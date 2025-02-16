@@ -1,4 +1,4 @@
-import { LegendProps } from "recharts";
+import { LegendProps } from 'recharts';
 
 export interface ListingItem {
   id: number;
@@ -17,7 +17,7 @@ export interface ListingItem {
   rules?: string;
 }
 
-export interface ListingCollection extends Array<any> { }
+export interface ListingCollection extends Array<any> {}
 
 export interface UseFetchListingProps {
   url: string;
@@ -52,9 +52,9 @@ export interface LevelGroupResponse {
 export interface MeanAndDeviationDisplayProps {
   mean: number;
   sd: number;
-  ownMean: number | null;
-  ownSd: number | null;
-  unitValue: string | null;
+  ownMean: number;
+  ownSd: number;
+  unitValue: string;
 }
 
 export interface MeanAndSdResponse {
@@ -117,7 +117,6 @@ export interface FetchListingData {
   }[];
 }
 
-
 export interface PayloadData {
   date: string;
   level: string;
@@ -140,4 +139,17 @@ export interface LegendCustomProps extends LegendProps {
   data?: Array<{
     level: string;
   }>;
+}
+
+export interface LegendMultipleProps {
+  payload?: any[];
+  levels: string[];
+}
+
+export type ViewMode = 'single' | 'dual';
+
+export interface GraphContextType {
+  viewMode: ViewMode;
+  toggleView: () => void;
+  setViewMode: (mode: ViewMode) => void;
 }

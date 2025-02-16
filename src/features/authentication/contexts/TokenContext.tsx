@@ -1,29 +1,22 @@
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useRouter } from 'next/router';
-import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from 'react';
-
-interface TokenContextProps {
-  token: string | null;
-  loading: boolean;
-}
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { TokenContextProps, TokenProviderProps } from '../types/Auth';
 
 const TokenContext = createContext<TokenContextProps>({
   token: null,
-  loading: true,
+  isLoading: true,
 });
-
-interface TokenProviderProps {
-  children: ReactNode;
-}
 
 export const TokenProvider = ({ children }: TokenProviderProps) => {
   const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        setLoading(true);
+        setIsLoading(true);
 
         if (
           router.pathname === '/auth/login' ||
@@ -32,33 +25,28 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
           router.pathname === '/about-us' ||
           router.pathname === '/'
         ) {
-          setLoading(false);
+          setIsLoading(false);
           return;
         }
 
-        const tokenResponse = await fetch('/api/get-token');
+        const tokenResponse = await fetchWrapper({
+          route: '/api/get-token',
+          method: 'GET',
+        });
 
-        if (!tokenResponse.ok || tokenResponse.status === 401) {
-          setLoading(false);
-          setToken(null);
-          router.push('/auth/login');
-          return;
-        }
-
-        const data = await tokenResponse.json();
-        setToken(data.token);
+        setToken(tokenResponse.token);
       } catch (err) {
-        console.error(err);
+        console.error(`'token provider error - '${err}`);
         setToken(null);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchToken();
   }, [router]);
 
-  const value = useMemo(() => ({ token, loading }), [token, loading]);
+  const value = useMemo(() => ({ token, isLoading }), [token, isLoading]);
   return <TokenContext.Provider value={value}>{children}</TokenContext.Provider>;
 };
 

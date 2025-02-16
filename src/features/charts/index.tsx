@@ -1,6 +1,6 @@
-import { useGraph } from '@/features/charts/contexts/GraphContext';
 import React from 'react';
 import MultipleLineLabGraph from './multiple-line';
+import { useGraph } from './shared-hooks/useGraph';
 import LabGraph from './single-line';
 import { LabGraphProps } from './types/Chart';
 

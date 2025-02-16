@@ -4,9 +4,9 @@ import {
   formatDateWithTime,
   formatEndDateWithTime,
 } from '@/features/shared/date-selector/constants/formatDateWithTime';
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useState } from 'react';
 import { PaginatedResponse, UseAnalyticsDataProps } from '../types/AnalyticsTable';
-
 
 export const useAnalyticsData = ({
   analyticsType,
@@ -21,7 +21,7 @@ export const useAnalyticsData = ({
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [totalElements, setTotalElements] = useState(0);
-  const { token, loading } = useToken();
+  const { token, isLoading: loading } = useToken();
 
   const fetchData = async (url: string) => {
     if (loading) {
@@ -35,19 +35,17 @@ export const useAnalyticsData = ({
     }
 
     setError(null);
+
     try {
-      const response = await fetch(url, {
+      const response = await fetchWrapper({
+        route: url,
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result: PaginatedResponse = await response.json();
+      const result: PaginatedResponse = response;
       setData(result.content);
       setTotalPages(result.page.totalPages);
       setTotalElements(result.page.totalElements);

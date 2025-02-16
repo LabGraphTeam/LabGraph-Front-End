@@ -1,12 +1,8 @@
-import { CarouselImage } from '@/features/about/types/about';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import React, { TouchEvent, useCallback, useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { TouchEvent, useCallback, useEffect, useState } from 'react';
 
-interface CarouselProps {
-  images: CarouselImage[];
-  autoPlayInterval?: number;
-}
+import { CarouselProps } from '@/features/about/types/about';
 
 const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);

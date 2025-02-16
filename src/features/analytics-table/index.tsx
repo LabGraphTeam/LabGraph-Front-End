@@ -1,8 +1,8 @@
 import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsData';
 import useDateSelector from '@/features/shared/date-selector/hooks/useDateSelector';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useAnalyticsOptions } from '../shared/ui/hooks/useAnalyticsOptions';
 import useWindowDimensions from '../shared/ui/hooks/useWindowDimensions';
-import { useAnalyticsOptions } from './hooks/useAnalyticsOptions';
 import MainLayout from './layouts/MainLayout';
 import ListingTable from './listing-table';
 import AnalyticsFilters from './util/AnalyticsFilters';
@@ -13,7 +13,7 @@ const AnalyticsTableIndex = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(8);
   const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics');
-  const [level, setLevel] = useState('0');
+  const [level, setLevel] = useState(0);
   const [isFiltered, setIsFiltered] = useState(false);
 
   const { width } = useWindowDimensions();
@@ -63,9 +63,12 @@ const AnalyticsTableIndex = () => {
     setItemsPerPage(width >= 1800 ? 14 : 8);
   }, [width]);
 
-  const handlePageChange = async (url: string): Promise<void> => {
-    await fetchData(url);
-  };
+  const handlePageChange = useCallback(
+    async (url: string): Promise<void> => {
+      await fetchData(url);
+    },
+    [fetchData]
+  );
 
   return (
     <MainLayout title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}>

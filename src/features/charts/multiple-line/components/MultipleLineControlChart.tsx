@@ -1,6 +1,6 @@
 import useWindowDimensions from '@/features/shared/ui/hooks/useWindowDimensions';
 import returnFullNameByTest from '@/features/shared/utils/helpers/returnFullNameByTest';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
   CartesianGrid,
@@ -15,9 +15,12 @@ import {
 import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
 import normalizeValue from '../../constants/normalizeValue';
 import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
+import LegendMultiple from './LegendMultiple';
+import TooltipMultiple from './TooltipMultiple';
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
+  const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), []);
   const { width: windowWidth } = useWindowDimensions();
 
   const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
@@ -87,21 +90,6 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
 
   if (!listings || listings.length === 0) return null;
 
-  const renderLegend = (props: any) => {
-    const { payload } = props;
-
-    return (
-      <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
-        {payload.map((entry: any, index: number) => (
-          <div key={`legend-${entry.id}`} className='flex items-center gap-2'>
-            <div className='size-2.5 rounded-full' style={{ backgroundColor: entry.color }} />
-            <span className='text-xs text-textPrimary md:text-sm'>{`${levels[index].toUpperCase()}`}</span>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
@@ -111,7 +99,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
-              onClick={() => setUseOwnValues(!useOwnValues)}
+              onClick={toggleUseOwnValues}
               className='group flex flex-col items-center transition-all duration-300'
             >
               <div
@@ -161,66 +149,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                   return matchingValue ? matchingValue.label : '';
                 }}
               />
-              <Tooltip
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    const uniqueEntries = payload.filter(
-                      (entry, index, self) =>
-                        index ===
-                        self.findIndex(
-                          (e) =>
-                            e.dataKey &&
-                            entry.dataKey &&
-                            e.payload[`date${e.dataKey.toString().slice(-1)}`] ===
-                              entry.payload[`date${entry.dataKey.toString().slice(-1)}`] &&
-                            e.payload[`level${e.dataKey.toString().slice(-1)}`] ===
-                              entry.payload[`level${entry.dataKey.toString().slice(-1)}`]
-                        )
-                    );
-
-                    return (
-                      <div className='rounded border border-border bg-background p-1 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:text-[0.65rem]'>
-                        {uniqueEntries.map((entry) => {
-                          const dataKeyIndex = entry.dataKey?.toString().slice(-1) ?? '';
-                          const data = entry.payload;
-                          const date = `date${dataKeyIndex}`;
-                          const level = `level${dataKeyIndex}`;
-                          const valueKey = `value${dataKeyIndex}`;
-                          const rawValueKey = `rawValue${dataKeyIndex}`;
-                          const levelLotKey = `levelLot${dataKeyIndex}`;
-                          const nameKey = `name${dataKeyIndex}`;
-                          const meanKey = `mean${dataKeyIndex}`;
-                          const sdKey = `sd${dataKeyIndex}`;
-
-                          if (data[valueKey]) {
-                            return (
-                              <div key={entry.payload.id} className={'border-border'}>
-                                <div className='flex items-center gap-2'>
-                                  <div
-                                    className='size-2.5 rounded-full'
-                                    style={{
-                                      backgroundColor: entry.stroke,
-                                    }}
-                                  />
-                                  <span className='font-medium'>{data[level].toUpperCase()}</span>
-                                </div>
-                                <p>Date: {data[date]}</p>
-                                <p>Test: {data[nameKey]}</p>
-                                <p>Value: {data[rawValueKey]}</p>
-                                <p>Lot: {data[levelLotKey]}</p>
-                                <p>Mean: {data[meanKey].toFixed(2)}</p>
-                                <p>Sd: {data[sdKey].toFixed(2)}</p>
-                              </div>
-                            );
-                          }
-                          return null;
-                        })}
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
+              <Tooltip content={<TooltipMultiple />} />
               {listings.map((_, index) => (
                 <Line
                   key={listings[index].groupedValuesByLevelDTO.level}
@@ -255,7 +184,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 />
               ))}
               <Legend
-                content={renderLegend}
+                content={<LegendMultiple levels={levels} />}
                 verticalAlign='bottom'
                 wrapperStyle={{
                   paddingTop: '5px',

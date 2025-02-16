@@ -63,7 +63,7 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 ### Docker
 
-Development: Execute `docker compose --profile dev up -d --remove-orphans;`
+Development: Execute `docker compose --profile dev up -d --remove-orphans`
 
 Prod: Execute `docker compose --profile prod up -d`
 

@@ -1,6 +1,6 @@
 import useWindowDimensions from '@/features/shared/ui/hooks/useWindowDimensions';
 import returnFullNameByTest from '@/features/shared/utils/helpers/returnFullNameByTest';
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
 import {
   CartesianGrid,
@@ -22,6 +22,11 @@ import TooltipCustom from './TooltipCustom';
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => {
   const [useOwnValues, setUseOwnValues] = useState(false);
+
+  const toggleUseOwnValues = useCallback(() => {
+    setUseOwnValues((prev) => !prev);
+  }, []);
+
   const { width: windowWidth } = useWindowDimensions();
 
   const chartData = listingData.map((entry) => ({
@@ -39,7 +44,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
     unitValue: entry.unit_value,
     rawValue: entry.value,
     sd: useOwnValues ? entry.ownSdValue : entry.sd,
-    mean: useOwnValues ? entry.ownSdValue : entry.mean,
+    mean: useOwnValues ? entry.ownMeanValue : entry.mean,
     OwnSd: entry.ownSdValue,
     OwnMean: entry.ownMeanValue,
     description: entry.description,
@@ -71,7 +76,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
-              onClick={() => setUseOwnValues(!useOwnValues)}
+              onClick={toggleUseOwnValues}
               className='group flex flex-col items-center transition-all duration-300'
             >
               <div

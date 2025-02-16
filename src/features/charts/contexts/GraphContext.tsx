@@ -1,14 +1,7 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useState } from 'react';
+import { GraphContextType, ViewMode } from '../types/Chart';
 
-type ViewMode = 'single' | 'dual';
-
-interface GraphContextType {
-  viewMode: ViewMode;
-  toggleView: () => void;
-  setViewMode: (mode: ViewMode) => void;
-}
-
-const GraphContext = createContext<GraphContextType | undefined>(undefined);
+export const GraphContext = createContext<GraphContextType | undefined>(undefined);
 
 export const GraphProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('single');
@@ -22,10 +15,4 @@ export const GraphProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       {children}
     </GraphContext.Provider>
   );
-};
-
-export const useGraph = () => {
-  const context = useContext(GraphContext);
-  if (!context) throw new Error('useGraph must be used within a GraphProvider');
-  return context;
 };

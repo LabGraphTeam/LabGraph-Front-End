@@ -1,17 +1,10 @@
-import { NavigationProps } from '@/features/about/types/about';
-import NavLogo from '@/features/shared/navigation-bar/components/NavLogo';
-import ThemeToggle from '@/features/shared/ui/theme';
-import { Menu } from 'lucide-react';
 import Link from 'next/link';
+import { Menu } from 'lucide-react';
 import { useCallback, useState } from 'react';
 
-const NAVIGATION_ITEMS: NavigationProps[] = [
-  { id: 'overview', label: 'OVERVIEW' },
-  { id: 'features', label: 'FEATURES' },
-  { id: 'contact', label: 'CONTACT' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'team', label: 'TEAM' },
-];
+import { NAVIGATION_ITEMS } from '@/features/about/constants/navigationConstants';
+import NavLogo from '@/features/shared/navigation-bar/components/NavLogo';
+import ThemeToggle from '@/features/shared/ui/theme';
 
 const AboutNavbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,13 +20,6 @@ const AboutNavbar: React.FC = () => {
         <div className='flex items-center justify-between py-8'>
           <div className='flex flex-col'>
             <NavLogo />
-            {/* <h1 className='text-2xl sm:text-4xl font-bold text-primary italic tracking-tight'>
-              &lt;LabGraph&gt;{}
-              <span className='text-[10px] sm:text-xs opacity-90 align-top'>®</span>
-            </h1>
-            <p className='text-[8px] text-center sm:text-sm text-primary opacity-70 italic'>
-              Quality Management System
-            </p> */}
           </div>
 
           {/* Desktop Navigation */}

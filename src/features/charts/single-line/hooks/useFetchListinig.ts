@@ -1,59 +1,53 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
-import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage';
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useEffect, useState } from 'react';
 import { FetchListingData, ListingCollection } from '../../types/Chart';
-import { serverFetch } from '@/services/fetch-service';
 
 const useFetchListing = (url: string) => {
   const [listing, setListing] = useState<ListingCollection>([]);
   const [unitValues, setUnitValues] = useState<string>('-');
   const [ownMeanValue, setOwnMeanValue] = useState<number>(0);
   const [ownSdValue, setOwnSdValue] = useState<number>(0);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { token, loading } = useToken();
+  const { token, isLoading } = useToken();
 
   const fetchData = useCallback(async (): Promise<FetchListingData> => {
+    let data = {} as FetchListingData;
 
-    const data = await serverFetch({
-      route: url,
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
+    if (!isLoading) {
+      data = await fetchWrapper({
+        route: url,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
 
-    return data as FetchListingData;
-  }, [url, token]);
+    return data;
+  }, [url, token, isLoading]);
 
-  useEffect(() => {
-    if (loading) return;
+  const handleFetchData = useCallback(async () => {
+    if (isLoading) return;
 
-    setIsLoading(true);
     setError(null);
 
-    (async () => {
-      try {
-        const data = await fetchData();
-        setOwnMeanValue(data.calcMeanAndStdDTO.mean);
-        setOwnSdValue(data.calcMeanAndStdDTO.standardDeviation);
+    try {
+      const data = await fetchData();
+      setOwnMeanValue(data.calcMeanAndStdDTO.mean ? data.calcMeanAndStdDTO.mean : 0);
+      setOwnSdValue(
+        data.calcMeanAndStdDTO.standardDeviation ? data.calcMeanAndStdDTO.standardDeviation : 0
+      );
+      setUnitValues(data.analyticsDTO[0]?.unit_value ?? '-');
+      setListing(data.analyticsDTO);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    }
+  }, [isLoading, fetchData]);
 
-        if (data.analyticsDTO.length > 0) {
-          setUnitValues(data.analyticsDTO[0]?.unit_value ?? '-');
-          setListing(data.analyticsDTO);
-        } else {
-          setUnitValues('-');
-        }
-      } catch (error: unknown) {
-        if (error instanceof Error && error.name === 'AbortError') return;
-        const errorMessage = getStatusMessage((error as any).status);
-        setError(errorMessage);
-        console.error('Error fetching data:', errorMessage);
-      } finally {
-        setIsLoading(false);
-      }
-    })();
-  }, [loading, fetchData, token]);
+  useEffect(() => {
+    handleFetchData();
+  }, [handleFetchData]);
 
   return {
     listing,
