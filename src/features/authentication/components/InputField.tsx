@@ -26,7 +26,7 @@ const InputField: React.FC<InputFieldProps> = ({
       <div className='relative'>
         {icon && <div className='absolute left-3 top-1/2 -translate-y-1/2'>{icon}</div>}
         <input
-          type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
+          type={type === 'password' && !showPassword ? 'password' : 'text'}
           id={id}
           value={value}
           onChange={onChange}

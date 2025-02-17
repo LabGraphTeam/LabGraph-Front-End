@@ -9,6 +9,7 @@ import MultipleLineControlChart from './components/MultipleLineControlChart';
 
 const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType }) => {
   const [groupResponse, setGroupResponse] = useState<LevelGroupResponse[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div className='min-h-min'>
@@ -23,15 +24,12 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
               name={testList[0]}
               setListing={setGroupResponse}
               analyticsType={analyticsType}
-              list={testList}
+              testNameList={testList}
+              setIsLoading={setIsLoading}
             />
           </div>
           <div className='flex min-h-full w-screen flex-col items-center justify-evenly'>
-            {!groupResponse[0] ? (
-              <Loading />
-            ) : (
-              <MultipleLineControlChart listings={groupResponse} />
-            )}
+            {isLoading ? <Loading /> : <MultipleLineControlChart listings={groupResponse} />}
           </div>
         </div>
         <Footer />

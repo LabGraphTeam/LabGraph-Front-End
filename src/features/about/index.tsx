@@ -1,10 +1,11 @@
-import Footer from '../shared/ui/footer';
-import AboutNavbar from './components/AboutNavbar';
-import AvailableFeatures from './components/AvailableFeatures';
-import Carousel from './components/Carousel';
-import Contacts from './components/Contacts';
-import FrequentlyAskedQuestions from './components/FrequentlyAskedQuestions';
-import Overview from './components/Overview';
+import Footer from '@/features/shared/ui/footer';
+
+import AboutNavbar from '@/features/about/components/AboutNavbar';
+import AvailableFeatures from '@/features/about/components/AvailableFeatures';
+import Carousel from '@/features/about/components/Carousel';
+import Contacts from '@/features/about/components/Contacts';
+import FAQSection from '@/features/about/components/FAQ';
+import Overview from '@/features/about/components/Overview';
 
 const AboutUs = () => {
   const carouselImages = [
@@ -17,17 +18,21 @@ const AboutUs = () => {
   return (
     <div id='overview' className='flex min-h-screen flex-col bg-background'>
       <AboutNavbar />
+
       <div className='mx-auto flex w-full max-w-7xl flex-col items-center space-y-2 px-4 py-8'>
         <section id='carousel' className='w-full'>
           <Carousel images={carouselImages} />
         </section>
+
         <section id='features' className='w-full'>
           <Overview />
           <AvailableFeatures />
         </section>
+
         <section className='w-full'>
-          <FrequentlyAskedQuestions />
+          <FAQSection />
         </section>
+
         <section id='contact' className='w-full'>
           <Contacts />
         </section>

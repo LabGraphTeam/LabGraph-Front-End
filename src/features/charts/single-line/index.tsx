@@ -23,10 +23,10 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
             <TestSelectorWithLevel
               name={testList[0]}
               level={1}
-              isLoading={setIsLoading}
+              setIsLoading={setIsLoading}
               setListingItem={setDataFetched}
               analyticsType={analyticsType}
-              list={testList}
+              testNameList={testList}
             />
           </div>
           <div className='flex min-h-full w-screen flex-col items-center justify-center'>

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export interface AuthFormData {
   identifier: string;
   email?: string;
@@ -23,4 +25,29 @@ export interface InputFieldProps {
 
 export interface SubmitButtonProps {
   text?: string;
+}
+
+export interface AuthLinkProps {
+  text: string;
+  linkText: string;
+  href: string;
+}
+
+export interface SubmitButtonProps {
+  text?: string;
+  icon?: boolean;
+}
+
+export interface TokenContextProps {
+  token: string | null;
+  isLoading: boolean;
+}
+
+export interface TokenProviderProps {
+  children: ReactNode;
+}
+
+export interface ValidationError {
+  field: string;
+  message: string;
 }

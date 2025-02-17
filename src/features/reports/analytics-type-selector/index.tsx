@@ -1,7 +1,4 @@
-interface AnalyticsTypeSelectorProps {
-  analyticsType: string;
-  onChange: (value: string) => void;
-}
+import { AnalyticsTypeSelectorProps } from './type/AnalyticsTypeSelector';
 
 const AnalyticsTypeSelector = ({ analyticsType, onChange }: AnalyticsTypeSelectorProps) => {
   return (

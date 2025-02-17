@@ -1,6 +1,5 @@
-import { ContactList } from '@/features/about/components/ContactList';
-import React from 'react';
-import ContactItem from './ContactItem';
+import { ContactCard } from '@/features/about/components/Cards';
+import { CONTACT_ITEMS } from '@/features/about/constants/contactConstants';
 
 const Contacts: React.FC = () => {
   return (
@@ -10,8 +9,8 @@ const Contacts: React.FC = () => {
         We&apos;re here to help and answer any questions you might have
       </p>
       <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-        {ContactList.map((item) => (
-          <ContactItem key={item.id} {...item} />
+        {CONTACT_ITEMS.map((item) => (
+          <ContactCard key={item.id} {...item} />
         ))}
       </div>
     </div>

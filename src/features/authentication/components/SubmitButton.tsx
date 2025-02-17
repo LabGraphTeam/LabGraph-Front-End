@@ -1,9 +1,5 @@
 import { LogIn } from 'lucide-react';
-
-interface SubmitButtonProps {
-  text?: string;
-  icon?: boolean;
-}
+import { SubmitButtonProps } from '../types/Auth';
 
 const SubmitButton = ({ text, icon = true }: SubmitButtonProps) => {
   return (

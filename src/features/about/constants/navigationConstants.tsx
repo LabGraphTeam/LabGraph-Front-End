@@ -6,4 +6,4 @@ export const NAVIGATION_ITEMS: NavigationProps[] = [
   { id: 'contact', label: 'CONTACT' },
   { id: 'faq', label: 'FAQ' },
   { id: 'team', label: 'TEAM' },
-];
+] as const;

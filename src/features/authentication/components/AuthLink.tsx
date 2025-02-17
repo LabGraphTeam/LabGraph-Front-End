@@ -1,10 +1,5 @@
 import Link from 'next/link';
-
-interface AuthLinkProps {
-  text: string;
-  linkText: string;
-  href: string;
-}
+import { AuthLinkProps } from '../types/Auth';
 
 const AuthLink = ({ text, linkText, href }: AuthLinkProps) => (
   <p className='text-center text-xs text-textSecondary sm:text-sm'>
