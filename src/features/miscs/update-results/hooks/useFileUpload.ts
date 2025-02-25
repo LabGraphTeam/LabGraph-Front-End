@@ -3,7 +3,6 @@ import { processCsvFile, processTextFile } from '@/features/shared/utils/helpers
 import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useState } from 'react';
 import { ProcessingStatus } from '../../../charts/types/Chart';
-import getStatusMessage from '../../../shared/utils/helpers/getStatusMessage';
 import { API_ENDPOINTS } from '../../csv-generator/constants/fileProcessing';
 
 export const useFileUpload = (analyticsType: string) => {
@@ -24,7 +23,6 @@ export const useFileUpload = (analyticsType: string) => {
         return;
       }
 
-      try {
         const endpoint =
           analyticsType === 'biochemistry-analytics'
             ? API_ENDPOINTS.biochemistry
@@ -33,15 +31,18 @@ export const useFileUpload = (analyticsType: string) => {
 
         const response = await fetchWrapper({
           route: endpointUrl,
-          method: 'GET',
+          method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
+          body: data,
         });
-
-        if (!response.ok) throw new Error(getStatusMessage(response.status));
+        if (response as Error) {
+          setStatus({
+            isProcessing: false,
+            message: 'Data upload failed',
+            error: response.message,
+          })
+        }
         setStatus((prev) => ({ ...prev, message: 'Data successfully uploaded' }));
-      } catch (error) {
-        throw new Error(error instanceof Error ? error.message : 'Unknown error');
-      }
     },
     [analyticsType, token, isLoading]
   );
@@ -66,6 +67,8 @@ export const useFileUpload = (analyticsType: string) => {
         message: 'Processing failed',
         error: error instanceof Error ? error.message : 'Unknown error occurred',
       });
+            
+
     }
   };
 

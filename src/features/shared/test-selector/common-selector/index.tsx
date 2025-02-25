@@ -78,7 +78,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   const { levelOptions } = useAnalyticsOptions(analyticsType);
 
   return (
-    <div className='mt-8 grid content-center justify-center items-center gap-1 text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>
+    <div className='mt-8 grid place-content-center items-center gap-1 text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>
       <DateSelector
         startDay={startDay}
         startMonth={startMonth}

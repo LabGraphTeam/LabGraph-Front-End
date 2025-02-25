@@ -1,11 +1,19 @@
 const handleResponseError = async (response: Response) => {
   try {
     if (!response.ok) {
-      const resp = await response.json();
-      throw new Error(`${resp.status} - ${resp.details}`);
+      const errorData = await response.json().catch(() => null);
+      const errorMessage = errorData?.details || response.statusText || 'Unknown error';
+      console.error('API Error:', {
+        status: response.status,
+        message: errorMessage,
+        url: response.url
+      });
+      throw Error(`${response.status} - ${errorMessage}`);
     }
+    return response;
   } catch (error) {
     console.error('Error handling response:', error);
+    throw error instanceof Error ? error : new Error('Unknown error occurred');
   }
 };
 

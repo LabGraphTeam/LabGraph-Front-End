@@ -21,6 +21,5 @@ export const fetchWrapper = async (options: FetchOptions) => {
     return await response.json();
   } catch (error) {
     console.error(`Fetch error for ${route}:`, error);
-    throw error;
   }
 };
