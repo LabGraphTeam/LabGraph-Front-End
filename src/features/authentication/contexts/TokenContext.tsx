@@ -28,12 +28,12 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
           setIsLoading(false);
           return;
         }
-
+        
         const tokenResponse = await fetchWrapper({
           route: '/api/get-token',
           method: 'GET',
         });
-
+        
         setToken(tokenResponse.token);
       } catch (err) {
         console.error(`'token provider error - '${err}`);
