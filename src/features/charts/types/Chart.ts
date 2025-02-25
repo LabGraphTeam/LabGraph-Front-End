@@ -52,9 +52,9 @@ export interface LevelGroupResponse {
 export interface MeanAndDeviationDisplayProps {
   mean: number;
   sd: number;
-  ownMean: number | null;
-  ownSd: number | null;
-  unitValue: string | null;
+  ownMean: number;
+  ownSd: number;
+  unitValue: string;
 }
 
 export interface MeanAndSdResponse {
@@ -144,4 +144,12 @@ export interface LegendCustomProps extends LegendProps {
 export interface LegendMultipleProps {
   payload?: any[];
   levels: string[];
+}
+
+export type ViewMode = 'single' | 'dual';
+
+export interface GraphContextType {
+  viewMode: ViewMode;
+  toggleView: () => void;
+  setViewMode: (mode: ViewMode) => void;
 }

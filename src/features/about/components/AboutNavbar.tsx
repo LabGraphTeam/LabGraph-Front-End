@@ -1,9 +1,10 @@
+import Link from 'next/link';
+import { Menu } from 'lucide-react';
+import { useCallback, useState } from 'react';
+
 import { NAVIGATION_ITEMS } from '@/features/about/constants/navigationConstants';
 import NavLogo from '@/features/shared/navigation-bar/components/NavLogo';
 import ThemeToggle from '@/features/shared/ui/theme';
-import { Menu } from 'lucide-react';
-import Link from 'next/link';
-import { useCallback, useState } from 'react';
 
 const AboutNavbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

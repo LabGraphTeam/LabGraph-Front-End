@@ -1,12 +1,7 @@
-import { AuthFormData } from '@/features/authentication/types/Auth';
+import { AuthFormData, ValidationError } from '@/features/authentication/types/Auth';
 import { authService } from '@/services/auth-service';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-
-interface ValidationError {
-  field: string;
-  message: string;
-}
 
 export const useAuth = (isLogin: boolean) => {
   const [formData, setFormData] = useState<AuthFormData>({
@@ -23,34 +18,46 @@ export const useAuth = (isLogin: boolean) => {
   const validateForm = (): ValidationError[] => {
     const errors: ValidationError[] = [];
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /[!@#$%^&*]/;
+
+    const PASSWORD_REQUIRED_LENGTH = 6;
 
     if (isLogin) {
       if (!formData.identifier) {
         errors.push({ field: 'identifier', message: 'Identifier is required.' });
       }
+
       if (!formData.password) {
         errors.push({ field: 'password', message: 'Password is required.' });
       }
-    } else {
-      if (!formData.email || !emailRegex.test(formData.email)) {
-        errors.push({ field: 'email', message: 'A valid email address is required.' });
-      }
-      if (!formData.password) {
-        errors.push({ field: 'password', message: 'Password is required.' });
-      } else if (formData.password.length < 4 || !/[!@#$%^&*]/.test(formData.password)) {
-        errors.push({
-          field: 'password',
-          message: 'Password must be at least 4 characters long and include one special character.',
-        });
-      }
-      if (!formData.confirmPassword) {
-        errors.push({ field: 'confirmPassword', message: 'Confirm Password is required.' });
-      } else if (formData.password !== formData.confirmPassword) {
-        errors.push({
-          field: 'confirmPassword',
-          message: 'Passwords do not match.',
-        });
-      }
+
+      return errors;
+    }
+
+    if (!formData.email || !emailRegex.test(formData.email)) {
+      errors.push({ field: 'email', message: 'A valid email address is required.' });
+    }
+
+    if (
+      !formData.password ||
+      formData.password.length < PASSWORD_REQUIRED_LENGTH ||
+      !passwordRegex.test(formData.password)
+    ) {
+      errors.push({
+        field: 'password',
+        message: `Password must be at least ${PASSWORD_REQUIRED_LENGTH} characters long and include one special character.`,
+      });
+    }
+
+    if (!formData.confirmPassword) {
+      errors.push({ field: 'confirmPassword', message: 'Confirm Password is required.' });
+    }
+
+    if (formData.confirmPassword && formData.password !== formData.confirmPassword) {
+      errors.push({
+        field: 'confirmPassword',
+        message: 'Passwords do not match.',
+      });
     }
 
     return errors;
@@ -74,8 +81,7 @@ export const useAuth = (isLogin: boolean) => {
         });
 
         if (response.success) {
-          router.push('/charts/hematology');
-          return;
+          return router.push('/charts/hematology');
         }
       } else {
         const response = await authService.signUp({
@@ -85,8 +91,7 @@ export const useAuth = (isLogin: boolean) => {
         });
 
         if (response.ok) {
-          router.push('/auth/login');
-          return;
+          return router.push('/auth/login');
         }
 
         if (response.status === 409) {
@@ -111,6 +116,7 @@ export const useAuth = (isLogin: boolean) => {
     const validationErrors = validateForm();
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
+      setLoading(false);
       return;
     }
 

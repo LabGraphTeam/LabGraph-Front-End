@@ -44,7 +44,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
     unitValue: entry.unit_value,
     rawValue: entry.value,
     sd: useOwnValues ? entry.ownSdValue : entry.sd,
-    mean: useOwnValues ? entry.ownSdValue : entry.mean,
+    mean: useOwnValues ? entry.ownMeanValue : entry.mean,
     OwnSd: entry.ownSdValue,
     OwnMean: entry.ownMeanValue,
     description: entry.description,

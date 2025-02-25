@@ -37,7 +37,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             id='level'
             value={level}
             onChange={(e) => {
-              setLevel(e.target.value);
+              setLevel(Number(e.target.value));
               setFiltered(() => e.target.value !== '0');
             }}
             className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'

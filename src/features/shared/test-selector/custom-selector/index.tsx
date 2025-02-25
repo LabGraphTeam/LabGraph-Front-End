@@ -1,18 +1,19 @@
 import useFetchListeningGrouped from '@/features/charts/multiple-line/hooks/useFetchListiningGrouped';
 import urlByNameAndDateNew from '@/features/shared/utils/helpers/urlByNameAndDateNew';
-import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import UpdateResults from '../../../miscs/update-results';
 import DateSelector from '../../date-selector';
 import useDateSelector from '../../date-selector/hooks/useDateSelector';
-import { TestSelectorProps } from '../types/Selector';
+import GoogleSheetLink from '../components/GoogleSheetLink';
+import TestNameSelector from '../components/TestNameSelector';
+import { TestSelectorProps } from '../types/SelectorProps';
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
-  list,
+  testNameList: list,
   analyticsType,
   name,
   setListing,
+  setIsLoading,
 }) => {
   const [testName, setTestName] = useState<string>(name);
   const {
@@ -39,8 +40,12 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   const { listing } = useFetchListeningGrouped(url);
 
   useEffect(() => {
+    setIsLoading(true);
+    if (listing && listing.length > 0) {
+      setIsLoading(false);
+    }
     setListing(listing);
-  }, [url, listing, setListing]);
+  }, [url, listing, setListing, setIsLoading]);
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK;
 
@@ -61,33 +66,8 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
         handleEndYearChange={handleEndYearChange}
       />
       <div className='flex flex-row content-center items-center justify-between gap-3'>
-        <span className='text-sm font-medium'>Test:</span>
-        <select
-          name='custom-selector'
-          className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md border border-borderColor bg-background p-0.5 text-sm text-textSecondary shadow-sm transition-all duration-200 focus:outline-none focus:ring-2 md:px-2 md:py-1'
-          value={testName}
-          onChange={(e) => setTestName(e.target.value)}
-        >
-          {list.map((test) => (
-            <option key={test} value={test}>
-              {test}
-            </option>
-          ))}
-        </select>
-        <span className='flex flex-row place-content-center items-center'>
-          <Link
-            className='hover:bg-background/90 focus:ring-borderColor/30 flex items-center justify-center rounded-md border border-borderColor bg-background px-2 py-0.5 text-sm font-medium text-textSecondary shadow-sm transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 md:px-2 md:py-1'
-            target='_blank'
-            href={GOOGLE_SHEET_URL ?? ''}
-          >
-            <span className='hidden p-0.5 md:inline'>
-              <CheckCircle size={19} />
-            </span>
-            <span className='inline p-0.5 md:hidden'>
-              <CheckCircle size={17} />
-            </span>
-          </Link>
-        </span>
+        <TestNameSelector testName={testName} setTestName={setTestName} testNameList={list} />
+        <GoogleSheetLink googleSheetUrl={GOOGLE_SHEET_URL} />
         <div className='hidden w-full md:flex'>
           <UpdateResults analyticsType={analyticsType} />
         </div>

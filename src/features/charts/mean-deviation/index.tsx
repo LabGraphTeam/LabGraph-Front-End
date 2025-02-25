@@ -1,4 +1,6 @@
 import React from 'react';
+import StatItem from '../components/StatItem';
+import { calculateCV } from '../constants/calculateCv';
 import { MeanAndDeviationDisplayProps } from '../types/Chart';
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
@@ -8,36 +10,24 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   ownSd,
   unitValue,
 }) => {
+  const formatWithUnit = React.useCallback(
+    (value: number) => value.toFixed(2) + (unitValue ? ' (' + unitValue + ')' : ''),
+    [unitValue]
+  );
+
   return (
-    <div className='mt:mt-4 flex w-full flex-col text-xs font-light text-textPrimary md:ml-8 md:mt-0 md:flex-row md:gap-2'>
-      <div className='flex flex-row justify-start md:flex-col'>
-        <span>Mean (Reference):</span>
-        <span className='text-textPrimary'>
-          {mean ? mean.toFixed(2) + (unitValue ? ` (${unitValue})` : '') : ' '}
-        </span>
-      </div>
-      <div className='flex flex-row justify-start md:flex-col'>
-        <span>Deviation (Reference):</span>
-        <span className='text-textPrimary'>
-          {sd ? sd.toFixed(2) + (unitValue ? ` (${unitValue})` : '') : ' '}
-        </span>
-      </div>
-      <div className='flex flex-row justify-start md:flex-col'>
-        <span>Calculated Mean:</span>
-        <span className='text-textPrimary'>
-          {typeof ownMean === 'number' && !isNaN(ownMean)
-            ? ownMean.toFixed(2) + (unitValue ? ` (${unitValue})` : '')
-            : ''}
-        </span>
-      </div>
-      <div className='flex flex-row justify-start md:flex-col'>
-        <span>Calculated Deviation:</span>
-        <span className='text-textPrimary'>
-          {typeof ownSd === 'number' && !isNaN(ownSd)
-            ? ownSd.toFixed(2) + (unitValue ? ` (${unitValue})` : '')
-            : ''}
-        </span>
-      </div>
+    <div className='grid w-full grid-cols-1 text-xs font-light text-textPrimary md:ml-8  md:grid-cols-3'>
+      <StatItem label='Mean (Reference)' value={mean} formatter={formatWithUnit} />
+      <StatItem label='Deviation (Reference)' value={sd} formatter={formatWithUnit} />
+      <StatItem label='Calculated Mean' value={ownMean} formatter={formatWithUnit} />
+      <StatItem label='Calculated Deviation' value={ownSd} formatter={formatWithUnit} />
+      {ownMean !== undefined && ownSd !== undefined && (
+        <StatItem
+          label='Calculated CV'
+          value={ownMean}
+          formatter={() => `${calculateCV(ownMean, ownSd)} (%)`}
+        />
+      )}
     </div>
   );
 };

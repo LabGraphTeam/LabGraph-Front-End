@@ -1,8 +1,9 @@
-import { FeatureProps } from '@/features/about/types/about';
 import { BiLineChart, BiMailSend, BiTable, BiTestTube } from 'react-icons/bi';
 import { MdDarkMode, MdOutlineRule } from 'react-icons/md';
 
-export const FeaturesList: FeatureProps[] = [
+import { FeatureProps } from '@/features/about/types/about';
+
+export const FEATURE_ITEMS: FeatureProps[] = [
   {
     id: 1,
     title: 'Westgard Rules',
@@ -43,4 +44,4 @@ export const FeaturesList: FeatureProps[] = [
     description: 'Dark and light mode options for comfortable viewing in any environment.',
     icon: <MdDarkMode size={24} />,
   },
-];
+] as const;

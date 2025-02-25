@@ -2,15 +2,20 @@ import { JSX } from 'react';
 
 export interface ContactItemProps {
   id: number;
-  icon: JSX.Element;
   title: string;
   content: string;
+  icon: JSX.Element;
 }
 
 export interface CarouselImage {
   id: number;
   src: string;
   alt: string;
+}
+
+export interface CarouselProps {
+  images: CarouselImage[];
+  autoPlayInterval?: number;
 }
 
 export interface FeatureProps {
@@ -32,8 +37,9 @@ export interface NavigationProps {
   label: string;
 }
 
-export interface FAQItem {
+export interface FAQProps {
   id: number;
-  question: string;
-  answer: string;
+  title: string;
+  description: string;
+  icon: JSX.Element;
 }

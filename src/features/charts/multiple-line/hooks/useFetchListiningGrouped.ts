@@ -1,25 +1,25 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
 import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage';
+import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useEffect, useState } from 'react';
 import { LevelGroupResponse } from '../../types/Chart';
-import { serverFetch } from '@/services/fetch-service';
 
 const useFetchListeningGrouped = (url: string) => {
   const [listing, setListing] = useState<LevelGroupResponse[]>([]);
   const [unitValues, setUnitValues] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { token, loading } = useToken();
+  const { token, isLoading: loading } = useToken();
 
   const fetchData = useCallback(async (): Promise<LevelGroupResponse[]> => {
     if (!token) throw new Error('No authentication token available');
 
-    const data = await serverFetch({
+    const data = await fetchWrapper({
       route: url,
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     return data as LevelGroupResponse[];

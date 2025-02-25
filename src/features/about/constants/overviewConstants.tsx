@@ -3,9 +3,10 @@ import { BiTargetLock } from 'react-icons/bi';
 import { MdOutlineAnalytics, MdOutlineHealthAndSafety } from 'react-icons/md';
 import { RiToolsFill } from 'react-icons/ri';
 import { TbClipboardData } from 'react-icons/tb';
-import { OverviewProps } from '../types/about';
 
-export const OverViewList: OverviewProps[] = [
+import { OverviewProps } from '@/features/about/types/about';
+
+export const OVERVIEW_ITEMS: OverviewProps[] = [
   {
     id: 1,
     title: 'Purpose',
@@ -48,4 +49,4 @@ export const OverViewList: OverviewProps[] = [
       'Comprehensive suite of tools designed to simplify quality control processes and enhance workflow.',
     icon: <RiToolsFill size={24} />,
   },
-];
+] as const;
