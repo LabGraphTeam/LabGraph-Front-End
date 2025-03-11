@@ -13,13 +13,38 @@ const GeneratePDF: React.FC<CsvGeneratorProps> = ({
 }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
-  // Helper function to format numeric values
+  // Helper function to format only decimal numbers
   const formatValue = (value: any): any => {
     if (typeof value === 'number' || (typeof value === 'string' && !isNaN(Number(value)))) {
       const numValue = Number(value);
-      return numValue.toFixed(2);
+      // Only format numbers that have decimal places
+      if (numValue % 1 !== 0) {
+        return numValue.toFixed(2);
+      }
+      return numValue;
     }
     return value;
+  };
+
+  // Column header mapping for better description
+  const columnMapping: Record<string, string> = {
+    'DATE': 'Date of Analysis',
+    'LEVEL_LOT': 'Control Level Lot',
+    'TEST_LOT': 'Test Lot Number',
+    'NAME': 'Test Name',
+    'LEVEL': 'Control Level',
+    'VALUE': 'Measured Value',
+    'MEAN': 'Mean Value',
+    'SD': 'Standard Deviation',
+    'UNIT_VALUE': 'Unit of Measurement',
+    'RULES': 'Quality Rules',
+    'DESCRIPTION': 'Test Description'
+  };
+
+  // Function to map column headers to descriptive labels
+  const getDescriptiveHeader = (header: string): string => {
+    const upperHeader = header.toUpperCase();
+    return columnMapping[upperHeader] || upperHeader;
   };
 
   const generatePdf = () => {
@@ -28,43 +53,79 @@ const GeneratePDF: React.FC<CsvGeneratorProps> = ({
     setIsGenerating(true);
 
     try {
-      const doc = new jsPDF();
+      // Create PDF with better quality settings
+      const doc = new jsPDF({
+        orientation: 'landscape',
+        unit: 'mm',
+        format: 'a4'
+      });
       
       // Get month and year for the title (use provided values or current date)
-      const month = reportMonth?.toLocaleUpperCase() || new Date().toLocaleString('default', { month: 'long' });
+      const month = reportMonth?.toLocaleUpperCase() || new Date().toLocaleString('default', { month: 'long' }).toUpperCase();
       const year = reportYear?.toString().toLocaleUpperCase() || new Date().getFullYear();
+      const reportTitle = fileName.replace(/-/g, ' ').replace('.pdf', '').replace('analytics', '').toUpperCase();
+      const currentDate = new Date().toLocaleDateString();
       
-      // Add title with month and report type
+      // Add company logo/header
+      doc.setFillColor(42, 73, 128); // Dark blue header
+      doc.rect(0, 0, 297, 20, 'F');
+      
+      // Add title with better formatting
       doc.setFontSize(16);
-      doc.text(`${month} ${year} - ${fileName.replace(/-/g, ' ').toUpperCase()}`, 14, 15);
+      doc.setTextColor(255, 255, 255); // White text
+      doc.setFont("helvetica", "bold");
+      doc.text(`${reportTitle}`, 10, 10);
       
-      // Process the data for the table
+      // Add date information
+      doc.setFontSize(10);
+      doc.text(`${month} ${year}`, 10, 15);
+      
+      // Add generation date on the right
+      doc.text(`Generated: ${currentDate}`, 240, 15, { align: 'right' });
+      
       if (jsonData.content && Array.isArray(jsonData.content)) {
         if (jsonData.content.length > 0) {
           // Extract headers from first object
           const firstItem = jsonData.content[0];
           const headers = Object.keys(firstItem).filter(key => key !== 'id' && key !== 'Id');
           
-          const formatedHeaders = Object.keys(firstItem).filter(key => key !== 'id' && key !== 'Id').map(key => key.toUpperCase());
+          // Use the mapping to get more descriptive headers
+          const formattedHeaders = headers.map(header => getDescriptiveHeader(header));
 
           // Extract rows - excluding Id column and format numeric values
           const data = jsonData.content.map((item: { [x: string]: any; }) => 
             headers.map(header => formatValue(item[header]))
           );
           
-          // Use autoTable directly as a function instead of as a method on doc
+          // Use autoTable with improved styling and descriptive headers
           autoTable(doc, {
-            head: [formatedHeaders],
+            head: [formattedHeaders],
             body: data,
-            startY: 30,
+            startY: 25, // Start below the header
             theme: 'grid',
-            styles: { fontSize: 6 }
+            headStyles: {
+              fillColor: [75, 107, 175], // Light blue header
+              textColor: [255, 255, 255],
+              fontStyle: 'bold',
+              halign: 'center',
+              fontSize: 8, // Slightly smaller to fit longer descriptions
+              cellPadding: 2
+            },
+            alternateRowStyles: {
+              fillColor: [240, 240, 240] // Light gray for alternate rows
+            },
+            bodyStyles: {
+              fontSize: 8,
+              lineWidth: 0.1,
+              lineColor: [170, 170, 170]
+            },
+            margin: { top: 25, right: 10, bottom: 20, left: 10 },
           });
         }
       }
       
       // Save the PDF with month and year in filename
-      const formattedFileName = `${month}_${year}_${fileName}`;
+      const formattedFileName = `${month}_${year}_${reportTitle.toLowerCase().replace(/\s+/g, '_')}`;
       doc.save(formattedFileName.endsWith('.pdf') ? formattedFileName : `${formattedFileName}.pdf`);
       
     } catch (error: Error | any) {

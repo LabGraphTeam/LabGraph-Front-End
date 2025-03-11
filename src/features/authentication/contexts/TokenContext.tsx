@@ -33,8 +33,12 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
           route: '/api/get-token',
           method: 'GET',
         });
+
+        if(tokenResponse.valid) {
+            setToken(tokenResponse.token);
+
+        }
         
-        setToken(tokenResponse.token);
       } catch (err) {
         console.error(`'token provider error - '${err}`);
         setToken(null);

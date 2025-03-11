@@ -22,7 +22,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/charts/:path*', '/auth/:path*, /misc/:path*'],
+  matcher: ['/auth/signup', '/auth/login', '/charts/:path*','/misc/:path*']
   // matcher: [
   //   '/((?!api|_next/static|_next/image|next/public|_next/data|_next/image|favicon.ico|auth/signup|health-check|about-us|.*\\.map|.*\\.js|.*\\.css|.*\\.json|.*\\.ico|.*\\.png|.*\\.jpg|.*\\.webp).*)',
   // ],

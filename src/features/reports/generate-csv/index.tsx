@@ -80,7 +80,7 @@ const GenerateReports: React.FC<CsvGeneratorProps> = ({
       ) : (
         <Download className='mr-2 size-5' />
       )}
-      <span>Generate Report</span>
+      <span>Generate CSV</span>
     </button>
   );
 };

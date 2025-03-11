@@ -6,7 +6,7 @@ interface ValidationResponse {
   token?: string;
 }
 
-export default async function handler(
+export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ValidationResponse>
 ) {
@@ -24,14 +24,6 @@ export default async function handler(
       return res.status(401).json({
         valid: false,
         message: 'No token found',
-      });
-    }
-
-    // Verify token structure
-    if (token.split('.').length !== 3) {
-      return res.status(401).json({
-        valid: false,
-        message: 'Invalid token format',
       });
     }
 

@@ -1,8 +1,6 @@
-import  Router  from "next/router";
+import Router from "next/router";
 
 const handleResponseError = async (response: Response) => {
-  const router = Router;
-
   try {
     if (!response.ok) {
       const errorData = await response.json().catch(() => null);
@@ -12,10 +10,14 @@ const handleResponseError = async (response: Response) => {
         message: errorMessage,
         url: response.url
       });
-      if(response.status === 401 || response.status === 403) {
-        fetch('/api/logout', {});
-        return router.push('/auth/login');
+      
+      // Redirect to login page for authentication issues (401 Unauthorized or 403 Forbidden)
+      if (response.status === 401 || response.status === 403) {
+        console.log('Authentication error, redirecting to login...');
+        Router.push('/login');
+        return Promise.reject(new Error('Authentication required'));
       }
+      
       throw Error(`${response.status} - ${errorMessage}`);
     }
     return response;
