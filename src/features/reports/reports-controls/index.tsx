@@ -4,7 +4,6 @@ import GenerateReports from '@/features/reports/generate-csv';
 import GeneratePDF from '@/features/reports/generate-pdf';
 import DateSelector from '@/features/shared/date-selector';
 import { DateSelectorProps } from '@/features/shared/date-selector/types/dateSelectorProps';
-import { SiD } from 'react-icons/si';
 
 interface ReportsControlsProps extends DateSelectorProps {
   analyticsType: string;
@@ -29,19 +28,17 @@ const ReportsControls = ({
     <div className='flex gap-2'>
       <span className='flex justify-evenly rounded-md border border-borderColor text-textSecondary shadow-sm shadow-shadow'>
         <GenerateReports 
-          jsonData={dataFetched} 
+          jsonData={dataFetched}
           fileName={analyticsType}
           reportMonth={reportMonth}
-          reportYear={reportYear}
-        />
+          reportYear={reportYear} buttonText={'generateCSV'}        />
       </span>
       <span className='flex justify-evenly rounded-md border border-borderColor text-textSecondary shadow-sm shadow-shadow'>
         <GeneratePDF 
-          jsonData={dataFetched} 
+          jsonData={dataFetched}
           fileName={analyticsType}
           reportMonth={reportMonth}
-          reportYear={reportYear}
-        />
+          reportYear={reportYear} buttonText={'generatePDF'}        />
       </span>
     </div>
   </div>
