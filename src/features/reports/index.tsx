@@ -13,10 +13,19 @@ import { useState } from 'react';
 
 const Reports = () => {
   const [analyticsType, setAnalyticsType] = useState<string>('biochemistry-analytics');
+  
   const dateSelector = useDateSelector();
 
   const { startDay, startMonth, startYear, endDay, endMonth, endYear } =
     dateSelector as DateSelectorProps;
+
+    const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${
+    process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS
+  }startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(
+    endYear,
+    endMonth,
+    endDay
+  )}&pageSize=2500&sort=date,asc`
     
   // Create a formatted month string for reports
   const getMonthName = (month: number) => {
@@ -27,13 +36,9 @@ const Reports = () => {
   
   const reportMonth = getMonthName(startMonth);
 
-  const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${
-    process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS
-  }startDate=${formatDateWithTime(startYear, startMonth, startDay)}&endDate=${formatEndDateWithTime(
-    endYear,
-    endMonth,
-    endDay
-  )}`;
+
+
+
 
   const { dataFetched } = useReportsData({ url });
 
