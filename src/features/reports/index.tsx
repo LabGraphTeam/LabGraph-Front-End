@@ -17,6 +17,15 @@ const Reports = () => {
 
   const { startDay, startMonth, startYear, endDay, endMonth, endYear } =
     dateSelector as DateSelectorProps;
+    
+  // Create a formatted month string for reports
+  const getMonthName = (month: number) => {
+    const date = new Date();
+    date.setMonth(month - 1); // month is 1-indexed in the app, but 0-indexed in Date
+    return date.toLocaleString('default', { month: 'long' });
+  };
+  
+  const reportMonth = getMonthName(startMonth);
 
   const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${
     process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS
@@ -37,6 +46,8 @@ const Reports = () => {
           onAnalyticsTypeChange={setAnalyticsType}
           dataFetched={dataFetched}
           dateSelectorProps={dateSelector}
+          reportMonth={reportMonth}
+          reportYear={startYear}
           {...dateSelector}
         />
         <ReportImage />

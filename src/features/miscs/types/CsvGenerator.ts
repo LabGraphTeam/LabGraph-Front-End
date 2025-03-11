@@ -1,6 +1,6 @@
 export interface CsvGeneratorProps {
-  jsonData: any | any[];
+  jsonData: any;
   fileName?: string;
-  buttonText?: string;
-  className?: string;
+  reportMonth?: string;
+  reportYear?: number;
 }

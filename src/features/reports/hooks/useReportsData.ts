@@ -13,7 +13,7 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
     const fetchData = async () => {
       if (loading) return;
       try {
-        const result = await fetchWrapper({
+        const result:ListingItem[] = await fetchWrapper({
           route: url,
           method: 'GET',
           headers: {
@@ -21,7 +21,7 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
             Authorization: `Bearer ${token}`,
           },
         });
-        setDataFetched(result);
+        setDataFetched(result); 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
