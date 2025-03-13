@@ -22,6 +22,7 @@ export default function handler(
   }
 
   try {
+
     const { token, remember, dateExp } = req.body;
 
     if (!token || typeof token !== 'string') {
@@ -45,7 +46,9 @@ export default function handler(
     };
 
     res.setHeader('Set-Cookie', serialize('tokenJWT', token, cookieOptions));
+
     return res.status(200).json({ success: true });
+
   } catch (error) {
     console.error('Login error:', error);
     return res.status(500).json({

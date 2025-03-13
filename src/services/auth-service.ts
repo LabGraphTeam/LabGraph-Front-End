@@ -4,7 +4,9 @@ import { fetchWrapper } from './fetch-wrapper';
 import { AuthParams } from './types/AuthParams';
 
 export const authService = {
+
   signIn: async ({ identifier, password, remember }: AuthParams) => {
+
     try {
       const backendResponse = await fetchWrapper({
         route: `${API_BASE_URL}/users/sign-in`,
@@ -12,17 +14,20 @@ export const authService = {
         body: { identifier, password },
       });
 
-      const cookieResponse = await fetchWrapper({
-        route: '/api/login',
-        method: 'POST',
-        body: {
-          token: backendResponse.tokenJWT,
-          dateExp: backendResponse.dateExp,
-          remember,
-        },
-      });
+      if (backendResponse.tokenJWT) {
+        const cookieResponse = await fetchWrapper({
+          route: '/api/login',
+          method: 'POST',
+          body: {
+            token: backendResponse.tokenJWT,
+            dateExp: backendResponse.dateExp,
+            remember,
+          },
+        });
 
-      return cookieResponse;
+        return cookieResponse;
+      }
+
     } catch (error) {
       console.error('SignIn error:', error);
       throw error;

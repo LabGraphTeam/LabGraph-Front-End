@@ -73,6 +73,7 @@ export const useAuth = (isLogin: boolean) => {
 
   const handleAuth = async (isLoginRequest: boolean) => {
     try {
+
       if (isLoginRequest) {
         const response = await authService.signIn({
           identifier: formData.identifier.trim(),
@@ -83,21 +84,23 @@ export const useAuth = (isLogin: boolean) => {
         if (response.success) {
           return router.push('/charts/hematology');
         }
-      } else {
-        const response = await authService.signUp({
-          identifier: formData.identifier.trim(),
-          email: formData.email?.trim() ?? '',
-          password: formData.password,
-        });
 
-        if (response.ok) {
-          return router.push('/auth/login');
-        }
-
-        if (response.status === 409) {
-          throw new Error('Signup was unsuccessful. Please verify your details and try again.');
-        }
       }
+
+      const response = await authService.signUp({
+        identifier: formData.identifier.trim(),
+        email: formData.email?.trim() ?? '',
+        password: formData.password,
+      });
+
+      if (response.ok) {
+        return router.push('/auth/login');
+      }
+
+      if (response.status === 409) {
+        throw new Error('Signup was unsuccessful. Please verify your details and try again.');
+      }
+
       throw new Error('Please verify your details and try again.');
     } catch (err) {
       console.error('Auth error:', err);

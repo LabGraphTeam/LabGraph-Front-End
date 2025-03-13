@@ -13,7 +13,6 @@ const handleResponseError = async (response: Response) => {
         url: response.url
       });
       if(response.status === 401 || response.status === 403) {
-        fetch('/api/logout', {});
         return router.push('/auth/login');
       }
       throw Error(`${response.status} - ${errorMessage}`);

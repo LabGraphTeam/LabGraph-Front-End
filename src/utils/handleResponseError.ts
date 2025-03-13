@@ -14,8 +14,7 @@ const handleResponseError = async (response: Response) => {
       // Redirect to login page for authentication issues (401 Unauthorized or 403 Forbidden)
       if (response.status === 401 || response.status === 403) {
         console.log('Authentication error, redirecting to login...');
-        Router.push('/login');
-        return Promise.reject(new Error('Authentication required'));
+        return Router.push('/login');
       }
       
       throw Error(`${response.status} - ${errorMessage}`);
