@@ -7,6 +7,4 @@
   @apply hover:underline;
   @apply hover:decoration-primary;
   @apply hover:decoration-1;
-  @apply border;
-  @apply border-indigo-600;
 }
