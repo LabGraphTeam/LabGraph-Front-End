@@ -1,22 +1,22 @@
-import { fetchWrapper } from '@/services/fetch-wrapper';
-import { useRouter } from 'next/router';
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { TokenContextProps, TokenProviderProps } from '../types/Auth';
+import { fetchWrapper } from '@/services/fetch-wrapper'
+import { useRouter } from 'next/router'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { TokenContextProps, TokenProviderProps } from '../types/Auth'
 
 const TokenContext = createContext<TokenContextProps>({
   token: null,
-  isLoading: true,
-});
+  isLoading: true
+})
 
 export const TokenProvider = ({ children }: TokenProviderProps) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+  const [token, setToken] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     const fetchToken = async () => {
       try {
-        setIsLoading(true);
+        setIsLoading(true)
 
         if (
           router.pathname === '/auth/login' ||
@@ -25,33 +25,31 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
           router.pathname === '/about-us' ||
           router.pathname === '/'
         ) {
-          setIsLoading(false);
-          return;
+          setIsLoading(false)
+          return
         }
-        
+
         const tokenResponse = await fetchWrapper({
           route: '/api/get-token',
-          method: 'GET',
-        });
+          method: 'GET'
+        })
 
-        if(tokenResponse.valid) {
-            setToken(tokenResponse.token);
-
+        if (tokenResponse.valid) {
+          setToken(tokenResponse.token)
         }
-        
       } catch (err) {
-        console.error(`'token provider error - '${err}`);
-        setToken(null);
+        console.error(`'token provider error - '${err}`)
+        setToken(null)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    };
+    }
 
-    fetchToken();
-  }, [router]);
+    fetchToken()
+  }, [router])
 
-  const value = useMemo(() => ({ token, isLoading }), [token, isLoading]);
-  return <TokenContext.Provider value={value}>{children}</TokenContext.Provider>;
-};
+  const value = useMemo(() => ({ token, isLoading }), [token, isLoading])
+  return <TokenContext.Provider value={value}>{children}</TokenContext.Provider>
+}
 
-export const useToken = () => useContext(TokenContext);
+export const useToken = () => useContext(TokenContext)

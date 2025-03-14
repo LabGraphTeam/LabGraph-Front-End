@@ -1,15 +1,15 @@
-import React from 'react';
-import MultipleLineLabGraph from './multiple-line';
-import { useGraph } from './shared-hooks/useGraph';
-import LabGraph from './single-line';
-import { LabGraphProps } from './types/Chart';
+import React from 'react'
+import { useGraph } from './contexts/useGraph'
+import MultipleLineLabGraph from './multiple-line'
+import LabGraph from './single-line'
+import { LabGraphProps } from './types/Chart'
 
 const GraphWrapper: React.FC<LabGraphProps> = ({ testList, analyticsType, levelListSize }) => {
-  const { viewMode } = useGraph();
+  const { viewMode } = useGraph()
 
-  const Graph = viewMode === 'single' ? LabGraph : MultipleLineLabGraph;
+  const Graph = viewMode === 'single' ? LabGraph : MultipleLineLabGraph
 
-  return <Graph levelListSize={levelListSize} testList={testList} analyticsType={analyticsType} />;
-};
+  return <Graph levelListSize={levelListSize} testList={testList} analyticsType={analyticsType} />
+}
 
-export default GraphWrapper;
+export default GraphWrapper

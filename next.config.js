@@ -1,14 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: process.env.NODE_ENV === 'development',
+  // reactStrictMode: process.env.NODE_ENV === 'development',
   compress: process.env.NODE_ENV === 'development',
-  // compiler: {
-  //   removeConsole: true,
-  // },
+  // compiler: { removeConsole: true, },
   output: 'standalone',
   eslint: {
-    ignoreDuringBuilds: true,
-  },
-};
+    ignoreDuringBuilds: true
+  }
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

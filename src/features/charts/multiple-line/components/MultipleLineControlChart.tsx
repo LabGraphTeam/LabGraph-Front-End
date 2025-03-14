@@ -1,7 +1,7 @@
-import useWindowDimensions from '@/features/shared/ui/hooks/useWindowDimensions';
-import returnFullNameByTest from '@/features/shared/utils/helpers/returnFullNameByTest';
-import React, { useCallback, useMemo, useState } from 'react';
-import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
+import returnFullNameByTest from '@/features/charts/utils/returnFullNameByTest'
+import useWindowDimensions from '@/features/shared/hooks/useWindowDimensions'
+import React, { useCallback, useMemo, useState } from 'react'
+import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
   CartesianGrid,
   Legend,
@@ -10,70 +10,70 @@ import {
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
-  YAxis,
-} from 'recharts';
-import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
-import normalizeValue from '../../constants/normalizeValue';
-import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart';
-import LegendMultiple from './LegendMultiple';
-import TooltipMultiple from './TooltipMultiple';
+  YAxis
+} from 'recharts'
+import customFormatDate from '../../../shared/ui/date-selectors/constants/customFormatDate'
+import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart'
+import normalizeValue from '../../utils/normalizeValue'
+import LegendMultiple from './LegendMultiple'
+import TooltipMultiple from './TooltipMultiple'
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
-  const [useOwnValues, setUseOwnValues] = useState(false);
-  const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), []);
-  const { width: windowWidth } = useWindowDimensions();
+  const [useOwnValues, setUseOwnValues] = useState(false)
+  const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), [])
+  const { width: windowWidth } = useWindowDimensions()
 
-  const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)'];
+  const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)']
 
   const levels = useMemo(() => {
-    if (!listings || listings.length === 0) return [];
-    return listings.map((level) => level.groupedValuesByLevelDTO.level);
-  }, [listings]);
+    if (!listings || listings.length === 0) return []
+    return listings.map((level) => level.groupedValuesByLevelDTO.level)
+  }, [listings])
 
   const chartData = useMemo(() => {
-    if (!listings || listings.length === 0) return [];
+    if (!listings || listings.length === 0) return []
 
     const maxLength = Math.max(
       ...listings.map((level) => level.groupedValuesByLevelDTO.values.length)
-    );
+    )
 
     return Array.from({ length: maxLength }).map((_, index) => {
-      const entry: any = {};
+      const entry: any = {}
 
       for (let levelIndex = 0; levelIndex < listings.length; levelIndex++) {
-        const data = listings[levelIndex];
-        const values = data.groupedValuesByLevelDTO.values[index];
-        const ownMean = data.groupedMeanAndStdByLevelDTO.values[0].mean;
-        const ownSd = data.groupedMeanAndStdByLevelDTO.values[0].standardDeviation;
+        const data = listings[levelIndex]
+        const values = data.groupedValuesByLevelDTO.values[index]
+        const ownMean = data.groupedMeanAndStdByLevelDTO.values[0].mean
+        const ownSd = data.groupedMeanAndStdByLevelDTO.values[0].standardDeviation
 
         if (values) {
           const { mean, standardDeviation }: MeanStdDevValue = useOwnValues
             ? { mean: ownMean, standardDeviation: ownSd }
             : {
                 mean: values.mean,
-                standardDeviation: values.sd,
-              };
+                standardDeviation: values.sd
+              }
 
-          entry.date = customFormatDate(values.date);
+          entry.date = customFormatDate(values.date)
 
-          const levelNum = levelIndex + 1;
+          const levelNum = levelIndex + 1
 
-          entry[`value${levelNum}`] = normalizeValue(values.value, mean, standardDeviation);
-          entry[`date${levelNum}`] = customFormatDate(values.date);
-          entry[`level${levelNum}`] = values.level;
-          entry[`rawValue${levelNum}`] = values.value.toFixed(2);
-          entry[`levelLot${levelNum}`] = values.level_lot;
-          entry[`name${levelNum}`] = values.name;
-          entry[`description${levelNum}`] = values.description;
-          entry[`rules${levelNum}`] = values.rules;
-          entry[`mean${levelNum}`] = useOwnValues ? ownMean : mean;
-          entry[`sd${levelNum}`] = useOwnValues ? ownSd : standardDeviation;
+          entry[`value${levelNum}`] = normalizeValue(values.value, mean, standardDeviation)
+          entry[`date${levelNum}`] = customFormatDate(values.date)
+          entry[`level${levelNum}`] = values.level
+          entry[`rawValue${levelNum}`] = values.value.toFixed(2)
+          entry[`levelLot${levelNum}`] = values.level_lot
+          entry[`name${levelNum}`] = values.name
+          entry[`description${levelNum}`] = values.description
+          entry[`rules${levelNum}`] = values.rules
+          entry[`mean${levelNum}`] = useOwnValues ? ownMean : mean
+          entry[`sd${levelNum}`] = useOwnValues ? ownSd : standardDeviation
         }
       }
 
-      return entry;
-    });
-  }, [listings, useOwnValues]);
+      return entry
+    })
+  }, [listings, useOwnValues])
 
   const yAxisValues = useMemo(
     () => [
@@ -83,12 +83,12 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
       { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
       { value: 1, label: '+1s', color: 'var(--color-sd1)' },
       { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-      { value: 3, label: '+3s', color: 'var(--color-sd3)' },
+      { value: 3, label: '+3s', color: 'var(--color-sd3)' }
     ],
     []
-  );
+  )
 
-  if (!listings || listings.length === 0) return null;
+  if (!listings || listings.length === 0) return null
 
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
@@ -145,8 +145,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                 tickLine={false}
                 stroke='var(--color-text-primary)'
                 tickFormatter={(value) => {
-                  const matchingValue = yAxisValues.find((v) => Math.abs(v.value - value) < 0.0001);
-                  return matchingValue ? matchingValue.label : '';
+                  const matchingValue = yAxisValues.find((v) => Math.abs(v.value - value) < 0.0001)
+                  return matchingValue ? matchingValue.label : ''
                 }}
               />
               <Tooltip content={<TooltipMultiple />} />
@@ -161,14 +161,14 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                   connectNulls={true}
                   activeDot={{
                     color: lineColors[index],
-                    r: 3,
+                    r: 3
                   }}
                   dot={{
                     fill: lineColors[index],
                     stroke: lineColors[index],
                     r: 2,
                     strokeWidth: 1,
-                    className: 'text-textPrimary',
+                    className: 'text-textPrimary'
                   }}
                   animationDuration={250}
                 />
@@ -190,7 +190,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
                   paddingTop: '5px',
                   paddingBottom: '5px',
                   fontStyle: 'italic',
-                  fontSize: 'x-small',
+                  fontSize: 'x-small'
                 }}
               />
             </LineChart>
@@ -198,7 +198,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MultipleLineControlChart;
+export default MultipleLineControlChart

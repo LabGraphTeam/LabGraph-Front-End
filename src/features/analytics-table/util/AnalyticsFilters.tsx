@@ -1,6 +1,6 @@
-import DateSelector from '@/features/shared/date-selector';
-import React from 'react';
-import { AnalyticsFiltersProps } from '../types/AnalyticsTable';
+import DateSelector from '@/features/shared/ui/date-selectors'
+import React from 'react'
+import { AnalyticsFiltersProps } from '../types/AnalyticsTable'
 
 const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   dateSelector,
@@ -10,7 +10,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   levelOptions,
   level,
   setLevel,
-  setFiltered,
+  setFiltered
 }) => {
   return (
     <div className='mb-4 mt-16 grid grid-cols-2 content-center items-center justify-start font-medium md:mb-4 md:flex md:text-sm'>
@@ -37,8 +37,8 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             id='level'
             value={level}
             onChange={(e) => {
-              setLevel(Number(e.target.value));
-              setFiltered(() => e.target.value !== '0');
+              setLevel(Number(e.target.value))
+              setFiltered(() => e.target.value !== '0')
             }}
             className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
           >
@@ -51,7 +51,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
         </label>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AnalyticsFilters;
+export default AnalyticsFilters

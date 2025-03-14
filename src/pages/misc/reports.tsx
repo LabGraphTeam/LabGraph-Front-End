@@ -1,5 +1,5 @@
-import Reports from '@/features/reports';
+import Reports from '@/features/reports'
 
 export default function ReportsPage() {
-  return <Reports />;
+  return <Reports />
 }

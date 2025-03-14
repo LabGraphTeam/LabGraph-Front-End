@@ -1,7 +1,7 @@
-import useWindowDimensions from '@/features/shared/ui/hooks/useWindowDimensions';
-import returnFullNameByTest from '@/features/shared/utils/helpers/returnFullNameByTest';
-import React, { useCallback, useMemo, useState } from 'react';
-import { TbFileDescription, TbMathFunction } from 'react-icons/tb';
+import returnFullNameByTest from '@/features/charts/utils/returnFullNameByTest'
+import useWindowDimensions from '@/features/shared/hooks/useWindowDimensions'
+import React, { useCallback, useMemo, useState } from 'react'
+import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
   CartesianGrid,
   Legend,
@@ -11,23 +11,23 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis,
-} from 'recharts';
-import customFormatDate from '../../../shared/date-selector/constants/customFormatDate';
-import getColorByLevel from '../../constants/getColorByLevel';
-import normalizeValue from '../../constants/normalizeValue';
-import { ControlChartProps } from '../../types/Chart';
-import LegendCustom from './LegendCustom';
-import TooltipCustom from './TooltipCustom';
+  YAxis
+} from 'recharts'
+import customFormatDate from '../../../shared/ui/date-selectors/constants/customFormatDate'
+import { ControlChartProps } from '../../types/Chart'
+import getColorByLevel from '../../utils/getColorByLevel'
+import normalizeValue from '../../utils/normalizeValue'
+import LegendCustom from './LegendCustom'
+import TooltipCustom from './TooltipCustom'
 
 const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => {
-  const [useOwnValues, setUseOwnValues] = useState(false);
+  const [useOwnValues, setUseOwnValues] = useState(false)
 
   const toggleUseOwnValues = useCallback(() => {
-    setUseOwnValues((prev) => !prev);
-  }, []);
+    setUseOwnValues((prev) => !prev)
+  }, [])
 
-  const { width: windowWidth } = useWindowDimensions();
+  const { width: windowWidth } = useWindowDimensions()
 
   const chartData = listingData.map((entry) => ({
     key: entry.id,
@@ -48,8 +48,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
     OwnSd: entry.ownSdValue,
     OwnMean: entry.ownMeanValue,
     description: entry.description,
-    rules: entry.rules,
-  }));
+    rules: entry.rules
+  }))
 
   const yAxisValues = useMemo(
     () => [
@@ -59,10 +59,10 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
       { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
       { value: 1, label: '+1s', color: 'var(--color-sd1)' },
       { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-      { value: 3, label: '+3s', color: 'var(--color-sd3)' },
+      { value: 3, label: '+3s', color: 'var(--color-sd3)' }
     ],
     []
-  );
+  )
 
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
@@ -134,8 +134,8 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
                 tickLine={false}
                 stroke='var(--color-text-primary)'
                 tickFormatter={(value) => {
-                  const matchingValue = yAxisValues.find((v) => Math.abs(v.value - value) < 0.0001);
-                  return matchingValue ? matchingValue.label : '';
+                  const matchingValue = yAxisValues.find((v) => Math.abs(v.value - value) < 0.0001)
+                  return matchingValue ? matchingValue.label : ''
                 }}
               />
               <Tooltip content={TooltipCustom} />
@@ -149,14 +149,14 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
                 connectNulls={true}
                 activeDot={{
                   color: getColorByLevel(listingData[0].level.toString()),
-                  r: 3,
+                  r: 3
                 }}
                 dot={{
                   fill: getColorByLevel(listingData[0].level.toString()),
                   stroke: getColorByLevel(listingData[0].level.toString()),
                   r: 2,
                   strokeWidth: 1,
-                  className: 'text-textPrimary',
+                  className: 'text-textPrimary'
                 }}
                 animationDuration={250}
               />
@@ -177,7 +177,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
                   paddingTop: '5px',
                   paddingBottom: '5px',
                   fontStyle: 'italic',
-                  fontSize: 'x-small',
+                  fontSize: 'x-small'
                 }}
               />
             </LineChart>
@@ -185,7 +185,7 @@ const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => 
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ControlChart;
+export default ControlChart

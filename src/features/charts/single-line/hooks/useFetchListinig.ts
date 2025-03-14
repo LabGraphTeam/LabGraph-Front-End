@@ -9,6 +9,7 @@ const useFetchListing = (url: string) => {
   const [ownMeanValue, setOwnMeanValue] = useState<number>(0);
   const [ownSdValue, setOwnSdValue] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+
   const { token, isLoading } = useToken();
 
   const fetchData = useCallback(async (): Promise<FetchListingData> => {
@@ -21,10 +22,11 @@ const useFetchListing = (url: string) => {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      }) as FetchListingData;
     }
 
     return data;
+
   }, [url, token, isLoading]);
 
   const handleFetchData = useCallback(async () => {

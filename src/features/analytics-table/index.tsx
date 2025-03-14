@@ -1,74 +1,73 @@
-import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsData';
-import useDateSelector from '@/features/shared/date-selector/hooks/useDateSelector';
-import { useCallback, useEffect, useState } from 'react';
-import { useAnalyticsOptions } from '../shared/ui/hooks/useAnalyticsOptions';
-import useWindowDimensions from '../shared/ui/hooks/useWindowDimensions';
-import MainLayout from './layouts/MainLayout';
-import ListingTable from './listing-table';
-import AnalyticsFilters from './util/AnalyticsFilters';
-import AnalyticsPagination from './util/AnalyticsPagination';
+import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsData'
+import { useCallback, useEffect, useState } from 'react'
+import { useAnalyticsOptions } from '../shared/hooks/useAnalyticsOptions'
+import useWindowDimensions from '../shared/hooks/useWindowDimensions'
+import useDateSelector from '../shared/ui/date-selectors/hooks/useDateSelector'
+import MainLayout from './layouts/MainLayout'
+import ListingTable from './listing-table'
+import AnalyticsFilters from './util/AnalyticsFilters'
+import AnalyticsPagination from './util/AnalyticsPagination'
 
 const AnalyticsTableIndex = () => {
-  const dateSelector = useDateSelector();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
-  const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics');
-  const [level, setLevel] = useState(0);
-  const [isFiltered, setIsFiltered] = useState(false);
+  const dateSelector = useDateSelector()
+  const [currentPage, setCurrentPage] = useState(0)
+  const [itemsPerPage, setItemsPerPage] = useState(8)
+  const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics')
+  const [level, setLevel] = useState(0)
+  const [isFiltered, setIsFiltered] = useState(false)
+  const [url, setUrl] = useState('')
 
-  const { width } = useWindowDimensions();
-  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType);
+  const { width } = useWindowDimensions()
+  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType)
+
+  const startDate = {
+    day: dateSelector.startDay,
+    month: dateSelector.startMonth,
+    year: dateSelector.startYear
+  }
+
+  const endDate = {
+    day: dateSelector.endDay,
+    month: dateSelector.endMonth,
+    year: dateSelector.endYear
+  }
 
   const {
     data: dataFetched,
     isLoading,
+    isTokenLoading,
     fetchData,
     buildUrl,
-    totalPages,
+    totalPages
   } = useAnalyticsData({
     analyticsType,
     level,
-    startDate: {
-      day: dateSelector.startDay,
-      month: dateSelector.startMonth,
-      year: dateSelector.startYear,
-    },
-    endDate: {
-      day: dateSelector.endDay,
-      month: dateSelector.endMonth,
-      year: dateSelector.endYear,
-    },
+    startDate,
+    endDate,
     itemsPerPage,
-    currentPage,
-  });
-
-  useEffect(() => {
-    const url = buildUrl(isFiltered);
-    fetchData(url);
-  }, [
-    isFiltered,
-    analyticsType,
-    level,
-    itemsPerPage,
-    currentPage,
-    dateSelector.startDay,
-    dateSelector.startMonth,
-    dateSelector.startYear,
-    dateSelector.endDay,
-    dateSelector.endMonth,
-    dateSelector.endYear,
-  ]);
-
-  useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 14 : 8);
-  }, [width]);
+    currentPage
+  })
 
   const handlePageChange = useCallback(
     async (url: string): Promise<void> => {
-      await fetchData(url);
+      await fetchData(url)
     },
     [fetchData]
-  );
+  )
+
+  useEffect(() => {
+    setUrl(buildUrl(isFiltered))
+  }, [buildUrl, isFiltered])
+
+  useEffect(() => {
+    if (url) {
+      fetchData(url)
+    }
+  }, [url, isLoading, isTokenLoading])
+
+  useEffect(() => {
+    setItemsPerPage(width >= 1800 ? 14 : 8)
+  }, [width])
 
   return (
     <MainLayout title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}>
@@ -90,7 +89,7 @@ const AnalyticsTableIndex = () => {
         setCurrentPage={setCurrentPage}
       />
     </MainLayout>
-  );
-};
+  )
+}
 
-export default AnalyticsTableIndex;
+export default AnalyticsTableIndex

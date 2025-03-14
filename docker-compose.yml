@@ -34,7 +34,7 @@ services:
     volumes:
       - ./src:/app/src:rw
       - ./public:/app/public:rw
-      - ./next.config.js:/app/next.config.js:rw
+      - ./next.config.ts:/app/next.config.ts:rw
       - ./.env.development:/app/.env.development:rw
       - ./package.json:/app/package.json:rw
     stdin_open: true

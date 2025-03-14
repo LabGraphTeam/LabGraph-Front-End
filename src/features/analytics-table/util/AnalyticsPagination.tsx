@@ -1,13 +1,13 @@
-import Arrow from '@/features/shared/ui/arrows';
-import React from 'react';
-import { AnalyticsPaginationProps } from '../types/AnalyticsTable';
-import PageButtons from './PageButtons';
+import Arrow from '@/features/shared/ui/arrow-button'
+import React from 'react'
+import { AnalyticsPaginationProps } from '../types/AnalyticsTable'
+import PageButtons from './PageButtons'
 
 const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
   currentPage,
   totalPages,
   dataFetched,
-  setCurrentPage,
+  setCurrentPage
 }) => {
   return (
     <div className='flex w-full flex-col items-center bg-background py-4'>
@@ -48,7 +48,7 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AnalyticsPagination;
+export default AnalyticsPagination

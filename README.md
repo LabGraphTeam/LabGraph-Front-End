@@ -49,6 +49,7 @@ A web application for laboratory quality control management implementing Westgar
 
 - Node.js 16.x or higher
 - npm
+- Docker
 
 ### Quick Start
 

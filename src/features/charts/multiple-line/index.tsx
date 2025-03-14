@@ -1,15 +1,15 @@
-import NavBar from '@/features/shared/navigation-bar';
-import TestSelectorWithoutLevel from '@/features/shared/test-selector/custom-selector';
-import Footer from '@/features/shared/ui/footer';
-import Loading from '@/features/shared/utils/components/loading';
-import Head from 'next/head';
-import React, { useState } from 'react';
-import { LevelGroupResponse, MultipleLineGraphProps } from '../types/Chart';
-import MultipleLineControlChart from './components/MultipleLineControlChart';
+import TestSelectorWithoutLevel from '@/features/shared/ui/analytics-selectors/custom-selector'
+import Footer from '@/features/shared/ui/footer'
+import NavBar from '@/features/shared/ui/nav-bar'
+import Loading from '@/features/shared/utils/components/loading'
+import Head from 'next/head'
+import React, { useState } from 'react'
+import { LevelGroupResponse, MultipleLineGraphProps } from '../types/Chart'
+import MultipleLineControlChart from './components/MultipleLineControlChart'
 
 const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType }) => {
-  const [groupResponse, setGroupResponse] = useState<LevelGroupResponse[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [groupResponse, setGroupResponse] = useState<LevelGroupResponse[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   return (
     <div className='min-h-min'>
@@ -35,7 +35,7 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
         <Footer />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MultipleLineLabGraph;
+export default MultipleLineLabGraph

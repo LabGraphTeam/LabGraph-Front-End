@@ -6,7 +6,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({ totalPages, currentPage, setC
 
   if (totalPages === undefined) return null;
 
-  let pages: (number | 'ellipsis')[] = [];
+  const pages: (number | 'ellipsis')[] = [];
   if (showAllPages || totalPages <= 4) {
     for (let i = 0; i < totalPages; i++) {
       pages.push(i);

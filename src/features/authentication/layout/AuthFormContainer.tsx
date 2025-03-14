@@ -1,8 +1,8 @@
-import Logo from '../../shared/ui/logo';
-import ThemeToggle from '../../shared/ui/theme';
+import ThemeToggle from '../../shared/theme'
+import Logo from '../../shared/ui/logo'
 
 interface AuthFormContainerProps {
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 const AuthFormContainer = ({ children }: AuthFormContainerProps) => {
@@ -20,7 +20,7 @@ const AuthFormContainer = ({ children }: AuthFormContainerProps) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AuthFormContainer;
+export default AuthFormContainer

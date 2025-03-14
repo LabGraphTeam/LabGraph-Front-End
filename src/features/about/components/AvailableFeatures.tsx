@@ -1,6 +1,5 @@
-
-import { FEATURE_ITEMS } from '@/features/about/constants/featureConstants';
 import { FeatureCard } from '@/features/about/components/Cards';
+import { FEATURE_ITEMS } from '@/features/about/constants/featureConstants';
 
 const AvailableFeatures: React.FC = () => (
   <div className='py-12'>

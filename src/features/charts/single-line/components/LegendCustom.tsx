@@ -1,8 +1,8 @@
-import getColorByLevel from '../../constants/getColorByLevel';
-import { LegendCustomProps } from '../../types/Chart';
+import { LegendCustomProps } from '../../types/Chart'
+import getColorByLevel from '../../utils/getColorByLevel'
 
 const LegendCustom = ({ payload, data }: LegendCustomProps) => {
-  if (!payload || !data) return null;
+  if (!payload || !data) return null
 
   return (
     <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
@@ -11,7 +11,7 @@ const LegendCustom = ({ payload, data }: LegendCustomProps) => {
           <div
             className='size-2.5 rounded-full'
             style={{
-              backgroundColor: getColorByLevel(data[index].level.toString()),
+              backgroundColor: getColorByLevel(data[index].level.toString())
             }}
           />
           <span className='text-xs text-textPrimary md:text-sm'>
@@ -20,7 +20,7 @@ const LegendCustom = ({ payload, data }: LegendCustomProps) => {
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default LegendCustom;
+export default LegendCustom

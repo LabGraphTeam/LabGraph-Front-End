@@ -1,8 +1,8 @@
-import Loading from '@/features/shared/utils/components/loading';
-import React from 'react';
-import { ListingTableProps } from '../../miscs/types/ListiningTable';
-import MobileItemCard from '../components/MobileItemCard';
-import TableRow from '../components/TableRow';
+import Loading from '@/features/shared/utils/components/loading'
+import React from 'react'
+import { ListingTableProps } from '../../miscs/types/ListiningTable'
+import MobileItemCard from '../components/MobileItemCard'
+import TableRow from '../components/TableRow'
 
 const tableHeaders = [
   { id: 'date', name: 'Date' },
@@ -13,8 +13,8 @@ const tableHeaders = [
   { id: 'mean_test', name: 'Mean Test' },
   { id: 'values', name: 'Values' },
   { id: 'unit', name: 'Unit' },
-  { id: 'rules', name: 'Rules' },
-];
+  { id: 'rules', name: 'Rules' }
+]
 
 const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
   return (
@@ -49,7 +49,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
         </div>
       ) : null}
     </div>
-  );
-};
+  )
+}
 
-export default ListingTable;
+export default ListingTable

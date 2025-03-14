@@ -1,0 +1,12 @@
+/* AboutNavBar.module.css */
+.aboutNavBar {
+  @apply whitespace-nowrap;
+  @apply text-textSecondary;
+  @apply transition-colors;
+  @apply hover:text-primary;
+  @apply hover:underline;
+  @apply hover:decoration-primary;
+  @apply hover:decoration-1;
+  @apply border;
+  @apply border-indigo-600;
+}

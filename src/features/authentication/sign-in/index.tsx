@@ -1,14 +1,15 @@
-import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer';
-import CheckIcon from '@/features/shared/ui/icons/CheckBox';
-import ErrorMessage from '@/features/shared/utils/components/error-message';
-import { AtSign, Lock } from 'lucide-react';
-import AuthLink from '../components/AuthLink';
-import InputField from '../components/InputField';
-import SubmitButton from '../components/SubmitButton';
-import { useAuth } from '../hooks/useAuthentication';
+import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer'
+import CheckIcon from '@/features/shared/ui/icons/CheckBox'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
+import { AtSign, Lock } from 'lucide-react'
+import AuthLink from '../components/AuthLink'
+import InputField from '../components/InputField'
+import SubmitButton from '../components/SubmitButton'
+import { useAuthValidator } from '../hooks/useAuthValidator'
 
 const LoginForm = () => {
-  const { formData, errors, handleChange, rememberMe, setRememberMe, handleSubmit } = useAuth(true);
+  const { formData, errors, handleChange, rememberMe, handleRememberMeChange, handleSubmit } =
+    useAuthValidator(true)
 
   return (
     <AuthFormContainer>
@@ -38,7 +39,11 @@ const LoginForm = () => {
         />
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>
-          <CheckIcon text='Keep me logged in' checked={rememberMe} onChange={setRememberMe} />
+          <CheckIcon
+            text='Keep me logged in'
+            checked={rememberMe}
+            onChange={handleRememberMeChange}
+          />
           <AuthLink text='' linkText='Forgot password?' href='#' />
         </div>
 
@@ -46,7 +51,7 @@ const LoginForm = () => {
         <AuthLink text="Don't have an account?" linkText='Sign up' href='/auth/signup' />
       </form>
     </AuthFormContainer>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

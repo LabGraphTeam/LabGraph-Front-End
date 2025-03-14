@@ -1,5 +1,5 @@
-import Logo from '@/features/shared/ui/logo';
-import ThemeToggle from '@/features/shared/ui/theme';
+import ThemeToggle from '@/features/shared/theme'
+import Logo from '@/features/shared/ui/logo'
 
 export default function Form() {
   return (
@@ -15,5 +15,5 @@ export default function Form() {
         </div>
       </div>
     </div>
-  );
+  )
 }

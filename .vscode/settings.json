@@ -1,1 +1,7 @@
-{}
+{
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "next*, .git*, eslint*, .eslint*, .prettier*, postcss*, tailwind*, tsconfig*, package*, .docker*, .env*",
+  }
+}

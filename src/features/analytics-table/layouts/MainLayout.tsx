@@ -1,6 +1,6 @@
-import NavBar from '@/features/shared/navigation-bar';
-import Footer from '@/features/shared/ui/footer';
-import { MainLayoutProps } from '../types/AnalyticsTable';
+import Footer from '@/features/shared/ui/footer'
+import NavBar from '@/features/shared/ui/nav-bar'
+import { MainLayoutProps } from '../types/AnalyticsTable'
 
 const MainLayout = ({ children, title }: MainLayoutProps) => {
   return (
@@ -14,7 +14,7 @@ const MainLayout = ({ children, title }: MainLayoutProps) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

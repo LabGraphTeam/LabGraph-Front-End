@@ -1,15 +1,15 @@
-import ControlChart from '@/features/charts/single-line/components/ControlChart';
-import NavBar from '@/features/shared/navigation-bar';
-import TestSelectorWithLevel from '@/features/shared/test-selector/common-selector';
-import Footer from '@/features/shared/ui/footer';
-import Loading from '@/features/shared/utils/components/loading';
-import Head from 'next/head';
-import { useState } from 'react';
-import { LabGraphProps, ListingItem } from '../types/Chart';
+import ControlChart from '@/features/charts/single-line/components/ControlChart'
+import TestSelectorWithLevel from '@/features/shared/ui/analytics-selectors/selector'
+import Footer from '@/features/shared/ui/footer'
+import NavBar from '@/features/shared/ui/nav-bar'
+import Loading from '@/features/shared/utils/components/loading'
+import Head from 'next/head'
+import { useState } from 'react'
+import { LabGraphProps, ListingItem } from '../types/Chart'
 
 const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
-  const [dataFetched, setDataFetched] = useState<ListingItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [dataFetched, setDataFetched] = useState<ListingItem[]>([])
+  const [isLoading, setIsLoading] = useState(true)
 
   return (
     <div className='min-h-min gap-4'>
@@ -38,7 +38,7 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
         <Footer />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LabGraph;
+export default LabGraph

@@ -1,13 +1,13 @@
-import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer';
-import ErrorMessage from '@/features/shared/utils/components/error-message';
-import { AtSign, Lock, User } from 'lucide-react';
-import AuthLink from '../components/AuthLink';
-import InputField from '../components/InputField';
-import SubmitButton from '../components/SubmitButton';
-import { useAuth } from '../hooks/useAuthentication';
+import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
+import { AtSign, Lock, User } from 'lucide-react'
+import AuthLink from '../components/AuthLink'
+import InputField from '../components/InputField'
+import SubmitButton from '../components/SubmitButton'
+import { useAuthValidator } from '../hooks/useAuthValidator'
 
 const SignUpForm = () => {
-  const { formData, errors, handleChange, handleSubmit } = useAuth(false);
+  const { formData, errors, handleChange, handleSubmit } = useAuthValidator(false)
 
   return (
     <AuthFormContainer>
@@ -59,7 +59,7 @@ const SignUpForm = () => {
         <AuthLink text='Already have an account?' linkText='Sign in' href='/auth/login' />
       </form>
     </AuthFormContainer>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

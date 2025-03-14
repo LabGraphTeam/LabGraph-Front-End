@@ -1,12 +1,13 @@
-import { useToken } from '@/features/authentication/contexts/TokenContext';
-import { ListingItem } from '@/features/charts/types/Chart';
+import { useToken } from '@/features/authentication/contexts/TokenContext'
+import { ListingItem } from '@/features/charts/types/Chart'
+
 import {
   formatDateWithTime,
-  formatEndDateWithTime,
-} from '@/features/shared/date-selector/constants/formatDateWithTime';
-import { fetchWrapper } from '@/services/fetch-wrapper';
-import { useState } from 'react';
-import { PaginatedResponse, UseAnalyticsDataProps } from '../types/AnalyticsTable';
+  formatEndDateWithTime
+} from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
+import { fetchWrapper } from '@/services/fetch-wrapper'
+import { useState } from 'react'
+import { UseAnalyticsDataProps, UseAnalyticsDataReturn } from '../types/AnalyticsTable'
 
 export const useAnalyticsData = ({
   analyticsType,
@@ -14,67 +15,61 @@ export const useAnalyticsData = ({
   startDate,
   endDate,
   itemsPerPage,
-  currentPage,
-}: UseAnalyticsDataProps) => {
-  const [data, setData] = useState<ListingItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalElements, setTotalElements] = useState(0);
-  const { token, isLoading: loading } = useToken();
+  currentPage
+}: UseAnalyticsDataProps): UseAnalyticsDataReturn => {
+  const [data, setData] = useState<ListingItem[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [totalPages, setTotalPages] = useState<number>(0)
+  const [totalElements, setTotalElements] = useState<number>(0)
+  const { token, isLoading: isTokenLoading } = useToken()
 
-  const fetchData = async (url: string) => {
-    if (loading) {
-      setIsLoading(true);
-      return;
+  const buildUrl = (isFiltered: boolean): string => {
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}`
+    const startDateFormatted = formatDateWithTime(startDate.year, startDate.month, startDate.day)
+    const endDateFormatted = formatEndDateWithTime(endDate.year, endDate.month, endDate.day)
+
+    if (isFiltered) {
+      return `${baseUrl}/level-date-range?level=${level}&startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`
     }
+    return `${baseUrl}/date-range?startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`
+  }
 
-    if (!token) {
-      setError('No authentication token available');
-      return;
+  const fetchData = async (url: string): Promise<void> => {
+    if (isTokenLoading) {
+      return
     }
-
-    setError(null);
 
     try {
       const response = await fetchWrapper({
         route: url,
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`
         },
-      });
+        next: { revalidate: 60 },
+        cache: 'force-cache'
+      })
 
-      const result: PaginatedResponse = response;
-      setData(result.content);
-      setTotalPages(result.page.totalPages);
-      setTotalElements(result.page.totalElements);
+      setData(response.content || [])
+      setTotalPages(response.page?.totalPages || 0)
+      setTotalElements(response.page?.totalElements || 0)
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to fetch data');
+      console.error('Error fetching analytics data:', error)
+      setData([])
+      setTotalPages(0)
+      setTotalElements(0)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
-
-  const buildUrl = (isFiltered: boolean) => {
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}`;
-    const startDateFormatted = formatDateWithTime(startDate.year, startDate.month, startDate.day);
-    const endDateFormatted = formatEndDateWithTime(endDate.year, endDate.month, endDate.day);
-
-    if (isFiltered) {
-      return `${baseUrl}/level-date-range?level=${level}&startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`;
-    }
-
-    return `${baseUrl}/date-range?startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`;
-  };
+  }
 
   return {
     data,
     isLoading,
-    error,
+    isTokenLoading,
     fetchData,
     buildUrl,
     totalPages,
-    totalElements,
-  };
-};
+    totalElements
+  }
+}

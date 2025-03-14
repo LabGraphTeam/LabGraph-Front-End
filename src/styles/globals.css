@@ -27,13 +27,9 @@
     --color-tertiary-hover: #553c9a; /* Interactive state */
 
     /* Interface Status Colors */
-    --color-success: #34d399; /* Positive actions/states */
-    --color-success-hover: #059669; /* Interactive state */
     --color-warning: #fbbf24; /* Cautionary indicators */
-    --color-warning-hover: #d97706; /* Interactive state */
     --color-danger: #d32f2f; /* Error/Danger indicators */
     --color-info: #60a5fa; /* Informational elements */
-    --color-info-hover: #3b82f6; /* Interactive state */
     --color-accent: #ff5722; /* Attention-drawing elements */
 
     /* Text Colors */
@@ -62,19 +58,13 @@
 
     /* Interactive Elements */
     --color-button-muted: #888888; /* Secondary buttons */
-    --color-signin: #28a745; /* Sign-in action */
-    --color-signin-hover: #218838; /* Interactive state */
-    --color-signout: #ff4136; /* Sign-out action */
-    --color-signout-hover: #ff0000; /* Interactive state */
 
     /* System Colors */
     --color-white: #ffffff; /* Pure white */
     --color-logo-l: #ffffff; /* Logo light variant */
-    --checkbox-color: #111111; /* Form controls */
     --border-color: #cccccc; /* Standard borders */
     --color-sun: #fdb813; /* Light theme indicator */
     --color-moon: #778899; /* Dark theme indicator */
-    --color-green: #28a745; /* Success indicators */
   }
 
   /* Dark Theme */
@@ -95,13 +85,9 @@
     --color-tertiary-hover: #805ad5;
 
     /* Interface Status Colors */
-    --color-success: #10b981;
-    --color-success-hover: #059669;
     --color-warning: #f59e0b;
-    --color-warning-hover: #d97706;
     --color-danger: #d32f2f;
     --color-info: #3b82f6;
-    --color-info-hover: #2563eb;
     --color-accent: #ff7043;
 
     /* Text Colors */
@@ -130,10 +116,6 @@
 
     /* Interactive Elements */
     --color-button-muted: #999999;
-    --color-signin: #28a745;
-    --color-signin-hover: #218838;
-    --color-signout: #ff4136;
-    --color-signout-hover: #ff0000;
 
     /* System Colors */
     --color-white: #ffffff;
@@ -141,7 +123,6 @@
     --checkbox-color: #ffffff;
     --color-sun: #fdb813;
     --color-moon: #778899;
-    --color-green: #2ecc71;
     --border-color: #cccccc85; /* Standard borders */
   }
 

@@ -1,20 +1,20 @@
-import { serialize } from 'cookie';
-import type { NextApiRequest, NextApiResponse } from 'next';
+import { serialize } from 'cookie'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default function logout(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ message: 'Method not allowed' })
   }
 
   const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
     sameSite: 'strict' as const,
     path: '/',
-    maxAge: 0,
-  };
+    maxAge: 0
+  }
 
-  res.setHeader('Set-Cookie', serialize('tokenJWT', '', cookieOptions));
+  res.setHeader('Set-Cookie', serialize('tokenJWT', '', cookieOptions))
 
-  return res.status(200).json({ success: true });
+  return res.status(200).json({ success: true })
 }
