@@ -1,6 +1,8 @@
 import { LegendProps } from 'recharts'
 
-export interface ListingItem {
+export interface ListingCollection extends Array<any> { }
+
+export interface AnalyticItem {
   id: number
   name: string
   level_lot: string
@@ -17,35 +19,24 @@ export interface ListingItem {
   rules?: string
 }
 
-export interface ListingCollection extends Array<any> {}
-
-export interface UseFetchListingProps {
-  url: string
-  urlMeanAndDeviation: string
-}
-
-export interface GroupedListing {
-  level: string
-  values: ListingItem[]
-}
 
 export interface ControlChartProps {
-  listing: ListingItem[]
+  analyticItemList: AnalyticItem[]
 }
 
-export interface MeanStdDevValue {
+export interface MeanStdDevValueData {
   mean: number
   standardDeviation: number
 }
 
-export interface LevelGroupResponse {
+export interface AnalyticGroupedData {
   groupedValuesByLevelDTO: {
     level: string
-    values: ListingItem[]
+    values: AnalyticItem[]
   }
   groupedMeanAndStdByLevelDTO: {
     level: string
-    values: MeanStdDevValue[]
+    values: MeanStdDevValueData[]
   }
 }
 
@@ -65,30 +56,13 @@ export interface MeanAndSdResponse {
   }
 }
 
-export interface ProcessedData {
-  date: string
-  level_lot: string
-  test_lot: string
-  level: string
-  unit_value: string
-  name: string
-  value: string
-  mean: string
-  sd: string
-}
-
-export interface ProcessingStatus {
-  isProcessing: boolean
-  message: string
-  error?: string
-}
 
 export interface MultipleLineChartProps {
-  listings: LevelGroupResponse[]
+  analyticsListData: AnalyticGroupedData[]
   colors?: string[]
 }
 
-export interface LabGraphProps {
+export interface SingleLineGraphProps {
   testList: string[]
   analyticsType: string
   levelListSize: number
@@ -100,14 +74,7 @@ export interface MultipleLineGraphProps {
   analyticsType: string
 }
 
-export interface ListingData {
-  listing: any[]
-  unitValue: string | null
-  ownMean: number | null
-  ownSd: number | null
-}
-
-export interface FetchListingData {
+export interface AnalyticWithStatsData {
   calcMeanAndStdDTO: {
     mean: number
     standardDeviation: number
@@ -128,7 +95,7 @@ export interface PayloadData {
   sd: number
 }
 
-export interface LegendCustomProps extends LegendProps {
+export interface LegendCustomSingleLineProps extends LegendProps {
   payload?: Array<{
     value: string
     payload: {
@@ -141,7 +108,7 @@ export interface LegendCustomProps extends LegendProps {
   }>
 }
 
-export interface LegendMultipleProps {
+export interface LegendMultipleLinesProps {
   payload?: any[]
   levels: string[]
 }

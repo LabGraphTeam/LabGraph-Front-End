@@ -34,13 +34,13 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
         </thead>
         <tbody>
           {items.map((item) => (
-            <TableRow key={item.id} item={item} />
+            <TableRow key={item.id} analyticItem={item} />
           ))}
         </tbody>
       </table>
       <div className='grid grid-cols-4 place-content-center gap-2 px-2 text-center md:hidden'>
         {items.map((item) => (
-          <MobileItemCard key={item.id} item={item} />
+          <MobileItemCard key={item.id} analyticItem={item} />
         ))}
       </div>
       {isLoading ? (

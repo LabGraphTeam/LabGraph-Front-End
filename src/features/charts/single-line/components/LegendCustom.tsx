@@ -1,7 +1,7 @@
-import { LegendCustomProps } from '../../types/Chart'
+import { LegendCustomSingleLineProps } from '../../types/Chart'
 import getColorByLevel from '../../utils/getColorByLevel'
 
-const LegendCustom = ({ payload, data }: LegendCustomProps) => {
+const LegendCustom = ({ payload, data }: LegendCustomSingleLineProps) => {
   if (!payload || !data) return null
 
   return (

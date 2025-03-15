@@ -1,7 +1,7 @@
 import MeanAndDeviationDisplay from '@/features/charts/components/MeanAndDeviationDisplay'
 import useFetchListing from '@/features/charts/single-line/hooks/useFetchListinig'
-import { ListingItem } from '@/features/charts/types/Chart'
-import urlAnalyticsByNameAndDateAndLevel from '@/features/shared/utils/helpers/urlAnalyticsByNameAndDateAndLevel'
+import { AnalyticItem } from '@/features/charts/types/Chart'
+import buildAnalyticsEndpoint from '@/features/shared/utils/helpers/buildAnalyticsEndpoint'
 import React, { useEffect, useState } from 'react'
 import { useAnalyticsOptions } from '../../../hooks/useAnalyticsOptions'
 import DateSelector from '../../date-selectors'
@@ -14,7 +14,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   analyticsType,
   name,
   level,
-  setListingItem,
+  setAnalyticItem,
   setIsLoading
 }) => {
   const [testName, setTestName] = useState<string>(name)
@@ -34,7 +34,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
     handleEndMonthChange
   } = useDateSelector()
 
-  const props = urlAnalyticsByNameAndDateAndLevel({
+  const props = buildAnalyticsEndpoint({
     analyticsType,
     name: testName,
     level: testLevel,
@@ -46,12 +46,12 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   useEffect(() => {
     setIsLoading(true)
     if (listing) {
-      const updatedListing: ListingItem[] = listing.map((item) => ({
+      const updatedListing: AnalyticItem[] = listing.map((item) => ({
         ...item,
         ownMeanValue,
         ownSdValue
       }))
-      setListingItem(updatedListing)
+      setAnalyticItem(updatedListing)
       if (updatedListing.length > 0) {
         setIsLoading(false)
       }
@@ -69,7 +69,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
     endDay,
     endMonth,
     endYear,
-    setListingItem,
+    setAnalyticItem,
     setIsLoading
   ])
 

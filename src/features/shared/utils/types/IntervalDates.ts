@@ -1,4 +1,4 @@
-export default interface Dates {
+export default interface IntervalDates {
   startDay: number;
   startMonth: number;
   startYear: number;

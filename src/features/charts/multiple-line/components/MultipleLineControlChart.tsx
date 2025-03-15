@@ -13,12 +13,12 @@ import {
   YAxis
 } from 'recharts'
 import customFormatDate from '../../../shared/ui/date-selectors/constants/customFormatDate'
-import { MeanStdDevValue, MultipleLineChartProps } from '../../types/Chart'
+import { MeanStdDevValueData, MultipleLineChartProps } from '../../types/Chart'
 import normalizeValue from '../../utils/normalizeValue'
 import LegendMultiple from './LegendMultiple'
 import TooltipMultiple from './TooltipMultiple'
 
-const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }) => {
+const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ analyticsListData: listings }) => {
   const [useOwnValues, setUseOwnValues] = useState(false)
   const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), [])
   const { width: windowWidth } = useWindowDimensions()
@@ -47,7 +47,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({ listings }
         const ownSd = data.groupedMeanAndStdByLevelDTO.values[0].standardDeviation
 
         if (values) {
-          const { mean, standardDeviation }: MeanStdDevValue = useOwnValues
+          const { mean, standardDeviation }: MeanStdDevValueData = useOwnValues
             ? { mean: ownMean, standardDeviation: ownSd }
             : {
                 mean: values.mean,

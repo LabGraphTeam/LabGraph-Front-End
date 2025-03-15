@@ -1,20 +1,20 @@
-import { ListingItem } from '@/features/charts/types/Chart'
+import { AnalyticItem } from '@/features/charts/types/Chart'
 import { ReactNode } from 'react'
 
 export interface MobileItemCardProps {
-  item: ListingItem
+  analyticItem: AnalyticItem
 }
 
 export interface TableRowProps {
-  item: ListingItem
+  analyticItem: AnalyticItem
 }
 export interface MainLayoutProps {
   children: ReactNode
   title: string
 }
 
-export interface UseAnalyticsDataReturn {
-  data: ListingItem[]
+export interface AnalyticsDataReturn {
+  analyticsDataList: AnalyticItem[]
   isLoading: boolean
   isTokenLoading: boolean
   fetchData: (url: string) => Promise<void>
@@ -48,7 +48,7 @@ export interface PageButtonsProps {
 }
 
 export interface PaginatedResponse {
-  content: ListingItem[]
+  content: AnalyticItem[]
   page: {
     size: number
     totalElements: number

@@ -1,6 +1,6 @@
 import useFetchListeningGrouped from '@/features/charts/multiple-line/hooks/useFetchListiningGrouped'
 import UpdateResults from '@/features/miscs/upload-results'
-import urlByNameAndDateNew from '@/features/shared/utils/helpers/urlByNameAndDateNew'
+import buildAnalyticsEndpointByNameAndDate from '@/features/shared/utils/helpers/buildAnalyticsEndpointByNameAndDate'
 import React, { useEffect, useState } from 'react'
 import DateSelector from '../../date-selectors'
 import useDateSelector from '../../date-selectors/hooks/useDateSelector'
@@ -12,7 +12,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   testNameList: list,
   analyticsType,
   name,
-  setListing,
+  setAnalyticItemList: setListing,
   setIsLoading
 }) => {
   const [testName, setTestName] = useState<string>(name)
@@ -31,7 +31,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     handleEndYearChange
   } = useDateSelector()
 
-  const { url } = urlByNameAndDateNew({
+  const { url } = buildAnalyticsEndpointByNameAndDate({
     name: testName,
     date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
     analyticsType

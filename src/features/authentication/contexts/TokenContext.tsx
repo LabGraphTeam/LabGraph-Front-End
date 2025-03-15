@@ -31,8 +31,6 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
         const tokenResponse = await fetchWrapper({
           route: '/api/get-token',
           method: 'GET',
-          cache: 'force-cache',
-          next: { revalidate: 60 }
         })
 
         if (tokenResponse.valid) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { TableRowProps } from '../types/AnalyticsTable';
 
-const TableRow: React.FC<TableRowProps> = ({ item }) => {
+const TableRow: React.FC<TableRowProps> = ({ analyticItem: item }) => {
   return (
     <tr className='rounded-md transition-colors duration-200 hover:bg-muted'>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-sm'>

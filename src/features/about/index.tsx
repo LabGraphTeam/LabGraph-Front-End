@@ -5,38 +5,43 @@ import Contacts from '@/features/about/components/Contacts'
 import FAQSection from '@/features/about/components/FAQ'
 import Overview from '@/features/about/components/Overview'
 import Footer from '@/features/shared/ui/footer'
+import { CAROULSEL_IMAGES } from './constants/carouselImages'
 
 const AboutUs = () => {
-  const carouselImages = [
-    { id: 1, src: '/reports.jpg', alt: 'view result by table' },
-    { id: 2, src: '/lab.jpg', alt: 'view result by chart' },
-    { id: 3, src: '/labbancada.jpg', alt: 'generate reports' },
-    { id: 4, src: '/lab4.jpg', alt: 'alerts by email' }
-  ]
-
   return (
     <div id='overview' className='flex min-h-screen flex-col bg-background'>
       <AboutNavbar />
 
-      <div className='mx-auto flex w-full max-w-7xl flex-col items-center space-y-2 px-4 py-8'>
-        <section id='carousel' className='w-full'>
-          <Carousel images={carouselImages} />
+      <div className='mx-auto flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-8'>
+        <section id='carousel' className='w-full py-8 md:py-12'>
+          <Carousel images={CAROULSEL_IMAGES} />
         </section>
 
-        <section id='features' className='w-full'>
+        <section id='features' className='w-full py-8'>
           <Overview />
-          <AvailableFeatures />
+          <div className='mt-20'>
+            <AvailableFeatures />
+          </div>
         </section>
 
-        <section className='w-full'>
+
+        <section id='faq' className='w-full py-8'>
           <FAQSection />
         </section>
 
-        <section id='contact' className='w-full'>
+        <section id='contact' className='w-full py-8'>
           <Contacts />
         </section>
       </div>
-      <Footer />
+
+      {/* toFix: implment responsive cards */}
+      {/* <section id='team' className='w-full'>
+        <Team />
+      </section> */}
+      
+      <div className='mt-auto'>
+        <Footer />
+      </div>
     </div>
   )
 }

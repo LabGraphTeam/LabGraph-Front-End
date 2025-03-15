@@ -1,5 +1,5 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { ListingItem } from '@/features/charts/types/Chart'
+import { AnalyticItem } from '@/features/charts/types/Chart'
 
 import {
   formatDateWithTime,
@@ -7,7 +7,7 @@ import {
 } from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
 import { fetchWrapper } from '@/services/fetch-wrapper'
 import { useState } from 'react'
-import { UseAnalyticsDataProps, UseAnalyticsDataReturn } from '../types/AnalyticsTable'
+import { UseAnalyticsDataProps, AnalyticsDataReturn } from '../types/AnalyticsTable'
 
 export const useAnalyticsData = ({
   analyticsType,
@@ -16,8 +16,8 @@ export const useAnalyticsData = ({
   endDate,
   itemsPerPage,
   currentPage
-}: UseAnalyticsDataProps): UseAnalyticsDataReturn => {
-  const [data, setData] = useState<ListingItem[]>([])
+}: UseAnalyticsDataProps): AnalyticsDataReturn => {
+  const [analyticData, setAnalyticData] = useState<AnalyticItem[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalPages, setTotalPages] = useState<number>(0)
   const [totalElements, setTotalElements] = useState<number>(0)
@@ -50,12 +50,12 @@ export const useAnalyticsData = ({
         cache: 'force-cache'
       })
 
-      setData(response.content || [])
+      setAnalyticData(response.content || [])
       setTotalPages(response.page?.totalPages || 0)
       setTotalElements(response.page?.totalElements || 0)
     } catch (error) {
       console.error('Error fetching analytics data:', error)
-      setData([])
+      setAnalyticData([])
       setTotalPages(0)
       setTotalElements(0)
     } finally {
@@ -64,7 +64,7 @@ export const useAnalyticsData = ({
   }
 
   return {
-    data,
+    analyticsDataList: analyticData,
     isLoading,
     isTokenLoading,
     fetchData,

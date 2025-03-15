@@ -1,9 +1,9 @@
-import { ListingItem } from '@/features/charts/types/Chart'
+import { AnalyticItem } from '@/features/charts/types/Chart'
 import { DateSelectorProps } from '@/features/shared/ui/date-selectors/types/dateSelectorProps'
 
 export interface ReportsHeaderProps {
   analyticsType: string
-  dataFetched?: ListingItem[]
+  dataFetched?: AnalyticItem[]
 }
 
 export interface UseReportsDataProps {
@@ -13,7 +13,7 @@ export interface UseReportsDataProps {
 export interface ReportsControlsProps extends DateSelectorProps {
   analyticsType: string
   onAnalyticsTypeChange: (value: string) => void
-  dataFetched: ListingItem[]
+  dataFetched: AnalyticItem[]
   dateSelectorProps: DateSelectorProps
   reportMonth?: string
   reportYear?: number

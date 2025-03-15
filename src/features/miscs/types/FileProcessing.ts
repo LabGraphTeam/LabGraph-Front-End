@@ -1,4 +1,4 @@
-import { ProcessedData } from '../../charts/types/Chart';
+import { ProcessedData } from '@/features/miscs/types/UpdateResults'
 
 export interface FileProcessingResult {
   success: boolean;

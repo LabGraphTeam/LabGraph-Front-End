@@ -1,5 +1,5 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { ListingItem } from '@/features/charts/types/Chart'
+import { AnalyticItem } from '@/features/charts/types/Chart'
 import { fetchWrapper } from '@/services/fetch-wrapper'
 import { useEffect, useState } from 'react'
 import { UseReportsDataProps } from '../types/Reports'
@@ -7,13 +7,13 @@ import { UseReportsDataProps } from '../types/Reports'
 const useReportsData = ({ url }: UseReportsDataProps) => {
   const { token, isLoading: loading } = useToken()
 
-  const [dataFetched, setDataFetched] = useState<ListingItem[]>([])
+  const [dataFetched, setDataFetched] = useState<AnalyticItem[]>([])
 
   useEffect(() => {
     const fetchData = async () => {
       if (loading) return
       try {
-        const result: ListingItem[] = await fetchWrapper({
+        const result: AnalyticItem[] = await fetchWrapper({
           route: url,
           method: 'GET',
           headers: {

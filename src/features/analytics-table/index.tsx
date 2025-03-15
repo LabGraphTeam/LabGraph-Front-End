@@ -33,7 +33,7 @@ const AnalyticsTableIndex = () => {
   }
 
   const {
-    data: dataFetched,
+    analyticsDataList: dataFetched,
     isLoading,
     isTokenLoading,
     fetchData,

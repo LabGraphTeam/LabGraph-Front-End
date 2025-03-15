@@ -1,12 +1,15 @@
-import { LevelGroupResponse, ListingItem } from '@/features/charts/types/Chart'
-import { LevelOptions } from '@/features/shared/hooks/useAnalyticsOptions'
+import { AnalyticGroupedData, AnalyticItem } from '@/features/charts/types/Chart'
 
+export interface LevelOptions {
+  value: string | number
+  label: string
+}
 export interface CommonTestSelectorProps {
   testNameList: string[]
   analyticsType: string
   name: string
   level: number
-  setListingItem: (data: ListingItem[]) => void
+  setAnalyticItem: (data: AnalyticItem[]) => void
   setIsLoading: (data: boolean) => void
 }
 
@@ -15,7 +18,7 @@ export interface TestSelectorProps {
   testNameList: string[]
   name: string
   setIsLoading: (data: boolean) => void
-  setListing: (data: LevelGroupResponse[]) => void
+  setAnalyticItemList: (data: AnalyticGroupedData[]) => void
 }
 
 export interface TestNameSelectorProps {

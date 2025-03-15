@@ -1,10 +1,5 @@
 import { useMemo } from 'react'
 
-export interface LevelOptions {
-  value: string | number
-  label: string
-}
-
 export const useAnalyticsOptions = (analyticsType: string) => {
   const analyticsOptions = [
     { value: 'biochemistry-analytics', label: 'BIOCHEMISTRY' },

@@ -1,14 +1,14 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
 import { fetchWrapper } from '@/services/fetch-wrapper'
 import { useCallback, useEffect, useState } from 'react'
-import { LevelGroupResponse } from '../../types/Chart'
+import { AnalyticGroupedData } from '../../types/Chart'
 
 const useFetchListeningGrouped = (url: string) => {
-  const [listing, setListing] = useState<LevelGroupResponse[]>([])
+  const [listing, setListing] = useState<AnalyticGroupedData[]>([])
   const [unitValues, setUnitValues] = useState<string | null>(null)
   const { token, isLoading } = useToken()
 
-  const fetchData = useCallback(async (): Promise<LevelGroupResponse[] | []> => {
+  const fetchData = useCallback(async (): Promise<AnalyticGroupedData[] | []> => {
     if (!isLoading && token) {
       const data = await fetchWrapper({
         route: url,
@@ -17,7 +17,7 @@ const useFetchListeningGrouped = (url: string) => {
           Authorization: `Bearer ${token}`
         }
       })
-      return data as LevelGroupResponse[]
+      return data as AnalyticGroupedData[]
     }
     return []
   }, [url, token, isLoading])

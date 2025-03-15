@@ -1,4 +1,4 @@
-import { ListingItem } from '@/features/charts/types/Chart';
+import { AnalyticItem } from '@/features/charts/types/Chart';
 
 export interface PageLinks {
   first?: { href: string };
@@ -11,7 +11,7 @@ export interface PageLinks {
 }
 
 export interface ListingTableProps {
-  items: ListingItem[];
+  items: AnalyticItem[];
   onPageChange: (url: string) => Promise<void>;
   isLoading: boolean;
 }

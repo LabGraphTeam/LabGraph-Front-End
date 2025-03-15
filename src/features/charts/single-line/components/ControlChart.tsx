@@ -20,7 +20,7 @@ import normalizeValue from '../../utils/normalizeValue'
 import LegendCustom from './LegendCustom'
 import TooltipCustom from './TooltipCustom'
 
-const ControlChart: React.FC<ControlChartProps> = ({ listing: listingData }) => {
+const ControlChart: React.FC<ControlChartProps> = ({ analyticItemList: listingData }) => {
   const [useOwnValues, setUseOwnValues] = useState(false)
 
   const toggleUseOwnValues = useCallback(() => {

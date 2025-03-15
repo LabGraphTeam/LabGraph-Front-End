@@ -8,7 +8,7 @@ export const handleResponseError = async (response: Response) => {
       const errorMessage = errorData?.details || response.statusText || 'Unknown error'
 
       if (response.status === 401 || response.status === 403) {
-        await fetchWrapper({ route: 'api/logout', method: 'POST' })
+        await fetchWrapper({ route: '/api/logout', method: 'POST' })
       }
 
       throw Error(`${response.status} - ${errorMessage}`)

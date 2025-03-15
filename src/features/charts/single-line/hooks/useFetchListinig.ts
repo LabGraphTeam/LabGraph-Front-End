@@ -1,7 +1,7 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext';
 import { fetchWrapper } from '@/services/fetch-wrapper';
 import { useCallback, useEffect, useState } from 'react';
-import { FetchListingData, ListingCollection } from '../../types/Chart';
+import { AnalyticWithStatsData, ListingCollection } from '../../types/Chart';
 
 const useFetchListing = (url: string) => {
   const [listing, setListing] = useState<ListingCollection>([]);
@@ -12,8 +12,8 @@ const useFetchListing = (url: string) => {
 
   const { token, isLoading } = useToken();
 
-  const fetchData = useCallback(async (): Promise<FetchListingData> => {
-    let data = {} as FetchListingData;
+  const fetchData = useCallback(async (): Promise<AnalyticWithStatsData> => {
+    let data = {} as AnalyticWithStatsData;
 
     if (!isLoading || token) {
       data = await fetchWrapper({
@@ -24,7 +24,7 @@ const useFetchListing = (url: string) => {
         },
         cache: 'force-cache',
         next: { revalidate: 1 },
-      }) as FetchListingData;
+      }) as AnalyticWithStatsData;
     }
 
     return data;

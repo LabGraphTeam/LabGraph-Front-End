@@ -3,8 +3,8 @@ import { processCsvFile } from '@/features/miscs/upload-results/utils/processCsv
 import { processTextFile } from '@/features/miscs/upload-results/utils/processTxtFile'
 import { fetchWrapper } from '@/services/fetch-wrapper'
 import { useCallback, useState } from 'react'
-import { ProcessedData, ProcessingStatus } from '../../../charts/types/Chart'
 import { API_ENDPOINTS } from '../constants/fileProcessing'
+import { ProcessedData, ProcessingStatus } from '../../types/UpdateResults'
 
 export const useFileUpload = (analyticsType: string) => {
   const [status, setStatus] = useState<ProcessingStatus>({

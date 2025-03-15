@@ -1,7 +1,7 @@
-import { ProcessedData } from '@/features/charts/types/Chart'
 import { FileProcessingResult } from '@/features/miscs/types/FileProcessing'
 import { CSV_MINIMUM_COLUMNS } from '@/features/miscs/upload-results/constants/fileProcessing'
 import { cleanValue, isValidValue } from './fileProcessors'
+import { ProcessedData } from '@/features/miscs/types/UpdateResults'
 
 export const processCsvFile = async (file: File): Promise<FileProcessingResult> => {
   const arrayValues: ProcessedData[] = []

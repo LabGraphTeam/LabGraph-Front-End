@@ -2,9 +2,9 @@ import React from 'react'
 import { useGraph } from './contexts/useGraph'
 import MultipleLineLabGraph from './multiple-line'
 import LabGraph from './single-line'
-import { LabGraphProps } from './types/Chart'
+import { SingleLineGraphProps } from './types/Chart'
 
-const GraphWrapper: React.FC<LabGraphProps> = ({ testList, analyticsType, levelListSize }) => {
+const GraphWrapper: React.FC<SingleLineGraphProps> = ({ testList, analyticsType, levelListSize }) => {
   const { viewMode } = useGraph()
 
   const Graph = viewMode === 'single' ? LabGraph : MultipleLineLabGraph

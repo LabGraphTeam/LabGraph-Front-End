@@ -1,7 +1,7 @@
 import React from 'react'
-import { LegendMultipleProps } from '../../types/Chart'
+import { LegendMultipleLinesProps } from '../../types/Chart'
 
-const LegendMultiple: React.FC<LegendMultipleProps> = ({ payload, levels }) => {
+const LegendMultiple: React.FC<LegendMultipleLinesProps> = ({ payload, levels }) => {
   if (!payload) return null
 
   return (

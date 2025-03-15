@@ -1,8 +1,8 @@
 import IntervalDates from './IntervalDates';
 
-
-export interface BuildAnalyticsEndpointByNameAndDateProps {
+export default interface BuildAnalyticsEndpointProps {
   analyticsType: string;
   name: string;
+  level: number;
   date: IntervalDates;
 }

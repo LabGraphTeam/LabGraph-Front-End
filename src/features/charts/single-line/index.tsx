@@ -5,10 +5,10 @@ import NavBar from '@/features/shared/ui/nav-bar'
 import Loading from '@/features/shared/utils/components/loading'
 import Head from 'next/head'
 import { useState } from 'react'
-import { LabGraphProps, ListingItem } from '../types/Chart'
+import { SingleLineGraphProps, AnalyticItem } from '../types/Chart'
 
-const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
-  const [dataFetched, setDataFetched] = useState<ListingItem[]>([])
+const LabGraph: React.FC<SingleLineGraphProps> = ({ testList, analyticsType }) => {
+  const [dataFetched, setDataFetched] = useState<AnalyticItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   return (
@@ -24,13 +24,13 @@ const LabGraph: React.FC<LabGraphProps> = ({ testList, analyticsType }) => {
               name={testList[0]}
               level={1}
               setIsLoading={setIsLoading}
-              setListingItem={setDataFetched}
+              setAnalyticItem={setDataFetched}
               analyticsType={analyticsType}
               testNameList={testList}
             />
           </div>
           <div className='flex min-h-full w-screen flex-col items-center justify-center'>
-            {isLoading ? <Loading /> : <ControlChart listing={dataFetched} />}
+            {isLoading ? <Loading /> : <ControlChart analyticItemList={dataFetched} />}
           </div>
         </div>
       </div>

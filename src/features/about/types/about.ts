@@ -43,3 +43,14 @@ export interface FAQProps {
   description: string;
   icon: JSX.Element;
 }
+
+export interface TeamMemberProps {
+  name: string;
+  role: string;
+  image?: string;
+  bio: string;
+  social?: {
+    linkedin?: string;
+    github?: string;
+  };
+}

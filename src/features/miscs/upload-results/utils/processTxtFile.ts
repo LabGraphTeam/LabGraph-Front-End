@@ -1,4 +1,4 @@
-import { ProcessedData } from '@/features/charts/types/Chart'
+import { ProcessedData } from '@/features/miscs/types/UpdateResults'
 import { FileProcessingResult } from '@/features/miscs/types/FileProcessing'
 import { cleanValue, createProcessedData, isValidValue } from './fileProcessors'
 

@@ -1,5 +1,5 @@
-import { ProcessedData } from '@/features/charts/types/Chart'
 import { MAX_VALUE } from '@/features/miscs/upload-results/constants/fileProcessing'
+import { ProcessedData } from '@/features/miscs/types/UpdateResults'
 
 export const cleanValue = (value: string) => value.replace(/"/g, '').trim()
 

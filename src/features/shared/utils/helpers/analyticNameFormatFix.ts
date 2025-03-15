@@ -1,4 +1,4 @@
-const testFormatFix = (testName: string) => {
+const analyticNameFormatFix = (testName: string) => {
   if (testName.includes('#')) {
     return (testName = testName.replace('#', '%23'));
   }
@@ -9,4 +9,4 @@ const testFormatFix = (testName: string) => {
   return testName;
 };
 
-export default testFormatFix;
+export default analyticNameFormatFix;
