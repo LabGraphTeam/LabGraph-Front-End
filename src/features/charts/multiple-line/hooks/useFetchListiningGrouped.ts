@@ -9,7 +9,7 @@ const useFetchListeningGrouped = (url: string) => {
   const { token, isLoading } = useToken()
 
   const fetchData = useCallback(async (): Promise<LevelGroupResponse[] | []> => {
-    if (!isLoading) {
+    if (!isLoading && token) {
       const data = await fetchWrapper({
         route: url,
         method: 'GET',
@@ -23,8 +23,6 @@ const useFetchListeningGrouped = (url: string) => {
   }, [url, token, isLoading])
 
   useEffect(() => {
-    if (isLoading) return
-
     const getData = async () => {
       const listingData = await fetchData()
       if (listingData) {
@@ -37,7 +35,7 @@ const useFetchListeningGrouped = (url: string) => {
     }
 
     getData()
-  }, [isLoading, fetchData])
+  }, [isLoading, token, fetchData])
 
   return {
     listing,

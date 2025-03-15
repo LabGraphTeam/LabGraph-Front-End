@@ -22,6 +22,14 @@ export const fetchWrapper = async (options: FetchOptions) => {
     if (!response.ok) {
       return handleResponseError(response)
     }
+
+    const contentType = response.headers.get('content-type')
+    if (response.status === 204 || !contentType?.includes('application/json')) {
+      return {
+        message: 'Success'
+      }
+    }
+
     return await response.json()
   } catch (error) {
     console.error(`Fetch error for ${route}:`, error)

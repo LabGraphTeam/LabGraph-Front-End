@@ -25,24 +25,25 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
           router.pathname === '/about-us' ||
           router.pathname === '/'
         ) {
-          setIsLoading(false)
           return
         }
 
         const tokenResponse = await fetchWrapper({
           route: '/api/get-token',
-          method: 'GET'
+          method: 'GET',
+          cache: 'force-cache',
+          next: { revalidate: 60 }
         })
 
         if (tokenResponse.valid) {
           setToken(tokenResponse.token)
+                    setIsLoading(false)
+
         }
       } catch (err) {
         console.error(`'token provider error - '${err}`)
         setToken(null)
-      } finally {
-        setIsLoading(false)
-      }
+      } 
     }
 
     fetchToken()

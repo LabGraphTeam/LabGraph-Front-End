@@ -15,13 +15,15 @@ const useFetchListing = (url: string) => {
   const fetchData = useCallback(async (): Promise<FetchListingData> => {
     let data = {} as FetchListingData;
 
-    if (!isLoading) {
+    if (!isLoading || token) {
       data = await fetchWrapper({
         route: url,
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        cache: 'force-cache',
+        next: { revalidate: 1 },
       }) as FetchListingData;
     }
 
@@ -30,10 +32,6 @@ const useFetchListing = (url: string) => {
   }, [url, token, isLoading]);
 
   const handleFetchData = useCallback(async () => {
-    if (isLoading) return;
-
-    setError(null);
-
     try {
       const data = await fetchData();
       setOwnMeanValue(data.calcMeanAndStdDTO.mean ? data.calcMeanAndStdDTO.mean : 0);
@@ -45,7 +43,7 @@ const useFetchListing = (url: string) => {
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     }
-  }, [isLoading, fetchData]);
+  }, [isLoading, token, fetchData]);
 
   useEffect(() => {
     handleFetchData();
