@@ -33,7 +33,7 @@ export function middleware(request: NextRequest) {
 
   if (!TOKEN_JWT || (TOKEN_JWT && isTokenExpired(TOKEN_JWT))) {
     request.cookies.delete('tokenJWT')
-    return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url))
+    return NextResponse.redirect(new URL(LOGIN_ROUTE, request.url), { status: 303 })
   }
 
   return NextResponse.next()
