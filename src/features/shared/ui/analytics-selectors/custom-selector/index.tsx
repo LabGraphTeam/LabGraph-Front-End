@@ -1,12 +1,12 @@
-import useFetchListeningGrouped from '@/features/charts/multiple-line/hooks/useFetchListiningGrouped'
-import UpdateResults from '@/features/miscs/upload-results'
+import useFetchAnalyticsGrouped from '@/features/analytics-charts/hooks/useFetchAnalyticsGrouped'
+import UpdateResults from '@/features/analytics-upload-files'
 import buildAnalyticsEndpointByNameAndDate from '@/features/shared/utils/helpers/buildAnalyticsEndpointByNameAndDate'
+import { TestSelectorProps } from '@/types/SelectorProps'
 import React, { useEffect, useState } from 'react'
+import useDateSelector from '../../../hooks/useDateSelector'
 import DateSelector from '../../date-selectors'
-import useDateSelector from '../../date-selectors/hooks/useDateSelector'
 import GoogleSheetLink from '../components/GoogleSheetLink'
 import TestNameSelector from '../components/TestNameSelector'
-import { TestSelectorProps } from '../types/SelectorProps'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   testNameList: list,
@@ -37,7 +37,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     analyticsType
   })
 
-  const { listing } = useFetchListeningGrouped(url)
+  const { listing } = useFetchAnalyticsGrouped(url)
 
   useEffect(() => {
     setIsLoading(true)
@@ -50,7 +50,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK
 
   return (
-    <div className='mt-12 grid content-center items-center gap-4 text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
+    <div className='mt-12 grid content-center items-center text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
       <DateSelector
         startDay={startDay}
         startMonth={startMonth}

@@ -1,4 +1,4 @@
-import Reports from '@/features/reports'
+import Reports from '@/features/analytics-reports'
 
 export default function ReportsPage() {
   return <Reports />

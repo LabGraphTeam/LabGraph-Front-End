@@ -1,10 +1,10 @@
-import React from 'react';
-import { DaySelectorProps } from '../types/dateSelectorProps';
+import { DaySelectorProps } from '@/types/DateSelectorProps'
+import React from 'react'
 
 const DaySelector: React.FC<DaySelectorProps & { fieldId?: string }> = ({
   selectedDay,
   onDayChange,
-  fieldId,
+  fieldId
 }) => {
   return (
     <select
@@ -20,7 +20,7 @@ const DaySelector: React.FC<DaySelectorProps & { fieldId?: string }> = ({
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
 
-export default DaySelector;
+export default DaySelector

@@ -1,10 +1,10 @@
-import React from 'react';
-import { MonthSelectorProps } from '../types/dateSelectorProps';
+import { MonthSelectorProps } from '@/types/DateSelectorProps'
+import React from 'react'
 
 const MonthSelector: React.FC<MonthSelectorProps & { fieldId?: string }> = ({
   selectedMonth,
   onMonthChange,
-  fieldId,
+  fieldId
 }) => {
   const months = [
     'January',
@@ -18,8 +18,8 @@ const MonthSelector: React.FC<MonthSelectorProps & { fieldId?: string }> = ({
     'September',
     'October',
     'November',
-    'December',
-  ];
+    'December'
+  ]
 
   return (
     <select
@@ -35,7 +35,7 @@ const MonthSelector: React.FC<MonthSelectorProps & { fieldId?: string }> = ({
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
 
-export default MonthSelector;
+export default MonthSelector

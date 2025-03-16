@@ -1,11 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: process.env.NODE_ENV === 'development',
+  reactStrictMode: true,
   compress: process.env.NODE_ENV === 'development',
-  // compiler: { removeConsole: true, },
   output: 'standalone',
   eslint: {
     ignoreDuringBuilds: true
+  },
+  images: {
+    domains: ['avatars.githubusercontent.com']
   }
 }
 

@@ -1,6 +1,6 @@
-import { InputFieldProps } from '@/features/authentication/types/Auth';
-import { Eye, EyeOff } from 'lucide-react';
-import React, { useState } from 'react';
+import { InputFieldProps } from '@/types/Auth'
+import { Eye, EyeOff } from 'lucide-react'
+import React, { useState } from 'react'
 
 const InputField: React.FC<InputFieldProps> = ({
   id,
@@ -10,13 +10,13 @@ const InputField: React.FC<InputFieldProps> = ({
   onChange,
   placeholder,
   autoComplete,
-  icon,
+  icon
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false)
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+    setShowPassword(!showPassword)
+  }
 
   return (
     <div className='space-y-0'>
@@ -30,7 +30,7 @@ const InputField: React.FC<InputFieldProps> = ({
           id={id}
           value={value}
           onChange={onChange}
-          className={`input-modern   ${icon ? 'pl-10' : 'pl-3'}`}
+          className={`input-modern ${icon ? 'pl-10' : 'pl-3'}`}
           required
           placeholder={placeholder}
           autoComplete={autoComplete}
@@ -46,7 +46,7 @@ const InputField: React.FC<InputFieldProps> = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InputField;
+export default InputField

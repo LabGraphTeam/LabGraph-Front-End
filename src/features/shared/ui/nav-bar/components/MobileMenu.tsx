@@ -1,7 +1,7 @@
-import Link from 'next/link';
-import navLinks from '../constants/navLinks';
-import { MobileMenuProps } from '../types/NavigationBar';
-import ViewToggleButton from './ViewToggleButton';
+import { MobileMenuProps } from '@/types/NavigationBar'
+import Link from 'next/link'
+import navLinks from '../constants/navLinks'
+import ViewToggleButton from './ViewToggleButton'
 
 const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
   <div
@@ -28,6 +28,6 @@ const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
       </span>
     </div>
   </div>
-);
+)
 
-export default MobileMenu;
+export default MobileMenu

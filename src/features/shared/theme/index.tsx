@@ -1,8 +1,8 @@
-import { CloudSun, Moon } from 'lucide-react';
-import useTheme from './hooks/useTheme';
+import { CloudSun, Moon } from 'lucide-react'
+import useTheme from '../hooks/useTheme'
 
 const ThemeToggle = () => {
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme()
 
   return (
     <button
@@ -17,7 +17,7 @@ const ThemeToggle = () => {
         <Moon strokeWidth='1.5' className='size-7 text-textPrimary opacity-90' />
       )}
     </button>
-  );
-};
+  )
+}
 
-export default ThemeToggle;
+export default ThemeToggle

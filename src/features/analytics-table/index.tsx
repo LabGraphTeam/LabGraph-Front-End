@@ -1,8 +1,8 @@
 import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsData'
 import { useCallback, useEffect, useState } from 'react'
 import { useAnalyticsOptions } from '../shared/hooks/useAnalyticsOptions'
+import useDateSelector from '../shared/hooks/useDateSelector'
 import useWindowDimensions from '../shared/hooks/useWindowDimensions'
-import useDateSelector from '../shared/ui/date-selectors/hooks/useDateSelector'
 import MainLayout from './layouts/MainLayout'
 import ListingTable from './listing-table'
 import AnalyticsFilters from './util/AnalyticsFilters'
@@ -85,7 +85,7 @@ const AnalyticsTableIndex = () => {
       <AnalyticsPagination
         currentPage={currentPage}
         totalPages={totalPages}
-        dataFetched={dataFetched}
+        analyticsListData={dataFetched}
         setCurrentPage={setCurrentPage}
       />
     </MainLayout>

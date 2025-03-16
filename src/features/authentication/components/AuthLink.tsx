@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { AuthLinkProps } from '../types/Auth';
+import { AuthLinkProps } from '@/types/Auth'
+import Link from 'next/link'
 
 const AuthLink = ({ text, linkText, href }: AuthLinkProps) => (
   <p className='text-center text-xs text-textSecondary sm:text-sm'>
@@ -8,6 +8,6 @@ const AuthLink = ({ text, linkText, href }: AuthLinkProps) => (
       {linkText}
     </Link>
   </p>
-);
+)
 
-export default AuthLink;
+export default AuthLink

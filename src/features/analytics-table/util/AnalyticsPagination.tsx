@@ -1,16 +1,16 @@
 import Arrow from '@/features/shared/ui/arrow-button'
+import { AnalyticsPaginationProps } from '@/types/AnalyticsTable'
 import React from 'react'
-import { AnalyticsPaginationProps } from '../types/AnalyticsTable'
 import PageButtons from './PageButtons'
 
 const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
   currentPage,
   totalPages,
-  dataFetched,
+  analyticsListData: dataFetched,
   setCurrentPage
 }) => {
   return (
-    <div className='flex w-full flex-col items-center bg-background py-4'>
+    <div className='mb-10 flex w-full flex-col items-center bg-background py-4'>
       <div className='flex w-full items-center justify-center space-x-0'>
         <button
           aria-label='Go to previous page'

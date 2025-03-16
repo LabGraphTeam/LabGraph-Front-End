@@ -1,7 +1,6 @@
 import { fetchWrapper } from '@/services/fetch-wrapper'
 
 export const handleResponseError = async (response: Response) => {
-
   try {
     if (!response.ok) {
       const errorData = await response.json().catch(() => null)

@@ -1,6 +1,6 @@
 import Footer from '@/features/shared/ui/footer'
 import NavBar from '@/features/shared/ui/nav-bar'
-import { MainLayoutProps } from '../types/AnalyticsTable'
+import { MainLayoutProps } from '@/types/AnalyticsTable'
 
 const MainLayout = ({ children, title }: MainLayoutProps) => {
   return (

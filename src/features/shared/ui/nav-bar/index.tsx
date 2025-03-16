@@ -4,7 +4,6 @@ import MobileMenu from './components/MobileMenu'
 import NavLinksComponent from './components/NavLinksComponent'
 import NavLogo from './components/NavLogo'
 import handleLogout from './constants/handleLogout'
-import { NavBarProps } from './types/NavigationBar'
 
 const getMenuBarClass = (isOpen: boolean, index: number): string => {
   if (isOpen && index === 0) return 'translate-y-2.5 rotate-45'
@@ -13,15 +12,19 @@ const getMenuBarClass = (isOpen: boolean, index: number): string => {
   return ''
 }
 
-const NavBar: React.FC<NavBarProps> = () => {
+const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const onLogout = () => handleLogout()
 
   return (
     <nav className='fixed left-0 top-0 z-50 w-full bg-navbar shadow-xl shadow-overlay'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <div className='flex h-16 items-center justify-between sm:h-20'>
-          <NavLogo />
+        <div className='flex h-16 items-center justify-between sm:h-32'>
+          <NavLogo
+            className='w-10 italic opacity-90 sm:w-12 md:w-16 lg:w-20'
+            h1Style='mt-[1px] text-xs font-semibold italic text-textPrimary opacity-95 sm:text-regular md:text-regular'
+            h2Style='text-[5px] text-textPrimary italic opacity-70 md:text-[10px]'
+          />
           <NavLinksComponent onLogout={onLogout} />
           <div className='flex items-center gap-2 lg:hidden'>
             <ThemeToggle />

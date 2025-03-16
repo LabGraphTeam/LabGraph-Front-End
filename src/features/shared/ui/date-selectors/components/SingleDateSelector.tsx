@@ -1,10 +1,10 @@
-import React from 'react';
-import { SingleDateSelectorProps } from '../types/dateSelectorProps';
-import DaySelector from './DaySelector';
-import MonthSelector from './MonthSelector';
-import YearSelector from './YearSelector';
+import { SingleDateSelectorProps } from '@/types/DateSelectorProps'
+import React from 'react'
+import DaySelector from './DaySelector'
+import MonthSelector from './MonthSelector'
+import YearSelector from './YearSelector'
 
-const sanitize = (str: string) => str.replace(/\s+/g, '-').toLowerCase();
+const sanitize = (str: string) => str.replace(/\s+/g, '-').toLowerCase()
 
 const SingleDateSelector: React.FC<SingleDateSelectorProps> = ({
   label,
@@ -13,11 +13,11 @@ const SingleDateSelector: React.FC<SingleDateSelectorProps> = ({
   year,
   onDayChange,
   onMonthChange,
-  onYearChange,
+  onYearChange
 }) => {
-  const prefix = sanitize(label);
+  const prefix = sanitize(label)
   return (
-    <div className='flex items-center gap-2 text-textSecondary '>
+    <div className='flex items-center gap-2 text-textSecondary'>
       <span className='font-medium md:text-sm'>{label}:</span>
       <DaySelector selectedDay={day} onDayChange={onDayChange} fieldId={`${prefix}-day-selector`} />
       <MonthSelector
@@ -31,7 +31,7 @@ const SingleDateSelector: React.FC<SingleDateSelectorProps> = ({
         fieldId={`${prefix}-year-selector`}
       />
     </div>
-  );
-};
+  )
+}
 
-export default SingleDateSelector;
+export default SingleDateSelector

@@ -1,13 +1,13 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { AnalyticItem } from '@/features/charts/types/Chart'
+import { AnalyticItem } from '@/types/Chart'
 
 import {
   formatDateWithTime,
   formatEndDateWithTime
 } from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
 import { fetchWrapper } from '@/services/fetch-wrapper'
+import { AnalyticsDataReturn, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
 import { useState } from 'react'
-import { UseAnalyticsDataProps, AnalyticsDataReturn } from '../types/AnalyticsTable'
 
 export const useAnalyticsData = ({
   analyticsType,

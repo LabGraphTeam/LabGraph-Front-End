@@ -1,60 +1,60 @@
-import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { TouchEvent, useCallback, useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { TouchEvent, useCallback, useEffect, useState } from 'react'
 
-import { CarouselProps } from '@/features/about/types/about';
+import { CarouselProps } from '@/types/About'
 
 const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>({});
-  const [isPaused, setIsPaused] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>({})
+  const [isPaused, setIsPaused] = useState(false)
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
 
-  const minSwipeDistance = 50;
+  const minSwipeDistance = 50
 
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }, [images.length]);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)
+  }, [images.length])
 
   const previousSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  }, [images.length]);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)
+  }, [images.length])
 
   const goToSlide = useCallback((index: number) => {
-    setCurrentIndex(index);
-  }, []);
+    setCurrentIndex(index)
+  }, [])
 
   const onTouchStart = (e: TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
 
   const onTouchMove = (e: TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
 
   const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+    if (!touchStart || !touchEnd) return
 
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
 
     if (isLeftSwipe) {
-      nextSlide();
+      nextSlide()
     } else if (isRightSwipe) {
-      previousSlide();
+      previousSlide()
     }
-  };
+  }
 
   useEffect(() => {
-    let intervalId: NodeJS.Timeout;
+    let intervalId: NodeJS.Timeout
     if (!isPaused) {
-      intervalId = setInterval(nextSlide, autoPlayInterval);
+      intervalId = setInterval(nextSlide, autoPlayInterval)
     }
-    return () => clearInterval(intervalId);
-  }, [autoPlayInterval, nextSlide, isPaused]);
+    return () => clearInterval(intervalId)
+  }, [autoPlayInterval, nextSlide, isPaused])
 
   return (
     <section
@@ -70,7 +70,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
         <div
           className='bg-accent/50 h-full transition-all duration-300'
           style={{
-            width: `${(currentIndex + 1) * (100 / images.length)}%`,
+            width: `${(currentIndex + 1) * (100 / images.length)}%`
           }}
         />
       </div>
@@ -92,7 +92,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
               }`}
               priority={index === 0}
               onLoad={() => {
-                setImagesLoaded((prev) => ({ ...prev, [index]: true }));
+                setImagesLoaded((prev) => ({ ...prev, [index]: true }))
               }}
             />
           </div>
@@ -127,7 +127,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
         ))}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Carousel;
+export default Carousel

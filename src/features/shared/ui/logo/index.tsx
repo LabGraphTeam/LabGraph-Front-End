@@ -1,9 +1,16 @@
-interface LogoProps {
-  className?: string;
-  title?: string;
+export interface LogoProps {
+  className?: string
+  h1Style?: string
+  h2Style?: string
+  title?: string
 }
 
-const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
+const Logo = ({
+  className,
+  h1Style = 'text-2xl font-bold italic text-textPrimary opacity-90 sm:text-3xl md:text-3xl',
+  h2Style = 'text-xs text-textPrimary opacity-70 md:text-xs',
+  title = 'LabGraph'
+}: LogoProps) => {
   return (
     <div className='flex flex-col items-center'>
       <svg className={`${className}`} viewBox='0 0 300 200' xmlns='http://www.w3.org/2000/svg'>
@@ -76,18 +83,16 @@ const Logo = ({ className, title = 'LabGraph' }: LogoProps) => {
         </g>
       </svg>
       <div className='mb-2 flex flex-col items-center'>
-        <h1 className='text-2xl font-bold italic text-textPrimary opacity-90 sm:text-3xl md:text-3xl'>
+        <h1 className={`${h1Style}`}>
           {title}
           <p className='inline-flex align-top text-xs text-textPrimary opacity-90 md:text-[12px]'>
             ®
           </p>
         </h1>
-        <h2 className='text-xs text-textPrimary opacity-70 md:text-xs'>
-          Making quality management easy
-        </h2>
+        <h2 className={`${h2Style}`}>Making quality management easy</h2>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo

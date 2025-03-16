@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react';
-import { TestLevelSelectorProps } from '../types/SelectorProps';
+import { TestLevelSelectorProps } from '@/types/SelectorProps'
+import React, { useCallback } from 'react'
 
 const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
   levelOptions,
   testLevel,
-  setTestLevel,
+  setTestLevel
 }) => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setTestLevel(Number(e.target.value));
+      setTestLevel(Number(e.target.value))
     },
     [setTestLevel]
-  );
+  )
 
   return (
     <>
@@ -31,7 +31,7 @@ const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
           ))}
       </select>
     </>
-  );
-};
+  )
+}
 
-export default TestLevelSelector;
+export default TestLevelSelector

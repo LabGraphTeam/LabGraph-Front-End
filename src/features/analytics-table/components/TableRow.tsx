@@ -1,5 +1,5 @@
-import React from 'react';
-import { TableRowProps } from '../types/AnalyticsTable';
+import { TableRowProps } from '@/types/AnalyticsTable'
+import React from 'react'
 
 const TableRow: React.FC<TableRowProps> = ({ analyticItem: item }) => {
   return (
@@ -32,7 +32,7 @@ const TableRow: React.FC<TableRowProps> = ({ analyticItem: item }) => {
         {item.rules}
       </td>
     </tr>
-  );
-};
+  )
+}
 
-export default TableRow;
+export default TableRow

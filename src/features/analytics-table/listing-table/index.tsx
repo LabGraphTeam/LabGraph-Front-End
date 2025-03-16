@@ -1,6 +1,6 @@
 import Loading from '@/features/shared/utils/components/loading'
+import { ListingTableProps } from '@/types/ListiningTable'
 import React from 'react'
-import { ListingTableProps } from '../../miscs/types/ListiningTable'
 import MobileItemCard from '../components/MobileItemCard'
 import TableRow from '../components/TableRow'
 
@@ -18,7 +18,7 @@ const tableHeaders = [
 
 const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
   return (
-    <div className='flex h-min w-full flex-col justify-evenly '>
+    <div className='flex h-min w-full flex-col justify-evenly'>
       <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table'>
         <thead className='rounded-lg bg-muted'>
           <tr>
@@ -44,7 +44,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
         ))}
       </div>
       {isLoading ? (
-        <div className=' rounded-md py-2 text-center text-textSecondary md:shadow-md md:shadow-shadow'>
+        <div className='rounded-md py-2 text-center text-textSecondary md:shadow-md md:shadow-shadow'>
           <Loading />
         </div>
       ) : null}

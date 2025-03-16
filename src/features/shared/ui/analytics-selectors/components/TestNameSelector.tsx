@@ -1,17 +1,17 @@
-import React, { useCallback } from 'react';
-import { TestNameSelectorProps } from '../types/SelectorProps';
+import { TestNameSelectorProps } from '@/types/SelectorProps'
+import React, { useCallback } from 'react'
 
 const TestNameSelector: React.FC<TestNameSelectorProps> = ({
   testNameList: list,
   testName,
-  setTestName,
+  setTestName
 }) => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setTestName(e.target.value);
+      setTestName(e.target.value)
     },
     [setTestName]
-  );
+  )
 
   return (
     <>
@@ -32,7 +32,7 @@ const TestNameSelector: React.FC<TestNameSelectorProps> = ({
         ))}
       </select>
     </>
-  );
-};
+  )
+}
 
-export default TestNameSelector;
+export default TestNameSelector

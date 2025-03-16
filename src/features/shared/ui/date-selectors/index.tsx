@@ -1,6 +1,6 @@
-import React from 'react';
-import SingleDateSelector from './components/SingleDateSelector';
-import { DateSelectorProps } from './types/dateSelectorProps';
+import { DateSelectorProps } from '@/types/DateSelectorProps'
+import React from 'react'
+import SingleDateSelector from './components/SingleDateSelector'
 
 const DateSelector: React.FC<DateSelectorProps> = ({
   startDay,
@@ -14,7 +14,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
   handleStartYearChange,
   handleEndDayChange,
   handleEndMonthChange,
-  handleEndYearChange,
+  handleEndYearChange
 }) => {
   return (
     <div className='space-y-1 md:space-y-1'>
@@ -37,7 +37,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         onYearChange={handleEndYearChange}
       />
     </div>
-  );
-};
+  )
+}
 
-export default DateSelector;
+export default DateSelector

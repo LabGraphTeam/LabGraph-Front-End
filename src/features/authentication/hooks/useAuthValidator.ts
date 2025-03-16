@@ -1,4 +1,4 @@
-import { ValidationError } from '@/features/authentication/types/Auth'
+import { ValidationError } from '@/types/Auth'
 import { useState } from 'react'
 import { useHandleAuthForm } from './useHandleAuthForm'
 

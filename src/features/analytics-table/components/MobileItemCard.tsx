@@ -1,5 +1,5 @@
-import React from 'react';
-import { MobileItemCardProps } from '../types/AnalyticsTable';
+import { MobileItemCardProps } from '@/types/AnalyticsTable'
+import React from 'react'
 
 const MobileItemCard: React.FC<MobileItemCardProps> = ({ analyticItem: item }) => {
   return (
@@ -29,7 +29,7 @@ const MobileItemCard: React.FC<MobileItemCardProps> = ({ analyticItem: item }) =
         Rules: <span className='text-textPrimary'>{item.rules}</span>
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default MobileItemCard;
+export default MobileItemCard

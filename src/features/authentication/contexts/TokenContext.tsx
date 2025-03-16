@@ -1,7 +1,7 @@
 import { fetchWrapper } from '@/services/fetch-wrapper'
+import { TokenContextProps, TokenProviderProps } from '@/types/Auth'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
-import { TokenContextProps, TokenProviderProps } from '../types/Auth'
 
 const TokenContext = createContext<TokenContextProps>({
   token: null,
@@ -30,18 +30,17 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
 
         const tokenResponse = await fetchWrapper({
           route: '/api/get-token',
-          method: 'GET',
+          method: 'GET'
         })
 
         if (tokenResponse.valid) {
           setToken(tokenResponse.token)
-                    setIsLoading(false)
-
+          setIsLoading(false)
         }
       } catch (err) {
         console.error(`'token provider error - '${err}`)
         setToken(null)
-      } 
+      }
     }
 
     fetchToken()

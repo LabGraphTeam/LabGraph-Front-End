@@ -1,4 +1,4 @@
-import { useGraph } from '@/features/charts/contexts/useGraph'
+import { useGraph } from '@/features/analytics-charts/hooks/useAnalyticsGraph'
 import { TbChartAreaLine, TbChartLine } from 'react-icons/tb'
 
 const ViewToggleButton = () => {

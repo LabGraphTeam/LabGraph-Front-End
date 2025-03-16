@@ -1,6 +1,6 @@
 import DateSelector from '@/features/shared/ui/date-selectors'
+import { AnalyticsFiltersProps } from '@/types/AnalyticsTable'
 import React from 'react'
-import { AnalyticsFiltersProps } from '../types/AnalyticsTable'
 
 const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   dateSelector,
@@ -13,8 +13,8 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   setFiltered
 }) => {
   return (
-    <div className='mb-4 mt-16 grid grid-cols-2 content-center items-center justify-start font-medium md:mb-4 md:flex md:text-sm'>
-      <div className='mt-4 w-full md:mt-14 md:w-auto'>
+    <div className='mb-2 mt-24 grid grid-cols-2 content-center items-center justify-start font-medium md:mb-4 md:flex md:text-sm'>
+      <div className='mt-2 w-full md:mt-12 md:w-auto'>
         <DateSelector {...dateSelector} />
         <label htmlFor='tests' className='flex items-center gap-1 text-textSecondary'>
           Test:{' '}

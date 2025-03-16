@@ -1,11 +1,11 @@
-import { YearSelectorProps } from '../types/dateSelectorProps';
+import { YearSelectorProps } from '@/types/DateSelectorProps'
 
 const YearSelector: React.FC<YearSelectorProps & { fieldId?: string }> = ({
   selectedYear,
   onYearChange,
-  fieldId,
+  fieldId
 }) => {
-  const years = [2023, 2024, 2025];
+  const years = [2023, 2024, 2025]
   return (
     <select
       id={fieldId ?? 'year-selector'}
@@ -20,7 +20,7 @@ const YearSelector: React.FC<YearSelectorProps & { fieldId?: string }> = ({
         </option>
       ))}
     </select>
-  );
-};
+  )
+}
 
-export default YearSelector;
+export default YearSelector

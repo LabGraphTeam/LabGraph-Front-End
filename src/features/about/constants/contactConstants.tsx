@@ -1,6 +1,6 @@
-import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
+import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi'
 
-import { ContactItemProps } from '@/features/about/types/about';
+import { ContactItemProps } from '@/types/About'
 
 export const CONTACT_ITEMS: ContactItemProps[] = [
   { id: 1, title: 'Phone', content: '+55 (85) 98992-4491', icon: <FiPhone /> },
@@ -9,6 +9,6 @@ export const CONTACT_ITEMS: ContactItemProps[] = [
     id: 3,
     title: 'Address',
     content: '123 Lab Street, Science City, ST 12345',
-    icon: <FiMapPin />,
-  },
-] as const;
+    icon: <FiMapPin />
+  }
+] as const

@@ -1,7 +1,7 @@
-import { CheckCircle } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
-import { GoogleSheetLinkProps } from '../types/SelectorProps';
+import { GoogleSheetLinkProps } from '@/types/SelectorProps'
+import { CheckCircle } from 'lucide-react'
+import Link from 'next/link'
+import React from 'react'
 
 const GoogleSheetLink: React.FC<GoogleSheetLinkProps> = ({ googleSheetUrl }) => {
   return (
@@ -19,7 +19,7 @@ const GoogleSheetLink: React.FC<GoogleSheetLinkProps> = ({ googleSheetUrl }) => 
         </span>
       </Link>
     </span>
-  );
-};
+  )
+}
 
-export default GoogleSheetLink;
+export default GoogleSheetLink

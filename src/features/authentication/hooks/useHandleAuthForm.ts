@@ -1,7 +1,7 @@
 import { authService } from '@/services/auth-service'
+import { AuthFormData } from '@/types/Auth'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { AuthFormData } from '../types/Auth'
 
 export const useHandleAuthForm = (isLoginRequest: boolean) => {
   const [rememberMe, setRememberMe] = useState(false)
