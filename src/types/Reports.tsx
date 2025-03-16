@@ -13,7 +13,7 @@ export interface UseReportsDataProps {
 export interface ReportsControlsProps extends DateSelectorProps {
   analyticsType: string
   onAnalyticsTypeChange: (value: string) => void
-  dataFetched: AnalyticItem[]
+  dataFetched: any
   dateSelectorProps: DateSelectorProps
   reportMonth?: string
   reportYear?: number

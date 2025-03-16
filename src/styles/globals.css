@@ -12,118 +12,118 @@
   /* Light Theme */
   :root {
     /* Data Visualization Colors - For charts and graphs */
-    --color-mean-line: #2d6a4f; /* Central tendency line */
-    --color-sd1: #2a9d8f; /* First standard deviation range */
-    --color-sd2: #e9c46a; /* Second standard deviation range */
-    --color-sd3: #e76f51; /* Third standard deviation range */
+    --color-mean-line: #1d7874; /* Central tendency line - more vibrant teal */
+    --color-sd1: #26a69a; /* First standard deviation range - clearer teal */
+    --color-sd2: #f4b942; /* Second standard deviation range - brighter amber */
+    --color-sd3: #e35340; /* Third standard deviation range - refined coral */
 
     /* Core Brand Colors */
-    --color-primary: #333333; /* Main brand color */
-    --color-primary-light: #4a4a4a; /* Lighter shade for highlights */
-    --color-primary-dark: #222222; /* Darker shade for emphasis */
-    --color-secondary: #0070f3; /* Secondary brand color */
-    --color-secondary-hover: #0366d6; /* Interactive state */
-    --color-tertiary: #6b46c1; /* Additional brand accent */
-    --color-tertiary-hover: #553c9a; /* Interactive state */
+    --color-primary: #2c3e50; /* Main brand color - refined dark blue-gray */
+    --color-primary-light: #46637f; /* Lighter shade - more vibrant highlight */
+    --color-primary-dark: #1a2533; /* Darker shade - deeper emphasis */
+    --color-secondary: #3498db; /* Secondary brand color - cleaner blue */
+    --color-secondary-hover: #2980b9; /* Interactive state - deeper blue */
+    --color-tertiary: #8e44ad; /* Additional brand accent - richer purple */
+    --color-tertiary-hover: #7d3c98; /* Interactive state - deeper purple */
 
     /* Interface Status Colors */
-    --color-warning: #fbbf24; /* Cautionary indicators */
-    --color-danger: #d32f2f; /* Error/Danger indicators */
-    --color-info: #60a5fa; /* Informational elements */
-    --color-accent: #ff5722; /* Attention-drawing elements */
+    --color-warning: #f39c12; /* Cautionary indicators - warmer amber */
+    --color-danger: #e74c3c; /* Error/Danger indicators - cleaner red */
+    --color-info: #3498db; /* Informational elements - cleaner blue */
+    --color-accent: #e67e22; /* Attention-drawing elements - warmer orange */
 
     /* Text Colors */
-    --color-text-primary: #222222; /* Main body text */
-    --color-text-secondary: #444444; /* Supporting text */
-    --color-bg-text: #222222; /* Text on colored backgrounds */
-    --color-error-text: #fafafa; /* Error message text */
+    --color-text-primary: #2c3e50; /* Main body text - refined dark blue-gray */
+    --color-text-secondary: #5d6d7e; /* Supporting text - balanced gray */
+    --color-bg-text: #2c3e50; /* Text on colored backgrounds */
+    --color-error-text: #ffffff; /* Error message text - pure white for contrast */
 
-    /* Background Hierarchy */
-    --color-background: #fafafa; /* Main background */
-    --color-surface: #ffffff; /* Elevated elements */
-    --color-muted: #f1f1f1; /* De-emphasized areas */
-    --color-navbar: #ffffff; /* Navigation background */
+    /* Background Hierarchy - Darkened */
+    --color-background: #edf0f5; /* Main background - darkened cool gray */
+    --color-surface: #edf0f5; /* Elevated elements - slightly off-white */
+    --color-muted: #e4e9f2; /* De-emphasized areas - darker blueish gray */
+    --color-navbar: #f0f4f8; /* Navigation background - subtle cool gray */
 
-    /* Neutral Scale */
-    --color-neutral-50: #f8fafc; /* Lightest neutral */
-    --color-neutral-100: #f1f5f9; /* Light neutral */
-    --color-neutral-200: #e2e8f0; /* Medium-light neutral */
-    --color-neutral-300: #cbd5e1; /* Medium neutral */
+    /* Neutral Scale - Darkened */
+    --color-neutral-50: #eaeef2; /* Lightest neutral - darkened cool gray */
+    --color-neutral-100: #dde4ed; /* Light neutral - darkened blueish gray */
+    --color-neutral-200: #cfd9e3; /* Medium-light neutral - darkened */
+    --color-neutral-300: #bbc5d0; /* Medium neutral - darkened */
 
-    /* UI Functional Colors */
-    --color-border: #dddddd; /* Borders and dividers */
-    --color-grid-lines: #cccccc; /* Grid and chart lines */
-    --color-shadow: rgba(0, 0, 0, 0.2); /* Shadows */
-    --color-overlay: rgba(0, 0, 0, 0.05); /* Overlays */
+    /* UI Functional Colors - Adjusted */
+    --color-border: #d0d8e0; /* Borders and dividers - darker blue-gray */
+    --color-grid-lines: #c7d1dc; /* Grid and chart lines - darker blue-gray */
+    --color-shadow: rgba(37, 51, 66, 0.1); /* Shadows - slightly stronger */
+    --color-overlay: rgba(37, 51, 66, 0.05); /* Overlays - slightly stronger */
 
     /* Interactive Elements */
-    --color-button-muted: #888888; /* Secondary buttons */
+    --color-button-muted: #7f8c8d; /* Secondary buttons - balanced gray */
 
     /* System Colors */
     --color-white: #ffffff; /* Pure white */
     --color-logo-l: #ffffff; /* Logo light variant */
-    --border-color: #cccccc; /* Standard borders */
-    --color-sun: #fdb813; /* Light theme indicator */
-    --color-moon: #778899; /* Dark theme indicator */
+    --border-color: #d0d8e0; /* Standard borders - darker blue-gray */
+    --color-sun: #f1c40f; /* Light theme indicator - vibrant yellow */
+    --color-moon: #7f8c8d; /* Dark theme indicator - balanced gray */
   }
 
   /* Dark Theme */
   .dark {
     /* Data Visualization Colors */
-    --color-mean-line: #a8d5ba;
-    --color-sd1: #71c7ec;
-    --color-sd2: #f4a261;
-    --color-sd3: #e63946;
+    --color-mean-line: #6dcfb6; /* Brighter teal with better dark contrast */
+    --color-sd1: #3ec9e0; /* Vibrant cyan with better dark contrast */
+    --color-sd2: #fbb86c; /* Warmer orange with better dark contrast */
+    --color-sd3: #ff5252; /* Vibrant red with better dark contrast */
 
     /* Core Brand Colors */
-    --color-primary: #cccccc;
-    --color-primary-light: #e5e5e5;
-    --color-primary-dark: #1a1a1a;
-    --color-secondary: #8ab4f8;
-    --color-secondary-hover: #6e9cf5;
-    --color-tertiary: #9f7aea;
-    --color-tertiary-hover: #805ad5;
+    --color-primary: #ecf0f1; /* Cleaner off-white */
+    --color-primary-light: #ffffff; /* Pure white for highlights */
+    --color-primary-dark: #121518; /* Even deeper dark for contrast */
+    --color-secondary: #5dade2; /* Brighter blue */
+    --color-secondary-hover: #3498db; /* Vibrant interactive blue */
+    --color-tertiary: #a569bd; /* Brighter purple */
+    --color-tertiary-hover: #8e44ad; /* Vibrant interactive purple */
 
     /* Interface Status Colors */
-    --color-warning: #f59e0b;
-    --color-danger: #d32f2f;
-    --color-info: #3b82f6;
-    --color-accent: #ff7043;
+    --color-warning: #f5b041; /* Brighter amber warning */
+    --color-danger: #ff5252; /* More vibrant red danger */
+    --color-info: #5dade2; /* Brighter blue info */
+    --color-accent: #ff8c52; /* Vibrant orange accent */
 
     /* Text Colors */
-    --color-text-primary: #e0e0e0;
-    --color-text-secondary: #c7c7c7;
-    --color-bg-text: #eeeeee;
-    --color-error-text: #fafafa;
+    --color-text-primary: #ecf0f1; /* Crisp off-white text */
+    --color-text-secondary: #bdc3c7; /* Softer secondary text */
+    --color-bg-text: #f5f5f5; /* Even brighter text on dark backgrounds */
+    --color-error-text: #ffffff; /* Pure white for errors */
 
     /* Background Hierarchy */
-    --color-background: #242529;
-    --color-surface: #2f3136;
-    --color-muted: #40444b;
-    --color-navbar: #202225;
+    --color-background: #1a1d21; /* Refined dark background */
+    --color-surface: #20252b; /* Higher contrast surface */
+    --color-muted: #2c3137; /* Better contrast muted areas */
+    --color-navbar: #141619; /* Darker navbar for contrast */
 
     /* Neutral Scale */
-    --color-neutral-50: #1a1a1a;
-    --color-neutral-100: #262626;
-    --color-neutral-200: #404040;
-    --color-neutral-300: #525252;
+    --color-neutral-50: #141619; /* Darkest neutral */
+    --color-neutral-100: #1a1d21; /* Dark neutral */
+    --color-neutral-200: #20252b; /* Medium-dark neutral */
+    --color-neutral-300: #2c3137; /* Medium neutral */
 
     /* UI Functional Colors */
-    --color-border: #444444;
-    --color-grid-lines: rgba(255, 255, 255, 0.1);
-    --color-shadow: rgba(255, 255, 255, 0.25);
-    --color-overlay: rgba(255, 255, 255, 0.1);
+    --color-border: #373d45; /* More visible borders */
+    --color-grid-lines: rgba(236, 240, 241, 0.12); /* More subtle grid lines */
+    --color-shadow: rgba(0, 0, 0, 0.3); /* Stronger shadows */
+    --color-overlay: rgba(236, 240, 241, 0.05); /* Refined overlay */
 
     /* Interactive Elements */
-    --color-button-muted: #999999;
+    --color-button-muted: #7f8c8d; /* Balanced gray button */
 
     /* System Colors */
-    --color-white: #ffffff;
-    --color-logo-l: #000000;
-    --checkbox-color: #ffffff;
-    --color-sun: #fdb813;
-    --color-moon: #778899;
-    --border-color: #cccccc85; /* Standard borders */
+    --color-white: #ffffff; /* Pure white */
+    --color-logo-l: #000000; /* Logo dark variant */
+    --checkbox-color: #ffffff; /* White checkboxes */
+    --color-sun: #f1c40f; /* Vibrant yellow sun */
+    --color-moon: #7f8c8d; /* Balanced gray moon */
+    --border-color: rgba(236, 240, 241, 0.2); /* Semi-transparent white borders */
   }
 
   /********************
