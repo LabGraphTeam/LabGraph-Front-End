@@ -13,44 +13,51 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   setFiltered
 }) => {
   return (
-    <div className='mb-2 mt-24 grid grid-cols-2 content-center items-center justify-start font-medium md:mb-4 md:flex md:text-sm'>
-      <div className='mt-2 w-full md:mt-12 md:w-auto'>
-        <DateSelector {...dateSelector} />
-        <label htmlFor='tests' className='flex items-center gap-1 text-textSecondary'>
-          Test:{' '}
-          <select
-            id='tests'
-            value={analyticsType}
-            onChange={(e) => setAnalyticsType(e.target.value)}
-            className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
-          >
-            {analyticsOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label htmlFor='level' className='flex items-center gap-2 text-textSecondary'>
-          Level:{' '}
-          <select
-            id='level'
-            value={level}
-            onChange={(e) => {
-              setLevel(Number(e.target.value))
-              setFiltered(() => e.target.value !== '0')
-            }}
-            className='focus:ring-borderColor/30 mt-1 rounded border border-borderColor bg-background text-textSecondary focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-sm'
-          >
-            {levelOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+    <div className='mb-10 mt-8 md:mt-40 md:text-xs'>
+      {/* <div className='relative border border-borderColor rounded-md p-2 pt-3'> */}
+        {/* <div className='absolute -top-3 left-4 bg-background px-2 text-xs font-light text-textSecondary'>
+         Filters
+        </div> */}
+        <div className='flex flex-wrap items-center justify-evenly gap-4 font-light'>
+          <DateSelector {...dateSelector} />
+          
+          <label htmlFor='tests' className='flex items-center gap-2 whitespace-nowrap text-textSecondary'>
+            Test:{' '}
+            <select
+              id='tests'
+              value={analyticsType}
+              onChange={(e) => setAnalyticsType(e.target.value)}
+              className='focus:ring-borderColor/30 rounded border border-borderColor bg-background px-2 py-1 text-textSecondary focus:outline-none focus:ring-2'
+            >
+              {analyticsOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+          
+          <label htmlFor='level' className='flex items-center gap-2 whitespace-nowrap text-textSecondary'>
+            Level:{' '}
+            <select
+              id='level'
+              value={level}
+              onChange={(e) => {
+                setLevel(Number(e.target.value))
+                setFiltered(() => e.target.value !== '0')
+              }}
+              className='focus:ring-borderColor/30 rounded border border-borderColor bg-background px-2 py-1 text-textSecondary focus:outline-none focus:ring-2'
+            >
+              {levelOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
       </div>
-    </div>
+    // </div>
   )
 }
 

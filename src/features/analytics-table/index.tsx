@@ -39,7 +39,8 @@ const AnalyticsTableIndex = () => {
     fetchData,
     buildUrl,
     totalPages,
-    validateAnalytics
+    validateAnalytics,
+    updateDescription
   } = useAnalyticsData({
     analyticsType,
     level,
@@ -82,7 +83,7 @@ const AnalyticsTableIndex = () => {
         setLevel={setLevel}
         setFiltered={setIsFiltered}
       />
-      <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} onValidate={validateAnalytics}/>
+      <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} onValidate={validateAnalytics} onUpdateDescription={updateDescription}/>
       <AnalyticsPagination
         currentPage={currentPage}
         totalPages={totalPages}

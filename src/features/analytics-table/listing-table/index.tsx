@@ -15,11 +15,17 @@ const tableHeaders = [
   { id: 'unit', name: 'Unit' },
   { id: 'rules', name: 'Rules' },
   { id: 'validated_by', name: 'Validated By' },
-  { id: 'actions', name: 'Actions' }
+  { id: 'actions', name: 'Actions' },
+  {id: 'descriptions', name: 'descriptions'}
 
 ]
 
-const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading, onValidate }) => {
+const ListingTable: React.FC<ListingTableProps> = ({ 
+  items, 
+  isLoading, 
+  onValidate,
+  onUpdateDescription 
+}) => {
   return (
     <div className='flex h-min w-full flex-col justify-evenly'>
       <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table'>
@@ -28,7 +34,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading, onValidat
             {tableHeaders.map((header) => (
               <th
                 key={header.id}
-                className='border-b border-border px-2 py-1 text-left text-[10px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'
+                className='border-b border-border px-2 py-1 text-left text-[8px] font-semibold uppercase tracking-wider text-textSecondary md:text-xs'
               >
                 {header.name}
               </th>
@@ -37,7 +43,12 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading, onValidat
         </thead>
         <tbody>
           {items.map((item) => (
-            <TableRow key={item.id} analyticItem={item} onValidate={onValidate}/>
+            <TableRow 
+              key={item.id} 
+              analyticItem={item} 
+              onValidate={onValidate}
+              onUpdateDescription={onUpdateDescription}
+            />
           ))}
         </tbody>
       </table>

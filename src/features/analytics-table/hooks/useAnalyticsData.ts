@@ -92,11 +92,44 @@ export const useAnalyticsData = ({
     }
   }
 
+  const updateDescription = async (analyticsId: number, description: string): Promise<boolean> => {
+    if (isTokenLoading) {
+      return false
+    }
+
+    try {
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${analyticsId}/description`
+      const updatedAnalytic = await fetchWrapper({
+        route: url,
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(description)
+      })
+
+      setAnalyticData(prevData =>
+        prevData.map(item =>
+          item.id === analyticsId
+            ? { ...item, ...updatedAnalytic }
+            : item
+        )
+      )
+
+      return true
+    } catch (error) {
+      console.error('Error updating description:', error)
+      return false
+    }
+  }
+
   return {
     analyticsDataList: analyticData,
     isLoading,
     isTokenLoading,
     validateAnalytics,
+    updateDescription,
     fetchData,
     buildUrl,
     totalPages,

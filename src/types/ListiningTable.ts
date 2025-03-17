@@ -13,7 +13,7 @@ export interface PageLinks {
 export interface ListingTableProps {
   items: AnalyticWithValidatedUser[]
   onPageChange: (url: string) => Promise<void>
-
-  onValidate?: (id: number) => void
+  onValidate?: (id: number) => Promise<boolean>
   isLoading: boolean
+  onUpdateDescription?: (id: number, description: string) => Promise<boolean>
 }
