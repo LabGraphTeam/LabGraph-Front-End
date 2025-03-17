@@ -17,7 +17,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
   handleEndYearChange
 }) => {
   return (
-    <div className='flex flex-row gap-4'>
+    <div className='flex flex-col mb-2 gap-1 md:flex-row md:gap-4'>
       <SingleDateSelector
         label='From'
         day={startDay}

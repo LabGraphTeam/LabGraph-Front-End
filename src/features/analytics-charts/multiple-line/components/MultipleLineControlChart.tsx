@@ -140,7 +140,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
           </div>
         </div>
 
-        <div className='flex h-[225px] place-content-center items-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[300px] 3xl:min-h-[500px]'>
+        <div className='flex h-[225px] place-content-center items-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
           <ResponsiveContainer
             className='flex place-content-center items-center bg-surface'
             width='97%'

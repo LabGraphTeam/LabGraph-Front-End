@@ -13,16 +13,16 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   setFiltered
 }) => {
   return (
-    <div className='mb-10 mt-8 md:mt-40 md:text-xs'>
+    <div className=' md:mt-40 md:mb-10 md:text-xs'>
       {/* <div className='relative border border-borderColor rounded-md p-2 pt-3'> */}
         {/* <div className='absolute -top-3 left-4 bg-background px-2 text-xs font-light text-textSecondary'>
          Filters
         </div> */}
-        <div className='flex flex-wrap items-center justify-evenly gap-4 font-light'>
+        <div className='flex mt-24 flex-col md:flex-row md:flex-wrap items-start justify-evenly md:gap-0 font-light'>
           <DateSelector {...dateSelector} />
           
           <label htmlFor='tests' className='flex items-center gap-2 whitespace-nowrap text-textSecondary'>
-            Test:{' '}
+            <span className="">Test:</span>{' '}
             <select
               id='tests'
               value={analyticsType}
@@ -37,8 +37,8 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             </select>
           </label>
           
-          <label htmlFor='level' className='flex items-center gap-2 whitespace-nowrap text-textSecondary'>
-            Level:{' '}
+          <label htmlFor='level' className='flex items-center mt-1 md:mt-0 gap-2 whitespace-nowrap text-textSecondary'>
+            <span className="">Level:</span>{' '}
             <select
               id='level'
               value={level}
