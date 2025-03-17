@@ -9,6 +9,7 @@ const CheckIcon = ({ text, checked, onChange }: CheckIconProps) => {
     <label className='flex cursor-pointer items-center space-x-1'>
       <div className='relative'>
         <input
+          id="rememberMe"
           type='checkbox'
           className='sr-only'
           checked={checked}

@@ -38,6 +38,7 @@ const LoginForm = () => {
           autoComplete='current-password'
         />
 
+
         <div className='flex items-center justify-between text-xs sm:text-sm'>
           <CheckIcon
             text='Keep me logged in'

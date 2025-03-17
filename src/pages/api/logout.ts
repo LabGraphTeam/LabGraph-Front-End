@@ -15,6 +15,7 @@ export default function logout(req: NextApiRequest, res: NextApiResponse) {
   }
 
   res.setHeader('Set-Cookie', serialize('tokenJWT', '', cookieOptions))
+  return res.redirect(302, '/')
 
   return res.status(200).json({ success: true })
 }

@@ -20,7 +20,7 @@ export const fetchWrapper = async (options: FetchOptions) => {
     const response = await fetch(`${route}`, fetchOptions)
 
     if (!response.ok) {
-      return handleResponseError(response)
+      return await handleResponseError(response)
     }
 
     const contentType = response.headers.get('content-type')

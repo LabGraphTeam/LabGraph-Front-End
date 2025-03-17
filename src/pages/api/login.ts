@@ -10,7 +10,7 @@ interface SuccessResponse {
   success: boolean
 }
 
-export default function login(
+export default async function login(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
@@ -27,10 +27,18 @@ export default function login(
     if (!token || typeof token !== 'string') {
       console.error('Token missing or not a string')
       return res.status(400).json({
-        message: 'Invalid or missing token',
+        message: 'Token must be a non-empty string',
         status: 400
       })
     }
+
+    if (remember && !dateExp) {
+      return res.status(400).json({
+        message: 'DateExp is required when "remember" is true',
+        status: 400
+      })
+    }
+
 
     const maxAgeInSeconds = remember
       ? Math.floor((new Date(dateExp).getTime() - Date.now()) / 1000)
@@ -38,7 +46,7 @@ export default function login(
 
     const cookieOptions = {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true,
       sameSite: 'strict' as const,
       path: '/',
       maxAge: maxAgeInSeconds

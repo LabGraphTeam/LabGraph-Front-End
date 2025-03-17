@@ -5,4 +5,5 @@ export interface FetchOptions {
   headers?: Record<string, string>
   next?: { revalidate: number }
   cache?: 'no-cache' | 'default' | 'reload' | 'force-cache' | 'only-if-cached'
+
 }
