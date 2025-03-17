@@ -1,4 +1,4 @@
-import { AnalyticItem } from '@/types/Chart'
+import { AnalyticWithValidatedUser } from './AnalyticsTable'
 
 export interface PageLinks {
   first?: { href: string }
@@ -11,7 +11,9 @@ export interface PageLinks {
 }
 
 export interface ListingTableProps {
-  items: AnalyticItem[]
+  items: AnalyticWithValidatedUser[]
   onPageChange: (url: string) => Promise<void>
+
+  onValidate?: (id: number) => void
   isLoading: boolean
 }

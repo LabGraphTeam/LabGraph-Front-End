@@ -38,7 +38,8 @@ const AnalyticsTableIndex = () => {
     isTokenLoading,
     fetchData,
     buildUrl,
-    totalPages
+    totalPages,
+    validateAnalytics
   } = useAnalyticsData({
     analyticsType,
     level,
@@ -66,7 +67,7 @@ const AnalyticsTableIndex = () => {
   }, [url, isLoading, isTokenLoading])
 
   useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 14 : 8)
+    setItemsPerPage(width >= 1800 ? 14 : 7)
   }, [width])
 
   return (
@@ -81,7 +82,7 @@ const AnalyticsTableIndex = () => {
         setLevel={setLevel}
         setFiltered={setIsFiltered}
       />
-      <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} />
+      <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} onValidate={validateAnalytics}/>
       <AnalyticsPagination
         currentPage={currentPage}
         totalPages={totalPages}

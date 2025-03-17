@@ -6,8 +6,13 @@ export interface MobileItemCardProps {
   analyticItem: AnalyticItem
 }
 
+export interface AnalyticWithValidatedUser extends AnalyticItem {
+  validator_user: string
+}
+
 export interface TableRowProps {
-  analyticItem: AnalyticItem
+  analyticItem: AnalyticWithValidatedUser,
+  onValidate?: (id: number) => void
 }
 export interface MainLayoutProps {
   children: ReactNode
@@ -15,10 +20,11 @@ export interface MainLayoutProps {
 }
 
 export interface AnalyticsDataReturn {
-  analyticsDataList: AnalyticItem[]
+  analyticsDataList: AnalyticWithValidatedUser[]
   isLoading: boolean
   isTokenLoading: boolean
   fetchData: (url: string) => Promise<void>
+  validateAnalytics: (analyticsId: number) => Promise<boolean>
   buildUrl: (isFiltered: boolean) => string
   totalPages: number
   totalElements: number

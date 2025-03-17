@@ -266,7 +266,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
       const year = reportYear?.toString().toLocaleUpperCase() ?? new Date().getFullYear()
 
       // Create basic report title
-      let basicReportTitle = fileName
+      const basicReportTitle = fileName
         .replace(/-/g, ' ')
         .replace('.pdf', '')
         .replace('analytics', '')
@@ -374,7 +374,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
           doc.setFont('helvetica', 'bold')
           doc.setFontSize(6) // Reduzido de 9 para 8
           doc.setTextColor(60, 60, 60)
-          let headerY = yPosition + marginTop + 8 // Reduzido de 10 para 8
+          const headerY = yPosition + marginTop + 8 // Reduzido de 10 para 8
 
           // Draw header line
           doc.setDrawColor(200, 200, 200)

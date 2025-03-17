@@ -1,12 +1,11 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { AnalyticItem } from '@/types/Chart'
 
 import {
   formatDateWithTime,
   formatEndDateWithTime
 } from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
 import { fetchWrapper } from '@/services/fetch-wrapper'
-import { AnalyticsDataReturn, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
+import { AnalyticsDataReturn, AnalyticWithValidatedUser, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
 import { useState } from 'react'
 
 export const useAnalyticsData = ({
@@ -17,7 +16,7 @@ export const useAnalyticsData = ({
   itemsPerPage,
   currentPage
 }: UseAnalyticsDataProps): AnalyticsDataReturn => {
-  const [analyticData, setAnalyticData] = useState<AnalyticItem[]>([])
+  const [analyticData, setAnalyticData] = useState<AnalyticWithValidatedUser[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [totalPages, setTotalPages] = useState<number>(0)
   const [totalElements, setTotalElements] = useState<number>(0)
@@ -46,8 +45,8 @@ export const useAnalyticsData = ({
         headers: {
           Authorization: `Bearer ${token}`
         },
-        next: { revalidate: 60 },
-        cache: 'force-cache'
+        next: { revalidate: 5 },
+        cache: 'no-cache'
       })
 
       setAnalyticData(response.content || [])
@@ -63,10 +62,41 @@ export const useAnalyticsData = ({
     }
   }
 
+  const validateAnalytics = async (analyticsId: number): Promise<boolean> => {
+    if (isTokenLoading) {
+      return false
+    }
+
+    try {
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${analyticsId}/validate`
+      const validatedAnalytic = await fetchWrapper({
+        route: url,
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      setAnalyticData(prevData =>
+        prevData.map(item =>
+          item.id === analyticsId
+            ? { ...item, ...validatedAnalytic }
+            : item
+        )
+      )
+
+      return true
+    } catch (error) {
+      console.error('Error validating analytics:', error)
+      return false
+    }
+  }
+
   return {
     analyticsDataList: analyticData,
     isLoading,
     isTokenLoading,
+    validateAnalytics,
     fetchData,
     buildUrl,
     totalPages,

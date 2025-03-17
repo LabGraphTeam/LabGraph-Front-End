@@ -13,10 +13,13 @@ const tableHeaders = [
   { id: 'mean_test', name: 'Mean Test' },
   { id: 'values', name: 'Values' },
   { id: 'unit', name: 'Unit' },
-  { id: 'rules', name: 'Rules' }
+  { id: 'rules', name: 'Rules' },
+  { id: 'validated_by', name: 'Validated By' },
+  { id: 'actions', name: 'Actions' }
+
 ]
 
-const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
+const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading, onValidate }) => {
   return (
     <div className='flex h-min w-full flex-col justify-evenly'>
       <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table'>
@@ -34,7 +37,7 @@ const ListingTable: React.FC<ListingTableProps> = ({ items, isLoading }) => {
         </thead>
         <tbody>
           {items.map((item) => (
-            <TableRow key={item.id} analyticItem={item} />
+            <TableRow key={item.id} analyticItem={item} onValidate={onValidate}/>
           ))}
         </tbody>
       </table>
