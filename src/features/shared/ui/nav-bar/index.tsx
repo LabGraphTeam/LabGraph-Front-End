@@ -19,11 +19,11 @@ const NavBar: React.FC = () => {
   return (
     <nav className='fixed left-0 top-0 z-50 w-full bg-navbar shadow-xl shadow-overlay'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        <div className='flex h-16 items-center justify-between sm:h-32'>
+        <div className='flex h-20 items-center justify-between sm:h-32'>
           <NavLogo
-            className='w-10 italic opacity-90 sm:w-12 md:w-16 lg:w-20'
-            h1Style='mt-[1px] text-xs font-semibold italic text-textPrimary opacity-95 sm:text-regular md:text-regular'
-            h2Style='text-[5px] text-textPrimary italic opacity-70 md:text-[10px]'
+            className='md:w-18 mt-2 w-10 italic opacity-100 sm:w-16 lg:w-20'
+            h1Style='hidden mt-[1px] text-xs font-semibold italic text-textPrimary opacity-95 sm:text-regular md:text-regular'
+            h2Style='hidden text-[5px] text-textPrimary italic opacity-70 md:text-[8px]'
           />
           <NavLinksComponent onLogout={onLogout} />
           <div className='flex items-center gap-2 lg:hidden'>
