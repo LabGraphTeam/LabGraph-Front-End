@@ -103,7 +103,7 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
             </button>
           </div>
         </div>
-        <div className='flex h-[250px] place-content-center items-center md:min-h-[275px] xl:min-h-[275px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
+        <div className='flex h-[225px] place-content-center items-center md:min-h-[250px] xl:min-h-[250px] 2xl:min-h-[300px] 3xl:min-h-[500px]'>
           <ResponsiveContainer
             className='flex place-content-center items-center bg-surface'
             width='97%'
