@@ -11,10 +11,10 @@ const ReportsControls = ({
   reportMonth,
   reportYear
 }: ReportsControlsProps) => (
-  <div className='grid gap-2 text-textSecondary md:flex xl:mt-14'>
+  <div className='grid gap-1 text-textSecondary md:flex md:flex-col xl:mt-20'>
     <DateSelector {...dateSelectorProps} />
     <AnalyticsTypeSelector analyticsType={analyticsType} onChange={onAnalyticsTypeChange} />
-    <div className='flex gap-2'>
+    <div className='flex gap-1'>
       <span className='flex justify-evenly rounded-md border border-borderColor text-textSecondary shadow-sm shadow-shadow'>
         <GeneratePdf
           jsonData={dataFetched}
