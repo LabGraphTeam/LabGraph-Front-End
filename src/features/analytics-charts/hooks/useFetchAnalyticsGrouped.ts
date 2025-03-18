@@ -6,20 +6,28 @@ import { useCallback, useEffect, useState } from 'react'
 const useFetchAnalyticsGrouped = (route: string) => {
   const [listing, setListing] = useState<AnalyticGroupedData[]>([])
   const [unitValues, setUnitValues] = useState<string | null>(null)
+  const [error, setError] = useState<string>()
   const { token, isLoading } = useToken()
 
-  const fetchData = useCallback(async (): Promise<AnalyticGroupedData[] | []> => {
-    if (!isLoading && token) {
-      const data = await fetchWrapper({
-        route: route,
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      return data as AnalyticGroupedData[]
+  const fetchData = useCallback(async () => {
+    try {
+      if (!isLoading && token) {
+        const data = await fetchWrapper({
+          route: route,
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        return data as AnalyticGroupedData[]
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message)
+      } else {
+        setError('An unexpected error occurred')
+      }
     }
-    return []
   }, [route, token, isLoading])
 
   useEffect(() => {
@@ -40,7 +48,8 @@ const useFetchAnalyticsGrouped = (route: string) => {
   return {
     listing,
     unitValues,
-    isLoading
+    isLoading,
+    error
   }
 }
 

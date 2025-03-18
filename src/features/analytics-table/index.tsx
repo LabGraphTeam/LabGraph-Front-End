@@ -1,4 +1,4 @@
-import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsData'
+import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsTableData'
 import { useCallback, useEffect, useState } from 'react'
 import { useAnalyticsOptions } from '../shared/hooks/useAnalyticsOptions'
 import useDateSelector from '../shared/hooks/useDateSelector'
@@ -7,6 +7,7 @@ import MainLayout from './layouts/MainLayout'
 import ListingTable from './listing-table'
 import AnalyticsFilters from './util/AnalyticsFilters'
 import AnalyticsPagination from './util/AnalyticsPagination'
+import ErrorMessage from '../shared/utils/components/error-message'
 
 const AnalyticsTableIndex = () => {
   const dateSelector = useDateSelector()
@@ -40,7 +41,8 @@ const AnalyticsTableIndex = () => {
     buildUrl,
     totalPages,
     validateAnalytics,
-    updateDescription
+    updateDescription,
+    error
   } = useAnalyticsData({
     analyticsType,
     level,
@@ -73,6 +75,7 @@ const AnalyticsTableIndex = () => {
 
   return (
     <MainLayout title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}>
+      {error && <ErrorMessage message={error.toString()} />}
       <AnalyticsFilters
         dateSelector={dateSelector}
         analyticsOptions={analyticsOptions}

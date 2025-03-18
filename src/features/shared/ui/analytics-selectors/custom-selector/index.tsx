@@ -7,6 +7,7 @@ import useDateSelector from '../../../hooks/useDateSelector'
 import DateSelector from '../../date-selectors'
 import GoogleSheetLink from '../components/GoogleSheetLink'
 import TestNameSelector from '../components/TestNameSelector'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   testNameList: list,
@@ -37,7 +38,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     analyticsType
   })
 
-  const { listing } = useFetchAnalyticsGrouped(url)
+  const { listing, error } = useFetchAnalyticsGrouped(url)
 
   useEffect(() => {
     setIsLoading(true)
@@ -51,6 +52,7 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
 
   return (
     <div className='mt-12 grid content-center items-center text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
+      {error && <ErrorMessage message={error.toString()} />}
       <DateSelector
         startDay={startDay}
         startMonth={startMonth}

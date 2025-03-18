@@ -12,8 +12,8 @@ export interface AnalyticWithValidatedUser extends AnalyticItem {
 
 export interface TableRowProps {
   analyticItem: AnalyticWithValidatedUser,
-  onValidate?: (id: number) => Promise<boolean>,
-  onUpdateDescription?: (id: number, description: string) => Promise<boolean>
+  onValidate?: (id: number) => Promise<void>,
+  onUpdateDescription?: (id: number, description: string) => Promise<void>
 }
 export interface MainLayoutProps {
   children: ReactNode
@@ -25,11 +25,13 @@ export interface AnalyticsDataReturn {
   isLoading: boolean
   isTokenLoading: boolean
   fetchData: (url: string) => Promise<void>
-  validateAnalytics: (analyticsId: number) => Promise<boolean>
-  updateDescription: (analyticsId: number, description: string) => Promise<boolean>
+  validateAnalytics: (analyticsId: number) => Promise<void>
+  updateDescription: (analyticsId: number, description: string) => Promise<void>
   buildUrl: (isFiltered: boolean) => string
   totalPages: number
   totalElements: number
+
+  error: Error | string | null
 }
 
 export interface AnalyticsFiltersProps {

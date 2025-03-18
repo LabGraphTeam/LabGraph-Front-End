@@ -1,8 +1,8 @@
 import { FetchOptions } from '@/services/types/FetchOptions'
-import { handleResponseError } from '@/services/utils/handleResponseError'
 
 export const fetchWrapper = async (options: FetchOptions) => {
   const { route, method = 'GET', body, headers = {}, isLogin = false } = options
+
   const fetchOptions: RequestInit = {
     method,
     headers: {
@@ -18,16 +18,28 @@ export const fetchWrapper = async (options: FetchOptions) => {
 
   const response = await fetch(`${route}`, fetchOptions)
 
-  if (!response.ok) {
-    return await handleResponseError(response, isLogin)
-  }
+  if (!response.ok || response.status === 403) {
+    let errorMessage = response.statusText || 'Unknown error';
 
-  const contentType = response.headers.get('content-type')
-  if (response.status === 204 || !contentType?.includes('application/json')) {
-    return {
-      message: 'Success'
+    const errorData = await response.json().catch(() => null);
+
+    if (errorData?.details) {
+      errorMessage = errorData.details;
     }
-  }
 
+    if (response.status === 401 && !isLogin) {
+      return await fetch('/api/logout', { method: 'POST' });
+    }
+
+    const contentType = response.headers.get('content-type')
+    if (response.status === 204 || !contentType?.includes('application/json')) {
+      return {
+        message: 'Success'
+      }
+    }
+
+    throw new Error(`${response.status} - ${errorMessage}`);
+
+  }
   return await response.json()
 }

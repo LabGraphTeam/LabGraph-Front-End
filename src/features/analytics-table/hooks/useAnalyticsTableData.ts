@@ -21,6 +21,7 @@ export const useAnalyticsData = ({
   const [totalPages, setTotalPages] = useState<number>(0)
   const [totalElements, setTotalElements] = useState<number>(0)
   const { token, isLoading: isTokenLoading } = useToken()
+  const [error, setError] = useState<string | null>(null)
 
   const buildUrl = (isFiltered: boolean): string => {
     const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}`
@@ -45,31 +46,31 @@ export const useAnalyticsData = ({
         headers: {
           Authorization: `Bearer ${token}`
         },
-        next: { revalidate: 5 },
-        cache: 'no-cache'
       })
 
       setAnalyticData(response.content || [])
       setTotalPages(response.page?.totalPages || 0)
       setTotalElements(response.page?.totalElements || 0)
+
     } catch (error) {
-      console.error('Error fetching analytics data:', error)
-      setAnalyticData([])
-      setTotalPages(0)
-      setTotalElements(0)
+      if (error instanceof Error) {
+        setError(error.message)
+      } else {
+        setError('An unexpected error occurred')
+      }
     } finally {
       setIsLoading(false)
     }
   }
 
-  const validateAnalytics = async (analyticsId: number): Promise<boolean> => {
+  const validateAnalytics = async (analyticsId: number): Promise<void> => {
     if (isTokenLoading) {
-      return false
+      return
     }
 
     try {
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${analyticsId}/validate`
-      const validatedAnalytic = await fetchWrapper({
+      const response = await fetchWrapper({
         route: url,
         method: 'PATCH',
         headers: {
@@ -77,29 +78,30 @@ export const useAnalyticsData = ({
         }
       })
 
+      if (await !response.ok) {
+        throw Error('Insuficient Authorization Error occurred :(')
+      }
+
       setAnalyticData(prevData =>
         prevData.map(item =>
           item.id === analyticsId
-            ? { ...item, ...validatedAnalytic }
+            ? { ...item, ...response }
             : item
         )
       )
-
-      return true
     } catch (error) {
-      console.error('Error validating analytics:', error)
-      return false
+      setError(error instanceof Error ? error.message : 'Insuficient Authorization Error occurred :(')
     }
   }
 
-  const updateDescription = async (analyticsId: number, description: string): Promise<boolean> => {
+  const updateDescription = async (analyticsId: number, description: string): Promise<void> => {
     if (isTokenLoading) {
-      return false
+      return
     }
 
     try {
       const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${analyticsId}/description`
-      const updatedAnalytic = await fetchWrapper({
+      const response = await fetchWrapper({
         route: url,
         method: 'PATCH',
         headers: {
@@ -109,18 +111,19 @@ export const useAnalyticsData = ({
         body: JSON.stringify(description)
       })
 
+      if (await !response.ok) {
+        throw Error('Authorization Error Occurred :(' + response.statusText)
+      }
+
       setAnalyticData(prevData =>
         prevData.map(item =>
           item.id === analyticsId
-            ? { ...item, ...updatedAnalytic }
+            ? { ...item, ...response }
             : item
         )
       )
-
-      return true
     } catch (error) {
-      console.error('Error updating description:', error)
-      return false
+      setError(error instanceof Error ? error.message : 'An error occurred')
     }
   }
 
@@ -133,6 +136,7 @@ export const useAnalyticsData = ({
     fetchData,
     buildUrl,
     totalPages,
-    totalElements
+    totalElements,
+    error
   }
 }

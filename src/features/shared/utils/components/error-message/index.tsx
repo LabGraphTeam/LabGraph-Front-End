@@ -34,31 +34,31 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
         role="alert"
         className="fixed left-1/2 top-1/2 z-50 flex w-[340px] 
           -translate-x-1/2 -translate-y-1/2 flex-col items-center 
-          justify-between rounded-xl bg-gradient-to-br from-red-500 
-          to-red-600 p-8 shadow-2xl ring-4 ring-red-200 
+          justify-between rounded-xl bg-gradient-to-br from-background 
+          to-surface p-8 shadow-2xl ring-1 ring-primary animate-in fade-in 
           animate-in fade-in duration-200 md:w-[420px]"
       >
         <div className="absolute right-3 top-3">
           <button 
             onClick={handleDismiss}
-            className="rounded-full p-1.5 text-white hover:bg-white/10 
+            className="rounded-full p-1.5 text-primary hover:bg-primary/10 
               transition-colors duration-200"
           >
             <X size={20} />
           </button>
         </div>
 
-        <AlertCircle size={56} className="mb-5 text-white animate-bounce" />
+        <AlertCircle size={56} className="mb-5 text-danger animate-bounce" />
         
         <div className="flex w-full flex-col items-center gap-4 text-center">
-          <h3 className="text-xl font-bold text-white">
+          <h3 className="text-xl font-bold text-primary">
             {title}
           </h3>
           
-          <p className="px-4 text-sm text-white leading-relaxed">
+          <p className="px-4 text-sm text-primary leading-relaxed">
             {message}
           </p>
-          <div className="text-xs text-white font-medium">
+          <div className="text-xs text-primary font-medium">
             Occurred at: {timestamp}
           </div>
         </div>
@@ -66,8 +66,8 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
         <div className="mt-8 flex gap-4">
           <button
             onClick={handleDismiss}
-            className="rounded-lg border border-white px-5 py-2.5 
-              text-sm font-semibold text-white hover:scale-105
+            className="rounded-lg border border-primary px-5 py-2.5 
+              text-sm font-semibold text-primary hover:scale-105
               transition-colors duration-200"
           >
             Dismiss
@@ -77,7 +77,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
             <button
               onClick={handleRetry}
               className="flex items-center gap-2 rounded-lg 
-                bg-white px-5 py-2.5 text-sm font-semibold 
+                bg-primary px-5 py-2.5 text-sm font-semibold 
                 text-red-600 hover:scale-105 transition-colors duration-200"
             >
               <RotateCw size={16} />
