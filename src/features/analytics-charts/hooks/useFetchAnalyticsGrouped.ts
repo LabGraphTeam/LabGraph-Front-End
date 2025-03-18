@@ -1,5 +1,5 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { fetchWrapper } from '@/services/fetch-wrapper'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { AnalyticGroupedData } from '@/types/Chart'
 import { useCallback, useEffect, useState } from 'react'
 

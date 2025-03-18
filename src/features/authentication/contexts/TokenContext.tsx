@@ -1,4 +1,4 @@
-import { fetchWrapper } from '@/services/fetch-wrapper'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { TokenContextProps, TokenProviderProps } from '@/types/Auth'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'

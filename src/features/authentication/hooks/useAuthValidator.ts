@@ -83,8 +83,9 @@ export const useAuthValidator = (isLogin: boolean) => {
 
     try {
       const result = await handleSubmitAuth()
-      if (!result.success) {
-        setErrors([{ field: 'general', message: result.errorMessage ?? 'Authentication failed.' }])
+
+      if (result && !result.success) {
+        setErrors([{ field: 'general', message: 'Authentication failed.' }])
       }
     } catch (err) {
       setErrors([

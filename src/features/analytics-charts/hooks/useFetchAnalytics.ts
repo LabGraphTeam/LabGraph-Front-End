@@ -1,7 +1,7 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { fetchWrapper } from '@/services/fetch-wrapper'
 import { AnalyticWithStatsData } from '@/types/Chart'
 import { useCallback, useEffect, useState } from 'react'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 
 const useFetchAnalytics = (route: string) => {
   const [analyticsListData, setAnalyticsListData] = useState<AnalyticWithStatsData>()

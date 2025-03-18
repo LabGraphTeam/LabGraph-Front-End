@@ -1,4 +1,4 @@
-import { fetchWrapper } from '@/services/fetch-wrapper'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 
 const handleLogout = async () => {
   await fetchWrapper({ route: '/api/logout', method: 'POST' })

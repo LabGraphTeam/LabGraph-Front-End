@@ -47,12 +47,15 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   )
   const { analyticsListData, isLoading } = useFetchAnalytics(props.url)
 
+
+
   useEffect(() => {
     if (!isLoading && analyticsListData && analyticsListData?.analyticsDTO?.length > 0) {
       setAnalyticListData(analyticsListData)
       setIsLoading(false)
     }
   }, [analyticsListData, isLoading, setAnalyticListData, setIsLoading])
+  
 
   return (
     <div className='mt-12 grid place-content-center items-center text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>

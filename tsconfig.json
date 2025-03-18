@@ -36,7 +36,8 @@
     ".next/types/**/*.ts",
     "postcss.config*",
     "tailwind.config*",
-    "next.config*"
+    "next.config*",
+    "src/features/shared/utils/components/error-message/ErrorBoundary.jsx"
   ],
   "exclude": [
     "node_modules"

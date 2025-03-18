@@ -1,5 +1,5 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-import { fetchWrapper } from '@/services/fetch-wrapper'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { ProcessedData, ProcessingStatus } from '@/types/UpdateResults'
 import { useCallback, useState } from 'react'
 import { API_ENDPOINTS } from '../constants/fileProcessing'

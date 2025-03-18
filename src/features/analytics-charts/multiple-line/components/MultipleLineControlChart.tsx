@@ -1,6 +1,6 @@
 import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
 import useWindowDimensions from '@/features/shared/hooks/useWindowDimensions'
-import { MeanStdDevValueData, MultipleLineChartProps } from '@/types/Chart'
+import { ChartEntry, MeanStdDevValueData, MultipleLineChartProps } from '@/types/Chart'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
@@ -17,6 +17,8 @@ import customFormatDate from '../../../shared/ui/date-selectors/constants/custom
 import normalizeValue from '../../utils/normalizeValue'
 import LegendMultiple from './LegendMultiple'
 import TooltipMultiple from './TooltipMultiple'
+
+
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
   analyticsListData: listings
@@ -38,20 +40,6 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
     const maxLength = Math.max(
       ...listings.map((level) => level.groupedValuesByLevelDTO.values.length)
     )
-
-    interface ChartEntry {
-      date?: string
-      [key: `value${number}`]: number
-      [key: `date${number}`]: string
-      [key: `level${number}`]: string
-      [key: `rawValue${number}`]: string
-      [key: `levelLot${number}`]: string
-      [key: `name${number}`]: string
-      [key: `description${number}`]: string
-      [key: `rules${number}`]: string
-      [key: `mean${number}`]: number
-      [key: `sd${number}`]: number
-    }
 
     return Array.from({ length: maxLength }).map((_, index) => {
       const entry = {} as ChartEntry

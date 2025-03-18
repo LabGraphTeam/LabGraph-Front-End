@@ -4,7 +4,7 @@ import {
   formatDateWithTime,
   formatEndDateWithTime
 } from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
-import { fetchWrapper } from '@/services/fetch-wrapper'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { AnalyticsDataReturn, AnalyticWithValidatedUser, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
 import { useState } from 'react'
 

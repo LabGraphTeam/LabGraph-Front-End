@@ -17,6 +17,20 @@ export interface AnalyticItem {
   rules: string
 }
 
+export interface ChartEntry {
+  date?: string
+  [key: `value${number}`]: number
+  [key: `date${number}`]: string
+  [key: `level${number}`]: string
+  [key: `rawValue${number}`]: string
+  [key: `levelLot${number}`]: string
+  [key: `name${number}`]: string
+  [key: `description${number}`]: string
+  [key: `rules${number}`]: string
+  [key: `mean${number}`]: number
+  [key: `sd${number}`]: number
+}
+
 export interface MeanStdDevValueData {
   mean: number
   standardDeviation: number

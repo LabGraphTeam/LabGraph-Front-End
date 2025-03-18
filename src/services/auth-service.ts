@@ -1,15 +1,16 @@
 import { AuthFormData } from '@/types/Auth'
 import { API_BASE_URL } from './constants/apiBaseUrl'
-import { fetchWrapper } from './fetch-wrapper'
+import { fetchWrapper } from './wrappers/fetch-wrapper'
 import { AuthParams } from './types/AuthParams'
 
-export const authService = {
+export const AuthService = {
   signIn: async ({ identifier, password, remember }: AuthParams) => {
     try {
       const backendResponse = await fetchWrapper({
         route: `${API_BASE_URL}/users/sign-in`,
         method: 'POST',
-        body: { identifier, password }
+        body: { identifier, password },
+        isLogin: true
       })
 
       if (backendResponse.tokenJWT) {
@@ -20,7 +21,7 @@ export const authService = {
             token: backendResponse.tokenJWT,
             dateExp: backendResponse.dateExp,
             remember
-          }
+          },
         })
 
         return cookieResponse

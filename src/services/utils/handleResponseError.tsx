@@ -1,6 +1,6 @@
-import { fetchWrapper } from '@/services/fetch-wrapper'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 
-export const handleResponseError = async (response: Response): Promise<Response> => {
+export const handleResponseError = async (response: Response, isLogin: boolean): Promise<Response> => {
   try {
     if (!response.ok) {
       let errorMessage = response.statusText || 'Unknown error';
@@ -11,7 +11,7 @@ export const handleResponseError = async (response: Response): Promise<Response>
         errorMessage = errorData.details;
       }
 
-      if (response.status === 401 || response.status === 403) {
+      if (response.status === 401 && !isLogin) {
         return await fetchWrapper({ route: '/api/logout', method: 'POST' });
       }
       throw new Error(`${response.status} - ${errorMessage}`);
