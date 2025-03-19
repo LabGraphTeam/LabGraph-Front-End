@@ -1,20 +1,12 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
 
-import {
-  formatDateWithTime,
-  formatEndDateWithTime
-} from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { AnalyticsDataReturn, AnalyticWithValidatedUser, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
 import { useState } from 'react'
+import { buildAnalyticsValidationEndpoint } from '../../shared/utils/helpers/buildAnalyticsValidationEndpoint'
 
-export const useAnalyticsData = ({
+export const useFetchAnalyticsTable = ({
   analyticsType,
-  level,
-  startDate,
-  endDate,
-  itemsPerPage,
-  currentPage
 }: UseAnalyticsDataProps): AnalyticsDataReturn => {
   const [analyticData, setAnalyticData] = useState<AnalyticWithValidatedUser[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -23,25 +15,15 @@ export const useAnalyticsData = ({
   const { token, isLoading: isTokenLoading } = useToken()
   const [error, setError] = useState<string | null>(null)
 
-  const buildUrl = (isFiltered: boolean): string => {
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}`
-    const startDateFormatted = formatDateWithTime(startDate.year, startDate.month, startDate.day)
-    const endDateFormatted = formatEndDateWithTime(endDate.year, endDate.month, endDate.day)
 
-    if (isFiltered) {
-      return `${baseUrl}/level-date-range?level=${level}&startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`
-    }
-    return `${baseUrl}/date-range?startDate=${startDateFormatted}&endDate=${endDateFormatted}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`
-  }
-
-  const fetchData = async (url: string): Promise<void> => {
+  const fetchData = async (apiEndpoint: string): Promise<void> => {
     if (isTokenLoading) {
       return
     }
 
     try {
       const response = await fetchWrapper({
-        route: url,
+        route: apiEndpoint,
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`
@@ -69,18 +51,17 @@ export const useAnalyticsData = ({
     }
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${analyticsId}/validate`
       const response = await fetchWrapper({
-        route: url,
+        route: buildAnalyticsValidationEndpoint({
+          analyticsType,
+          analyticsId
+        }),
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
 
-      if (await !response.ok) {
-        throw Error('Insuficient Authorization Error occurred :(')
-      }
 
       setAnalyticData(prevData =>
         prevData.map(item =>
@@ -90,7 +71,7 @@ export const useAnalyticsData = ({
         )
       )
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Insuficient Authorization Error occurred :(')
+      setError(error instanceof Error ? error.message : 'Insufficient permissions to perform this action')
     }
   }
 
@@ -100,9 +81,12 @@ export const useAnalyticsData = ({
     }
 
     try {
-      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${analyticsId}/description`
       const response = await fetchWrapper({
-        route: url,
+        route: buildAnalyticsValidationEndpoint({
+          analyticsType,
+          analyticsId,
+          isUpdateDescription: true
+        }),
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -110,10 +94,6 @@ export const useAnalyticsData = ({
         },
         body: JSON.stringify(description)
       })
-
-      if (await !response.ok) {
-        throw Error('Authorization Error Occurred :(' + response.statusText)
-      }
 
       setAnalyticData(prevData =>
         prevData.map(item =>
@@ -123,20 +103,21 @@ export const useAnalyticsData = ({
         )
       )
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'An error occurred')
+      setError(error instanceof Error ? error.message : 'Insufficient permissions to perform this action')
     }
   }
 
+
   return {
-    analyticsDataList: analyticData,
+    analyticData,
     isLoading,
     isTokenLoading,
     validateAnalytics,
     updateDescription,
     fetchData,
-    buildUrl,
     totalPages,
     totalElements,
-    error
+    error,
+
   }
 }

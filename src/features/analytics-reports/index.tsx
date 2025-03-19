@@ -40,7 +40,7 @@ const Reports = () => {
 
   return (
     <div className='flex min-h-screen flex-col justify-evenly'>
-      <ReportsHeader analyticsType={analyticsType} dataFetched={dataFetched} />
+      <ReportsHeader analyticsType={analyticsType} dataFetched={dataFetched || undefined} />
       <main className='mt-16 flex grow flex-col items-center justify-evenly bg-background xl:mt-16'>
         <ReportsControls
           analyticsType={analyticsType}

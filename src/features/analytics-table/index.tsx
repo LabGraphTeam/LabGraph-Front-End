@@ -1,25 +1,26 @@
-import { useAnalyticsData } from '@/features/analytics-table/hooks/useAnalyticsTableData'
 import { useCallback, useEffect, useState } from 'react'
 import { useAnalyticsOptions } from '../shared/hooks/useAnalyticsOptions'
 import useDateSelector from '../shared/hooks/useDateSelector'
 import useWindowDimensions from '../shared/hooks/useWindowDimensions'
-import MainLayout from './layouts/MainLayout'
-import ListingTable from './listing-table'
-import AnalyticsFilters from './util/AnalyticsFilters'
-import AnalyticsPagination from './util/AnalyticsPagination'
 import ErrorMessage from '../shared/utils/components/error-message'
+import Loading from '../shared/utils/components/loading'
+import { buildAnalyticsValidationEndpoint } from '../shared/utils/helpers/buildAnalyticsTableEndpoint'
+import AnalyticsFilters from './components/AnalyticsFilters'
+import AnalyticsPagination from './components/AnalyticsPagination'
+import AnalyticsTable from './components/AnalyticsTable'
+import { useFetchAnalyticsTable } from './hooks/useFetchAnalyticsTable'
+import MainLayout from './layouts/MainLayout'
 
 const AnalyticsTableIndex = () => {
   const dateSelector = useDateSelector()
+  const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics')
   const [currentPage, setCurrentPage] = useState(0)
   const [itemsPerPage, setItemsPerPage] = useState(8)
-  const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics')
   const [level, setLevel] = useState(0)
   const [isFiltered, setIsFiltered] = useState(false)
-  const [url, setUrl] = useState('')
+  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType)
 
   const { width } = useWindowDimensions()
-  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType)
 
   const startDate = {
     day: dateSelector.startDay,
@@ -34,16 +35,15 @@ const AnalyticsTableIndex = () => {
   }
 
   const {
-    analyticsDataList: dataFetched,
+    analyticData,
     isLoading,
     isTokenLoading,
     fetchData,
-    buildUrl,
     totalPages,
     validateAnalytics,
     updateDescription,
     error
-  } = useAnalyticsData({
+  } = useFetchAnalyticsTable({
     analyticsType,
     level,
     startDate,
@@ -56,21 +56,46 @@ const AnalyticsTableIndex = () => {
     async (url: string): Promise<void> => {
       await fetchData(url)
     },
-    [fetchData]
+    [isFiltered, analyticsType, level, itemsPerPage, currentPage]
   )
 
-  useEffect(() => {
-    setUrl(buildUrl(isFiltered))
-  }, [buildUrl, isFiltered])
+  const getParams = useCallback(() => {
+    return buildAnalyticsValidationEndpoint({
+      analyticsType,
+      level,
+      date: {
+        startDay: dateSelector.startDay,
+        startMonth: dateSelector.startMonth,
+        startYear: dateSelector.startYear,
+        endDay: dateSelector.endDay,
+        endMonth: dateSelector.endMonth,
+        endYear: dateSelector.endYear
+      },
+      isFiltered,
+      itemsPerPage,
+      currentPage,
+      name: '-'
+    })
+  }, [
+    analyticsType,
+    level,
+    dateSelector.startDay,
+    dateSelector.startMonth,
+    dateSelector.startYear,
+    dateSelector.endDay,
+    dateSelector.endMonth,
+    dateSelector.endYear,
+    isFiltered,
+    itemsPerPage,
+    currentPage
+  ])
 
   useEffect(() => {
-    if (url) {
-      fetchData(url)
-    }
-  }, [url, isLoading, isTokenLoading])
+    fetchData(getParams())
+  }, [getParams, isTokenLoading])
 
   useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 14 : 7)
+    setItemsPerPage(width >= 1800 ? 14 : 8)
   }, [width])
 
   return (
@@ -86,11 +111,22 @@ const AnalyticsTableIndex = () => {
         setLevel={setLevel}
         setFiltered={setIsFiltered}
       />
-      <ListingTable items={dataFetched} isLoading={isLoading} onPageChange={handlePageChange} onValidate={validateAnalytics} onUpdateDescription={updateDescription}/>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <AnalyticsTable
+          items={analyticData}
+          isLoading={isLoading}
+          onPageChange={handlePageChange}
+          onValidate={validateAnalytics}
+          onUpdateDescription={updateDescription}
+        />
+      )}
+
       <AnalyticsPagination
         currentPage={currentPage}
         totalPages={totalPages}
-        analyticsListData={dataFetched}
+        analyticsListData={analyticData}
         setCurrentPage={setCurrentPage}
       />
     </MainLayout>

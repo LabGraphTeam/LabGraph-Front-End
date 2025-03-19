@@ -1,10 +1,10 @@
-import React from 'react';
-import { UploadButton } from './components/UploadButton';
-import { useFileUpload } from './hooks/useFileUpload';
-import ErrorMessage from '@/features/shared/utils/components/error-message';
+import ErrorMessage from '@/features/shared/utils/components/error-message'
+import React from 'react'
+import { UploadButton } from './components/UploadButton'
+import { useFileUpload } from './hooks/useFileUpload'
 
 const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) => {
-  const { status, handleFileUpload } = useFileUpload(analyticsType);
+  const { status, handleFileUpload } = useFileUpload(analyticsType)
 
   return (
     <div className='flex items-center text-textSecondary'>
@@ -13,12 +13,9 @@ const UpdateResults: React.FC<{ analyticsType: string }> = ({ analyticsType }) =
         message={status.message}
         onChange={handleFileUpload}
       />
-      {status.error && (
-        <ErrorMessage message={status.error} title='Upload failed'/>
-
-      )}
+      {status.error && <ErrorMessage message={status.error} title='Upload failed' />}
     </div>
-  );
-};
+  )
+}
 
-export default UpdateResults;
+export default UpdateResults

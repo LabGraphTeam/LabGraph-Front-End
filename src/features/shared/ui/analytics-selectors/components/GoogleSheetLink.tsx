@@ -12,7 +12,7 @@ const GoogleSheetLink: React.FC<GoogleSheetLinkProps> = ({ googleSheetUrl }) => 
         href={googleSheetUrl ?? ''}
       >
         <span className='hidden p-0.5 md:inline'>
-          <CheckCircle size={19} />
+          <CheckCircle size={15} />
         </span>
         <span className='inline p-0.5 md:hidden'>
           <CheckCircle size={17} />

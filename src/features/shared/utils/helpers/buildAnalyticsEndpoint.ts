@@ -8,14 +8,13 @@ import analyticNameFormatFix from './analyticNameFormatFix'
 const buildAnalyticsEndpoint = (props: BuildAnalyticsEndpointProps) => {
   const { analyticsType, name, level, date } = props
 
-  const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/name-and-level-date-range?name=`
+  const baseEndPoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/name-and-level-date-range?name=`
 
   const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay)
   const endDate = formatEndDateWithTime(date.endYear, date.endMonth, date.endDay)
 
-  const url = `${baseUrl}${analyticNameFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`
+  return `${baseEndPoint}${analyticNameFormatFix(name)}&level=${level}&startDate=${startDate}&endDate=${endDate}`
 
-  return { url }
 }
 
 export default buildAnalyticsEndpoint

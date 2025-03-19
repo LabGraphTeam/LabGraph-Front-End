@@ -1,5 +1,6 @@
 import MeanAndDeviationDisplay from '@/features/analytics-charts/components/MeanAndDeviationDisplay'
 import useFetchAnalytics from '@/features/analytics-charts/hooks/useFetchAnalytics'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
 import buildAnalyticsEndpoint from '@/features/shared/utils/helpers/buildAnalyticsEndpoint'
 import { CommonTestSelectorProps } from '@/types/SelectorProps'
 import React, { useEffect, useMemo, useState } from 'react'
@@ -7,7 +8,6 @@ import { useAnalyticsOptions } from '../../../hooks/useAnalyticsOptions'
 import useDateSelector from '../../../hooks/useDateSelector'
 import DateSelector from '../../date-selectors'
 import TestSelectorActions from '../components/TestSelectorActions'
-import ErrorMessage from '@/features/shared/utils/components/error-message'
 
 const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   testNameList,
@@ -46,9 +46,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
       }),
     [analyticsType, testName, testLevel, startDay, startMonth, startYear, endDay, endMonth, endYear]
   )
-  const { analyticsListData, isLoading, error } = useFetchAnalytics(props.url)
-
-
+  const { analyticsListData, isLoading, error } = useFetchAnalytics(props)
 
   useEffect(() => {
     if (!error && !isLoading && analyticsListData && analyticsListData?.analyticsDTO?.length > 0) {
@@ -56,7 +54,6 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
       setIsLoading(false)
     }
   }, [analyticsListData, isLoading, setAnalyticListData, setIsLoading])
-  
 
   return (
     <div className='mt-12 grid place-content-center items-center text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>

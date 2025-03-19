@@ -17,8 +17,8 @@ const SingleDateSelector: React.FC<SingleDateSelectorProps> = ({
 }) => {
   const prefix = sanitize(label)
   return (
-    <div className='flex items-center gap-2 text-textSecondary'>
-      <span className='font-medium md:text-sm'>{label}:</span>
+    <div className='flex items-center gap-2 text-textPrimary'>
+      <span className='font-medium md:text-xs'>{label}:</span>
       <DaySelector selectedDay={day} onDayChange={onDayChange} fieldId={`${prefix}-day-selector`} />
       <MonthSelector
         selectedMonth={month}

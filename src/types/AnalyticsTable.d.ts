@@ -21,13 +21,13 @@ export interface MainLayoutProps {
 }
 
 export interface AnalyticsDataReturn {
-  analyticsDataList: AnalyticWithValidatedUser[]
+  analyticData: AnalyticWithValidatedUser[]
   isLoading: boolean
   isTokenLoading: boolean
   fetchData: (url: string) => Promise<void>
   validateAnalytics: (analyticsId: number) => Promise<void>
   updateDescription: (analyticsId: number, description: string) => Promise<void>
-  buildUrl: (isFiltered: boolean) => string
+  buildUrl?: (isFiltered: boolean) => string
   totalPages: number
   totalElements: number
 
@@ -75,4 +75,12 @@ export interface UseAnalyticsDataProps {
   endDate: { day: number; month: number; year: number }
   itemsPerPage: number
   currentPage: number
+}
+
+export interface AnalyticsTableProps {
+  items: AnalyticWithValidatedUser[]
+  onPageChange: (url: string) => Promise<void>
+  onValidate?: (id: number) => Promise<void>
+  isLoading: boolean
+  onUpdateDescription?: (id: number, description: string) => Promise<void>
 }

@@ -36,7 +36,7 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
           onClick={() => setCurrentPage((prev) => prev + 1)}
           disabled={
             totalPages !== undefined
-              ? currentPage === totalPages || dataFetched.length === 0
+              ? currentPage === totalPages - 1 || dataFetched.length === 0
               : dataFetched.length === 0
           }
           className='rounded-md px-4 py-2 text-xs text-textPrimary transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'

@@ -57,7 +57,8 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
     SD: 'Standard Deviation',
     UNIT_VALUE: 'Unit of Measurement',
     RULES: 'Quality Rules',
-    DESCRIPTION: 'Test Description'
+    DESCRIPTION: 'Test Description',
+    VALIDATOR_USER: 'Validator User'
   }
 
   // Function to map column headers to descriptive labels
@@ -277,56 +278,56 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
 
       const currentDate = new Date().toLocaleDateString()
 
-      // Add header with gradient effect (reduzido em altura)
+      // Add header with gradient effect (reduced in height)
       doc.setFillColor(42, 73, 128) // Dark blue header
-      doc.rect(0, 0, 297, 20, 'F') // Reduzido de 25 para 20
+      doc.rect(0, 0, 297, 20, 'F') // Reduced from 25 to 20
       doc.setFillColor(75, 107, 175) // Lighter blue accent
-      doc.rect(0, 18, 297, 2, 'F') // Ajustado
+      doc.rect(0, 18, 297, 2, 'F') // Adjusted
 
       // Reserved space for logo (could be implemented later)
       doc.setDrawColor(255, 255, 255)
       doc.setLineWidth(0.1)
-      doc.rect(10, 3, 12, 12) // Tamanho reduzido
+      doc.rect(10, 3, 12, 12) // Reduced size
 
       // Add title with better formatting
       doc.setFontSize(14) // Reduced from 16 to 14 to accommodate longer titles
       doc.setTextColor(255, 255, 255) // White text
       doc.setFont('helvetica', 'bold')
-      doc.text(`${reportTitle}`, 27, 9) // Ajustado Y de 12 para 9
+      doc.text(`${reportTitle}`, 27, 9) // Adjusted Y from 12 to 9
 
       // Add date information with improved styling
-      doc.setFontSize(8) // Reduzido de 10 para 9
-      doc.text(`Report Period: ${month} ${year}`, 27, 15) // Ajustado Y de 19 para 15
+      doc.setFontSize(8) // Reduced from 10 to 9
+      doc.text(`Report Period: ${month} ${year}`, 27, 15) // Adjusted Y from 19 to 15
 
       // Add generation date on the right
       doc.text(`Generated: ${currentDate}`, 240, 8, { align: 'right' })
 
-      // Current vertical position tracker - começar mais próximo ao topo
-      let yPosition = 25 // Reduzido de 35 para 25
+      // Current vertical position tracker - start closer to the top
+      let yPosition = 25 // Reduced from 35 to 25
 
       // Add summary section if data exists
       if (jsonData.content && Array.isArray(jsonData.content) && jsonData.content.length > 0) {
         // Calculate statistics
         const stats = calculateStatistics(jsonData.content)
 
-        // Add summary box (mais compacto)
+        // Add summary box (more compact)
         doc.setDrawColor(75, 107, 175)
         doc.setLineWidth(0.5)
         doc.setFillColor(240, 245, 255)
-        doc.roundedRect(10, yPosition, 277, 15, 3, 3, 'FD') // Reduzido altura de 20 para 15
+        doc.roundedRect(10, yPosition, 277, 15, 3, 3, 'FD') // Reduced height from 20 to 15
 
         // Add summary title
         doc.setFont('helvetica', 'bold')
-        doc.setFontSize(11) // Reduzido de 12 para 11
+        doc.setFontSize(11) // Reduced from 12 to 11
         doc.setTextColor(42, 73, 128)
-        doc.text('REPORT SUMMARY', 15, yPosition + 6) // Ajustado Y e X
+        doc.text('REPORT SUMMARY', 15, yPosition + 6) // Adjusted Y and X
 
         // Add summary content
         doc.setFont('helvetica', 'normal')
-        doc.setFontSize(8) // Reduzido de 10 para 9
+        doc.setFontSize(8) // Reduced from 10 to 9
         doc.setTextColor(60, 60, 60)
 
-        let summaryX = 15 // Reduzido de 20 para 15
+        let summaryX = 15 // Reduced from 20 to 15
         doc.text(`Total Records: ${stats.totalTests || 'N/A'}`, summaryX, yPosition + 11)
 
         if (stats.uniqueTests) {
@@ -343,22 +344,22 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
           )
         }
 
-        // Update position after summary - menos espaçamento
-        yPosition += 20 // Reduzido de 35 para 20
+        // Update position after summary - less spacing
+        yPosition += 20 // Reduced from 35 to 20
 
-        // Add problematic tests section (se necessário - mais compacto)
+        // Add problematic tests section (if necessary - more compact)
         const problematicTests = getProblematicTests(jsonData.content)
 
         if (problematicTests.length > 0) {
-          // Calculate height with menos espaçamento
-          const rowHeight = 5 // Reduzido de 6 para 5
-          const headerHeight = 12 // Reduzido de 15 para 12
-          const marginTop = 3 // Reduzido de 5 para 3
-          const marginBottom = 5 // Reduzido de 8 para 5
+          // Calculate height with less spacing
+          const rowHeight = 5 // Reduced from 6 to 5
+          const headerHeight = 12 // Reduced from 15 to 12
+          const marginTop = 3 // Reduced from 5 to 3
+          const marginBottom = 5 // Reduced from 8 to 5
           const totalHeight =
             headerHeight + problematicTests.length * rowHeight + marginTop + marginBottom
 
-          // Add problematic tests header com menos espaçamento
+          // Add problematic tests header with less spacing
           doc.setDrawColor(75, 107, 175)
           doc.setLineWidth(0.5)
           doc.setFillColor(240, 245, 255)
@@ -366,22 +367,22 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
 
           // Add title
           doc.setFont('helvetica', 'bold')
-          doc.setFontSize(11) // Reduzido de 12 para 11
+          doc.setFontSize(11) // Reduced from 12 to 11
           doc.setTextColor(42, 73, 128)
-          doc.text('PROBLEMATIC TESTS', 15, yPosition + 6) // Ajustado de 20 para 15
+          doc.text('PROBLEMATIC TESTS', 15, yPosition + 6) // Adjusted from 20 to 15
 
-          // Add column headers com menos espaçamento
+          // Add column headers with less spacing
           doc.setFont('helvetica', 'bold')
-          doc.setFontSize(6) // Reduzido de 9 para 8
+          doc.setFontSize(6) // Reduced from 9 to 8
           doc.setTextColor(60, 60, 60)
-          const headerY = yPosition + marginTop + 8 // Reduzido de 10 para 8
+          const headerY = yPosition + marginTop + 8 // Reduced from 10 to 8
 
           // Draw header line
           doc.setDrawColor(200, 200, 200)
           doc.setLineWidth(0.2)
           doc.line(15, headerY + 2, 280, headerY + 2)
 
-          // Column headers com posicionamento ajustado
+          // Column headers with adjusted positioning
           doc.text('Test Name', 15, headerY)
           doc.text('±3s Count', 180, headerY)
           doc.text('±2s Count', 220, headerY)
@@ -389,10 +390,10 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
 
           // List problematic tests
           doc.setFont('helvetica', 'normal')
-          doc.setFontSize(8) // Reduzido de 9 para 8
+          doc.setFontSize(8) // Reduced from 9 to 8
 
           problematicTests.forEach((test, index) => {
-            const testY = headerY + 6 + index * rowHeight // Reduzido de 8 para 6
+            const testY = headerY + 6 + index * rowHeight // Reduced from 8 to 6
 
             // Truncate long test names
             let testName = test.name
@@ -424,18 +425,18 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
           // Reset text color
           doc.setTextColor(60, 60, 60)
 
-          // Update position after problematic tests - menos espaçamento
-          yPosition += totalHeight + 5 // Reduzido de 10 para 5
+          // Update position after problematic tests - less spacing
+          yPosition += totalHeight + 5 // Reduced from 10 to 5
         }
 
         if (jsonData.content.length > 0) {
-          // Use section title for the data table (mais compacto)
+          // Use section title for the data table (more compact)
           doc.setFont('helvetica', 'bold')
-          doc.setFontSize(9) // Reduzido de 12 para 11
+          doc.setFontSize(9) // Reduced from 12 to 11
           doc.setTextColor(42, 73, 128)
           doc.text('ANALYTICS ', 10, yPosition)
 
-          yPosition += 7 // Reduzido de 10 para 7
+          yPosition += 7 // Reduced from 10 to 7
 
           // Extract headers from first object
           const firstItem = jsonData.content[0]
@@ -449,15 +450,15 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
             headers.map((header) => formatRuleValue(header, item[header]))
           )
 
-          // Diferentes configurações para primeira página e páginas subsequentes
+          // Different configurations for the first page and subsequent pages
           let firstPageDone = false
           let firstPageRowCount = 0
           const rowsPerPage = {
-            firstPage: 5, // Reduzido de 8 para 7
-            subsequentPages: 14 // Reduzido de 15 para 14
+            firstPage: 5, // Reduced from 8 to 7
+            subsequentPages: 14 // Reduced from 15 to 14
           }
 
-          // Use autoTable with improved styling e otimizado para mais linhas por página
+          // Use autoTable with improved styling and optimized for more rows per page
           autoTable(doc, {
             head: [formattedHeaders],
             body: data,
@@ -480,30 +481,30 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
               lineColor: [200, 200, 200],
               cellPadding: 1.5
             },
-            // Gerenciar o número de linhas em cada página
+            // Manage the number of rows on each page
             didDrawPage: function (data) {
-              // Após desenhar a primeira página, atualizamos a configuração para as próximas páginas
+              // After drawing the first page, update the configuration for subsequent pages
               if (!firstPageDone) {
                 firstPageDone = true
-                firstPageRowCount = 0 // Reset contador ao mudar de página
+                firstPageRowCount = 0 // Reset counter when changing page
 
-                // Na próxima página, ajustar o espaço para acomodar mais linhas
-                data.settings.margin.top = 20 // Reduzir margem superior nas páginas subsequentes
+                // On the next page, adjust the space to accommodate more rows
+                data.settings.margin.top = 20 // Reduce top margin on subsequent pages
               }
             },
 
-            // Nova estratégia para controlar linhas por página
+            // New strategy to control rows per page
             willDrawCell: function (data) {
-              // Apenas afeta células do corpo (não cabeçalho) e apenas na primeira página
+              // Only affects body cells (not header) and only on the first page
               if (data.section === 'body' && data.pageNumber === 0 && !firstPageDone) {
-                // Se o índice da linha atual é diferente do anterior, estamos em uma nova linha
+                // If the index of the current row is different from the previous one, we're on a new row
                 if (data.row.index >= 0 && data.column.index === 0) {
                   firstPageRowCount++
                 }
 
-                // Se atingimos o limite de linhas e estamos prestes a desenhar mais uma
+                // If we have reached the row limit and are about to draw one more
                 if (firstPageRowCount > rowsPerPage.firstPage && data.cursor) {
-                  // Forçar quebra de página movendo o cursor para o final da página
+                  // Force page break by moving the cursor to the end of the page
                   data.cursor.y = doc.internal.pageSize.height
                 }
               }
@@ -557,7 +558,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
               lineColor: [75, 107, 175],
               lineWidth: 0.1,
               minCellHeight: 6,
-              cellWidth: 'auto' // Ajuste automático de largura para melhor distribuição do espaço
+              cellWidth: 'auto' // Auto width adjustment for better space distribution
             },
             margin: { top: yPosition, right: 10, bottom: 15, left: 10 }
           })

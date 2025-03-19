@@ -1,5 +1,6 @@
 import useFetchAnalyticsGrouped from '@/features/analytics-charts/hooks/useFetchAnalyticsGrouped'
 import UpdateResults from '@/features/analytics-upload-files'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
 import buildAnalyticsEndpointByNameAndDate from '@/features/shared/utils/helpers/buildAnalyticsEndpointByNameAndDate'
 import { TestSelectorProps } from '@/types/SelectorProps'
 import React, { useEffect, useState } from 'react'
@@ -7,7 +8,6 @@ import useDateSelector from '../../../hooks/useDateSelector'
 import DateSelector from '../../date-selectors'
 import GoogleSheetLink from '../components/GoogleSheetLink'
 import TestNameSelector from '../components/TestNameSelector'
-import ErrorMessage from '@/features/shared/utils/components/error-message'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   testNameList: list,
@@ -32,21 +32,21 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     handleEndYearChange
   } = useDateSelector()
 
-  const { url } = buildAnalyticsEndpointByNameAndDate({
+  const endPoint = buildAnalyticsEndpointByNameAndDate({
     name: testName,
     date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
     analyticsType
   })
 
-  const { listing, error } = useFetchAnalyticsGrouped(url)
+  const { listing, error } = useFetchAnalyticsGrouped(endPoint)
 
   useEffect(() => {
     setIsLoading(true)
     if (listing && listing.length > 0) {
       setIsLoading(false)
     }
-    setListing(listing)
-  }, [url, listing, setListing, setIsLoading])
+    setListing(listing || [])
+  }, [endPoint, listing, setListing, setIsLoading])
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK
 
