@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "next lint --fix",
     "lint:fix": "eslint ./src --fix",
-    "exec:container": "docker exec -it quality-lab-pro-front-end-dev /bin/sh"
+    "exec:container": "docker exec -it quality-lab-pro-front-end-dev /bin/sh",
+    "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
+    "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
+    "component": "cypress open --component",
+    "component:headless": "cypress run --component"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.13",
@@ -30,6 +34,7 @@
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
     "autoprefixer": "^10.0.1",
+    "cypress": "^14.2.0",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.2",
     "eslint-plugin-react": "^7.37.4",
