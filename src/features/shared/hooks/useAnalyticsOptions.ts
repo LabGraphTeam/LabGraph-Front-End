@@ -28,5 +28,10 @@ export const useAnalyticsOptions = (analyticsType: string) => {
     }
   }, [analyticsType])
 
-  return { analyticsOptions, levelOptions }
+
+  const filters = [
+    { value: false, label: '-' },
+    { value: true, label: '✓' }]
+
+  return { analyticsOptions, levelOptions, filters }
 }

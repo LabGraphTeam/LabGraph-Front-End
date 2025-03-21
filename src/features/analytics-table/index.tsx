@@ -15,10 +15,11 @@ const AnalyticsTableIndex = () => {
   const dateSelector = useDateSelector()
   const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics')
   const [currentPage, setCurrentPage] = useState(0)
-  const [itemsPerPage, setItemsPerPage] = useState(8)
+  const [itemsPerPage, setItemsPerPage] = useState(7)
   const [level, setLevel] = useState(0)
   const [isFiltered, setIsFiltered] = useState(false)
-  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType)
+  const { analyticsOptions, levelOptions, filters } = useAnalyticsOptions(analyticsType)
+  const [unValidatedFilter, setUnValidatedFilter] = useState(false)
 
   const { width } = useWindowDimensions()
 
@@ -74,7 +75,8 @@ const AnalyticsTableIndex = () => {
       isFiltered,
       itemsPerPage,
       currentPage,
-      name: '-'
+      name: '-',
+      unValidatedFilter
     })
   }, [
     analyticsType,
@@ -87,7 +89,8 @@ const AnalyticsTableIndex = () => {
     dateSelector.endYear,
     isFiltered,
     itemsPerPage,
-    currentPage
+    currentPage,
+    unValidatedFilter
   ])
 
   useEffect(() => {
@@ -95,7 +98,7 @@ const AnalyticsTableIndex = () => {
   }, [getParams, isTokenLoading])
 
   useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 14 : 8)
+    setItemsPerPage(width >= 1800 ? 13 : 7)
   }, [width])
 
   return (
@@ -108,8 +111,11 @@ const AnalyticsTableIndex = () => {
         setAnalyticsType={setAnalyticsType}
         levelOptions={levelOptions}
         level={level}
+        unValidFilter={unValidatedFilter}
         setLevel={setLevel}
         setFiltered={setIsFiltered}
+        setUnValidatedFilter={setUnValidatedFilter}
+        filters={filters}
       />
       {isLoading ? (
         <Loading />

@@ -10,7 +10,10 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   levelOptions,
   level,
   setLevel,
-  setFiltered
+  setFiltered,
+  unValidFilter,
+  setUnValidatedFilter,
+  filters
 }) => {
   return (
     <div className='md:mb-4 md:mt-40 md:text-xs'>
@@ -52,6 +55,25 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             {levelOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label
+          htmlFor='isValidated'
+          className='mt-1 flex items-center gap-2 whitespace-nowrap text-textPrimary md:mt-0'
+        >
+          <span className=''>filter for non-validated:</span>{' '}
+          <select
+            id='isValidated'
+            onChange={(e) => {
+              setUnValidatedFilter(() => e.target.value == 'true')
+            }}
+            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background px-2 py-1 text-textPrimary focus:outline-none focus:ring-2'
+          >
+            {filters.map((filter) => (
+              <option key={String(filter.value)} value={String(filter.value)}>
+                {filter.label}
               </option>
             ))}
           </select>

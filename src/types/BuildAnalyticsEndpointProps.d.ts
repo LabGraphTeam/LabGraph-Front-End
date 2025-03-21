@@ -8,6 +8,7 @@ export default interface BuildAnalyticsEndpointProps {
   isFiltered?: boolean
   itemsPerPage?: number
   currentPage?: number
+  unValidatedFilter?: boolean
 }
 
 

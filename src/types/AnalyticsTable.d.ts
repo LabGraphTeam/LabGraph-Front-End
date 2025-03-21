@@ -43,6 +43,10 @@ export interface AnalyticsFiltersProps {
   level: number
   setLevel: (value: number) => void
   setFiltered: (setter: (prev: boolean) => boolean) => void
+  unValidFilter: boolean
+  setUnValidatedFilter: (setter: (prev: boolean) => boolean) => void
+
+  filters: { value: boolean; label: string }[]
 }
 
 export interface AnalyticsPaginationProps {
