@@ -12,7 +12,7 @@ export const buildAnalyticsValidationEndpoint = (props: BuildAnalyticsEndpointPr
 
     if (isFiltered) {
 
-        if (!unValidatedFilter) {
+        if (unValidatedFilter) {
             return `${baseEndPoint}/level-date-range/unvalid?level=${level}&startDate=${startDate}&endDate=${endDate}&size=${itemsPerPage}&page=${currentPage}&sort=date,desc`
         }
 

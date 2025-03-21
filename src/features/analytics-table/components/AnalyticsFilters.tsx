@@ -63,7 +63,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
           htmlFor='isValidated'
           className='mt-1 flex items-center gap-2 whitespace-nowrap text-textPrimary md:mt-0'
         >
-          <span className=''>filter for non-validated:</span>{' '}
+          <span className=''>Filter for non-validated:</span>{' '}
           <select
             id='isValidated'
             onChange={(e) => {
