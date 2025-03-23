@@ -4,7 +4,7 @@ import { TouchEvent, useCallback, useEffect, useState } from 'react'
 
 import { CarouselProps } from '@/types/About'
 
-const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) => {
+const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000000 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [imagesLoaded, setImagesLoaded] = useState<{ [key: number]: boolean }>({})
   const [isPaused, setIsPaused] = useState(false)
@@ -59,7 +59,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
   return (
     <section
       aria-label='Image carousel'
-      className='group relative h-[400px] w-full overflow-hidden rounded-2xl shadow-lg'
+      className='group relative h-[250px] w-full overflow-hidden rounded-2xl shadow-lg'
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={onTouchStart}
@@ -89,7 +89,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
               fill
               className={`object-cover transition-all duration-700 ${
                 !imagesLoaded[index] ? 'scale-100 blur-xl' : 'scale-100 blur-0'
-              }`}
+              } filter brightness-85 contrast-100 grayscale-[50%] hover:grayscale-[0%]`}
               priority={index === 0}
               onLoad={() => {
                 setImagesLoaded((prev) => ({ ...prev, [index]: true }))
@@ -101,14 +101,14 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000 }) 
 
       <button
         onClick={previousSlide}
-        className='absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-textSecondary p-2 text-white opacity-0 transition-all duration-300 hover:scale-110 group-hover:opacity-85'
+        className='absolute left-2 top-1/2 bg-black/30  -translate-y-1/2 rounded-full  p-2 text-white opacity-0 transition-all duration-300 hover:scale-110 group-hover:opacity-100'
         aria-label='Previous slide'
       >
         <ChevronLeft className='size-6' />
       </button>
       <button
         onClick={nextSlide}
-        className='absolute right-2 top-1/2 -translate-y-1/2 rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+        className='absolute right-2 bg-black/30 top-1/2 -translate-y-1/2 rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100'
         aria-label='Next slide'
       >
         <ChevronRight className='size-6' />

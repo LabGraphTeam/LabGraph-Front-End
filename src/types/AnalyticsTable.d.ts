@@ -43,7 +43,6 @@ export interface AnalyticsFiltersProps {
   setFiltered: (setter: (prev: boolean) => boolean) => void
   unValidFilter: boolean
   setUnValidatedFilter: (setter: (prev: boolean) => boolean) => void
-
   filters: { value: boolean; label: string }[]
 }
 

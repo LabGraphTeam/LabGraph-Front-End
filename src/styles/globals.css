@@ -62,7 +62,7 @@
     /* System Colors */
     --color-white: #ffffff; /* Pure white */
     --color-logo-l: #ffffff; /* Logo light variant */
-    --border-color: #d0d8e0; /* Standard borders - darker blue-gray */
+    --border-color: #ced4db; /* Standard borders - darker blue-gray */
     --color-sun: #f1c40f; /* Light theme indicator - vibrant yellow */
     --color-moon: #7f8c8d; /* Dark theme indicator - balanced gray */
   }
@@ -123,7 +123,7 @@
     --checkbox-color: #ffffff; /* White checkboxes */
     --color-sun: #f1c40f; /* Vibrant yellow sun */
     --color-moon: #7f8c8d; /* Balanced gray moon */
-    --border-color: rgba(236, 240, 241, 0.2); /* Semi-transparent white borders */
+    --border-color: #ecf0f167; /* Semi-transparent white borders */
   }
 
   /********************

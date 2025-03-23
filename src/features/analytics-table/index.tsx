@@ -98,11 +98,11 @@ const AnalyticsTableIndex = () => {
   }, [getParams, isTokenLoading])
 
   useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 13 : 7)
+    setItemsPerPage(width >= 1800 ? 11 : 7)
   }, [width])
 
   return (
-    <MainLayout title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}>
+    <MainLayout title={`LabGraph - ${'Analytics Table'}`}>
       {error && <ErrorMessage message={error.toString()} />}
       <AnalyticsFilters
         dateSelector={dateSelector}

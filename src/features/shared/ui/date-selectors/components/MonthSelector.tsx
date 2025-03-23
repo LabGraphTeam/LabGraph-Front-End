@@ -25,7 +25,7 @@ const MonthSelector: React.FC<MonthSelectorProps & { fieldId?: string }> = ({
     <select
       id={fieldId ?? 'month-selector'}
       name={fieldId ?? 'month-selector'}
-      className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
+      className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[8px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
       value={selectedMonth}
       onChange={(e) => onMonthChange(+e.target.value)}
     >

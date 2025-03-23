@@ -21,13 +21,13 @@ const AboutNavbar: React.FC = () => {
     <nav className='sticky top-0 z-50 border-b border-borderColor bg-navbar italic backdrop-blur-sm'>
       <div className='mx-auto max-w-7xl px-4'>
         <div className='flex items-center justify-between py-8'>
-          <div className='flex flex-col'>
-            <NavLogo />
+          <div className='flex flex-col p-4 rounded-xl'>
+            <NavLogo className='w-12' h1Style='font-extrabold text-textPrimary opacity-95 text-xl md:text-2xl' h2Style='hidden md:block text-textPrimary opacity-70 md:text-xs'/>
           </div>
 
           {/* Desktop Navigation */}
           <div className='hidden items-center gap-6 lg:flex'>
-            <ul className='flex items-center space-x-6 text-sm sm:text-base'>
+            <ul className='flex items-center space-x-6 text-sm sm:text-sms'>
               {NAVIGATION_ITEMS.map((item) => (
                 <li key={item.id}>
                   <button

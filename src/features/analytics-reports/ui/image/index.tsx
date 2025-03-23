@@ -6,7 +6,7 @@ const ReportImage = () => {
       <Image
         className='rounded-xl object-cover'
         fetchPriority='high'
-        src='/reports.jpg'
+        src='/images/lab.jpg'
         style={{
           width: '100%',
           height: 'auto',

@@ -12,8 +12,7 @@ const AboutUs = () => {
   return (
     <div id='overview' className='flex min-h-screen flex-col bg-background'>
       <AboutNavbar />
-
-      <div className='mx-auto mt-4 flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-0'>
+      <div className='mx-auto mt-8 flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-0'>
         <section id='carousel' className='w-full md:py-6'>
           <Carousel images={CAROULSEL_IMAGES} />
         </section>

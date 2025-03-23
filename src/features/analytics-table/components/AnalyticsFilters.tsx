@@ -11,24 +11,23 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   level,
   setLevel,
   setFiltered,
-  unValidFilter,
   setUnValidatedFilter,
   filters
 }) => {
   return (
-    <div className='md:mb-4 md:mt-40 md:text-xs'>
-      <div className='mt-24 flex flex-col items-start justify-evenly font-light md:flex-row md:gap-0'>
+    <div className='ml-2 md:mb-4 mt-28 md:mt-40 text-[10px] md:text-xs'>
+      <div className='mt-24 flex flex-col items-start justify-evenly font-light md:flex-row'>
         <DateSelector {...dateSelector} />
         <label
           htmlFor='tests'
-          className='flex items-center gap-2 whitespace-nowrap text-textPrimary'
+          className='flex items-center gap-1 md-gap-2 whitespace-nowrap text-textPrimary'
         >
           <span className=''>Test:</span>{' '}
           <select
             id='tests'
             value={analyticsType}
             onChange={(e) => setAnalyticsType(e.target.value)}
-            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background px-2 py-1 text-textPrimary focus:outline-none focus:ring-2'
+            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background md:px-2 md:py-1 text-textPrimary focus:outline-none focus:ring-2'
           >
             {analyticsOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -40,7 +39,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
 
         <label
           htmlFor='level'
-          className='mt-1 flex items-center gap-2 whitespace-nowrap text-textPrimary md:mt-0'
+          className='mt-1 md:mt-0 flex items-center gap-1 md-gap-2 whitespace-nowrap text-textPrimary'
         >
           <span className=''>Level:</span>{' '}
           <select
@@ -50,8 +49,8 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
               setLevel(Number(e.target.value))
               setFiltered(() => e.target.value !== '0')
             }}
-            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background px-2 py-1 text-textPrimary focus:outline-none focus:ring-2'
-          >
+            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
+            >
             {levelOptions.map((option) => (
               <option key={option.value} value={option.value}>
                 {option.label}
@@ -60,17 +59,17 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
           </select>
         </label>
         <label
-          htmlFor='isValidated'
-          className='mt-1 flex items-center gap-2 whitespace-nowrap text-textPrimary md:mt-0'
+          htmlFor='validation-status'
+          className='mt-1 md:mt-0 flex items-center gap-1 md-gap-2 whitespace-nowrap text-textPrimary'
         >
-          <span className=''>Filter for non-validated:</span>{' '}
+          <span>Status filter:</span>{' '}
           <select
-            id='isValidated'
+            id='validation-status'
             onChange={(e) => {
               setUnValidatedFilter(() => e.target.value == 'true')
             }}
-            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background px-2 py-1 text-textPrimary focus:outline-none focus:ring-2'
-          >
+            className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
+            >
             {filters.map((filter) => (
               <option key={String(filter.value)} value={String(filter.value)}>
                 {filter.label}

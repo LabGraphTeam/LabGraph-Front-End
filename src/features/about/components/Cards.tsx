@@ -10,12 +10,12 @@ import Link from 'next/link'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
 
 export const FeatureCard: React.FC<FeatureProps> = ({ title, description, icon }) => (
-  <div className='card-hover group rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
+  <div className='card-hover hover:bg-primaryLight/5 group rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
     <div className='mb-4 flex items-center space-x-3'>
-      <div className='text-primary transition-colors duration-300 group-hover:text-accent'>
+    <div className='text-primary transition-colors duration-300 group-hover:text-accent'>
         {icon}
       </div>
-      <h3 className='text-lg font-semibold text-textSecondary'>{title}</h3>
+      <h3 className='text-lg font-semibold text-textPrimary  group-hover:text-accent'>{title}</h3>
     </div>
     <p className='text-sm leading-relaxed text-textSecondary'>{description}</p>
   </div>
@@ -91,7 +91,7 @@ export const TeamMemberCard: React.FC<TeamMemberProps> = ({ name, role, image, b
           href={social.linkedin}
           target='_blank'
           rel='noopener noreferrer'
-          className='text-textSecondary transition-colors hover:text-primary'
+          className='text-textSecondary transition-colors hover:text-textPrimary'
         >
           <FaLinkedin size={20} />
         </Link>
@@ -101,7 +101,7 @@ export const TeamMemberCard: React.FC<TeamMemberProps> = ({ name, role, image, b
           href={social.github}
           target='_blank'
           rel='noopener noreferrer'
-          className='text-textSecondary transition-colors hover:text-primary'
+          className='text-textSecondary transition-colors hover:text-textPrimary'
         >
           <FaGithub size={20} />
         </Link>
