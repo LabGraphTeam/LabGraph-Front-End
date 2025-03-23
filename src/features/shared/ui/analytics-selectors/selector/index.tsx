@@ -10,10 +10,10 @@ import DateSelector from '../../date-selectors'
 import TestSelectorActions from '../components/TestSelectorActions'
 
 const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
-  testNameList,
+  availableTestNames: testNameList,
   analyticsType,
-  name,
-  level,
+  analyticName: name,
+  analyticLevel: level,
   setAnalyticListData,
   setIsLoading
 }) => {
@@ -40,20 +40,27 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
     () =>
       buildAnalyticsEndpoint({
         analyticsType,
-        name: testName,
-        level: testLevel,
-        date: { startDay, startMonth, startYear, endDay, endMonth, endYear }
+        analyticName: testName,
+        analyticsLevel: testLevel,
+        analyticsMeasurementPeriod: {
+          startDay,
+          startMonth,
+          startYear,
+          endDay,
+          endMonth,
+          endYear
+        }
       }),
     [analyticsType, testName, testLevel, startDay, startMonth, startYear, endDay, endMonth, endYear]
   )
-  const { analyticsListData, isLoading, error } = useFetchAnalytics(props)
+  const { data, isLoading, error } = useFetchAnalytics(props)
 
   useEffect(() => {
-    if (!error && !isLoading && analyticsListData && analyticsListData?.analyticsDTO?.length > 0) {
-      setAnalyticListData(analyticsListData)
+    if (!error && !isLoading && data && data?.analyticsDTO?.length > 0) {
+      setAnalyticListData(data)
       setIsLoading(false)
     }
-  }, [analyticsListData, isLoading, setAnalyticListData, setIsLoading])
+  }, [data, isLoading, setAnalyticListData, setIsLoading])
 
   return (
     <div className='mt-12 grid place-content-center items-center text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>
@@ -74,8 +81,8 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
       />
       <div className='grid grid-cols-1 gap-1'>
         <TestSelectorActions
-          testNameList={testNameList}
-          testName={testName}
+          availableTestNames={testNameList}
+          analyticName={testName}
           setTestName={setTestName}
           levelOptions={levelOptions}
           testLevel={testLevel}
@@ -84,11 +91,11 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
           googleSheetUrl={GOOGLE_SHEET_URL ?? ''}
         />
         <MeanAndDeviationDisplay
-          mean={analyticsListData?.analyticsDTO[0]?.mean ?? 0}
-          sd={analyticsListData?.analyticsDTO[0]?.sd ?? 0}
-          ownMean={analyticsListData?.calcMeanAndStdDTO.mean ?? 0}
-          ownSd={analyticsListData?.calcMeanAndStdDTO.standardDeviation ?? 0}
-          unitValue={analyticsListData?.analyticsDTO[0]?.unit_value ?? ''}
+          mean={data?.analyticsDTO[0]?.mean ?? 0}
+          sd={data?.analyticsDTO[0]?.sd ?? 0}
+          ownMean={data?.calcMeanAndStdDTO.mean ?? 0}
+          ownSd={data?.calcMeanAndStdDTO.standardDeviation ?? 0}
+          unitValue={data?.analyticsDTO[0]?.unit_value ?? ''}
         />
       </div>
     </div>

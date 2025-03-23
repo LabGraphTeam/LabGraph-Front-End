@@ -1,9 +1,9 @@
-import { TestNameSelectorProps } from '@/types/SelectorProps'
+import { TestNameSelectorWithLevelProps } from '@/types/SelectorProps'
 import React, { useCallback } from 'react'
 
-const TestNameSelector: React.FC<TestNameSelectorProps> = ({
-  testNameList: list,
-  testName,
+const TestNameSelector: React.FC<TestNameSelectorWithLevelProps> = ({
+  availableTestNames: list,
+  analyticName: testName,
   setTestName
 }) => {
   const handleChange = useCallback(

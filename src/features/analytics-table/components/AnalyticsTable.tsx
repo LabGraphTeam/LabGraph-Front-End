@@ -31,7 +31,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
           {items.map((item) => (
             <TableRow
               key={item.id}
-              analyticItem={item}
+              analyticData={item}
               onValidate={onValidate}
               onUpdateDescription={onUpdateDescription}
             />
@@ -40,7 +40,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
       </table>
       <div className='grid grid-cols-4 place-content-center gap-2 px-2 text-center md:hidden'>
         {items.map((item) => (
-          <MobileItemCard key={item.id} analyticItem={item} />
+          <MobileItemCard key={item.id} analyticData={item} />
         ))}
       </div>
     </>

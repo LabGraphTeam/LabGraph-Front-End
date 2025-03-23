@@ -1,17 +1,17 @@
-import { AnalyticItem } from '@/types/Chart'
+import { AnalyticData } from '@/types/Chart'
 import { DateSelectorProps } from '@/types/DateSelectorProps'
 import { ReactNode } from 'react'
 
 export interface MobileItemCardProps {
-  analyticItem: AnalyticItem
+  analyticData: AnalyticData
 }
 
-export interface AnalyticWithValidatedUser extends AnalyticItem {
+export interface AnalyticWithValidatedUser extends AnalyticData {
   validator_user: string
 }
 
 export interface TableRowProps {
-  analyticItem: AnalyticWithValidatedUser,
+  analyticData: AnalyticWithValidatedUser,
   onValidate?: (id: number) => Promise<void>,
   onUpdateDescription?: (id: number, description: string) => Promise<void>
 }
@@ -27,10 +27,8 @@ export interface AnalyticsDataReturn {
   fetchData: (url: string) => Promise<void>
   validateAnalytics: (analyticsId: number) => Promise<void>
   updateDescription: (analyticsId: number, description: string) => Promise<void>
-  buildUrl?: (isFiltered: boolean) => string
   totalPages: number
   totalElements: number
-
   error: Error | string | null
 }
 
@@ -52,7 +50,7 @@ export interface AnalyticsFiltersProps {
 export interface AnalyticsPaginationProps {
   currentPage: number
   totalPages: number | undefined
-  analyticsListData: AnalyticItem[]
+  analyticsListData: AnalyticData[]
   setCurrentPage: (setter: (prev: number) => number) => void
 }
 
@@ -60,16 +58,6 @@ export interface PageButtonsProps {
   totalPages: number | undefined
   currentPage: number
   setCurrentPage: (setter: (prev: number) => number) => void
-}
-
-export interface PaginatedResponse {
-  content: AnalyticItem[]
-  page: {
-    size: number
-    totalElements: number
-    totalPages: number
-    number: number
-  }
 }
 
 export interface UseAnalyticsDataProps {
@@ -80,7 +68,6 @@ export interface UseAnalyticsDataProps {
   itemsPerPage: number
   currentPage: number
 }
-
 export interface AnalyticsTableProps {
   items: AnalyticWithValidatedUser[]
   onPageChange: (url: string) => Promise<void>

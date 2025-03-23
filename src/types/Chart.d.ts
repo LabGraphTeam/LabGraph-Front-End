@@ -1,6 +1,6 @@
 import { LegendProps } from 'recharts'
 
-export interface AnalyticItem {
+export interface AnalyticData {
   id: number
   name: string
   level_lot: string
@@ -8,8 +8,6 @@ export interface AnalyticItem {
   level: string
   sd: number
   mean: number
-  ownMeanValue: number
-  ownSdValue: number
   date: string
   value: number
   unit_value: string
@@ -36,10 +34,10 @@ export interface MeanStdDevValueData {
   standardDeviation: number
 }
 
-export interface AnalyticGroupedData {
+export interface GroupedAnalyticData {
   groupedValuesByLevelDTO: {
     level: string
-    values: AnalyticItem[]
+    values: AnalyticData[]
   }
   groupedMeanAndStdByLevelDTO: {
     level: string
@@ -56,18 +54,16 @@ export interface MeanAndDeviationDisplayProps {
 }
 
 export interface MultipleLineChartProps {
-  analyticsListData: AnalyticGroupedData[]
-  colors?: string[]
+  groupedAnalysisData: GroupedAnalyticData[]
 }
 
 export interface SingleLineGraphProps {
   testList: string[]
   analyticsType: string
-  levelListSize: number
+  size: number
 }
 
 export interface MultipleLineGraphProps {
-  levelListSize: number
   testList: string[]
   analyticsType: string
 }
@@ -77,7 +73,7 @@ export interface AnalyticWithStatsData {
     mean: number
     standardDeviation: number
   }
-  analyticsDTO: AnalyticItem[]
+  analyticsDTO: AnalyticData[]
 }
 
 export interface PayloadData {
@@ -99,14 +95,14 @@ export interface LegendCustomSingleLineProps extends LegendProps {
       strokeDasharray: string | number
     }
   }>
-  data?: Array<{
-    level: string
+  levelData?: Array<{
+    dataLevel: string
   }>
 }
 
 export interface LegendMultipleLinesProps {
   payload?: { color: string }[]
-  levels: string[]
+  multipleLineLevels: string[]
 }
 
 export type ViewMode = 'single' | 'dual'
@@ -120,25 +116,5 @@ export interface GraphContextType {
 export interface StatItemProps {
   label: string
   value?: number
-  formatter: (value: number) => string
-}
-
-export interface MultipleLinesData {
-  [key: string]: string | number | undefined
-  date1?: string
-  date2?: string
-  level1?: string
-  level2?: string
-  value1?: number
-  value2?: number
-  rawValue1?: string | number
-  rawValue2?: string | number
-  levelLot1?: string
-  levelLot2?: string
-  name1?: string
-  name2?: string
-  mean1?: number
-  mean2?: number
-  sd1?: number
-  sd2?: number
+  formatStatValue: (value: number) => string
 }

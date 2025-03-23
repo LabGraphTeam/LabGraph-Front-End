@@ -3,7 +3,7 @@ import BuildAnalyticsEndpointProps from "@/types/BuildAnalyticsEndpointProps"
 
 export const buildAnalyticsValidationEndpoint = (props: BuildAnalyticsEndpointProps): string => {
 
-    const { analyticsType, level, date, itemsPerPage, currentPage, isFiltered, unValidatedFilter } = props
+    const { analyticsType, analyticsLevel: level, analyticsMeasurementPeriod: date, itemsPerPage, currentPage, isFiltered, unValidatedFilter } = props
 
     const baseEndPoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}`
 

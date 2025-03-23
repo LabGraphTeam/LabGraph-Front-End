@@ -1,7 +1,7 @@
 import { LegendCustomSingleLineProps } from '@/types/Chart'
 import getColorByLevel from '../../utils/getColorByLevel'
 
-const LegendCustom = ({ payload, data }: LegendCustomSingleLineProps) => {
+const LegendCustom = ({ payload, levelData: data }: LegendCustomSingleLineProps) => {
   if (!payload || !data) return null
 
   return (
@@ -11,11 +11,11 @@ const LegendCustom = ({ payload, data }: LegendCustomSingleLineProps) => {
           <div
             className='size-2.5 rounded-full'
             style={{
-              backgroundColor: getColorByLevel(data[index].level.toString())
+              backgroundColor: getColorByLevel(data[index].dataLevel.toString())
             }}
           />
           <span className='text-xs text-textPrimary md:text-sm'>
-            {data[index].level.toString().toUpperCase()}
+            {data[index].dataLevel.toString().toUpperCase()}
           </span>
         </div>
       ))}

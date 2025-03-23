@@ -3,7 +3,7 @@ import React, { useCallback } from 'react'
 
 const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
   levelOptions,
-  testLevel,
+  analyticLevel: testLevel,
   setTestLevel
 }) => {
   const handleChange = useCallback(

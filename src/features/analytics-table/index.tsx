@@ -63,8 +63,8 @@ const AnalyticsTableIndex = () => {
   const getParams = useCallback(() => {
     return buildAnalyticsValidationEndpoint({
       analyticsType,
-      level,
-      date: {
+      analyticsLevel: level,
+      analyticsMeasurementPeriod: {
         startDay: dateSelector.startDay,
         startMonth: dateSelector.startMonth,
         startYear: dateSelector.startYear,
@@ -75,7 +75,7 @@ const AnalyticsTableIndex = () => {
       isFiltered,
       itemsPerPage,
       currentPage,
-      name: '-',
+      analyticName: '-',
       unValidatedFilter
     })
   }, [

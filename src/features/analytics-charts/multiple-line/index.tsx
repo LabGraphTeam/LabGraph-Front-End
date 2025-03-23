@@ -2,13 +2,13 @@ import TestSelectorWithoutLevel from '@/features/shared/ui/analytics-selectors/c
 import Footer from '@/features/shared/ui/footer'
 import NavBar from '@/features/shared/ui/nav-bar'
 import Loading from '@/features/shared/utils/components/loading'
-import { AnalyticGroupedData, MultipleLineGraphProps } from '@/types/Chart'
+import { GroupedAnalyticData, MultipleLineGraphProps } from '@/types/Chart'
 import Head from 'next/head'
 import React, { useState } from 'react'
 import MultipleLineControlChart from './components/MultipleLineControlChart'
 
 const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType }) => {
-  const [groupResponse, setGroupResponse] = useState<AnalyticGroupedData[]>([])
+  const [analyticsGroupData, setAnalyticsGroupData] = useState<GroupedAnalyticData[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
   return (
@@ -21,10 +21,10 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
         <div className='flex flex-col'>
           <div className='mb-8 mt-14 flex justify-evenly md:mt-24 xl:mb-8 xl:mt-32'>
             <TestSelectorWithoutLevel
-              name={testList[0]}
-              setAnalyticItemList={setGroupResponse}
+              analyticName={testList[0]}
+              setAnalyticGroupedData={setAnalyticsGroupData}
               analyticsType={analyticsType}
-              testNameList={testList}
+              availableTestNames={testList}
               setIsLoading={setIsLoading}
             />
           </div>
@@ -32,7 +32,7 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
             {isLoading ? (
               <Loading />
             ) : (
-              <MultipleLineControlChart analyticsListData={groupResponse} />
+              <MultipleLineControlChart groupedAnalysisData={analyticsGroupData} />
             )}
           </div>
         </div>

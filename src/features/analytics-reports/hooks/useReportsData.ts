@@ -1,13 +1,14 @@
-import { useAuthenticatedFetch } from '@/features/shared/hooks/useAuthenticatedFetch'
-import { AnalyticItem } from '@/types/Chart'
+import { useFetchSWR } from '@/features/shared/hooks/useFetchSWR'
+import { AnalyticData } from '@/types/Chart'
 import { UseReportsDataProps } from '@/types/Reports'
 
 const useReportsData = ({ url }: UseReportsDataProps) => {
-  const { data: dataFetched = [] } = useAuthenticatedFetch<AnalyticItem[]>({
+  const { data: dataFetched = [] } = useFetchSWR<AnalyticData[]>({
     url,
     method: 'GET',
     contentType: 'application/json',
-    immediate: true
+    immediate: true,
+    authenticated: true
   })
 
   return { dataFetched }

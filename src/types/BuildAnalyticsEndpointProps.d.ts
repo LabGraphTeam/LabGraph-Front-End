@@ -2,9 +2,9 @@ import IntervalDates from './IntervalDates'
 
 export default interface BuildAnalyticsEndpointProps {
   analyticsType: string
-  name: string
-  level?: number
-  date: IntervalDates
+  analyticName: string
+  analyticsLevel?: number
+  analyticsMeasurementPeriod: IntervalDates
   isFiltered?: boolean
   itemsPerPage?: number
   currentPage?: number

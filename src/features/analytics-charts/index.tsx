@@ -4,23 +4,16 @@ import { useGraph } from './hooks/useAnalyticsGraph'
 import MultipleLineLabGraph from './multiple-line'
 import LabGraph from './single-line'
 
-const GraphWrapper: React.FC<SingleLineGraphProps> = ({
-  testList,
-  analyticsType,
-  levelListSize
-}) => {
+const GraphWrapper: React.FC<SingleLineGraphProps> = ({ testList, analyticsType, size }) => {
   const { viewMode } = useGraph()
 
-  const graphProps = { levelListSize, testList, analyticsType }
+  const graphProps = { size, testList, analyticsType }
 
-  const SingleGraph = useMemo(
-    () => <LabGraph {...graphProps} />,
-    [testList, analyticsType, levelListSize]
-  )
+  const SingleGraph = useMemo(() => <LabGraph {...graphProps} />, [testList, analyticsType, size])
 
   const MultiGraph = useMemo(
     () => <MultipleLineLabGraph {...graphProps} />,
-    [testList, analyticsType, levelListSize]
+    [testList, analyticsType, size]
   )
 
   return <div>{viewMode === 'single' ? SingleGraph : MultiGraph}</div>

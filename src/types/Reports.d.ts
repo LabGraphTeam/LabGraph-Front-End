@@ -1,9 +1,9 @@
-import { AnalyticItem } from '@/types/Chart'
+import { AnalyticData } from '@/types/Chart'
 import { DateSelectorProps } from '@/types/DateSelectorProps'
 
 export interface ReportsHeaderProps {
   analyticsType: string
-  dataFetched?: AnalyticItem[]
+  dataFetched?: AnalyticData[]
 }
 
 export interface UseReportsDataProps {

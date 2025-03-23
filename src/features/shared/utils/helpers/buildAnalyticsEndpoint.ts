@@ -6,7 +6,7 @@ import {
 import analyticNameFormatFix from './analyticNameFormatFix'
 
 const buildAnalyticsEndpoint = (props: BuildAnalyticsEndpointProps) => {
-  const { analyticsType, name, level, date } = props
+  const { analyticsType, analyticName: name, analyticsLevel: level, analyticsMeasurementPeriod: date } = props
 
   const baseEndPoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/name-and-level-date-range?name=`
 

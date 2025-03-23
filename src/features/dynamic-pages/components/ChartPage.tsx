@@ -7,7 +7,7 @@ export function ChartPageComponent({ chartType, config }: Readonly<ChartPageProp
       key={chartType}
       testList={config.testList}
       analyticsType={config.analyticsType}
-      levelListSize={config.levelListSize}
+      size={config.size}
     />
   )
 }

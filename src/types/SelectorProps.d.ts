@@ -1,41 +1,41 @@
-import { AnalyticGroupedData, AnalyticWithStatsData } from '@/types/Chart'
+import { GroupedAnalyticData, AnalyticWithStatsData } from '@/types/Chart'
 
 export interface LevelOptions {
   value: string | number
   label: string
 }
 export interface CommonTestSelectorProps {
-  testNameList: string[]
+  availableTestNames: string[]
   analyticsType: string
-  name: string
-  level: number
+  analyticName: string
+  analyticLevel: number
   setAnalyticListData: (data: AnalyticWithStatsData) => void
   setIsLoading: (data: boolean) => void
 }
 
 export interface TestSelectorProps {
   analyticsType: string
-  testNameList: string[]
-  name: string
+  availableTestNames: string[]
+  analyticName: string
   setIsLoading: (data: boolean) => void
-  setAnalyticItemList: (data: AnalyticGroupedData[]) => void
+  setAnalyticGroupedData: (data: GroupedAnalyticData[]) => void
 }
 
-export interface TestNameSelectorProps {
-  testNameList: string[]
-  testName: string
+export interface TestNameSelectorWithLevelProps {
+  availableTestNames: string[]
+  analyticName: string
   setTestName: (name: string) => void
 }
 
 export interface TestLevelSelectorProps {
   levelOptions: LevelOptions[]
-  testLevel: number
+  analyticLevel: number
   setTestLevel: (level: number) => void
 }
 
 export interface TestSelectorActionsProps {
-  testNameList: string[]
-  testName: string
+  availableTestNames: string[]
+  analyticName: string
   setTestName: (name: string) => void
   levelOptions: LevelOptions[]
   testLevel: number

@@ -6,7 +6,7 @@ import {
 import analyticNameFormatFix from './analyticNameFormatFix'
 
 const buildAnalyticsEndpointByNameAndDate = (props: BuildAnalyticsEndpointByNameAndDateProps) => {
-  const { name, date, analyticsType } = props
+  const { analyticName: name, analyticsMeasurementPeriod: date, analyticsType } = props
 
   const startDate = formatDateWithTime(date.startYear, date.startMonth, date.startDay)
   const endDate = formatEndDateWithTime(date.endYear, date.endMonth, date.endDay)

@@ -1,7 +1,7 @@
 import { MobileItemCardProps } from '@/types/AnalyticsTable'
 import React from 'react'
 
-const MobileItemCard: React.FC<MobileItemCardProps> = ({ analyticItem: item }) => {
+const MobileItemCard: React.FC<MobileItemCardProps> = ({ analyticData: item }) => {
   return (
     <div className='mt-6 rounded-md border border-border bg-surface p-4 shadow-sm shadow-shadow'>
       <p className='text-[6px] font-semibold text-textSecondary'>

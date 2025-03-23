@@ -1,7 +1,7 @@
 import { StatItemProps } from '@/types/Chart'
 import React from 'react'
 
-const StatItem: React.FC<StatItemProps> = ({ label, value, formatter }) => {
+const StatItem: React.FC<StatItemProps> = ({ label, value, formatStatValue: formatter }) => {
   const displayValue = React.useMemo(() => {
     if (value === undefined || isNaN(value)) return ''
     return formatter(value)

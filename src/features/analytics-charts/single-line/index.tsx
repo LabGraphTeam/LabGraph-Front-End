@@ -21,12 +21,12 @@ const LabGraph: React.FC<SingleLineGraphProps> = ({ testList, analyticsType }) =
         <div className='flex flex-col'>
           <div className='mb-4 ml-4 mt-12 flex justify-start md:mt-24 xl:mb-8 xl:mt-32'>
             <TestSelectorWithLevel
-              name={testList[0]}
-              level={1}
+              analyticName={testList[0]}
+              analyticLevel={1}
               setIsLoading={setIsLoading}
               setAnalyticListData={setDataFetched}
               analyticsType={analyticsType}
-              testNameList={testList}
+              availableTestNames={testList}
             />
           </div>
           <div className='flex min-h-full w-screen flex-col items-center justify-center'>

@@ -18,10 +18,8 @@ import normalizeValue from '../../utils/normalizeValue'
 import LegendMultiple from './LegendMultiple'
 import TooltipMultiple from './TooltipMultiple'
 
-
-
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
-  analyticsListData: listings
+  groupedAnalysisData: listings
 }) => {
   const [useOwnValues, setUseOwnValues] = useState(false)
   const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), [])
@@ -188,7 +186,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
                 />
               ))}
               <Legend
-                content={<LegendMultiple levels={levels} />}
+                content={<LegendMultiple multipleLineLevels={levels} />}
                 verticalAlign='bottom'
                 wrapperStyle={{
                   paddingTop: '5px',

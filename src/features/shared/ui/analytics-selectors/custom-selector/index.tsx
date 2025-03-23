@@ -10,10 +10,10 @@ import GoogleSheetLink from '../components/GoogleSheetLink'
 import TestNameSelector from '../components/TestNameSelector'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
-  testNameList: list,
+  availableTestNames: list,
   analyticsType,
-  name,
-  setAnalyticItemList: setListing,
+  analyticName: name,
+  setAnalyticGroupedData: setdata,
   setIsLoading
 }) => {
   const [testName, setTestName] = useState<string>(name)
@@ -33,20 +33,20 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   } = useDateSelector()
 
   const endPoint = buildAnalyticsEndpointByNameAndDate({
-    name: testName,
-    date: { startDay, startMonth, startYear, endDay, endMonth, endYear },
+    analyticName: testName,
+    analyticsMeasurementPeriod: { startDay, startMonth, startYear, endDay, endMonth, endYear },
     analyticsType
   })
 
-  const { listing, error } = useFetchAnalyticsGrouped(endPoint)
+  const { data, error } = useFetchAnalyticsGrouped(endPoint)
 
   useEffect(() => {
     setIsLoading(true)
-    if (listing && listing.length > 0) {
+    if (data && data.length > 0) {
       setIsLoading(false)
     }
-    setListing(listing || [])
-  }, [endPoint, listing, setListing, setIsLoading])
+    setdata(data || [])
+  }, [endPoint, data, setdata, setIsLoading])
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK
 
@@ -68,7 +68,11 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
         handleEndYearChange={handleEndYearChange}
       />
       <div className='flex flex-row content-center items-center justify-between gap-3'>
-        <TestNameSelector testName={testName} setTestName={setTestName} testNameList={list} />
+        <TestNameSelector
+          analyticName={testName}
+          setTestName={setTestName}
+          availableTestNames={list}
+        />
         <GoogleSheetLink googleSheetUrl={GOOGLE_SHEET_URL} />
         <div className='hidden w-full md:flex'>
           <UpdateResults analyticsType={analyticsType} />

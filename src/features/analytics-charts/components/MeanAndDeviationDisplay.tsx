@@ -17,15 +17,15 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
 
   return (
     <div className='grid w-full grid-cols-1 text-[10px] font-light text-textPrimary md:ml-8 md:grid-cols-3'>
-      <StatItem label='Mean (Reference)' value={mean} formatter={formatWithUnit} />
-      <StatItem label='Deviation (Reference)' value={sd} formatter={formatWithUnit} />
-      <StatItem label='Calculated Mean' value={ownMean} formatter={formatWithUnit} />
-      <StatItem label='Calculated Deviation' value={ownSd} formatter={formatWithUnit} />
+      <StatItem label='Mean (Reference)' value={mean} formatStatValue={formatWithUnit} />
+      <StatItem label='Deviation (Reference)' value={sd} formatStatValue={formatWithUnit} />
+      <StatItem label='Calculated Mean' value={ownMean} formatStatValue={formatWithUnit} />
+      <StatItem label='Calculated Deviation' value={ownSd} formatStatValue={formatWithUnit} />
       {ownMean !== undefined && ownSd !== undefined && (
         <StatItem
           label='Calculated CV'
           value={ownMean}
-          formatter={() => `${calculateCV(ownMean, ownSd)} (%)`}
+          formatStatValue={() => `${calculateCV(ownMean, ownSd)} (%)`}
         />
       )}
     </div>

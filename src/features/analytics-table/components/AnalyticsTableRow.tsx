@@ -13,7 +13,7 @@ const sanitizeDescription = (description: string): string => {
 }
 
 const TableRow: React.FC<TableRowProps> = ({
-  analyticItem: item,
+  analyticData: item,
   onValidate,
   onUpdateDescription
 }) => {

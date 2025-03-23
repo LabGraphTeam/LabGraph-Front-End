@@ -1,8 +1,8 @@
-import { AnalyticItem } from './Chart'
+import { AnalyticData } from './Chart'
 
 export interface PdfGeneratorProps {
   jsonData: {
-    content: AnalyticItem[]
+    content: AnalyticData[]
   }
   fileName?: string
   reportMonth?: string

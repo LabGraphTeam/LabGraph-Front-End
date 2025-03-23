@@ -7,8 +7,8 @@ import TestLevelSelector from './TestLevelSelector'
 import TestNameSelector from './TestNameSelector'
 
 const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
-  testNameList: list,
-  testName,
+  availableTestNames: list,
+  analyticName: testName,
   setTestName,
   levelOptions,
   testLevel,
@@ -19,12 +19,16 @@ const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
   return (
     <div className='flex flex-row items-center gap-2'>
       <span className='text-xs text-textPrimary'>Test:</span>
-      <TestNameSelector testNameList={list} testName={testName} setTestName={setTestName} />
+      <TestNameSelector
+        availableTestNames={list}
+        analyticName={testName}
+        setTestName={setTestName}
+      />
       <span className='text-xs text-textPrimary'>Level:</span>
       {levelOptions && levelOptions.length > 0 && setTestLevel && (
         <TestLevelSelector
           levelOptions={levelOptions}
-          testLevel={testLevel}
+          analyticLevel={testLevel}
           setTestLevel={setTestLevel}
         />
       )}
