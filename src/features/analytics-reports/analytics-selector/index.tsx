@@ -3,7 +3,7 @@ import { AnalyticsTypeSelectorProps } from '@/types/Reports'
 const AnalyticsTypeSelector = ({ analyticsType, onChange }: AnalyticsTypeSelectorProps) => {
   return (
     <select
-      className='rounded-md border border-borderColor bg-background text-xs text-textSecondary shadow-sm shadow-shadow md:text-sm'
+      className='rounded-md border border-borderColor bg-background text-xs text-textSecondary shadow-sm shadow-shadow'
       value={analyticsType}
       onChange={(e) => onChange(e.target.value)}
     >

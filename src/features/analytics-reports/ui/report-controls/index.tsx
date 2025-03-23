@@ -11,19 +11,20 @@ const ReportsControls = ({
   reportMonth,
   reportYear
 }: ReportsControlsProps) => (
-  <div className='grid gap-1 text-textSecondary md:flex md:flex-col xl:mt-20'>
+  <div className='grid gap-2 text-xs text-textSecondary md:flex md:flex-col xl:mt-24'>
     <DateSelector {...dateSelectorProps} />
-    <AnalyticsTypeSelector analyticsType={analyticsType} onChange={onAnalyticsTypeChange} />
-    <div className='flex gap-1'>
-      <span className='flex justify-evenly rounded-md border border-borderColor text-textSecondary shadow-sm shadow-shadow'>
-        <GeneratePdf
-          jsonData={dataFetched}
-          fileName={analyticsType}
-          reportMonth={reportMonth}
-          reportYear={reportYear}
-          buttonText={'generatePDF'}
-        />
-      </span>
+    <div className='flex items-end gap-2'>
+      <span className='text-textPrimary'>AnalyticsType:</span>
+      <AnalyticsTypeSelector analyticsType={analyticsType} onChange={onAnalyticsTypeChange} />
+      <span className='text-textPrimary'>Action:</span>
+
+      <GeneratePdf
+        jsonData={dataFetched}
+        fileName={analyticsType}
+        reportMonth={reportMonth}
+        reportYear={reportYear}
+        buttonText={'GENERATE REPORT'}
+      />
     </div>
   </div>
 )

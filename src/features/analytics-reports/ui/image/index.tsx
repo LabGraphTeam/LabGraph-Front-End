@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from 'next/image'
 
 const ReportImage = () => {
   return (
@@ -10,7 +10,7 @@ const ReportImage = () => {
         style={{
           width: '100%',
           height: 'auto',
-          opacity: 1.0,
+          opacity: 1.0
         }}
         width={350}
         height={150}
@@ -18,7 +18,7 @@ const ReportImage = () => {
         priority={true}
       />
     </span>
-  );
-};
+  )
+}
 
-export default ReportImage;
+export default ReportImage

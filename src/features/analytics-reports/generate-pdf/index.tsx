@@ -585,15 +585,15 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
     <button
       onClick={generatePdf}
       disabled={isGenerating}
-      className={`flex items-center justify-evenly rounded-lg p-1 text-textPrimary transition-all duration-300 ease-in-out focus:outline-none focus:ring-0 ${isGenerating ? 'cursor-not-allowed opacity-50' : 'hover:scale-105'} `}
+      className={`flex items-center justify-center rounded-md border border-borderColor bg-background px-1 text-textSecondary shadow-sm shadow-shadow`}
       aria-label='Export PDF'
     >
       {isGenerating ? (
-        <Loader2 className='mr-2 size-5 animate-spin' />
+        <Loader2 className='mr-1 size-4 animate-spin' />
       ) : (
-        <FileText className='mr-2 size-5' />
+        <FileText className='mr-1 size-4' />
       )}
-      <span>Generate PDF</span>
+      <span>GENERATE REPORT</span>
     </button>
   )
 }
