@@ -1,17 +1,35 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export default function useDateSelector() {
-  const endDate = new Date();
-  const startDate = new Date();
-  startDate.setDate(1);
 
-  const [startDay, setStartDay] = useState<number>(startDate.getDate());
-  const [startMonth, setStartMonth] = useState<number>(startDate.getMonth() + 1);
-  const [startYear, setStartYear] = useState<number>(startDate.getFullYear());
+  const firstDayOfMonth = useMemo(() => {
+    const date = new Date();
+    date.setDate(1);
+    return date;
+  }, []);
 
-  const [endDay, setEndDay] = useState<number>(endDate.getDate());
-  const [endMonth, setEndMonth] = useState<number>(endDate.getMonth() + 1);
-  const [endYear, setEndYear] = useState<number>(endDate.getFullYear());
+  const today = useMemo(() => new Date(), []);
+
+  const startDate = useMemo(() => ({
+    day: firstDayOfMonth.getDate(),
+    month: firstDayOfMonth.getMonth() + 1,
+    year: firstDayOfMonth.getFullYear(),
+  }), [firstDayOfMonth]);
+
+  const endDate = useMemo(() => ({
+    day: today.getDate(),
+    month: today.getMonth() + 1,
+    year: today.getFullYear(),
+  }), [today]);
+
+
+  const [startDay, setStartDay] = useState<number>(startDate.day);
+  const [startMonth, setStartMonth] = useState<number>(startDate.month);
+  const [startYear, setStartYear] = useState<number>(startDate.year);
+
+  const [endDay, setEndDay] = useState<number>(endDate.day);
+  const [endMonth, setEndMonth] = useState<number>(endDate.month);
+  const [endYear, setEndYear] = useState<number>(endDate.year);
 
   // Helper function to get the last day of a month
   function getLastDayOfMonth(year: number, month: number): number {
@@ -23,7 +41,7 @@ export default function useDateSelector() {
     // Validate day is within the month's range
     const maxDays = getLastDayOfMonth(startYear, startMonth);
     const validDay = Math.min(day, maxDays);
-    
+
     // Set end date to the last day of the same month
     const lastDayOfMonth = getLastDayOfMonth(startYear, startMonth);
 
@@ -37,7 +55,7 @@ export default function useDateSelector() {
     // Validate day is within the month's range
     const maxDays = getLastDayOfMonth(endYear, endMonth);
     const validDay = Math.min(day, maxDays);
-    
+
     setEndDay(validDay);
   };
 
@@ -45,7 +63,7 @@ export default function useDateSelector() {
     // Ensure day is valid for the new month
     const maxDays = getLastDayOfMonth(startYear, month);
     const validDay = Math.min(startDay, maxDays);
-    
+
     // Set end date to the last day of the same month
     const lastDayOfMonth = getLastDayOfMonth(startYear, month);
 
@@ -60,7 +78,7 @@ export default function useDateSelector() {
     // Ensure day is valid for the new month
     const maxDays = getLastDayOfMonth(endYear, month);
     const validDay = Math.min(endDay, maxDays);
-    
+
     setEndMonth(month);
     setEndDay(validDay);
   };
@@ -69,7 +87,7 @@ export default function useDateSelector() {
     // Ensure day is valid for the new year (especially for Feb 29)
     const maxDays = getLastDayOfMonth(year, startMonth);
     const validDay = Math.min(startDay, maxDays);
-    
+
     // Set end date to the last day of the same month
     const lastDayOfMonth = getLastDayOfMonth(year, startMonth);
 
@@ -84,23 +102,44 @@ export default function useDateSelector() {
     // Ensure day is valid for the new year (especially for Feb 29)
     const maxDays = getLastDayOfMonth(year, endMonth);
     const validDay = Math.min(endDay, maxDays);
-    
+
     setEndYear(year);
     setEndDay(validDay);
   };
 
-  return {
+
+
+  const dateValues = {
     startDay,
     startMonth,
     startYear,
-    handleStartDayChange,
-    handleStartMonthChange,
-    handleStartYearChange,
     endDay,
     endMonth,
     endYear,
+  }
+
+
+  const dateHandlers = {
+    handleStartDayChange,
+    handleStartMonthChange,
+    handleStartYearChange,
     handleEndDayChange,
     handleEndMonthChange,
     handleEndYearChange,
-  };
+  }
+
+  return {
+    dateValues,
+    dateHandlers,
+    startDate: {
+      day: startDate.day,
+      month: startDate.month,
+      year: startDate.year
+    },
+    endDate: {
+      day: endDate.day,
+      month: endDate.month,
+      year: endDate.year
+    }
+  }
 }

@@ -3,7 +3,7 @@ import React from 'react'
 
 const MobileItemCard: React.FC<MobileItemCardProps> = ({ analyticData: item }) => {
   return (
-    <div className='mt-6 rounded-md border border-border bg-surface p-4 shadow-sm shadow-shadow'>
+    <div className='mt-4 rounded-md border border-border bg-surface p-4 shadow-sm shadow-shadow'>
       <p className='text-[6px] font-semibold text-textSecondary'>
         Test: <span className='text-textPrimary'>{item.name}</span>
       </p>

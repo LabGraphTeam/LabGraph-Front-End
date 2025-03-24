@@ -17,7 +17,10 @@ const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
   googleSheetUrl
 }) => {
   return (
-    <div className='flex flex-row items-center gap-2'>
+    <div className='relative flex flex-row items-center gap-2 rounded-md border border-borderColor p-4'>
+      <div className='absolute -top-2.5 left-8 ml-7 -translate-x-1/2 bg-background px-2 text-[7px] font-extralight text-textPrimary md:ml-6 md:text-[10px]'>
+        Filters & Actions
+      </div>
       <span className='text-xs text-textPrimary'>Test:</span>
       <TestNameSelector
         availableTestNames={list}
@@ -25,6 +28,7 @@ const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
         setTestName={setTestName}
       />
       <span className='text-xs text-textPrimary'>Level:</span>
+
       {levelOptions && levelOptions.length > 0 && setTestLevel && (
         <TestLevelSelector
           levelOptions={levelOptions}

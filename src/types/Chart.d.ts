@@ -85,6 +85,8 @@ export interface PayloadData {
   unitValue: string
   mean: number
   sd: number
+  ownMean: number
+  ownSd: number
 }
 
 export interface LegendCustomSingleLineProps extends LegendProps {

@@ -1,6 +1,6 @@
 export interface UseFetchProps<T> {
     url: string
-    method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
+    method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH'
     body?: Record<string, any>
     contentType?: string
     immediate?: boolean

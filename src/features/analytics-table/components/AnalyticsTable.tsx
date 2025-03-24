@@ -11,7 +11,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
 }) => {
   return (
     <>
-      <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table md:w-full'>
+      <table className='hidden rounded-md border border-borderColor bg-surface p-8 shadow-md shadow-shadow md:table md:w-full'>
         <caption className='mb-1 text-[10px] text-primary'>
           Table 1.1: Interactive Analytics Results with Filtering Options
         </caption>
@@ -38,7 +38,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
           ))}
         </tbody>
       </table>
-      <div className='grid grid-cols-4 place-content-center gap-2 px-2 text-center md:hidden'>
+      <div className='mt-2 grid grid-cols-3 place-content-center gap-2 px-2 text-center md:hidden'>
         {items.map((item) => (
           <MobileItemCard key={item.id} analyticData={item} />
         ))}

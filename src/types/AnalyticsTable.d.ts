@@ -21,14 +21,12 @@ export interface MainLayoutProps {
 }
 
 export interface AnalyticsDataReturn {
-  analyticData: AnalyticWithValidatedUser[]
+  data: PaginatedAnalyticsResponse | null,
+  error: Error | string | null,
   isLoading: boolean
-  isTokenLoading: boolean
-  fetchData: (url: string) => Promise<void>
   validateAnalytics: (analyticsId: number) => Promise<void>
   updateDescription: (analyticsId: number, description: string) => Promise<void>
-  totalPages: number
-  totalElements: number
+
   error: Error | string | null
 }
 
@@ -49,7 +47,7 @@ export interface AnalyticsFiltersProps {
 export interface AnalyticsPaginationProps {
   currentPage: number
   totalPages: number | undefined
-  analyticsListData: AnalyticData[]
+  analyticsData: AnalyticWithValidatedUser[]
   setCurrentPage: (setter: (prev: number) => number) => void
 }
 
@@ -60,17 +58,29 @@ export interface PageButtonsProps {
 }
 
 export interface UseAnalyticsDataProps {
+
+  endPoint: string
   analyticsType: string
   level: number
   startDate: { day: number; month: number; year: number }
   endDate: { day: number; month: number; year: number }
   itemsPerPage: number
   currentPage: number
+  setAnalyticData: (data: AnalyticWithValidatedUser[]) => void
+  analyticData: AnalyticWithValidatedUser[]
+
 }
 export interface AnalyticsTableProps {
   items: AnalyticWithValidatedUser[]
-  onPageChange: (url: string) => Promise<void>
   onValidate?: (id: number) => Promise<void>
   isLoading: boolean
   onUpdateDescription?: (id: number, description: string) => Promise<void>
+}
+
+export interface PaginatedAnalyticsResponse {
+  content: AnalyticWithValidatedUser[]
+  page: {
+    totalElements: number
+    totalPages: number
+  }
 }

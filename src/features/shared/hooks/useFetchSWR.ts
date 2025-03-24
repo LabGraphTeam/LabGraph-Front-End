@@ -15,6 +15,7 @@ export function useFetchSWR<T>({
     authenticated = false,
     headers: customHeaders = {}
 }: UseFetchProps<T>) {
+
     const { token, isLoading: isTokenLoading } = useToken()
 
     const needsToken = authenticated && (isTokenLoading || !token)
@@ -64,7 +65,7 @@ export function useFetchSWR<T>({
         try {
             return await mutate()
         } catch (err) {
-            return null
+            throw new Error(String(err))
         }
     }
 

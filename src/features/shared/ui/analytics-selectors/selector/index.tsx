@@ -1,4 +1,3 @@
-import MeanAndDeviationDisplay from '@/features/analytics-charts/components/MeanAndDeviationDisplay'
 import useFetchAnalytics from '@/features/analytics-charts/hooks/useFetchAnalytics'
 import ErrorMessage from '@/features/shared/utils/components/error-message'
 import buildAnalyticsEndpoint from '@/features/shared/utils/helpers/buildAnalyticsEndpoint'
@@ -22,38 +21,27 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   const [testName, setTestName] = useState<string>(name)
   const [testLevel, setTestLevel] = useState<number>(level ?? 1)
 
-  const {
-    startDay,
-    startMonth,
-    startYear,
-    endDay,
-    endMonth,
-    endYear,
-    handleStartDayChange,
-    handleStartMonthChange,
-    handleStartYearChange,
-    handleEndDayChange,
-    handleEndMonthChange
-  } = useDateSelector()
+  const { dateValues, dateHandlers: handlers } = useDateSelector()
 
-  const props = useMemo(
+  const dateValuesAndHandlers = {
+    ...dateValues,
+    ...handlers
+  }
+
+  const analyticsApiUrl = useMemo(
     () =>
       buildAnalyticsEndpoint({
         analyticsType,
         analyticName: testName,
         analyticsLevel: testLevel,
         analyticsMeasurementPeriod: {
-          startDay,
-          startMonth,
-          startYear,
-          endDay,
-          endMonth,
-          endYear
+          ...dateValues
         }
       }),
-    [analyticsType, testName, testLevel, startDay, startMonth, startYear, endDay, endMonth, endYear]
+    [analyticsType, testName, testLevel, dateValues]
   )
-  const { data, isLoading, error } = useFetchAnalytics(props)
+
+  const { data, isLoading, error } = useFetchAnalytics(analyticsApiUrl)
 
   useEffect(() => {
     if (!error && !isLoading && data && data?.analyticsDTO?.length > 0) {
@@ -63,22 +51,9 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
   }, [data, isLoading, setAnalyticListData, setIsLoading])
 
   return (
-    <div className='mt-12 grid place-content-center items-center text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>
+    <div className='mt-12 grid place-content-center items-start text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>
       {error && <ErrorMessage message={error.toString()} />}
-      <DateSelector
-        startDay={startDay}
-        startMonth={startMonth}
-        startYear={startYear}
-        endDay={endDay}
-        endMonth={endMonth}
-        endYear={endYear}
-        handleStartDayChange={handleStartDayChange}
-        handleStartMonthChange={handleStartMonthChange}
-        handleStartYearChange={handleStartYearChange}
-        handleEndDayChange={handleEndDayChange}
-        handleEndMonthChange={handleEndMonthChange}
-        handleEndYearChange={handleEndDayChange}
-      />
+      <DateSelector {...dateValuesAndHandlers} />
       <div className='grid grid-cols-1 gap-1'>
         <TestSelectorActions
           availableTestNames={testNameList}
@@ -90,13 +65,13 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
           analyticsType={analyticsType}
           googleSheetUrl={GOOGLE_SHEET_URL ?? ''}
         />
-        <MeanAndDeviationDisplay
+        {/* <MeanAndDeviationDisplay
           mean={data?.analyticsDTO[0]?.mean ?? 0}
           sd={data?.analyticsDTO[0]?.sd ?? 0}
           ownMean={data?.calcMeanAndStdDTO.mean ?? 0}
           ownSd={data?.calcMeanAndStdDTO.standardDeviation ?? 0}
           unitValue={data?.analyticsDTO[0]?.unit_value ?? ''}
-        />
+        /> */}
       </div>
     </div>
   )

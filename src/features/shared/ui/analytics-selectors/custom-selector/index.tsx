@@ -10,31 +10,26 @@ import GoogleSheetLink from '../components/GoogleSheetLink'
 import TestNameSelector from '../components/TestNameSelector'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
-  availableTestNames: list,
+  availableTestNames,
   analyticsType,
-  analyticName: name,
-  setAnalyticGroupedData: setdata,
+  analyticName,
+  setAnalyticGroupedData,
   setIsLoading
 }) => {
-  const [testName, setTestName] = useState<string>(name)
-  const {
-    startDay,
-    startMonth,
-    startYear,
-    endDay,
-    endMonth,
-    endYear,
-    handleStartDayChange,
-    handleStartMonthChange,
-    handleStartYearChange,
-    handleEndDayChange,
-    handleEndMonthChange,
-    handleEndYearChange
-  } = useDateSelector()
+  const [testName, setTestName] = useState<string>(analyticName)
+
+  const { dateValues, dateHandlers: handlers } = useDateSelector()
+
+  const dateValuesAndHandlers = {
+    ...dateValues,
+    ...handlers
+  }
 
   const endPoint = buildAnalyticsEndpointByNameAndDate({
     analyticName: testName,
-    analyticsMeasurementPeriod: { startDay, startMonth, startYear, endDay, endMonth, endYear },
+    analyticsMeasurementPeriod: {
+      ...dateValues
+    },
     analyticsType
   })
 
@@ -45,33 +40,20 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     if (data && data.length > 0) {
       setIsLoading(false)
     }
-    setdata(data || [])
-  }, [endPoint, data, setdata, setIsLoading])
+    setAnalyticGroupedData(data || [])
+  }, [endPoint, data, setAnalyticGroupedData, setIsLoading])
 
   const GOOGLE_SHEET_URL = process.env.NEXT_PUBLIC_API_GOOGLE_SHEETS_LINK
 
   return (
     <div className='mt-12 grid content-center items-center text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
       {error && <ErrorMessage message={error.toString()} />}
-      <DateSelector
-        startDay={startDay}
-        startMonth={startMonth}
-        startYear={startYear}
-        endDay={endDay}
-        endMonth={endMonth}
-        endYear={endYear}
-        handleStartDayChange={handleStartDayChange}
-        handleStartMonthChange={handleStartMonthChange}
-        handleStartYearChange={handleStartYearChange}
-        handleEndDayChange={handleEndDayChange}
-        handleEndMonthChange={handleEndMonthChange}
-        handleEndYearChange={handleEndYearChange}
-      />
+      <DateSelector {...dateValuesAndHandlers} />
       <div className='flex flex-row content-center items-center justify-between gap-3'>
         <TestNameSelector
           analyticName={testName}
           setTestName={setTestName}
-          availableTestNames={list}
+          availableTestNames={availableTestNames}
         />
         <GoogleSheetLink googleSheetUrl={GOOGLE_SHEET_URL} />
         <div className='hidden w-full md:flex'>

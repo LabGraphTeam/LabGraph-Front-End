@@ -16,7 +16,7 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   )
 
   return (
-    <div className='grid w-full grid-cols-1 text-[10px] font-light text-textPrimary md:ml-8 md:grid-cols-3'>
+    <div className='flex w-full flex-col text-[10px] font-light text-textPrimary'>
       <StatItem label='Mean (Reference)' value={mean} formatStatValue={formatWithUnit} />
       <StatItem label='Deviation (Reference)' value={sd} formatStatValue={formatWithUnit} />
       <StatItem label='Calculated Mean' value={ownMean} formatStatValue={formatWithUnit} />

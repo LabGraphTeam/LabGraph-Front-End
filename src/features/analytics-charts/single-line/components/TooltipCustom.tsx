@@ -1,39 +1,60 @@
 import { PayloadData } from '@/types/Chart'
 import { TooltipProps } from 'recharts'
+import MeanAndDeviationDisplay from '../../components/MeanAndDeviationDisplay'
 import getColorByLevel from '../../utils/getColorByLevel'
+import returnFullNameByTest from '../../utils/returnFullNameByTest'
 
 const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
   if (!active || !payload?.length) return null
 
   return (
-    <div className='rounded border border-border bg-background p-2 text-xs text-textPrimary shadow-md shadow-shadow'>
+    <div className='shadow-shadow/20 animate-in fade-in zoom-in-95 rounded-lg border border-border bg-background p-3 text-xs text-textPrimary shadow-lg backdrop-blur-sm transition-all duration-200'>
       {payload.map((item) => {
         const data = item.payload as PayloadData
         return (
           <div
             key={`${data.date}-${data.level}-${data.levelLot}`}
-            className='mb-2 border-b border-border last:border-0 last:pb-0'
+            className='mb-3 border-b border-border pb-2 last:mb-0 last:border-0 last:pb-0'
           >
-            <div className='mb-1 flex items-center gap-2'>
+            <div className='mb-2 flex items-center gap-2'>
               <div
-                className='size-2.5 rounded-full'
+                className='ring-border/30 size-3 rounded-full ring-1'
                 style={{
                   backgroundColor: getColorByLevel(data.level)
                 }}
               />
-              <span className='font-medium'>Level: {data.level.toUpperCase()}</span>
+              <span className='font-medium tracking-wide'>{data.level.toUpperCase()}</span>
             </div>
-            <p>Test: {data.name}</p>
-            <p>Date: {data.date}</p>
-            <p>Value: {`${data.rawValue.toFixed(2)} ${data.unitValue}`}</p>
-            <p>Lot: {data.levelLot}</p>
-            <p>Mean: {data.mean.toFixed(2)}</p>
-            <p>Sd: {data.sd.toFixed(2)}</p>
+
+            <div className='text-[8px]'>
+              <DataItem label='Test Name:' value={returnFullNameByTest(data.name)} />
+              <DataItem label='Date of Analysis:' value={data.date} />
+              <DataItem
+                label='Value of Analysis:'
+                value={`${data.rawValue.toFixed(2)} ${data.unitValue}`}
+              />
+              <DataItem label='Lot of control:' value={data.levelLot} />
+
+              <MeanAndDeviationDisplay
+                mean={data.mean}
+                sd={data.sd}
+                ownMean={data.ownMean}
+                ownSd={data.sd}
+                unitValue={data.unitValue}
+              />
+            </div>
           </div>
         )
       })}
     </div>
   )
 }
+
+const DataItem = ({ label, value }: { label: string; value: string }) => (
+  <div className='flex flex-col'>
+    <span className='text-xs text-textPrimary'>{label}</span>
+    <span className='font-extralight'>{value}</span>
+  </div>
+)
 
 export default TooltipCustom

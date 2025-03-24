@@ -1,9 +1,9 @@
 import { useFetchSWR } from '@/features/shared/hooks/useFetchSWR'
-import { AnalyticData } from '@/types/Chart'
+import { PaginatedAnalyticsResponse } from '@/types/AnalyticsTable'
 import { UseReportsDataProps } from '@/types/Reports'
 
 const useReportsData = ({ url }: UseReportsDataProps) => {
-  const { data: dataFetched = [] } = useFetchSWR<AnalyticData[]>({
+  const { data: dataFetched = [] } = useFetchSWR<PaginatedAnalyticsResponse | never[]>({
     url,
     method: 'GET',
     contentType: 'application/json',
@@ -15,3 +15,4 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
 }
 
 export default useReportsData
+

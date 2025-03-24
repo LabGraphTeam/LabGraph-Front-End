@@ -55,7 +55,7 @@ const TableRow: React.FC<TableRowProps> = ({
         {item.name}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
-        {item.level}
+        {item.level.toUpperCase()}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {item.level_lot}
@@ -77,32 +77,38 @@ const TableRow: React.FC<TableRowProps> = ({
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {item.validator_user !== 'Not validated' ? (
-          <span className='text-green-500 flex items-center'>
-            <span className='mr-1'>✅</span>
+          <span className='flex items-center'>
+            <span className='mr-1'></span>
             {item.validator_user}
           </span>
         ) : (
-          <span className='flex items-center text-amber-500'>⚠️Pending</span>
+          <span className='flex items-center'>⚠️Pending</span>
         )}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
-        {item.validator_user === 'Not validated' && (
-          <button
-            onClick={() => onValidate?.(item.id)}
-            className='rounded bg-blue-500 px-2 py-1 text-[6px] text-white hover:bg-blue-600 md:text-xs'
-          >
-            Validate
+        <div className='flex items-center gap-2'>
+          {item.validator_user === 'Not validated' && (
+            <button
+              onClick={() => onValidate?.(item.id)}
+              className='flex items-center gap-1 rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-red-500 md:text-xs'
+            >
+              <span>✓</span>
+            </button>
+          )}
+          {item.validator_user !== 'Not validated' && (
+            <button
+              disabled
+              className='bg-green-500 cursor-not-allowed rounded px-2 py-1 text-[6px] text-white md:text-xs'
+            >
+              ✓
+            </button>
+          )}
+          <button onClick={() => setIsEditing(true)} className='px-2 py-1.5 text-[6px] md:text-xs'>
+            ✏️
           </button>
-        )}
-        {item.validator_user !== 'Not validated' && (
-          <button
-            disabled
-            className='cursor-not-allowed rounded bg-blue-400 px-2 py-1 text-[6px] text-white md:text-xs'
-          >
-            Validated
-          </button>
-        )}
+        </div>
       </td>
+
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {isEditing ? (
           <div className='flex flex-col gap-1'>
@@ -153,12 +159,6 @@ const TableRow: React.FC<TableRowProps> = ({
         ) : (
           <div className='flex items-center justify-between'>
             <span>{description || '-'}</span>
-            <button
-              onClick={() => setIsEditing(true)}
-              className='ml-2 text-[6px] text-blue-500 hover:text-blue-700 md:text-xs'
-            >
-              ✏️
-            </button>
           </div>
         )}
       </td>

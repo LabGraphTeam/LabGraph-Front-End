@@ -14,7 +14,6 @@ const navLinks: NavLinkProps[] = [
     title: 'COAGULATION CHARTS'
   },
   { id: 'hematology', text: 'HEMATOLOGY', url: '/charts/hematology', title: 'HEMATOLOGY CHARTS' },
-  { id: 'reports', text: 'REPORTS', url: '/misc/reports', title: 'REPORTS' },
   { id: 'tables', text: 'TABLES', url: '/misc/analytics-table', title: 'TABLES' },
   { id: 'about', text: 'ABOUT', url: '/about-us', title: 'ABOUT' }
 ]
