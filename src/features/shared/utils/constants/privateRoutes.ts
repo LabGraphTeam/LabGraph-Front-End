@@ -12,7 +12,7 @@ export const PRIVATE_ROUTES = {
     ABOUT_US: '/about-us',
 };
 
-export const CHARTS = PRIVATE_ROUTES.CHARTS;
+export const {CHARTS} = PRIVATE_ROUTES;
 export const MISC = PRIVATE_ROUTES.MISC;
 export const ABOUT_US = PRIVATE_ROUTES.ABOUT_US;
 
