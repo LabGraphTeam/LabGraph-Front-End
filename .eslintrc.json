@@ -2,8 +2,7 @@
   "root": true,
   "extends": [
     "next/core-web-vitals",
-    "plugin:tailwindcss/recommended",
-    "next/typescript"
+    "plugin:tailwindcss/recommended"
   ],
   "plugins": [
     "unused-imports"
@@ -12,7 +11,7 @@
     "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": "warn",
-    "react/react-in-jsx-scope": "off",
+    "react/react-in-jsx-scope": "off"
   },
   "overrides": [
     {

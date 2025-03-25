@@ -1,4 +1,5 @@
 import useFetchAnalyticsGrouped from '@/features/analytics-charts/hooks/useFetchAnalyticsGrouped'
+import { PRIVATE_ROUTES } from '@/features/shared/utils/constants/privateRoutes'
 import useDateSelector from '@/shared/hooks/useDateSelector'
 import TestSelectorActions from '@/shared/ui/analytics-selectors/components/TestSelectorActions'
 import DateSelector from '@/shared/ui/date-selectors'
@@ -40,24 +41,20 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   }, [endPoint, data, setAnalyticGroupedData, setIsLoading])
 
   return (
-    <div className='mt-12 grid content-center items-center text-textSecondary md:mt-4 lg:mt-4 xl:flex xl:w-full xl:justify-around'>
+    <div className='mt-12 grid content-center items-center text-textSecondary md:mt-8 md:w-full md:justify-around xl:flex'>
       {error ? <ErrorMessage message={error.toString()} /> : null}
       <DateSelector {...combinedDateAndHandlersProps} />
-      <div className='flex flex-row content-center items-center justify-between gap-3'>
-        <div className='grid grid-cols-1 gap-1'>
-          <TestSelectorActions
-            analyticName={testName}
-            analyticsType={analyticsType}
-            availableTestNames={availableTestNames}
-            isMultiSelect={true}
-            levelOptions={[]}
-            setTestLevel={() => {}}
-            setTestName={setTestName}
-            testLevel={0}
-            validationUrl="/misc/analytics-table"
-          />
-        </div>
-      </div>
+      <TestSelectorActions
+        analyticName={testName}
+        analyticsType={analyticsType}
+        availableTestNames={availableTestNames}
+        isMultiSelect={true}
+        levelOptions={[]}
+        setTestLevel={() => {}}
+        setTestName={setTestName}
+        testLevel={0}
+        validationUrl={PRIVATE_ROUTES.MISC.ANALYTICS_TABLE}
+      />
     </div>
   )
 }

@@ -12,7 +12,7 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
   return (
     <MainLayout title={`LabGraph - ${'Analytics Table'}`}>
       <div className='flex flex-col'>
-        <div className='mb-8 mt-14 flex justify-evenly md:mt-28 xl:mt-36'>
+        <div className='mb-8 mt-14 md:mt-28 xl:mt-36'>
           <TestSelectorWithoutLevel
             analyticName={testList[0]}
             analyticsType={analyticsType}
@@ -21,11 +21,11 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
             setIsLoading={setIsLoading}
           />
         </div>
-        <div className='flex min-h-full w-full flex-col items-center justify-evenly'>
+        <div className='flex min-h-full w-full flex-col items-center justify-center'>
           {isLoading ? (
             <Loading />
           ) : (
-            <MultipleLineControlChart groupedAnalysisData={analyticsGroupData} />
+            <MultipleLineControlChart groupedAnalysisData={analyticsGroupData ?? []} />
           )}
         </div>
       </div>

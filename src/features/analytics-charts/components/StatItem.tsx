@@ -8,9 +8,9 @@ const StatItem: React.FC<StatItemProps> = ({ label, value, formatStatValue: form
   }, [value, formatter])
 
   return (
-    <div className='flex flex-row justify-start md:flex-col'>
+    <div className='flex flex-col text-[12px]'>
       <span>{label}:</span>
-      <span className='text-textPrimary'>{displayValue}</span>
+      <span className='text-[10px] text-textPrimary'>{displayValue}</span>
     </div>
   )
 }

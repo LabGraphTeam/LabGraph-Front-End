@@ -27,6 +27,7 @@ export interface ChartEntry {
   [key: `rules${number}`]: string
   [key: `mean${number}`]: number
   [key: `sd${number}`]: number
+  [key: `unit${number}`]: string
 }
 
 export interface MeanStdDevValueData {

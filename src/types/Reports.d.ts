@@ -1,22 +1,6 @@
-import { AnalyticData } from '@/types/Chart'
-import { DateSelectorProps } from '@/types/DateSelectorProps'
-
-export interface ReportsHeaderProps {
-  analyticsType: string
-  dataFetched?: AnalyticData[]
-}
 
 export interface UseReportsDataProps {
   url: string
-}
-
-export interface ReportsControlsProps extends DateSelectorProps {
-  analyticsType: string
-  onAnalyticsTypeChange: (value: string) => void
-  dataFetched: any
-  dateSelectorProps: DateSelectorProps
-  reportMonth?: string
-  reportYear?: number
 }
 
 export interface AnalyticsTypeSelectorProps {

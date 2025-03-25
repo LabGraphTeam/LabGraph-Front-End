@@ -18,7 +18,7 @@ const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ onLogout }) => {
           <span className='absolute bottom-0 left-1/2 h-0.5 w-0 bg-primary transition-all duration-300 ease-in-out group-hover:left-0 group-hover:w-full' />
         </Link>
       ))}
-      <span className='hidden lg:flex'>
+      <span className='hidden md:flex'>
         <ThemeToggle />
       </span>
       <div className='border-l border-border pl-2'>

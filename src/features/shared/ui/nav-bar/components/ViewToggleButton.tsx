@@ -6,7 +6,7 @@ const ViewToggleButton = () => {
 
   return (
     <button
-      className='flex items-center gap-2 rounded-full p-2 text-textPrimary'
+      className='mt-1 flex items-center rounded-full text-textPrimary'
       onClick={toggleView}
       title={`${viewMode === 'single' ? 'Switch to' : 'Back to'} ${viewMode === 'single' ? 'multi line' : 'line'}`}
     >

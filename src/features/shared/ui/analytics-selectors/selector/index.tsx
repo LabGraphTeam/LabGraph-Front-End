@@ -23,19 +23,17 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
 
   const { dateValues, combinedDateAndHandlersProps } = useDateSelector()
 
-  const analyticsEndPointProps = {
-    analyticsType,
-    analyticsName,
-    analyticsLevel,
-    analyticsMeasurementPeriod: {
-      ...dateValues
+  const analyticsApiUrl = useMemo(() => {
+    const analyticsEndPointProps = {
+      analyticsType,
+      analyticsName,
+      analyticsLevel,
+      analyticsMeasurementPeriod: {
+        ...dateValues
+      }
     }
-  }
-
-  const analyticsApiUrl = useMemo(
-    () => buildAnalyticsEndpoint(analyticsEndPointProps),
-    [analyticsType, analyticsName, analyticsLevel, dateValues]
-  )
+    return buildAnalyticsEndpoint(analyticsEndPointProps)
+  }, [analyticsType, analyticsName, analyticsLevel, dateValues])
 
   const { data, isLoading, error } = useFetchAnalytics(analyticsApiUrl)
 
@@ -44,24 +42,22 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
       setAnalyticListData(data)
       setIsLoading(false)
     }
-  }, [data, isLoading, setAnalyticListData, setIsLoading])
+  }, [data, error, isLoading, setAnalyticListData, setIsLoading])
 
   return (
-    <div className='mt-12 grid place-content-center items-start text-textSecondary md:mt-0 md:flex md:w-full md:justify-around'>
+    <div className='mt-12 grid place-content-center items-start text-textSecondary md:mt-2 md:flex md:w-full md:justify-around'>
       {error ? <ErrorMessage message={error.toString()} /> : null}
       <DateSelector {...combinedDateAndHandlersProps} />
-      <div className='grid grid-cols-1 gap-1'>
-        <TestSelectorActions
-          analyticName={analyticsName}
-          analyticsType={analyticsType}
-          availableTestNames={availableTestNames}
-          levelOptions={levelOptions}
-          setTestLevel={setAnalyticsLevel}
-          setTestName={setAnalyticsName}
-          testLevel={analyticsLevel}
-          validationUrl={PRIVATE_ROUTES.MISC.ANALYTICS_TABLE}
-        />
-      </div>
+      <TestSelectorActions
+        analyticName={analyticsName}
+        analyticsType={analyticsType}
+        availableTestNames={availableTestNames}
+        levelOptions={levelOptions}
+        setTestLevel={setAnalyticsLevel}
+        setTestName={setAnalyticsName}
+        testLevel={analyticsLevel}
+        validationUrl={PRIVATE_ROUTES.MISC.ANALYTICS_TABLE}
+      />
     </div>
   )
 }

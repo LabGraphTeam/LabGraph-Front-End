@@ -70,6 +70,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
           entry[`rules${levelNum}`] = values.rules ?? ''
           entry[`mean${levelNum}`] = useOwnValues ? ownMean : mean
           entry[`sd${levelNum}`] = useOwnValues ? ownSd : standardDeviation
+          entry[`unit${levelNum}`] = values.unit_value
         }
       }
 

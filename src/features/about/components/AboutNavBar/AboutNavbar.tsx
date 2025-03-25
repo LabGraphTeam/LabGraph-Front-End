@@ -31,7 +31,7 @@ const AboutNavbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className='hidden items-center gap-6 lg:flex'>
-            <ul className='sm:text-sms flex items-center space-x-6 text-sm'>
+            <ul className='flex items-center space-x-6 text-sm'>
               {NAVIGATION_ITEMS.map((item) => (
                 <li key={item.id}>
                   <button

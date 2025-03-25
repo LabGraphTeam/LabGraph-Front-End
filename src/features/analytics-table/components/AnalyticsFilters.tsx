@@ -15,7 +15,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   filters
 }) => {
   return (
-    <div className='mt-32 text-[10px] md:mb-4 md:mt-40 md:text-xs'>
+    <div className='mt-28 text-[10px] md:mb-4 md:mt-40 md:text-xs'>
       <div className='mt-24 flex flex-col items-start justify-between font-light md:flex-row'>
         <DateSelector {...dateSelector} />
         <div className='relative mt-2 flex flex-row items-center gap-2 rounded-md border border-borderColor p-4 md:mt-0'>
@@ -23,7 +23,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             Filters & Actions
           </div>
           <label
-            className='md-gap-2 flex items-center gap-1 whitespace-nowrap text-textPrimary'
+            className='flex items-center gap-1 whitespace-nowrap text-textPrimary'
             htmlFor='tests'
           >
             <span className=''>Test:</span>{' '}
@@ -42,7 +42,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
           </label>
 
           <label
-            className='md-gap-2 mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
+            className='mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
             htmlFor='level'
           >
             <span className=''>Level:</span>{' '}
@@ -63,12 +63,12 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             </select>
           </label>
           <label
-            className='md-gap-2 mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
+            className='mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
             htmlFor='validation-status'
           >
             <span>Status filter:</span>{' '}
             <select
-              className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
+              className='rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 focus:ring-borderColor md:px-2 md:py-1 md:text-xs'
               id='validation-status'
               onChange={(e) => {
                 setUnValidatedFilter(() => e.target.value == 'true')

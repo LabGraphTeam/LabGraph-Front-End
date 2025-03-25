@@ -8,7 +8,7 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
   if (!active || !payload?.length) return null
 
   return (
-    <div className='shadow-shadow/20 animate-in fade-in zoom-in-95 rounded-lg border border-border bg-background p-3 text-xs text-textPrimary shadow-lg backdrop-blur-sm transition-all duration-200'>
+    <div className='shadow-shadow/20 scale-95 gap-2 rounded-lg border border-border bg-background p-2 text-[10px] text-textPrimary shadow-lg transition-all duration-200 md:text-[12px]'>
       {payload.map((item) => {
         const data = item.payload as PayloadData
         return (
@@ -18,16 +18,16 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
           >
             <div className='mb-2 flex items-center gap-2'>
               <div
-                className='ring-border/30 size-3 rounded-full ring-1'
+                className='ring-border/30 size-2 rounded-full ring-1'
                 style={{
                   backgroundColor: getColorByLevel(data.level)
                 }}
               />
-              <span className='font-medium tracking-wide'>{data.level.toUpperCase()}</span>
+              <span className='font-light tracking-wide'>{data.level.toUpperCase()}</span>
             </div>
 
-            <div className='text-[8px]'>
-              <DataItem label='Test Name:' value={returnFullNameByTest(data.name)} />
+            <div className='text-[12px]'>
+              <DataItem label='Analyte Name:' value={returnFullNameByTest(data.name)} />
               <DataItem label='Date of Analysis:' value={data.date} />
               <DataItem
                 label='Value of Analysis:'
@@ -52,8 +52,8 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
 
 const DataItem = ({ label, value }: { label: string; value: string }) => (
   <div className='flex flex-col'>
-    <span className='text-xs text-textPrimary'>{label}</span>
-    <span className='font-extralight'>{value}</span>
+    <span className='text-[12px] text-textPrimary'>{label}</span>
+    <span className='text-[10px]'>{value}</span>
   </div>
 )
 

@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         <div className='flex h-20 items-center justify-between sm:h-32'>
           <NavLogo
-            className='sm:w-18 mt-2 w-12 italic opacity-100 md:w-20 lg:w-24'
+            className='mt-2 w-12 italic opacity-100 md:w-20'
             h1Style='hidden mt-[1px] text-xs font-semibold italic text-textPrimary opacity-95 sm:text-regular md:text-regular'
             h2Style='hidden text-[5px] text-textPrimary italic opacity-70 md:text-[8px]'
           />

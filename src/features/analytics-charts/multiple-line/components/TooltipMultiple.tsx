@@ -32,23 +32,23 @@ const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) 
           const nameKey = `name${dataKeyIndex}`
           const meanKey = `mean${dataKeyIndex}`
           const sdKey = `sd${dataKeyIndex}`
+          const unitKey = `unit${dataKeyIndex}`
 
           if (data[valueKey]) {
             return (
               <div className='border-border' key={`tooltip-${id}-${level}`}>
                 <div className='flex items-center gap-2'>
-                  <div
-                    className='size-2.5 rounded-full'
-                    style={{ backgroundColor: entry.stroke }}
-                  />
-                  <span className='font-medium'>{data[level].toUpperCase()}</span>
+                  <div className='size-2 rounded-full' style={{ backgroundColor: entry.stroke }} />
+                  <span className='text-[10px] font-extralight text-textPrimary'>
+                    {data[level].toUpperCase()}
+                  </span>
                 </div>
-                <p>Date: {data[date]}</p>
-                <p>Test: {data[nameKey]}</p>
-                <p>Value: {data[rawValueKey]}</p>
+                <p>Date of Analysis: {data[date]}</p>
+                <p>Analyte: {data[nameKey]}</p>
                 <p>Lot: {data[levelLotKey]}</p>
-                <p>Mean: {data[meanKey].toFixed(2)}</p>
-                <p>Sd: {data[sdKey].toFixed(2)}</p>
+                <p>Value: {data[rawValueKey] + '-' + data[unitKey]}</p>
+                <p>Mean: {data[meanKey].toFixed(2) + '-' + data[unitKey]}</p>
+                <p>StandardDeviation: {data[sdKey].toFixed(2) + '-' + data[unitKey]}</p>
               </div>
             )
           }

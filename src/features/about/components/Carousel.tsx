@@ -80,12 +80,14 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000000 
       >
         {images.map((image, index) => (
           <div className='relative h-full min-w-full shrink-0' key={image.id}>
-            {!imagesLoaded[index] ? <div className='absolute inset-0 animate-pulse bg-neutral-200' /> : null}
+            {!imagesLoaded[index] ? (
+              <div className='absolute inset-0 animate-pulse bg-neutral-200' />
+            ) : null}
             <Image
               alt={image.alt}
               className={`object-cover transition-all duration-700 ${
                 !imagesLoaded[index] ? 'scale-100 blur-xl' : 'scale-100 blur-0'
-              } filter brightness-85 contrast-100 grayscale-[50%] hover:grayscale-[0%]`}
+              } brightness-75 contrast-100 grayscale-[50%] filter hover:grayscale-[0%]`}
               fill
               onLoad={() => {
                 setImagesLoaded((prev) => ({ ...prev, [index]: true }))
@@ -99,14 +101,14 @@ const Carousel: React.FC<CarouselProps> = ({ images, autoPlayInterval = 5000000 
 
       <button
         aria-label='Previous slide'
-        className='absolute left-2 top-1/2 bg-black/30  -translate-y-1/2 rounded-full  p-2 text-white opacity-0 transition-all duration-300 hover:scale-110 group-hover:opacity-100'
+        className='absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white opacity-0 transition-all duration-300 hover:scale-110 group-hover:opacity-100'
         onClick={previousSlide}
       >
         <ChevronLeft className='size-6' />
       </button>
       <button
         aria-label='Next slide'
-        className='absolute right-2 bg-black/30 top-1/2 -translate-y-1/2 rounded-full p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100'
+        className='absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/30 p-2 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100'
         onClick={nextSlide}
       >
         <ChevronRight className='size-6' />

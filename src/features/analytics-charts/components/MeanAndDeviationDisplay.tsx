@@ -16,16 +16,16 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   )
 
   return (
-    <div className='flex w-full flex-col text-[10px] font-light text-textPrimary'>
-      <StatItem formatStatValue={formatWithUnit} label='Mean (Reference)' value={mean} />
-      <StatItem formatStatValue={formatWithUnit} label='Deviation (Reference)' value={sd} />
-      <StatItem formatStatValue={formatWithUnit} label='Calculated Mean' value={ownMean} />
-      <StatItem formatStatValue={formatWithUnit} label='Calculated Deviation' value={ownSd} />
-      {ownMean !== undefined && ownSd !== undefined ? <StatItem
+    <div className='flex w-full flex-col text-textPrimary'>
+      <StatItem formatStatValue={formatWithUnit} label='Mean' value={mean} />
+      <StatItem formatStatValue={formatWithUnit} label='Standard Deviation' value={sd} />
+      {ownMean !== undefined && ownSd !== undefined ? (
+        <StatItem
           formatStatValue={() => `${calculateCV(ownMean, ownSd)} (%)`}
           label='Calculated CV'
           value={ownMean}
-        /> : null}
+        />
+      ) : null}
     </div>
   )
 }

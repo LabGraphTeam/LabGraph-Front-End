@@ -7,14 +7,14 @@ import React, { useMemo } from 'react'
 const GraphWrapper: React.FC<SingleLineGraphProps> = ({ testList, analyticsType, size }) => {
   const { viewMode } = useAnalyticsGraph()
 
-  const graphProps = { size, testList, analyticsType }
-
-  const SingleGraph = useMemo(() => <LabGraph {...graphProps} />, [testList, analyticsType, size])
-
-  const MultiGraph = useMemo(
-    () => <MultipleLineLabGraph {...graphProps} />,
-    [testList, analyticsType, size]
+  const graphProps = useMemo(
+    () => ({ size, testList, analyticsType }),
+    [size, testList, analyticsType]
   )
+
+  const SingleGraph = useMemo(() => <LabGraph {...graphProps} />, [graphProps])
+
+  const MultiGraph = useMemo(() => <MultipleLineLabGraph {...graphProps} />, [graphProps])
 
   return <div>{viewMode === 'single' ? SingleGraph : MultiGraph}</div>
 }

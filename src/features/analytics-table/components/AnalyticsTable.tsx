@@ -11,7 +11,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
 }) => {
   return (
     <>
-      <table className='hidden rounded-md border border-borderColor bg-surface p-8 shadow-md shadow-shadow md:table md:w-full'>
+      <table className='hidden rounded-md border border-borderColor bg-surface shadow-md shadow-shadow md:table md:w-full'>
         <caption className='mb-1 text-[10px] text-primary'>
           Table 1.1: Interactive Analytics Results with Filtering Options
         </caption>
@@ -19,7 +19,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
           <tr className=''>
             {tableHeaders.map((header) => (
               <th
-                className='border-b border-border px-2 py-1 text-left text-[8px] font-semibold uppercase tracking-wider text-textSecondary md:text-[9px]'
+                className='border-b border-border px-1.5 py-0.5 text-left text-[8px] font-semibold uppercase tracking-wider text-textSecondary md:text-[9px]'
                 key={header.id}
               >
                 {header.name}

@@ -18,7 +18,7 @@ const AnalyticsTableIndex = () => {
   const [analyticData, setAnalyticData] = useState<AnalyticWithValidatedUser[]>([])
   const [totalPages, setTotalPages] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState(0)
-  const [itemsPerPage, setItemsPerPage] = useState(6)
+  const [itemsPerPage, setItemsPerPage] = useState(7)
   const [analyticsLevel, setAnalyticsLevel] = useState(0)
   const [isFiltered, setIsFiltered] = useState(false)
   const { analyticsOptions, levelOptions, filters } = useAnalyticsOptions(analyticsType)
@@ -68,10 +68,16 @@ const AnalyticsTableIndex = () => {
     useFetchAnalyticsTableProps
   )
 
+  const getItemsPerPage = (screenWidth: number) => {
+    if (screenWidth >= 1800) return 10
+    if (screenWidth < 768) return 6
+    return 7
+  }
+
   useEffect(() => {
     if (!error && !isLoading && data && data?.content?.length > 0) {
       setTotalPages(data.page.totalPages)
-      setItemsPerPage(width >= 1800 ? 10 : 6)
+      setItemsPerPage(getItemsPerPage(width))
       setAnalyticData(data.content)
     }
 

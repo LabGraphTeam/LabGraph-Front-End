@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useReportsData from '@/features/analytics-reports/hooks/useReportsData'
 import {
   formatDateWithTime,
@@ -607,7 +608,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   return (
     <button
       aria-label='Export PDF'
-      className="flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-sm text-textSecondary shadow-sm shadow-shadow hover:scale-105"
+      className='flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-sm text-textSecondary shadow-sm shadow-shadow hover:scale-105'
       disabled={isGenerating}
       onClick={generatePdf}
     >
