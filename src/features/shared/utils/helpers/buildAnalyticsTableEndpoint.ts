@@ -1,7 +1,7 @@
-import { formatDateWithTime, formatEndDateWithTime } from "@/features/shared/ui/date-selectors/constants/formatDateWithTime"
+import { formatDateWithTime, formatEndDateWithTime } from "@/shared/ui/date-selectors/constants/formatDateWithTime"
 import BuildAnalyticsEndpointProps from "@/types/BuildAnalyticsEndpointProps"
 
-export const buildAnalyticsValidationEndpoint = (props: BuildAnalyticsEndpointProps): string => {
+export const buildAnalyticsValidationWithFiltersEndpoint = (props: BuildAnalyticsEndpointProps): string => {
 
     const { analyticsType, analyticsLevel: level, analyticsMeasurementPeriod: date, itemsPerPage, currentPage, isFiltered, unValidatedFilter } = props
 

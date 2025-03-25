@@ -1,5 +1,5 @@
-import AboutUsPage from './about-us';
+import AboutUsPage from '@/pages/about-us'
 
 export default function Home() {
-  return AboutUsPage();
+  return AboutUsPage()
 }

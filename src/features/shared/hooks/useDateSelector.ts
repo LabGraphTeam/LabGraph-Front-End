@@ -1,27 +1,22 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 export default function useDateSelector() {
 
-  const firstDayOfMonth = useMemo(() => {
-    const date = new Date();
-    date.setDate(1);
-    return date;
-  }, []);
+  const today = new Date();
 
-  const today = useMemo(() => new Date(), []);
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
 
-  const startDate = useMemo(() => ({
+  const startDate = {
     day: firstDayOfMonth.getDate(),
     month: firstDayOfMonth.getMonth() + 1,
     year: firstDayOfMonth.getFullYear(),
-  }), [firstDayOfMonth]);
+  };
 
-  const endDate = useMemo(() => ({
+  const endDate = {
     day: today.getDate(),
     month: today.getMonth() + 1,
     year: today.getFullYear(),
-  }), [today]);
-
+  };
 
   const [startDay, setStartDay] = useState<number>(startDate.day);
   const [startMonth, setStartMonth] = useState<number>(startDate.month);
@@ -107,8 +102,6 @@ export default function useDateSelector() {
     setEndDay(validDay);
   };
 
-
-
   const dateValues = {
     startDay,
     startMonth,
@@ -117,7 +110,6 @@ export default function useDateSelector() {
     endMonth,
     endYear,
   }
-
 
   const dateHandlers = {
     handleStartDayChange,
@@ -128,18 +120,19 @@ export default function useDateSelector() {
     handleEndYearChange,
   }
 
+  const combinedDateAndHandlersProps = {
+    ...dateValues,
+    ...dateHandlers
+  }
+
+  const combinedDateProps = {
+    startDate,
+    endDate
+  }
+
   return {
-    dateValues,
-    dateHandlers,
-    startDate: {
-      day: startDate.day,
-      month: startDate.month,
-      year: startDate.year
-    },
-    endDate: {
-      day: endDate.day,
-      month: endDate.month,
-      year: endDate.year
-    }
+    combinedDateAndHandlersProps,
+    combinedDateProps,
+    dateValues
   }
 }

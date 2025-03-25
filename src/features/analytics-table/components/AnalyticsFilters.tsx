@@ -1,4 +1,4 @@
-import DateSelector from '@/features/shared/ui/date-selectors'
+import DateSelector from '@/shared/ui/date-selectors'
 import { AnalyticsFiltersProps } from '@/types/AnalyticsTable'
 import React from 'react'
 
@@ -15,7 +15,7 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   filters
 }) => {
   return (
-    <div className='ml-2 mt-32 text-[10px] md:mb-4 md:mt-40 md:text-xs'>
+    <div className='mt-28 text-[10px] md:mb-4 md:mt-40 md:text-xs'>
       <div className='mt-24 flex flex-col items-start justify-between font-light md:flex-row'>
         <DateSelector {...dateSelector} />
         <div className='relative mt-2 flex flex-row items-center gap-2 rounded-md border border-borderColor p-4 md:mt-0'>
@@ -23,15 +23,15 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             Filters & Actions
           </div>
           <label
+            className='flex items-center gap-1 whitespace-nowrap text-textPrimary'
             htmlFor='tests'
-            className='md-gap-2 flex items-center gap-1 whitespace-nowrap text-textPrimary'
           >
             <span className=''>Test:</span>{' '}
             <select
-              id='tests'
-              value={analyticsType}
-              onChange={(e) => setAnalyticsType(e.target.value)}
               className='focus:ring-borderColor/30 rounded border border-borderColor bg-background text-textPrimary focus:outline-none focus:ring-2 md:px-2 md:py-1'
+              id='tests'
+              onChange={(e) => setAnalyticsType(e.target.value)}
+              value={analyticsType}
             >
               {analyticsOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -42,18 +42,18 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
           </label>
 
           <label
+            className='mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
             htmlFor='level'
-            className='md-gap-2 mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
           >
             <span className=''>Level:</span>{' '}
             <select
+              className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
               id='level'
-              value={level}
               onChange={(e) => {
                 setLevel(Number(e.target.value))
                 setFiltered(() => e.target.value !== '0')
               }}
-              className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
+              value={level}
             >
               {levelOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -63,16 +63,16 @@ const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
             </select>
           </label>
           <label
+            className='mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
             htmlFor='validation-status'
-            className='md-gap-2 mt-1 flex items-center gap-1 whitespace-nowrap text-textPrimary md:mt-0'
           >
             <span>Status filter:</span>{' '}
             <select
+              className='rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 focus:ring-borderColor md:px-2 md:py-1 md:text-xs'
               id='validation-status'
               onChange={(e) => {
                 setUnValidatedFilter(() => e.target.value == 'true')
               }}
-              className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[10px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
             >
               {filters.map((filter) => (
                 <option key={String(filter.value)} value={String(filter.value)}>

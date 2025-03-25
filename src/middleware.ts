@@ -1,5 +1,5 @@
+import { LOGIN_ROUTE, SIGNUP_ROUTE } from '@/shared/utils/constants/publicRoutes'
 import { NextResponse, type NextRequest } from 'next/server'
-import { LOGIN_ROUTE, SIGNUP_ROUTE } from './features/shared/utils/constants/publicRoutes'
 
 interface TokenPayload {
   exp: number

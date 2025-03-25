@@ -1,8 +1,8 @@
-import IntervalDates from './IntervalDates'
+import IntervalDates from '@/types/IntervalDates'
 
 export default interface BuildAnalyticsEndpointProps {
   analyticsType: string
-  analyticName: string
+  analyticsName: string
   analyticsLevel?: number
   analyticsMeasurementPeriod: IntervalDates
   isFiltered?: boolean

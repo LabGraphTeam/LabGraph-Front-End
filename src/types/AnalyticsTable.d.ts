@@ -27,7 +27,6 @@ export interface AnalyticsDataReturn {
   validateAnalytics: (analyticsId: number) => Promise<void>
   updateDescription: (analyticsId: number, description: string) => Promise<void>
 
-  error: Error | string | null
 }
 
 export interface AnalyticsFiltersProps {
@@ -57,7 +56,7 @@ export interface PageButtonsProps {
   setCurrentPage: (setter: (prev: number) => number) => void
 }
 
-export interface UseAnalyticsDataProps {
+export interface UseFetchAnalyticsTableProps {
 
   endPoint: string
   analyticsType: string

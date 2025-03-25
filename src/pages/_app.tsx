@@ -1,6 +1,6 @@
 import { GraphProvider } from '@/features/analytics-charts/contexts/AnalyticsGraphContext'
 import { TokenProvider } from '@/features/authentication/contexts/TokenContext'
-import ErrorBoundary from '@/features/shared/utils/components/error-message/ErrorBoundary'
+import ErrorBoundary from '@/shared/utils/components/error-message/ErrorBoundary'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { IBM_Plex_Sans } from 'next/font/google'
@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <GraphProvider>
         <main className={IBM.className}>
           <ErrorBoundary>
-          <Component {...pageProps} />
+            <Component {...pageProps} />
           </ErrorBoundary>
         </main>
       </GraphProvider>

@@ -1,5 +1,5 @@
-import { teamMembers } from '../constants/teamMembers'
-import { TeamMemberCard } from './Cards'
+import { TeamMemberCard } from '@/features/about/components/Cards'
+import { teamMembers } from '@/features/about/constants/teamMembers'
 
 const Team = () => {
   return (

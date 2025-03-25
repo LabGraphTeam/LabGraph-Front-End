@@ -1,4 +1,4 @@
-import filter from './filter';
+import filter from "@/features/analytics-charts/utils/filter";
 
 const normalizeValue = (value: number, mean: number, sd: number) => {
   return (filter(value, mean, sd) - mean) / (sd || 1);

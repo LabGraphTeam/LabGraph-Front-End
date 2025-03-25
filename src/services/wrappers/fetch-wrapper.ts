@@ -1,4 +1,4 @@
-import { FetchOptions } from '@/services/types/FetchOptions'
+import { FetchOptions } from '@/types/FetchOptions'
 
 export const fetchWrapper = async (options: FetchOptions) => {
   const { route, method = 'GET', body, headers = {}, isLogin = false } = options

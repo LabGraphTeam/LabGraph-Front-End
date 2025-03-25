@@ -1,7 +1,7 @@
 import { CSV_MINIMUM_COLUMNS } from '@/features/analytics-upload-files/constants/fileProcessing'
+import { isValidValue, cleanValue } from '@/features/analytics-upload-files/utils/fileProcessors'
 import { FileProcessingResult } from '@/types/FileProcessing'
 import { ProcessedData } from '@/types/UpdateResults'
-import { cleanValue, isValidValue } from './fileProcessors'
 
 export const processCsvFile = async (file: File): Promise<FileProcessingResult> => {
   const arrayValues: ProcessedData[] = []
@@ -26,7 +26,7 @@ export const processCsvFile = async (file: File): Promise<FileProcessingResult> 
       const entryData: ProcessedData = {
         date: cleanValue(formattedDate),
         level_lot: cleanValue(data[55]),
-        test_lot: 'nao se aplica',
+        test_lot: '-',
         level: cleanValue(data[3]),
         unit_value: cleanValue(data[51]),
         name: cleanValue(data[1]),

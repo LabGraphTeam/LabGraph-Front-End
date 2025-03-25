@@ -1,12 +1,12 @@
-import { AnalyticsDataReturn, PaginatedAnalyticsResponse, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
-import { buildAnalyticsValidationEndpoint } from '../../shared/utils/helpers/buildAnalyticsValidationEndpoint'
-import { useFetchSWR } from '@/features/shared/hooks/useFetchSWR'
+import { AnalyticsDataReturn, PaginatedAnalyticsResponse, UseFetchAnalyticsTableProps } from '@/types/AnalyticsTable'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { useToken } from '@/features/authentication/contexts/TokenContext'
+import { buildAnalyticsValidationEndpoint } from '@/shared/utils/helpers/buildAnalyticsValidationEndpoint'
 
 export const useFetchAnalyticsTable = ({
-  analyticsType, endPoint, analyticData, setAnalyticData
-}: UseAnalyticsDataProps): AnalyticsDataReturn => {
+  analyticsType, endPoint
+}: UseFetchAnalyticsTableProps): AnalyticsDataReturn => {
   const { token } = useToken();
 
   const {
@@ -35,14 +35,14 @@ export const useFetchAnalyticsTable = ({
         }
       });
 
-      const updatedData = analyticData.map(item =>
-        item.id === analyticsId
-          ? { ...item, ...response }
-          : item
-      )
-
-      setAnalyticData(updatedData);
-      mutate();
+      if (data) {
+        const updatedContent = data.content.map(item =>
+          item.id === analyticsId
+            ? { ...item, ...response }
+            : item
+        );
+        mutate({ ...data, content: updatedContent }, false);
+      }
     } catch (error) {
       console.error("Error validating analytics:", error);
     }
@@ -64,14 +64,14 @@ export const useFetchAnalyticsTable = ({
         body: JSON.stringify({ description })
       });
 
-      const updatedData = analyticData.map(item =>
-        item.id === analyticsId
-          ? { ...item, ...response }
-          : item
-      )
-
-      setAnalyticData(updatedData);
-      mutate();
+      if (data) {
+        const updatedContent = data.content.map(item =>
+          item.id === analyticsId
+            ? { ...item, ...response }
+            : item
+        );
+        mutate({ ...data, content: updatedContent }, false);
+      }
     } catch (error) {
       console.error("Error updating description:", error);
     }

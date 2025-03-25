@@ -1,4 +1,4 @@
-import { useFetchSWR } from '@/features/shared/hooks/useFetchSWR'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
 import { PaginatedAnalyticsResponse } from '@/types/AnalyticsTable'
 import { UseReportsDataProps } from '@/types/Reports'
 

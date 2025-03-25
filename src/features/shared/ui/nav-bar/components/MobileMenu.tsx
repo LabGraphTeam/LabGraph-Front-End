@@ -1,7 +1,7 @@
+import ViewToggleButton from '@/shared/ui/nav-bar/components/ViewToggleButton'
+import navLinks from '@/shared/ui/nav-bar/constants/navLinks'
 import { MobileMenuProps } from '@/types/NavigationBar'
 import Link from 'next/link'
-import navLinks from '../constants/navLinks'
-import ViewToggleButton from './ViewToggleButton'
 
 const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
   <div
@@ -13,10 +13,10 @@ const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
       {[...navLinks, { id: 'exit', text: 'EXIT', url: '/auth/login', onClick: onLogout }].map(
         (link) => (
           <Link
-            key={link.id}
-            href={link.url}
-            onClick={link.onClick}
             className='text-sm font-normal text-textSecondary hover:text-primary'
+            href={link.url}
+            key={link.id}
+            onClick={link.onClick}
           >
             {link.text}
           </Link>

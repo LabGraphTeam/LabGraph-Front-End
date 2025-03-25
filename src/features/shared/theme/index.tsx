@@ -1,20 +1,20 @@
+import useTheme from '@/shared/hooks/useTheme'
 import { CloudSun, Moon } from 'lucide-react'
-import useTheme from '../hooks/useTheme'
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme()
 
   return (
     <button
-      onClick={toggleTheme}
-      className='rounded-full p-2 hover:bg-surface focus:outline-none'
       aria-label='Toggle theme'
+      className='rounded-full p-2 hover:bg-surface focus:outline-none'
+      onClick={toggleTheme}
       title='Toggle theme'
     >
       {theme === 'light' ? (
-        <CloudSun strokeWidth='1.5' className='size-7 text-textPrimary opacity-80' />
+        <CloudSun className='size-7 text-textPrimary opacity-80' strokeWidth='1.5' />
       ) : (
-        <Moon strokeWidth='1.5' className='size-7 text-textPrimary opacity-90' />
+        <Moon className='size-7 text-textPrimary opacity-90' strokeWidth='1.5' />
       )}
     </button>
   )

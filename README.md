@@ -1,26 +1,24 @@
-# LabGraph Project
+# LabGraph Front-End Project
 
-A web application for laboratory quality control management implementing Westgard rules for statistical quality control (QC) in clinical laboratories.
+A comprehensive web application for laboratory quality control management implementing Westgard rules for statistical quality control (QC) in clinical laboratories.
 
 ## Project Structure
 
 ```bash
 ├── public/          # Static files
 ├── src/
-│   ├── features/    # Reusable features components
-│   │   ├── analytics-table/
-│   │   ├── authentication/
-│   │   ├── charts/
-│   │   ├── features/
-│   │   ├── reports/
-│   │   └── shared/
-│   ├── pages/       # Routes
-│   │   ├── api/
-│   │   ├── auth/
-│   │   ├── charts/
-│   │   └── misc/
-│   ├── services/    # External services
-│   └── styles/      # Global styles
+│   ├── features/    # Feature-based component organization
+│   │   ├── about/                  # About page components & constants
+│   │   ├── analytics-charts/       # Chart-related components and utilities
+│   │   ├── analytics-upload-files/ # File upload and processing
+│   │   ├── authentication/         # Auth components and contexts
+│   │   ├── dynamic-pages/          # Dynamically generated page components
+│   │   └── shared/                 # Reusable components, hooks, and utilities
+│   ├── pages/       # Next.js pages and API routes
+│   │   └── api/     # Backend API endpoints
+│   ├── services/    # External services and API wrappers
+│   ├── styles/      # Global styles and theme configuration
+│   └── types/       # TypeScript type definitions
 └── config files     # Configuration files
 ```
 
@@ -28,62 +26,99 @@ A web application for laboratory quality control management implementing Westgar
 
 - **Quality Control**
 
-  - Westgard multi-rules implementation
-  - Real-time violation detection
-  - Statistical process control (SPC)
+  - Implementation of Westgard multi-rules for laboratory QC
+  - Statistical process control (SPC) for monitoring lab test performance
+  - Real-time quality violation detection
 
-- **Visualization**
+- **Data Visualization**
 
-  - Levey-Jennings charts
-  - Interactive dashboards for Hematology, Coagulation, and Biochemistry
-  - Dark/Light mode support
+  - Interactive Levey-Jennings charts for tracking QC performance
+  - Specialized dashboards for Hematology, Biochemistry, and Coagulation
+  - Responsive dark/light theme support
 
-- **Analytics**
-  - QC data analysis with filtering
-  - Statistical metrics
-  - Email alerts for violations
+- **File Processing**
+
+  - CSV data import and validation
+  - Automated data processing and standardization
+  - Test result trend analysis
+
+- **User Experience**
+  - Modern, responsive interface
+  - Role-based access control
+  - Comprehensive documentation and FAQ
+
+## Technologies
+
+- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
+- **Charting**: Custom visualization components (recharts.js)
+- **State Management**: React Context API, SWR for data fetching
+- **Styling**: Tailwind with custom theming
 
 ## Getting Started
 
 ### Prerequisites
 
 - Node.js 16.x or higher
-- npm
-- Docker
+- npm or yarn
+- Access to backend API (separate repository)
 
-### Quick Start
+### Installation
 
 ```bash
-git clone https://github.com/LeonardoMeireles55/LabGraph-Front-End.git
+# Clone the repository
+git clone https://github.com/LabGraphTeam/LabGraph-Front-End.git
 cd LabGraph-Front-End
-npm install
+
+# Install dependencies
+npm ci
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your configuration
+
+# Start development server
 npm run dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000)
+Visit [http://localhost:3000](http://localhost:3000) to see the application.
 
-### Docker
+### Environment Variables
 
-Development: Execute `docker compose --profile dev up -d --remove-orphans`
+```
+NEXT_PUBLIC_API_BASE_URL=https://api.example.com
 
-Prod: Execute `docker compose --profile prod up -d`
+NEXT_PUBLIC_API_BASE_URL_REPORTS=date-range?
+
+NEXT_PUBLIC_API_BASE_URL_RESULTS_GROUPED=grouped-by-level?name=
+
+NEXT_PUBLIC_APP_VERSION=0.9.5
+
+```
+
+## Deployment
 
 ### Production Build
 
 ```bash
 npm run build
-node ./.next/standalone/server.js
-
+npm run start
 ```
 
-## Contributing
+### Docker
 
-1. Fork the repository
-2. Create feature/[...] or fix/[...] branch
-3. Submit pull request
+```bash
+# Development
+docker compose --profile dev up -d --remove-orphans
+
+# Production
+docker compose --profile prod up -d
+```
+
+## Team
+
+- Leonardo Meireles - Full Stack Developer
+- Mathew Vieira - Full Stack Developer & Designer
 
 ## License
 
 Licensed under GNU General Public License v3.0 (GPL-3.0)
-
-![image](https://github.com/user-attachments/assets/89193291-fe53-488e-b652-4094d319f281)

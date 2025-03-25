@@ -7,8 +7,8 @@ export interface LevelOptions {
 export interface CommonTestSelectorProps {
   availableTestNames: string[]
   analyticsType: string
-  analyticName: string
-  analyticLevel: number
+  defaultAnalyticsName: string
+  defaultAnalyticsLevel: number
   setAnalyticListData: (data: AnalyticWithStatsData) => void
   setIsLoading: (data: boolean) => void
 }
@@ -41,9 +41,10 @@ export interface TestSelectorActionsProps {
   testLevel: number
   setTestLevel: (level: number) => void
   analyticsType: string
-  googleSheetUrl: string
+  validationUrl: string
+  isMultiSelect?: boolean
 }
 
-export interface GoogleSheetLinkProps {
-  googleSheetUrl?: string
+export interface ValidationButtonLinkProps {
+  validationUrl: string
 }

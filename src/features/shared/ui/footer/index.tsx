@@ -11,27 +11,27 @@ const Footer: FC = () => {
         </div>
         <span>
           <Link
-            href='https://github.com/LeonardoMeireles55'
-            target='_blank'
-            rel='noopener noreferrer'
             className='hover:opacity-80'
+            href='https://github.com/LeonardoMeireles55'
+            rel='noopener noreferrer'
+            target='_blank'
           >
             <Github
+              className='ml-4 inline-block rounded-full fill-background p-0'
               size={24}
               strokeWidth={1.5}
-              className='ml-4 inline-block rounded-full fill-background p-0'
             />
           </Link>
           <Link
-            href='https://www.linkedin.com/in/leomeireles55'
-            target='_blank'
-            rel='noopener noreferrer'
             className='hover:opacity-80'
+            href='https://www.linkedin.com/in/leomeireles55'
+            rel='noopener noreferrer'
+            target='_blank'
           >
             <Linkedin
+              className='ml-4 inline-block rounded-full fill-background p-0'
               size={24}
               strokeWidth={1.5}
-              className='ml-4 inline-block rounded-full fill-background p-0'
             />
           </Link>
         </span>

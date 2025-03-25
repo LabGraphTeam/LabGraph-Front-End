@@ -1,22 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import useReportsData from '@/features/analytics-reports/hooks/useReportsData'
 import {
   formatDateWithTime,
   formatEndDateWithTime
-} from '@/features/shared/ui/date-selectors/constants/formatDateWithTime'
+} from '@/shared/ui/date-selectors/constants/formatDateWithTime'
+import getStatusMessage from '@/shared/utils/helpers/getStatusMessage'
 import { PdfGeneratorProps } from '@/types/PDFGenerator'
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { FileText, Loader2 } from 'lucide-react'
 import React, { useState } from 'react'
-import getStatusMessage from '../../shared/utils/helpers/getStatusMessage'
-import useReportsData from '../hooks/useReportsData'
-
-interface TestData {
-  name?: string
-  NAME?: string
-  rules?: string
-  RULES?: string
-  [key: string]: string | number | undefined
-}
 
 const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   analyticsType,
@@ -614,10 +607,10 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
 
   return (
     <button
-      onClick={generatePdf}
-      disabled={isGenerating}
-      className={`flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-sm text-textSecondary shadow-sm shadow-shadow hover:scale-105`}
       aria-label='Export PDF'
+      className='flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-sm text-textSecondary shadow-sm shadow-shadow hover:scale-105'
+      disabled={isGenerating}
+      onClick={generatePdf}
     >
       {isGenerating ? (
         <Loader2 className='mr-1 size-4 animate-spin' />

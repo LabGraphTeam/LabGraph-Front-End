@@ -1,5 +1,5 @@
-import ThemeToggle from '../../shared/theme'
-import Logo from '../../shared/ui/logo'
+import ThemeToggle from '@/shared/theme'
+import Logo from '@/shared/ui/logo'
 
 interface AuthFormContainerProps {
   children: React.ReactNode
@@ -8,6 +8,7 @@ interface AuthFormContainerProps {
 const AuthFormContainer = ({ children }: AuthFormContainerProps) => {
   return (
     <div className='flex h-screen items-center justify-center bg-background px-2'>
+      <title>LabGraph-Analytics</title>
       <div className='mx-auto w-full max-w-md rounded-xl border border-borderColor px-8 py-6 shadow-md shadow-shadow backdrop-blur-sm transition-all duration-300 ease-in-out sm:px-12 sm:py-8'>
         <div className='absolute right-4 top-4 z-50'>
           <ThemeToggle />

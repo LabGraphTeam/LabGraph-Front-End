@@ -8,11 +8,11 @@ const YearSelector: React.FC<YearSelectorProps & { fieldId?: string }> = ({
   const years = [2023, 2024, 2025]
   return (
     <select
+      className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[8px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
       id={fieldId ?? 'year-selector'}
       name={fieldId ?? 'year-selector'}
-      className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[8px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
-      value={selectedYear}
       onChange={(e) => onYearChange(+e.target.value)}
+      value={selectedYear}
     >
       {years.map((year) => (
         <option key={year} value={year}>
