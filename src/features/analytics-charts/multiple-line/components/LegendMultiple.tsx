@@ -10,7 +10,7 @@ const LegendMultiple: React.FC<LegendMultipleLinesProps> = ({
   return (
     <div className='mt-2 flex justify-center gap-4 text-xs md:text-sm'>
       {payload.map((entry: { color: string }, index: number) => (
-        <div key={`legend-${index}-${levels[index]}`} className='flex items-center gap-2'>
+        <div className='flex items-center gap-2' key={`legend-${index}-${levels[index]}`}>
           <div className='size-2.5 rounded-full' style={{ backgroundColor: entry.color }} />
           <span className='text-xs text-textPrimary md:text-sm'>{levels[index].toUpperCase()}</span>
         </div>

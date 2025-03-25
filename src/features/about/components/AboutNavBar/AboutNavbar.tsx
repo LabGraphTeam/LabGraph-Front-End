@@ -4,8 +4,8 @@ import { Menu } from 'lucide-react'
 import Link from 'next/link'
 
 import { NAVIGATION_ITEMS } from '@/features/about/constants/navigationConstants'
-import ThemeToggle from '@/features/shared/theme'
-import NavLogo from '@/features/shared/ui/nav-bar/components/NavLogo'
+import ThemeToggle from '@/shared/theme'
+import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'
 
 import styles from './AboutNavBar.module.css'
 
@@ -21,18 +21,22 @@ const AboutNavbar: React.FC = () => {
     <nav className='sticky top-0 z-50 border-b border-borderColor bg-navbar italic backdrop-blur-sm'>
       <div className='mx-auto max-w-7xl px-4'>
         <div className='flex items-center justify-between py-8'>
-          <div className='flex flex-col p-4 rounded-xl'>
-            <NavLogo className='w-12' h1Style='font-extrabold text-textPrimary opacity-95 text-xl md:text-2xl' h2Style='hidden md:block text-textPrimary opacity-70 md:text-xs'/>
+          <div className='flex flex-col rounded-xl p-4'>
+            <NavLogo
+              className='w-12'
+              h1Style='font-extrabold text-textPrimary opacity-95 text-xl md:text-2xl'
+              h2Style='hidden md:block text-textPrimary opacity-70 md:text-xs'
+            />
           </div>
 
           {/* Desktop Navigation */}
           <div className='hidden items-center gap-6 lg:flex'>
-            <ul className='flex items-center space-x-6 text-sm sm:text-sms'>
+            <ul className='sm:text-sms flex items-center space-x-6 text-sm'>
               {NAVIGATION_ITEMS.map((item) => (
                 <li key={item.id}>
                   <button
-                    onClick={() => scrollToSection(item.id)}
                     className={`${styles.aboutNavBar}`}
+                    onClick={() => scrollToSection(item.id)}
                   >
                     {item.label}
                   </button>
@@ -40,8 +44,8 @@ const AboutNavbar: React.FC = () => {
               ))}
               <li>
                 <Link
-                  href='/auth/signup'
                   className='rounded-lg bg-secondary px-4 py-2 font-light italic text-white transition-colors duration-300 hover:bg-secondaryHover'
+                  href='/auth/signup'
                 >
                   TRY DEMO
                 </Link>
@@ -55,15 +59,15 @@ const AboutNavbar: React.FC = () => {
           {/* Mobile Menu Button */}
           <div className='flex items-center gap-4 lg:hidden'>
             <Link
-              href='/auth/signup'
               className='rounded-lg bg-secondary px-3 py-1.5 text-sm font-light italic text-white transition-colors duration-300 hover:bg-secondaryHover'
+              href='/auth/signup'
             >
               DEMO
             </Link>
             <ThemeToggle />
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
               className='p-2 text-textSecondary hover:text-primary'
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <Menu size={24} />
             </button>
@@ -80,9 +84,9 @@ const AboutNavbar: React.FC = () => {
         <div className='flex flex-col space-y-4'>
           {NAVIGATION_ITEMS.map((item) => (
             <button
+              className='text-left text-sm font-normal text-textSecondary hover:text-primary'
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className='text-left text-sm font-normal text-textSecondary hover:text-primary'
             >
               {item.label}
             </button>

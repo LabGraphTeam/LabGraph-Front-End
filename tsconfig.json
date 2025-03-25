@@ -18,10 +18,29 @@
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/features/*": [
+        "features/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/shared/*": [
+        "features/shared/*"
+      ],
+      "@/types/*": [
+        "types/*"
+      ],
+      "@/services/*": [
+        "services/*"
+      ],
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/features/*/constants": [
+        "features/*/constants"
+      ],
     },
     "plugins": [
       {

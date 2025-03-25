@@ -1,9 +1,7 @@
 import { BuildAnalyticsEndpointByNameAndDateProps } from '@/types/BuildAnalyticsEndpointByNameAndDateProps'
-import {
-  formatDateWithTime,
-  formatEndDateWithTime
-} from '../../ui/date-selectors/constants/formatDateWithTime'
-import analyticNameFormatFix from './analyticNameFormatFix'
+
+import { formatDateWithTime, formatEndDateWithTime } from '@/shared/ui/date-selectors/constants/formatDateWithTime'
+import analyticNameFormatFix from '@/shared/utils/helpers/analyticNameFormatFix'
 
 const buildAnalyticsEndpointByNameAndDate = (props: BuildAnalyticsEndpointByNameAndDateProps) => {
   const { analyticName: name, analyticsMeasurementPeriod: date, analyticsType } = props

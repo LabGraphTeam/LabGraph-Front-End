@@ -1,8 +1,8 @@
+import MeanAndDeviationDisplay from '@/features/analytics-charts/components/MeanAndDeviationDisplay'
+import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
+import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
 import { PayloadData } from '@/types/Chart'
 import { TooltipProps } from 'recharts'
-import MeanAndDeviationDisplay from '../../components/MeanAndDeviationDisplay'
-import getColorByLevel from '../../utils/getColorByLevel'
-import returnFullNameByTest from '../../utils/returnFullNameByTest'
 
 const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
   if (!active || !payload?.length) return null
@@ -13,8 +13,8 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
         const data = item.payload as PayloadData
         return (
           <div
-            key={`${data.date}-${data.level}-${data.levelLot}`}
             className='mb-3 border-b border-border pb-2 last:mb-0 last:border-0 last:pb-0'
+            key={`${data.date}-${data.level}-${data.levelLot}`}
           >
             <div className='mb-2 flex items-center gap-2'>
               <div
@@ -37,9 +37,9 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
 
               <MeanAndDeviationDisplay
                 mean={data.mean}
-                sd={data.sd}
                 ownMean={data.ownMean}
                 ownSd={data.sd}
+                sd={data.sd}
                 unitValue={data.unitValue}
               />
             </div>

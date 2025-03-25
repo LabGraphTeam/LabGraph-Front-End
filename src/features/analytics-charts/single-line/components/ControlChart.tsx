@@ -1,5 +1,10 @@
+import LegendCustom from '@/features/analytics-charts/single-line/components/LegendCustom'
+import TooltipCustom from '@/features/analytics-charts/single-line/components/TooltipCustom'
+import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
+import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
 import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
-import useWindowDimensions from '@/features/shared/hooks/useWindowDimensions'
+import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
+import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatDate'
 import { AnalyticWithStatsData } from '@/types/Chart'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
@@ -14,11 +19,6 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
-import customFormatDate from '../../../shared/ui/date-selectors/constants/customFormatDate'
-import getColorByLevel from '../../utils/getColorByLevel'
-import normalizeValue from '../../utils/normalizeValue'
-import LegendCustom from './LegendCustom'
-import TooltipCustom from './TooltipCustom'
 
 const ControlChart: React.FC<AnalyticWithStatsData> = ({
   analyticsDTO: listingData,
@@ -79,8 +79,8 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
-              onClick={toggleUseOwnValues}
               className='group flex flex-col items-center transition-all duration-300'
+              onClick={toggleUseOwnValues}
             >
               <div
                 className={`rounded-full p-2 transition-all duration-300 ${
@@ -106,54 +106,50 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
         <div className='flex h-[225px] place-content-center items-center md:min-h-[250px] xl:min-h-[250px] 2xl:min-h-[325px] 3xl:min-h-[500px]'>
           <ResponsiveContainer
             className='flex place-content-center items-center bg-surface'
-            width='97%'
             height='96%'
+            width='97%'
           >
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <XAxis
-                className='text-[0.4rem] text-textPrimary md:text-[0.7rem]'
-                id='key'
-                dataKey='date'
                 angle={-50}
+                axisLine={false}
+                className='text-[0.4rem] text-textPrimary md:text-[0.7rem]'
+                dataKey='date'
+                height={windowWidth < 768 ? 35 : 60}
+                id='key'
+                stroke='var(--color-text-primary)'
                 textAnchor='end'
                 tickFormatter={(date) => date}
-                height={windowWidth < 768 ? 35 : 60}
-                width={windowWidth < 768 ? 35 : 40}
-                tickMargin={0}
-                axisLine={false}
                 tickLine={false}
-                stroke='var(--color-text-primary)'
+                tickMargin={0}
+                width={windowWidth < 768 ? 35 : 40}
               />
               <YAxis
+                axisLine={false}
                 className='text-[0.5rem] text-textPrimary md:text-xs'
                 domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
-                textAnchor='end'
-                ticks={yAxisValues.map((v) => v.value)}
-                width={windowWidth < 768 ? 30 : 40}
                 height={0}
-                tickMargin={0}
-                axisLine={false}
-                tickLine={false}
                 stroke='var(--color-text-primary)'
+                textAnchor='end'
                 tickFormatter={(value) => {
                   const matchingValue = yAxisValues.find((v) => Math.abs(v.value - value) < 0.0001)
                   return matchingValue ? matchingValue.label : ''
                 }}
+                tickLine={false}
+                tickMargin={0}
+                ticks={yAxisValues.map((v) => v.value)}
+                width={windowWidth < 768 ? 30 : 40}
               />
               <Tooltip content={TooltipCustom} />
               <Line
-                id={'id'}
-                type='linear'
-                dataKey={`value`}
-                name={`level`}
-                stroke={getColorByLevel(listingData[0].level.toString())}
-                strokeWidth={1.0}
-                connectNulls={true}
                 activeDot={{
                   color: getColorByLevel(listingData[0].level.toString()),
                   r: 3
                 }}
+                animationDuration={250}
+                connectNulls={true}
+                dataKey="value"
                 dot={{
                   fill: getColorByLevel(listingData[0].level.toString()),
                   stroke: getColorByLevel(listingData[0].level.toString()),
@@ -161,16 +157,20 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
                   strokeWidth: 1,
                   className: 'text-textPrimary'
                 }}
-                animationDuration={250}
+                id="id"
+                name="level"
+                stroke={getColorByLevel(listingData[0].level.toString())}
+                strokeWidth={1.0}
+                type='linear'
               />
               {yAxisValues.map((line) => (
                 <ReferenceLine
                   key={line.value}
-                  y={line.value}
                   stroke={line.color}
                   strokeDasharray='4 4'
-                  strokeWidth={1.0}
                   strokeOpacity={1.0}
+                  strokeWidth={1.0}
+                  y={line.value}
                 />
               ))}
               <Legend

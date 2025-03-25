@@ -35,7 +35,7 @@ const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) 
 
           if (data[valueKey]) {
             return (
-              <div key={`tooltip-${id}-${level}`} className='border-border'>
+              <div className='border-border' key={`tooltip-${id}-${level}`}>
                 <div className='flex items-center gap-2'>
                   <div
                     className='size-2.5 rounded-full'

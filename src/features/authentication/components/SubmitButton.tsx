@@ -3,7 +3,7 @@ import { LogIn } from 'lucide-react'
 
 const SubmitButton = ({ text, icon = true }: SubmitButtonProps) => {
   return (
-    <button type='submit' className='button-modern'>
+    <button className='button-modern' type='submit'>
       {icon ? <LogIn className='size-5' /> : text}
     </button>
   )

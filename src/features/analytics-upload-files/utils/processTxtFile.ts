@@ -1,6 +1,6 @@
+import { cleanValue, createProcessedData, isValidValue } from '@/features/analytics-upload-files/utils/fileProcessors'
 import { FileProcessingResult } from '@/types/FileProcessing'
 import { ProcessedData } from '@/types/UpdateResults'
-import { cleanValue, createProcessedData, isValidValue } from './fileProcessors'
 
 export const processTextFile = async (file: File): Promise<FileProcessingResult> => {
   const arrayValues: ProcessedData[] = []

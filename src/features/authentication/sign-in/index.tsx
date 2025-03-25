@@ -1,11 +1,11 @@
+import AuthLink from '@/features/authentication/components/AuthLink'
+import InputField from '@/features/authentication/components/InputField'
+import SubmitButton from '@/features/authentication/components/SubmitButton'
+import { useAuthValidator } from '@/features/authentication/hooks/useAuthValidator'
 import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer'
-import CheckIcon from '@/features/shared/ui/icons/CheckBox'
-import ErrorMessage from '@/features/shared/utils/components/error-message'
+import CheckIcon from '@/shared/ui/icons/CheckBox'
+import ErrorMessage from '@/shared/utils/components/error-message'
 import { AtSign, Lock } from 'lucide-react'
-import AuthLink from '../components/AuthLink'
-import InputField from '../components/InputField'
-import SubmitButton from '../components/SubmitButton'
-import { useAuthValidator } from '../hooks/useAuthValidator'
 
 const LoginForm = () => {
   const { formData, errors, handleChange, rememberMe, handleRememberMeChange, handleSubmit } =
@@ -13,43 +13,40 @@ const LoginForm = () => {
 
   return (
     <AuthFormContainer>
-      {errors && errors.length > 0 && (
-        <ErrorMessage message={errors.map((error) => error.message).join(', ')} />
-      )}
-      <form onSubmit={handleSubmit} className='mb-4 space-y-4'>
+      {errors && errors.length > 0 ? <ErrorMessage message={errors.map((error) => error.message).join(', ')} /> : null}
+      <form className='mb-4 space-y-4' onSubmit={handleSubmit}>
         <InputField
-          id='identifier'
-          type='text'
-          label='Email or Username'
-          placeholder='Enter your email or username'
-          value={formData.identifier}
-          onChange={handleChange}
-          icon={<AtSign className='size-4 text-textSecondary' />}
           autoComplete='username'
+          icon={<AtSign className='size-4 text-textSecondary' />}
+          id='identifier'
+          label='Email or Username'
+          onChange={handleChange}
+          placeholder='Enter your email or username'
+          type='text'
+          value={formData.identifier}
         />
         <InputField
-          id='password'
-          type='password'
-          label='Password'
-          placeholder='Enter your password'
-          value={formData.password}
-          onChange={handleChange}
-          icon={<Lock className='size-4 text-textSecondary' />}
           autoComplete='current-password'
+          icon={<Lock className='size-4 text-textSecondary' />}
+          id='password'
+          label='Password'
+          onChange={handleChange}
+          placeholder='Enter your password'
+          type='password'
+          value={formData.password}
         />
-
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>
           <CheckIcon
-            text='Keep me logged in'
             checked={rememberMe}
             onChange={handleRememberMeChange}
+            text='Keep me logged in'
           />
-          <AuthLink text='' linkText='Forgot password?' href='#' />
+          <AuthLink href='#' linkText='Forgot password?' text='' />
         </div>
 
         <SubmitButton text='Sign-in' />
-        <AuthLink text="Don't have an account?" linkText='Sign up' href='/auth/signup' />
+        <AuthLink href='/auth/signup' linkText='Sign up' text="Don't have an account?" />
       </form>
     </AuthFormContainer>
   )

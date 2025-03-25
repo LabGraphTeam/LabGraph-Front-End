@@ -1,4 +1,4 @@
-import getStatusMessage from '@/features/shared/utils/helpers/getStatusMessage'
+import getStatusMessage from '@/shared/utils/helpers/getStatusMessage'
 import { Theme, ThemeConfig, UseThemeReturn } from '@/types/Theme'
 import { useCallback, useEffect, useState } from 'react'
 

@@ -1,6 +1,6 @@
+import SingleDateSelector from '@/shared/ui/date-selectors/components/SingleDateSelector'
 import { DateSelectorProps } from '@/types/DateSelectorProps'
 import React from 'react'
-import SingleDateSelector from './components/SingleDateSelector'
 
 const DateSelector: React.FC<DateSelectorProps> = ({
   startDay,
@@ -22,22 +22,22 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         Date Interval
       </div>
       <SingleDateSelector
-        label='From'
         day={startDay}
+        label='From'
         month={startMonth}
-        year={startYear}
         onDayChange={handleStartDayChange}
         onMonthChange={handleStartMonthChange}
         onYearChange={handleStartYearChange}
+        year={startYear}
       />
       <SingleDateSelector
-        label='To'
         day={endDay}
+        label='To'
         month={endMonth}
-        year={endYear}
         onDayChange={handleEndDayChange}
         onMonthChange={handleEndMonthChange}
         onYearChange={handleEndYearChange}
+        year={endYear}
       />
     </div>
   )

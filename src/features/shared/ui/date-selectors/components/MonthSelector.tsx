@@ -23,11 +23,11 @@ const MonthSelector: React.FC<MonthSelectorProps & { fieldId?: string }> = ({
 
   return (
     <select
+      className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[8px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
       id={fieldId ?? 'month-selector'}
       name={fieldId ?? 'month-selector'}
-      className='focus:ring-borderColor/30 rounded border border-borderColor bg-background p-0 text-[8px] text-textSecondary shadow-sm shadow-shadow focus:outline-none focus:ring-2 md:px-2 md:py-1 md:text-xs'
-      value={selectedMonth}
       onChange={(e) => onMonthChange(+e.target.value)}
+      value={selectedMonth}
     >
       {months.map((month, i) => (
         <option key={month} value={i + 1}>

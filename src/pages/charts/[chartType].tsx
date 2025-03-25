@@ -21,6 +21,8 @@ export const getServerSideProps: GetServerSideProps<ChartPageProps> = async ({ p
   }
 }
 
-export default function ChartPage(props: Readonly<ChartPageProps>) {
+const ChartPage = (props: Readonly<ChartPageProps>) => {
   return <ChartPageComponent {...props} />
 }
+
+export default ChartPage

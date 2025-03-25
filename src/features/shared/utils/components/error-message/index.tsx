@@ -31,24 +31,24 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
     <>
       <div className="fixed inset-0 z-50 transition-all duration-300" />
       <div
-        role="alert"
         className="fixed left-1/2 top-1/2 z-50 flex w-[340px] 
           -translate-x-1/2 -translate-y-1/2 flex-col items-center 
           justify-between rounded-xl bg-gradient-to-br from-background 
           to-surface p-8 shadow-2xl ring-1 ring-primary animate-in fade-in 
           animate-in fade-in duration-200 md:w-[420px]"
+        role="alert"
       >
         <div className="absolute right-3 top-3">
           <button 
-            onClick={handleDismiss}
             className="rounded-full p-1.5 text-primary hover:bg-primary/10 
               transition-colors duration-200"
+            onClick={handleDismiss}
           >
             <X size={20} />
           </button>
         </div>
 
-        <AlertCircle size={56} className="mb-5 text-danger animate-bounce" />
+        <AlertCircle className="mb-5 text-danger animate-bounce" size={56} />
         
         <div className="flex w-full flex-col items-center gap-4 text-center">
           <h3 className="text-xl font-bold text-primary">
@@ -65,25 +65,23 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
 
         <div className="mt-8 flex gap-4">
           <button
-            onClick={handleDismiss}
             className="rounded-lg border border-primary px-5 py-2.5 
               text-sm font-semibold text-primary hover:scale-105
               transition-colors duration-200"
+            onClick={handleDismiss}
           >
             Dismiss
           </button>
           
-          {onRetry && (
-            <button
-              onClick={handleRetry}
+          {onRetry ? <button
               className="flex items-center gap-2 rounded-lg 
                 bg-primary px-5 py-2.5 text-sm font-semibold 
                 text-red-600 hover:scale-105 transition-colors duration-200"
+              onClick={handleRetry}
             >
               <RotateCw size={16} />
               Retry
-            </button>
-          )}
+            </button> : null}
         </div>
       </div>
     </>

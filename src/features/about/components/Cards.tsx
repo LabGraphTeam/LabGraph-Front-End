@@ -74,11 +74,11 @@ export const TeamMemberCard: React.FC<TeamMemberProps> = ({ name, role, image, b
     <div className='mb-4 flex flex-col items-center'>
       <div className='relative h-32 w-32 overflow-hidden rounded-full'>
         <Image
-          src={image ?? '/team/placeholder.jpg'}
           alt={name}
+          className='transition-transform duration-300 group-hover:scale-110'
           layout='fill'
           objectFit='cover'
-          className='transition-transform duration-300 group-hover:scale-110'
+          src={image ?? '/team/placeholder.jpg'}
         />
       </div>
       <h3 className='mt-4 text-lg font-semibold text-textPrimary'>{name}</h3>
@@ -86,26 +86,22 @@ export const TeamMemberCard: React.FC<TeamMemberProps> = ({ name, role, image, b
     </div>
     <p className='mb-4 text-center text-sm leading-relaxed text-textSecondary'>{bio}</p>
     <div className='flex justify-center space-x-4'>
-      {social?.linkedin && (
-        <Link
-          href={social.linkedin}
-          target='_blank'
-          rel='noopener noreferrer'
+      {social?.linkedin ? <Link
           className='text-textSecondary transition-colors hover:text-textPrimary'
+          href={social.linkedin}
+          rel='noopener noreferrer'
+          target='_blank'
         >
           <FaLinkedin size={20} />
-        </Link>
-      )}
-      {social?.github && (
-        <Link
-          href={social.github}
-          target='_blank'
-          rel='noopener noreferrer'
+        </Link> : null}
+      {social?.github ? <Link
           className='text-textSecondary transition-colors hover:text-textPrimary'
+          href={social.github}
+          rel='noopener noreferrer'
+          target='_blank'
         >
           <FaGithub size={20} />
-        </Link>
-      )}
+        </Link> : null}
     </div>
   </div>
 )

@@ -20,30 +20,28 @@ const InputField: React.FC<InputFieldProps> = ({
 
   return (
     <div className='space-y-0'>
-      <label htmlFor={id} className='block text-xs text-textSecondary transition-colors sm:text-sm'>
+      <label className='block text-xs text-textSecondary transition-colors sm:text-sm' htmlFor={id}>
         {label}
       </label>
       <div className='relative'>
-        {icon && <div className='absolute left-3 top-1/2 -translate-y-1/2'>{icon}</div>}
+        {icon ? <div className='absolute left-3 top-1/2 -translate-y-1/2'>{icon}</div> : null}
         <input
-          type={type === 'password' && !showPassword ? 'password' : 'text'}
-          id={id}
-          value={value}
-          onChange={onChange}
-          className={`input-modern ${icon ? 'pl-10' : 'pl-3'}`}
-          required
-          placeholder={placeholder}
           autoComplete={autoComplete}
+          className={`input-modern ${icon ? 'pl-10' : 'pl-3'}`}
+          id={id}
+          onChange={onChange}
+          placeholder={placeholder}
+          required
+          type={type === 'password' && !showPassword ? 'password' : 'text'}
+          value={value}
         />
-        {type === 'password' && (
-          <button
-            type='button'
-            onClick={togglePasswordVisibility}
+        {type === 'password' ? <button
             className='absolute right-3 top-1/2 -translate-y-1/2 text-textSecondary hover:text-textPrimary'
+            onClick={togglePasswordVisibility}
+            type='button'
           >
             {showPassword ? <EyeOff className='size-4' /> : <Eye className='size-4' />}
-          </button>
-        )}
+          </button> : null}
       </div>
     </div>
   )

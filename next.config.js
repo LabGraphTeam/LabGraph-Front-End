@@ -4,14 +4,15 @@ const nextConfig = {
   compress: process.env.NODE_ENV === 'development',
   output: 'standalone',
   eslint: {
-    ignoreDuringBuilds: true
+    ignoreDuringBuilds: false
   },
   images: {
-    remotePatterns: [{
-      protocol: 'https',
-      hostname: 'avatars.githubusercontent.com',
-    }
-  ]
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'avatars.githubusercontent.com'
+      }
+    ]
   }
 }
 

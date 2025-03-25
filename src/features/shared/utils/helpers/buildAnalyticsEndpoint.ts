@@ -1,12 +1,10 @@
+import { formatDateWithTime, formatEndDateWithTime } from '@/shared/ui/date-selectors/constants/formatDateWithTime'
+import analyticNameFormatFix from '@/shared/utils/helpers/analyticNameFormatFix'
 import BuildAnalyticsEndpointProps from '@/types/BuildAnalyticsEndpointProps'
-import {
-  formatDateWithTime,
-  formatEndDateWithTime
-} from '../../ui/date-selectors/constants/formatDateWithTime'
-import analyticNameFormatFix from './analyticNameFormatFix'
+
 
 const buildAnalyticsEndpoint = (props: BuildAnalyticsEndpointProps) => {
-  const { analyticsType, analyticName: name, analyticsLevel: level, analyticsMeasurementPeriod: date } = props
+  const { analyticsType, analyticsName: name, analyticsLevel: level, analyticsMeasurementPeriod: date } = props
 
   const baseEndPoint = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/name-and-level-date-range?name=`
 

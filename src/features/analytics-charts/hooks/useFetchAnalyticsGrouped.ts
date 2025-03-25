@@ -1,4 +1,4 @@
-import { useFetchSWR } from '@/features/shared/hooks/useFetchSWR'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
 import { GroupedAnalyticData } from '@/types/Chart'
 
 const useFetchAnalyticsGrouped = (route: string) => {

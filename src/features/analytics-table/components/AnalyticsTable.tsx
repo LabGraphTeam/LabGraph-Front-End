@@ -1,8 +1,8 @@
+import TableRow from '@/features/analytics-table/components/AnalyticsTableRow'
+import MobileItemCard from '@/features/analytics-table/components/MobileItemCard'
+import { tableHeaders } from '@/features/analytics-table/constants/tableHeaders'
 import { AnalyticsTableProps } from '@/types/AnalyticsTable'
 import React from 'react'
-import { tableHeaders } from '../constants/tableHeaders'
-import TableRow from './AnalyticsTableRow'
-import MobileItemCard from './MobileItemCard'
 
 const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
   items,
@@ -19,8 +19,8 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
           <tr className=''>
             {tableHeaders.map((header) => (
               <th
-                key={header.id}
                 className='border-b border-border px-2 py-1 text-left text-[8px] font-semibold uppercase tracking-wider text-textSecondary md:text-[9px]'
+                key={header.id}
               >
                 {header.name}
               </th>
@@ -30,17 +30,17 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
         <tbody>
           {items.map((item) => (
             <TableRow
-              key={item.id}
               analyticData={item}
-              onValidate={onValidate}
+              key={item.id}
               onUpdateDescription={onUpdateDescription}
+              onValidate={onValidate}
             />
           ))}
         </tbody>
       </table>
       <div className='mt-2 grid grid-cols-3 place-content-center gap-2 px-2 text-center md:hidden'>
         {items.map((item) => (
-          <MobileItemCard key={item.id} analyticData={item} />
+          <MobileItemCard analyticData={item} key={item.id} />
         ))}
       </div>
     </>

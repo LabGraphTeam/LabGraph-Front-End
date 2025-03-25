@@ -1,9 +1,9 @@
+import ThemeToggle from '@/shared/theme'
+import MobileMenu from '@/shared/ui/nav-bar/components/MobileMenu'
+import NavLinksComponent from '@/shared/ui/nav-bar/components/NavLinksComponent'
+import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'
+import handleLogout from '@/shared/ui/nav-bar/constants/handleLogout'
 import { useState } from 'react'
-import ThemeToggle from '../../theme'
-import MobileMenu from './components/MobileMenu'
-import NavLinksComponent from './components/NavLinksComponent'
-import NavLogo from './components/NavLogo'
-import handleLogout from './constants/handleLogout'
 
 const getMenuBarClass = (isOpen: boolean, index: number): string => {
   if (isOpen && index === 0) return 'translate-y-2.5 rotate-45'
@@ -29,15 +29,15 @@ const NavBar: React.FC = () => {
           <div className='flex items-center gap-2 lg:hidden'>
             <ThemeToggle />
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className='p-2'
               aria-label='Toggle menu'
+              className='p-2'
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <div className='space-y-2'>
                 {[0, 1, 2].map((i) => (
                   <span
-                    key={i}
                     className={`block h-0.5 w-6 bg-textSecondary transition-all duration-300 ${getMenuBarClass(isMenuOpen, i)}`}
+                    key={i}
                   />
                 ))}
               </div>

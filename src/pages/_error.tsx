@@ -1,4 +1,4 @@
-import CustomError from '@/features/shared/utils/custom-errors'
+import CustomError from '@/shared/utils/custom-errors'
 import { NextPageContext } from 'next'
 import { ErrorProps } from 'next/error'
 
