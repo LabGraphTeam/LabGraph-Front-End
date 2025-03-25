@@ -50,7 +50,7 @@ A comprehensive web application for laboratory quality control management implem
 ## Technologies
 
 - **Frontend**: Next.js, React, TypeScript, Tailwind CSS
-- **Charting**: Custom visualization components(recharts.js)
+- **Charting**: Custom visualization components (recharts.js)
 - **State Management**: React Context API, SWR for data fetching
 - **Styling**: Tailwind with custom theming
 
