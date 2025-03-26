@@ -1,5 +1,5 @@
+import { ABOUT_US, CHARTS, MISC } from '@/shared/utils/constants/privateRoutes'
 import type { NavLinkProps } from '@/types/NavigationBar'
-import { CHARTS, MISC, ABOUT_US } from '@/shared/utils/constants/privateRoutes'
 
 const navLinks: NavLinkProps[] = [
   {

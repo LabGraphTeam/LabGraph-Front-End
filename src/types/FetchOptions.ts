@@ -6,5 +6,4 @@ export interface FetchOptions {
   next?: { revalidate: number }
   cache?: 'no-cache' | 'default' | 'reload' | 'force-cache' | 'only-if-cached'
   isLogin?: boolean
-
 }

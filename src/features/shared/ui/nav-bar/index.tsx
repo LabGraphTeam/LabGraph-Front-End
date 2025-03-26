@@ -1,9 +1,10 @@
+import { useState } from 'react'
+
 import ThemeToggle from '@/shared/theme'
 import MobileMenu from '@/shared/ui/nav-bar/components/MobileMenu'
 import NavLinksComponent from '@/shared/ui/nav-bar/components/NavLinksComponent'
 import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'
 import handleLogout from '@/shared/ui/nav-bar/constants/handleLogout'
-import { useState } from 'react'
 
 const getMenuBarClass = (isOpen: boolean, index: number): string => {
   if (isOpen && index === 0) return 'translate-y-2.5 rotate-45'

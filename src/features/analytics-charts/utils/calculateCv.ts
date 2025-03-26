@@ -1,1 +1,1 @@
-export const calculateCV = (mean: number, sd: number) => ((sd / mean) * 100).toFixed(2);
+export const calculateCV = (mean: number, sd: number) => ((sd / mean) * 100).toFixed(2)

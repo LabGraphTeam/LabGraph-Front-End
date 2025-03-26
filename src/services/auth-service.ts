@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '@/services/constants/apiBaseUrl'
-import { AuthParams } from '@/types/AuthParams'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { AuthFormData } from '@/types/Auth'
+import { AuthParams } from '@/types/AuthParams'
 
 export const AuthService = {
   signIn: async ({ identifier, password, remember }: AuthParams) => {
@@ -21,7 +21,7 @@ export const AuthService = {
             token: backendResponse.tokenJWT,
             dateExp: backendResponse.dateExp,
             remember
-          },
+          }
         })
 
         return cookieResponse

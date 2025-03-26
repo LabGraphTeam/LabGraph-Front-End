@@ -1,106 +1,105 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 export default function useDateSelector() {
+  const today = new Date()
 
-  const today = new Date();
-
-  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1)
 
   const startDate = {
     day: firstDayOfMonth.getDate(),
     month: firstDayOfMonth.getMonth() + 1,
-    year: firstDayOfMonth.getFullYear(),
-  };
+    year: firstDayOfMonth.getFullYear()
+  }
 
   const endDate = {
     day: today.getDate(),
     month: today.getMonth() + 1,
-    year: today.getFullYear(),
-  };
+    year: today.getFullYear()
+  }
 
-  const [startDay, setStartDay] = useState<number>(startDate.day);
-  const [startMonth, setStartMonth] = useState<number>(startDate.month);
-  const [startYear, setStartYear] = useState<number>(startDate.year);
+  const [startDay, setStartDay] = useState<number>(startDate.day)
+  const [startMonth, setStartMonth] = useState<number>(startDate.month)
+  const [startYear, setStartYear] = useState<number>(startDate.year)
 
-  const [endDay, setEndDay] = useState<number>(endDate.day);
-  const [endMonth, setEndMonth] = useState<number>(endDate.month);
-  const [endYear, setEndYear] = useState<number>(endDate.year);
+  const [endDay, setEndDay] = useState<number>(endDate.day)
+  const [endMonth, setEndMonth] = useState<number>(endDate.month)
+  const [endYear, setEndYear] = useState<number>(endDate.year)
 
   // Helper function to get the last day of a month
   function getLastDayOfMonth(year: number, month: number): number {
     // month parameter is 1-12, but Date constructor expects 0-11
-    return new Date(year, month, 0).getDate();
+    return new Date(year, month, 0).getDate()
   }
 
   const handleStartDayChange = (day: number) => {
     // Validate day is within the month's range
-    const maxDays = getLastDayOfMonth(startYear, startMonth);
-    const validDay = Math.min(day, maxDays);
+    const maxDays = getLastDayOfMonth(startYear, startMonth)
+    const validDay = Math.min(day, maxDays)
 
     // Set end date to the last day of the same month
-    const lastDayOfMonth = getLastDayOfMonth(startYear, startMonth);
+    const lastDayOfMonth = getLastDayOfMonth(startYear, startMonth)
 
-    setStartDay(validDay);
-    setEndDay(lastDayOfMonth);
-    setEndMonth(startMonth);
-    setEndYear(startYear);
-  };
+    setStartDay(validDay)
+    setEndDay(lastDayOfMonth)
+    setEndMonth(startMonth)
+    setEndYear(startYear)
+  }
 
   const handleEndDayChange = (day: number) => {
     // Validate day is within the month's range
-    const maxDays = getLastDayOfMonth(endYear, endMonth);
-    const validDay = Math.min(day, maxDays);
+    const maxDays = getLastDayOfMonth(endYear, endMonth)
+    const validDay = Math.min(day, maxDays)
 
-    setEndDay(validDay);
-  };
+    setEndDay(validDay)
+  }
 
   const handleStartMonthChange = (month: number) => {
     // Ensure day is valid for the new month
-    const maxDays = getLastDayOfMonth(startYear, month);
-    const validDay = Math.min(startDay, maxDays);
+    const maxDays = getLastDayOfMonth(startYear, month)
+    const validDay = Math.min(startDay, maxDays)
 
     // Set end date to the last day of the same month
-    const lastDayOfMonth = getLastDayOfMonth(startYear, month);
+    const lastDayOfMonth = getLastDayOfMonth(startYear, month)
 
-    setStartMonth(month);
-    setStartDay(validDay);
-    setEndDay(lastDayOfMonth);
-    setEndMonth(month);
-    setEndYear(startYear);
-  };
+    setStartMonth(month)
+    setStartDay(validDay)
+    setEndDay(lastDayOfMonth)
+    setEndMonth(month)
+    setEndYear(startYear)
+  }
 
   const handleEndMonthChange = (month: number) => {
     // Ensure day is valid for the new month
-    const maxDays = getLastDayOfMonth(endYear, month);
-    const validDay = Math.min(endDay, maxDays);
+    const maxDays = getLastDayOfMonth(endYear, month)
+    const validDay = Math.min(endDay, maxDays)
 
-    setEndMonth(month);
-    setEndDay(validDay);
-  };
+    setEndMonth(month)
+    setEndDay(validDay)
+  }
 
   const handleStartYearChange = (year: number) => {
     // Ensure day is valid for the new year (especially for Feb 29)
-    const maxDays = getLastDayOfMonth(year, startMonth);
-    const validDay = Math.min(startDay, maxDays);
+    const maxDays = getLastDayOfMonth(year, startMonth)
+    const validDay = Math.min(startDay, maxDays)
 
     // Set end date to the last day of the same month
-    const lastDayOfMonth = getLastDayOfMonth(year, startMonth);
+    const lastDayOfMonth = getLastDayOfMonth(year, startMonth)
 
-    setStartYear(year);
-    setStartDay(validDay);
-    setEndDay(lastDayOfMonth);
-    setEndMonth(startMonth);
-    setEndYear(year);
-  };
+    setStartYear(year)
+    setStartDay(validDay)
+    setEndDay(lastDayOfMonth)
+    setEndMonth(startMonth)
+    setEndYear(year)
+  }
 
   const handleEndYearChange = (year: number) => {
     // Ensure day is valid for the new year (especially for Feb 29)
-    const maxDays = getLastDayOfMonth(year, endMonth);
-    const validDay = Math.min(endDay, maxDays);
+    const maxDays = getLastDayOfMonth(year, endMonth)
+    const validDay = Math.min(endDay, maxDays)
 
-    setEndYear(year);
-    setEndDay(validDay);
-  };
+    setEndYear(year)
+    setEndDay(validDay)
+  }
 
   const dateValues = {
     startDay,
@@ -108,7 +107,7 @@ export default function useDateSelector() {
     startYear,
     endDay,
     endMonth,
-    endYear,
+    endYear
   }
 
   const dateHandlers = {
@@ -117,7 +116,7 @@ export default function useDateSelector() {
     handleStartYearChange,
     handleEndDayChange,
     handleEndMonthChange,
-    handleEndYearChange,
+    handleEndYearChange
   }
 
   const combinedDateAndHandlersProps = {

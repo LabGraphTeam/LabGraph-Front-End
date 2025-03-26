@@ -1,5 +1,6 @@
-import { StatItemProps } from '@/types/Chart'
 import React from 'react'
+
+import { StatItemProps } from '@/types/Chart'
 
 const StatItem: React.FC<StatItemProps> = ({ label, value, formatStatValue: formatter }) => {
   const displayValue = React.useMemo(() => {

@@ -1,9 +1,10 @@
+import { useState } from 'react'
+
 import ControlChart from '@/features/analytics-charts/single-line/components/ControlChart'
 import TestSelectorWithLevel from '@/shared/ui/analytics-selectors/selector'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
 import Loading from '@/shared/utils/components/loading'
 import { AnalyticWithStatsData, SingleLineGraphProps } from '@/types/Chart'
-import { useState } from 'react'
 
 const LabGraph: React.FC<SingleLineGraphProps> = ({ testList, analyticsType }) => {
   const [dataFetched, setDataFetched] = useState<AnalyticWithStatsData>()

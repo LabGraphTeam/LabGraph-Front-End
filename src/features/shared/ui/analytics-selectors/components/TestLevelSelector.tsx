@@ -1,5 +1,6 @@
-import { TestLevelSelectorProps } from '@/types/SelectorProps'
 import React, { useCallback } from 'react'
+
+import { TestLevelSelectorProps } from '@/types/SelectorProps'
 
 const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
   levelOptions,

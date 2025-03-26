@@ -1,5 +1,6 @@
-import { TestNameSelectorWithLevelProps } from '@/types/SelectorProps'
 import React, { useCallback } from 'react'
+
+import { TestNameSelectorWithLevelProps } from '@/types/SelectorProps'
 
 const TestNameSelector: React.FC<TestNameSelectorWithLevelProps> = ({
   availableTestNames: list,

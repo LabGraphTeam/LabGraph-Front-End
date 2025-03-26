@@ -1,7 +1,8 @@
+import React from 'react'
+
 import StatItem from '@/features/analytics-charts/components/StatItem'
 import { calculateCV } from '@/features/analytics-charts/utils/calculateCv'
 import { MeanAndDeviationDisplayProps } from '@/types/Chart'
-import React from 'react'
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   mean,

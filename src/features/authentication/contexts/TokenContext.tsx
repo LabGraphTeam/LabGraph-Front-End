@@ -1,7 +1,8 @@
-import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
-import { TokenContextProps, TokenProviderProps } from '@/types/Auth'
 import { useRouter } from 'next/router'
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
+import { TokenContextProps, TokenProviderProps } from '@/types/Auth'
 
 const TokenContext = createContext<TokenContextProps>({
   token: null,

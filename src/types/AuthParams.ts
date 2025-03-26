@@ -1,5 +1,5 @@
 export interface AuthParams {
-  identifier: string;
-  password: string;
-  remember?: boolean;
+  identifier: string
+  password: string
+  remember?: boolean
 }

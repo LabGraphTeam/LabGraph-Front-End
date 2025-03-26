@@ -5,7 +5,10 @@ export const DESCRIPTION_OPTIONS = [
   { value: 'Reagent change', label: 'Reagent change' },
   { value: 'Control stability', label: 'Control stability' },
   { value: 'Unknown issue', label: 'Unknown issue' },
-  { value: 'Accepted with custom mean and deviations', label: 'Accepted with custom mean and deviations' },
+  {
+    value: 'Accepted with custom mean and deviations',
+    label: 'Accepted with custom mean and deviations'
+  },
   { value: 'Requires investigation', label: 'Requires investigation' },
-  { value: 'Other', label: 'Other (custom)' },
-] as const;
+  { value: 'Other', label: 'Other (custom)' }
+] as const

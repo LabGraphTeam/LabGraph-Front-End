@@ -1,8 +1,9 @@
+import React from 'react'
+
 import TableRow from '@/features/analytics-table/components/AnalyticsTableRow'
 import MobileItemCard from '@/features/analytics-table/components/MobileItemCard'
 import { tableHeaders } from '@/features/analytics-table/constants/tableHeaders'
 import { AnalyticsTableProps } from '@/types/AnalyticsTable'
-import React from 'react'
 
 const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
   items,

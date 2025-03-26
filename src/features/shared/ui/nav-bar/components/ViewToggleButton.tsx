@@ -1,5 +1,6 @@
-import { useAnalyticsGraph } from '@/features/analytics-charts/hooks/useAnalyticsGraph'
 import { TbChartAreaLine, TbChartLine } from 'react-icons/tb'
+
+import { useAnalyticsGraph } from '@/features/analytics-charts/hooks/useAnalyticsGraph'
 
 const ViewToggleButton = () => {
   const { viewMode, toggleView } = useAnalyticsGraph()

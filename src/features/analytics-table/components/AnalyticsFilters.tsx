@@ -1,6 +1,7 @@
+import React from 'react'
+
 import DateSelector from '@/shared/ui/date-selectors'
 import { AnalyticsFiltersProps } from '@/types/AnalyticsTable'
-import React from 'react'
 
 const AnalyticsFilters: React.FC<AnalyticsFiltersProps> = ({
   dateSelector,

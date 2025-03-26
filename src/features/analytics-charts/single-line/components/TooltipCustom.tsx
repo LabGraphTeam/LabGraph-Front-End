@@ -1,8 +1,9 @@
+import { TooltipProps } from 'recharts'
+
 import MeanAndDeviationDisplay from '@/features/analytics-charts/components/MeanAndDeviationDisplay'
 import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
 import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
 import { PayloadData } from '@/types/Chart'
-import { TooltipProps } from 'recharts'
 
 const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
   if (!active || !payload?.length) return null

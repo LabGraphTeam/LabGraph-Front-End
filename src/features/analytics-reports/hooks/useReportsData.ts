@@ -15,4 +15,3 @@ const useReportsData = ({ url }: UseReportsDataProps) => {
 }
 
 export default useReportsData
-

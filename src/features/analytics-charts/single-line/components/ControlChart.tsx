@@ -1,11 +1,3 @@
-import LegendCustom from '@/features/analytics-charts/single-line/components/LegendCustom'
-import TooltipCustom from '@/features/analytics-charts/single-line/components/TooltipCustom'
-import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
-import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
-import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
-import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
-import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatDate'
-import { AnalyticWithStatsData } from '@/types/Chart'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
@@ -19,6 +11,15 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
+
+import LegendCustom from '@/features/analytics-charts/single-line/components/LegendCustom'
+import TooltipCustom from '@/features/analytics-charts/single-line/components/TooltipCustom'
+import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
+import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
+import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
+import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
+import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatDate'
+import { AnalyticWithStatsData } from '@/types/Chart'
 
 const ControlChart: React.FC<AnalyticWithStatsData> = ({
   analyticsDTO: listingData,
@@ -149,7 +150,7 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
                 }}
                 animationDuration={250}
                 connectNulls={true}
-                dataKey="value"
+                dataKey='value'
                 dot={{
                   fill: getColorByLevel(listingData[0].level.toString()),
                   stroke: getColorByLevel(listingData[0].level.toString()),
@@ -157,8 +158,8 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
                   strokeWidth: 1,
                   className: 'text-textPrimary'
                 }}
-                id="id"
-                name="level"
+                id='id'
+                name='level'
                 stroke={getColorByLevel(listingData[0].level.toString())}
                 strokeWidth={1.0}
                 type='linear'

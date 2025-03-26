@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
     "exec:container": "docker exec -it quality-lab-pro-front-end-dev /bin/sh",
     "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",

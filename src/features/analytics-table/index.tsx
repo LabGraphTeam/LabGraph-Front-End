@@ -1,3 +1,5 @@
+import { useEffect, useMemo, useState } from 'react'
+
 import GeneratePdf from '@/features/analytics-reports/generate-pdf'
 import AnalyticsFilters from '@/features/analytics-table/components/AnalyticsFilters'
 import AnalyticsPagination from '@/features/analytics-table/components/AnalyticsPagination'
@@ -11,7 +13,6 @@ import ErrorMessage from '@/shared/utils/components/error-message'
 import { buildAnalyticsValidationWithFiltersEndpoint } from '@/shared/utils/helpers/buildAnalyticsTableEndpoint'
 import { AnalyticWithValidatedUser, UseFetchAnalyticsTableProps } from '@/types/AnalyticsTable'
 import BuildAnalyticsEndpointProps from '@/types/BuildAnalyticsEndpointProps'
-import { useEffect, useMemo, useState } from 'react'
 
 const AnalyticsTableIndex = () => {
   const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics')

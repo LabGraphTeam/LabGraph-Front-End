@@ -1,4 +1,4 @@
-import { GroupedAnalyticData, AnalyticWithStatsData } from '@/types/Chart'
+import { AnalyticWithStatsData, GroupedAnalyticData } from '@/types/Chart'
 
 export interface LevelOptions {
   value: string | number

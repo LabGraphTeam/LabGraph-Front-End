@@ -1,20 +1,20 @@
-import { AnalyticsDataReturn, PaginatedAnalyticsResponse, UseFetchAnalyticsTableProps } from '@/types/AnalyticsTable'
-import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
-import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { useToken } from '@/features/authentication/contexts/TokenContext'
+import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
 import { buildAnalyticsValidationEndpoint } from '@/shared/utils/helpers/buildAnalyticsValidationEndpoint'
+import {
+  AnalyticsDataReturn,
+  PaginatedAnalyticsResponse,
+  UseFetchAnalyticsTableProps
+} from '@/types/AnalyticsTable'
 
 export const useFetchAnalyticsTable = ({
-  analyticsType, endPoint
+  analyticsType,
+  endPoint
 }: UseFetchAnalyticsTableProps): AnalyticsDataReturn => {
-  const { token } = useToken();
+  const { token } = useToken()
 
-  const {
-    data,
-    error,
-    isLoading,
-    mutate
-  } = useFetchSWR<PaginatedAnalyticsResponse>({
+  const { data, error, isLoading, mutate } = useFetchSWR<PaginatedAnalyticsResponse>({
     url: endPoint,
     method: 'GET',
     immediate: true,
@@ -31,20 +31,18 @@ export const useFetchAnalyticsTable = ({
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         }
-      });
+      })
 
       if (data) {
-        const updatedContent = data.content.map(item =>
-          item.id === analyticsId
-            ? { ...item, ...response }
-            : item
-        );
-        mutate({ ...data, content: updatedContent }, false);
+        const updatedContent = data.content.map((item) =>
+          item.id === analyticsId ? { ...item, ...response } : item
+        )
+        mutate({ ...data, content: updatedContent }, false)
       }
     } catch (error) {
-      console.error("Error validating analytics:", error);
+      console.error('Error validating analytics:', error)
     }
   }
 
@@ -59,21 +57,19 @@ export const useFetchAnalyticsTable = ({
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({ description })
-      });
+      })
 
       if (data) {
-        const updatedContent = data.content.map(item =>
-          item.id === analyticsId
-            ? { ...item, ...response }
-            : item
-        );
-        mutate({ ...data, content: updatedContent }, false);
+        const updatedContent = data.content.map((item) =>
+          item.id === analyticsId ? { ...item, ...response } : item
+        )
+        mutate({ ...data, content: updatedContent }, false)
       }
     } catch (error) {
-      console.error("Error updating description:", error);
+      console.error('Error updating description:', error)
     }
   }
 
@@ -82,8 +78,7 @@ export const useFetchAnalyticsTable = ({
     validateAnalytics,
     updateDescription,
     error,
-    data,
+    data
   }
 }
 export default useFetchAnalyticsTable
-

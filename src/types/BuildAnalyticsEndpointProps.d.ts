@@ -11,9 +11,8 @@ export default interface BuildAnalyticsEndpointProps {
   unValidatedFilter?: boolean
 }
 
-
 export interface BuildAnalyticsValidationParamsProps {
-  analyticsType: string,
+  analyticsType: string
   analyticsId: number
   isUpdateDescription?: boolean
 }

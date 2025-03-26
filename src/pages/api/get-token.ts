@@ -6,7 +6,10 @@ interface ValidationResponse {
   token?: string
 }
 
-export default async function getToken(req: NextApiRequest, res: NextApiResponse<ValidationResponse>) {
+export default async function getToken(
+  req: NextApiRequest,
+  res: NextApiResponse<ValidationResponse>
+) {
   if (req.method !== 'GET') {
     return res.status(405).json({
       valid: false,

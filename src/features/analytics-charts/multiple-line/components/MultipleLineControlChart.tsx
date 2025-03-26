@@ -1,10 +1,3 @@
-import LegendMultiple from '@/features/analytics-charts/multiple-line/components/LegendMultiple'
-import TooltipMultiple from '@/features/analytics-charts/multiple-line/components/TooltipMultiple'
-import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
-import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
-import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
-import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatDate'
-import { ChartEntry, MeanStdDevValueData, MultipleLineChartProps } from '@/types/Chart'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
@@ -17,6 +10,14 @@ import {
   Tooltip,
   YAxis
 } from 'recharts'
+
+import LegendMultiple from '@/features/analytics-charts/multiple-line/components/LegendMultiple'
+import TooltipMultiple from '@/features/analytics-charts/multiple-line/components/TooltipMultiple'
+import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
+import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
+import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
+import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatDate'
+import { ChartEntry, MeanStdDevValueData, MultipleLineChartProps } from '@/types/Chart'
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
   groupedAnalysisData: listings

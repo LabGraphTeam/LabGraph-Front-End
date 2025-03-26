@@ -1,6 +1,7 @@
+import React, { useState } from 'react'
+
 import { DESCRIPTION_OPTIONS } from '@/features/analytics-table/constants/descriptionOptions'
 import { TableRowProps } from '@/types/AnalyticsTable'
-import React, { useState } from 'react'
 
 const sanitizeDescription = (description: string): string => {
   if (!description) return ''
@@ -87,18 +88,22 @@ const TableRow: React.FC<TableRowProps> = ({
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         <div className='flex items-center gap-2'>
-          {item.validator_user === 'Not validated' ? <button
+          {item.validator_user === 'Not validated' ? (
+            <button
               className='flex items-center gap-1 rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-red-500 md:text-xs'
               onClick={() => onValidate?.(item.id)}
             >
               <span>✓</span>
-            </button> : null}
-          {item.validator_user !== 'Not validated' ? <button
+            </button>
+          ) : null}
+          {item.validator_user !== 'Not validated' ? (
+            <button
               className='cursor-not-allowed rounded bg-green-500 px-2 py-1 text-[6px] text-white md:text-xs'
               disabled
             >
               ✓
-            </button> : null}
+            </button>
+          ) : null}
           <button className='px-2 py-1.5 text-[6px] md:text-xs' onClick={() => setIsEditing(true)}>
             ✏️
           </button>
@@ -120,13 +125,15 @@ const TableRow: React.FC<TableRowProps> = ({
               ))}
             </select>
 
-            {isCustomDescription ? <input
+            {isCustomDescription ? (
+              <input
                 className='mt-1 w-full rounded border border-gray-300 px-2 py-1 text-[6px] text-black md:text-xs'
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder='Enter custom description'
                 type='text'
                 value={description}
-              /> : null}
+              />
+            ) : null}
 
             <div className='mt-1 flex gap-1'>
               <button

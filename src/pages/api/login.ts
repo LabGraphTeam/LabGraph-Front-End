@@ -39,7 +39,6 @@ export default async function login(
       })
     }
 
-
     const maxAgeInSeconds = remember
       ? Math.floor((new Date(dateExp).getTime() - Date.now()) / 1000)
       : undefined

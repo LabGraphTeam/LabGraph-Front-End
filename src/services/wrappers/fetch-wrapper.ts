@@ -19,16 +19,16 @@ export const fetchWrapper = async (options: FetchOptions) => {
   const response = await fetch(`${route}`, fetchOptions)
 
   if (!response.ok || response.status === 403) {
-    let errorMessage = response.statusText || 'Unknown error';
+    let errorMessage = response.statusText || 'Unknown error'
 
-    const errorData = await response.json().catch(() => null);
+    const errorData = await response.json().catch(() => null)
 
     if (errorData?.details) {
-      errorMessage = errorData.details;
+      errorMessage = errorData.details
     }
 
     if (response.status === 401 && !isLogin) {
-      return await fetch('/api/logout', { method: 'POST' });
+      return await fetch('/api/logout', { method: 'POST' })
     }
 
     const contentType = response.headers.get('content-type')
@@ -38,8 +38,7 @@ export const fetchWrapper = async (options: FetchOptions) => {
       }
     }
 
-    throw new Error(`${response.status} - ${errorMessage}`);
-
+    throw new Error(`${response.status} - ${errorMessage}`)
   }
   return await response.json()
 }

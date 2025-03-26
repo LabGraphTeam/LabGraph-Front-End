@@ -1,4 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+import { FileText, Loader2 } from 'lucide-react'
+import React, { useState } from 'react'
+
 import useReportsData from '@/features/analytics-reports/hooks/useReportsData'
 import {
   formatDateWithTime,
@@ -6,10 +11,6 @@ import {
 } from '@/shared/ui/date-selectors/constants/formatDateWithTime'
 import getStatusMessage from '@/shared/utils/helpers/getStatusMessage'
 import { PdfGeneratorProps } from '@/types/PDFGenerator'
-import jsPDF from 'jspdf'
-import autoTable from 'jspdf-autotable'
-import { FileText, Loader2 } from 'lucide-react'
-import React, { useState } from 'react'
 
 const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   analyticsType,

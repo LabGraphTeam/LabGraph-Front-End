@@ -1,8 +1,9 @@
+import Link from 'next/link'
+
 import ThemeToggle from '@/shared/theme'
 import ViewToggleButton from '@/shared/ui/nav-bar/components/ViewToggleButton'
 import navLinks from '@/shared/ui/nav-bar/constants/navLinks'
 import { NavLinksComponentProps } from '@/types/NavigationBar'
-import Link from 'next/link'
 
 const NavLinksComponent: React.FC<NavLinksComponentProps> = ({ onLogout }) => {
   return (
