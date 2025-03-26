@@ -1,4 +1,4 @@
-import CustomError from '@/shared/utils/custom-errors'
+import CustomError from '@/shared/utils/components/custom-errors'
 
 export default function Custom404() {
   return (

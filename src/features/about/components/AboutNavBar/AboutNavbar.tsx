@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useCallback, useState } from 'react'
 
 import { NAVIGATION_ITEMS } from '@/features/about/constants/navigationConstants'
+import { PUBLIC_ROUTES } from '@/features/shared/routes/routes'
 import ThemeToggle from '@/shared/theme'
 import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'
 
@@ -45,7 +46,7 @@ const AboutNavbar: React.FC = () => {
               <li>
                 <Link
                   className='rounded-lg bg-secondary px-4 py-2 font-light italic text-white transition-colors duration-300 hover:bg-secondaryHover'
-                  href='/auth/signup'
+                  href={PUBLIC_ROUTES.USERS.LOGIN}
                 >
                   TRY DEMO
                 </Link>
@@ -60,7 +61,7 @@ const AboutNavbar: React.FC = () => {
           <div className='flex items-center gap-4 lg:hidden'>
             <Link
               className='rounded-lg bg-secondary px-3 py-1.5 text-sm font-light italic text-white transition-colors duration-300 hover:bg-secondaryHover'
-              href='/auth/signup'
+              href={PUBLIC_ROUTES.USERS.LOGIN}
             >
               DEMO
             </Link>

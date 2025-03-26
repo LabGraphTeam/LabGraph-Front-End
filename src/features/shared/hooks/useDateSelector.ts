@@ -7,7 +7,7 @@ export default function useDateSelector() {
 
   const startDate = {
     day: firstDayOfMonth.getDate(),
-    month: firstDayOfMonth.getMonth() - 1,
+    month: firstDayOfMonth.getMonth() + 1,
     year: firstDayOfMonth.getFullYear()
   }
 

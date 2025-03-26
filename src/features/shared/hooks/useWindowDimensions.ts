@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-type WindowDimensions = {
+export type WindowDimensions = {
   width: number
   height: number
 }
