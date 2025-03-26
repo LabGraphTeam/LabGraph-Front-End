@@ -1,7 +1,7 @@
-import SignUpForm from '@/features/authentication/sign-up';
+import SignUpForm from '@/features/authentication/sign-up'
 
 const SignUp = () => {
-  return <SignUpForm />;
-};
+  return <SignUpForm />
+}
 
-export default SignUp;
+export default SignUp

@@ -1,7 +1,8 @@
+import React from 'react'
+
 import PageButtons from '@/features/analytics-table/components/PageButtons'
 import Arrow from '@/shared/ui/arrow-button'
 import { AnalyticsPaginationProps } from '@/types/AnalyticsTable'
-import React from 'react'
 
 const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
   currentPage,
@@ -25,10 +26,10 @@ const AnalyticsPagination: React.FC<AnalyticsPaginationProps> = ({
         </button>
         <div className='flex items-center'>
           <PageButtons
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              totalPages={totalPages}
-            />
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={totalPages}
+          />
         </div>
         <button
           className='rounded-md px-4 py-2 text-xs text-textPrimary transition-colors hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50 md:text-sm'

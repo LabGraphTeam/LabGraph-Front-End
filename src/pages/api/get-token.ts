@@ -6,7 +6,10 @@ interface ValidationResponse {
   token?: string
 }
 
-export default async function getToken(req: NextApiRequest, res: NextApiResponse<ValidationResponse>) {
+export default async function getToken(
+  req: NextApiRequest,
+  res: NextApiResponse<ValidationResponse>
+) {
   if (req.method !== 'GET') {
     return res.status(405).json({
       valid: false,
@@ -21,20 +24,6 @@ export default async function getToken(req: NextApiRequest, res: NextApiResponse
       return res.status(401).json({
         valid: false,
         message: 'No token found'
-      })
-    }
-    try {
-      const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
-      if (Date.now() >= payload.exp * 1000) {
-        return res.status(401).json({
-          valid: false,
-          message: 'Token expired'
-        })
-      }
-    } catch {
-      return res.status(401).json({
-        valid: false,
-        message: 'Invalid token payload'
       })
     }
 

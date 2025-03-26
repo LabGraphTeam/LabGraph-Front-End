@@ -1,6 +1,7 @@
-import { UploadButtonProps } from '@/types/UpdateResults'
 import { Upload } from 'lucide-react'
 import React from 'react'
+
+import { UploadButtonProps } from '@/types/UpdateResults'
 
 export const UploadButton: React.FC<UploadButtonProps> = ({ isProcessing, message, onChange }) => (
   <>

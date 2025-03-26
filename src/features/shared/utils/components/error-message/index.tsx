@@ -31,7 +31,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
     <>
       <div className='fixed inset-0 z-50 transition-all duration-300' />
       <div
-        className='fixed left-1/2 top-1/2 z-50 flex w-[340px] -translate-x-1/2 -translate-y-1/2 animate-pulse flex-col items-center justify-between rounded-xl bg-gradient-to-br from-background to-surface p-8 shadow-2xl ring-1 ring-primary duration-200 md:w-[420px]'
+        className='fixed left-1/2 top-1/2 z-50 flex w-[340px] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-between rounded-xl bg-gradient-to-br from-background to-surface p-8 shadow-2xl ring-1 ring-primary duration-200 md:w-[420px]'
         role='alert'
       >
         <div className='absolute right-3 top-3'>
@@ -43,7 +43,7 @@ const ErrorMessage: React.FC<ErrorMessageProps> = ({
           </button>
         </div>
 
-        <AlertCircle className='mb-5 animate-bounce text-danger' size={56} />
+        <AlertCircle className='mb-5 animate-pulse text-danger' size={56} />
 
         <div className='flex w-full flex-col items-center gap-4 text-center'>
           <h3 className='text-xl font-bold text-primary'>{title}</h3>

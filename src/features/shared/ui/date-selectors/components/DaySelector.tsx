@@ -1,5 +1,6 @@
-import { DaySelectorProps } from '@/types/DateSelectorProps'
 import React from 'react'
+
+import { DaySelectorProps } from '@/types/DateSelectorProps'
 
 const DaySelector: React.FC<DaySelectorProps & { fieldId?: string }> = ({
   selectedDay,

@@ -1,6 +1,7 @@
-import { InputFieldProps } from '@/types/Auth'
 import { Eye, EyeOff } from 'lucide-react'
 import React, { useState } from 'react'
+
+import { InputFieldProps } from '@/types/Auth'
 
 const InputField: React.FC<InputFieldProps> = ({
   id,
@@ -35,13 +36,15 @@ const InputField: React.FC<InputFieldProps> = ({
           type={type === 'password' && !showPassword ? 'password' : 'text'}
           value={value}
         />
-        {type === 'password' ? <button
+        {type === 'password' ? (
+          <button
             className='absolute right-3 top-1/2 -translate-y-1/2 text-textSecondary hover:text-textPrimary'
             onClick={togglePasswordVisibility}
             type='button'
           >
             {showPassword ? <EyeOff className='size-4' /> : <Eye className='size-4' />}
-          </button> : null}
+          </button>
+        ) : null}
       </div>
     </div>
   )

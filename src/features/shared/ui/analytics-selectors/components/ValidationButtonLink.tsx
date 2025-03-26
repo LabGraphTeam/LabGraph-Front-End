@@ -1,7 +1,8 @@
-import { ValidationButtonLinkProps } from '@/types/SelectorProps'
 import { CheckCircle } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+
+import { ValidationButtonLinkProps } from '@/types/SelectorProps'
 
 const ValidationButtonLink: React.FC<ValidationButtonLinkProps> = ({ validationUrl }) => {
   return (

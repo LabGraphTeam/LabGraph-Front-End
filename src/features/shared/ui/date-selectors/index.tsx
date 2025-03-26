@@ -1,6 +1,7 @@
+import React from 'react'
+
 import SingleDateSelector from '@/shared/ui/date-selectors/components/SingleDateSelector'
 import { DateSelectorProps } from '@/types/DateSelectorProps'
-import React from 'react'
 
 const DateSelector: React.FC<DateSelectorProps> = ({
   startDay,

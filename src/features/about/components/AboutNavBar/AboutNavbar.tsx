@@ -1,12 +1,12 @@
-import { useCallback, useState } from 'react'
-
 import { Menu } from 'lucide-react'
 import Link from 'next/link'
+import { useCallback, useState } from 'react'
 
 import { NAVIGATION_ITEMS } from '@/features/about/constants/navigationConstants'
 import ThemeToggle from '@/shared/theme'
 import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'
 
+// eslint-disable-next-line no-restricted-imports
 import styles from './AboutNavBar.module.css'
 
 const AboutNavbar: React.FC = () => {

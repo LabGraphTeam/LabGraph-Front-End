@@ -1,5 +1,6 @@
-import { PageButtonsProps } from '@/types/AnalyticsTable'
 import React, { useState } from 'react'
+
+import { PageButtonsProps } from '@/types/AnalyticsTable'
 
 const PageButtons: React.FC<PageButtonsProps> = ({ totalPages, currentPage, setCurrentPage }) => {
   const [showAllPages, setShowAllPages] = useState(false)
@@ -23,7 +24,7 @@ const PageButtons: React.FC<PageButtonsProps> = ({ totalPages, currentPage, setC
     page === 'ellipsis' ? (
       <button
         className={`rounded-md px-2 text-textPrimary ${currentPage > 2 && currentPage < totalPages - 1 ? 'bg-muted' : 'bg-background'}`}
-        key="ellipsis"
+        key='ellipsis'
         onClick={() => setShowAllPages(true)}
       >
         ...

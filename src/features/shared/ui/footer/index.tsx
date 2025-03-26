@@ -1,6 +1,6 @@
-import { Github, Linkedin } from 'lucide-react';
-import Link from 'next/link';
-import { FC } from 'react';
+import { Github, Linkedin } from 'lucide-react'
+import Link from 'next/link'
+import { FC } from 'react'
 
 const Footer: FC = () => {
   return (
@@ -37,7 +37,7 @@ const Footer: FC = () => {
         </span>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

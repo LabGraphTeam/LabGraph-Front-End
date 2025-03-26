@@ -1,9 +1,10 @@
+import React from 'react'
+
 import UpdateResults from '@/features/analytics-upload-files'
 import ValidationButtonLink from '@/features/shared/ui/analytics-selectors/components/ValidationButtonLink'
 import TestLevelSelector from '@/shared/ui/analytics-selectors/components/TestLevelSelector'
 import TestNameSelector from '@/shared/ui/analytics-selectors/components/TestNameSelector'
 import { TestSelectorActionsProps } from '@/types/SelectorProps'
-import React from 'react'
 
 const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
   availableTestNames: list,

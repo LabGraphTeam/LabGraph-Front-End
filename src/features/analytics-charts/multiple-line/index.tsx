@@ -1,9 +1,10 @@
+import React, { useState } from 'react'
+
 import MultipleLineControlChart from '@/features/analytics-charts/multiple-line/components/MultipleLineControlChart'
 import TestSelectorWithoutLevel from '@/shared/ui/analytics-selectors/custom-selector'
 import MainLayout from '@/shared/ui/layouts/MainLayout'
 import Loading from '@/shared/utils/components/loading'
 import { GroupedAnalyticData, MultipleLineGraphProps } from '@/types/Chart'
-import React, { useState } from 'react'
 
 const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType }) => {
   const [analyticsGroupData, setAnalyticsGroupData] = useState<GroupedAnalyticData[]>([])

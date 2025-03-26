@@ -1,7 +1,8 @@
+import { GetServerSideProps } from 'next'
+
 import { ChartPageComponent } from '@/features/dynamic-pages/components/ChartPage'
 import { chartConfigs } from '@/features/dynamic-pages/config/chartConfigs'
 import { ChartPageProps } from '@/types/ChartPageProps'
-import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps<ChartPageProps> = async ({ params }) => {
   const chartType = params?.chartType as string

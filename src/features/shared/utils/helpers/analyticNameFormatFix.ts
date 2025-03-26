@@ -1,12 +1,12 @@
 const analyticNameFormatFix = (testName: string) => {
   if (testName.includes('#')) {
-    return testName.replace('#', '%23');
+    return testName.replace('#', '%23')
   }
   if (testName.includes('%')) {
-    return testName.replace('%', '%25');
+    return testName.replace('%', '%25')
   }
 
-  return testName;
-};
+  return testName
+}
 
-export default analyticNameFormatFix;
+export default analyticNameFormatFix

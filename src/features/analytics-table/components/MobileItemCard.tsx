@@ -1,5 +1,6 @@
-import { MobileItemCardProps } from '@/types/AnalyticsTable'
 import React from 'react'
+
+import { MobileItemCardProps } from '@/types/AnalyticsTable'
 
 const MobileItemCard: React.FC<MobileItemCardProps> = ({ analyticData: item }) => {
   return (

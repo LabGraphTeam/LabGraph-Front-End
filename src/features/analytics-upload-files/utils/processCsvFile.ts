@@ -1,5 +1,5 @@
 import { CSV_MINIMUM_COLUMNS } from '@/features/analytics-upload-files/constants/fileProcessing'
-import { isValidValue, cleanValue } from '@/features/analytics-upload-files/utils/fileProcessors'
+import { cleanValue, isValidValue } from '@/features/analytics-upload-files/utils/fileProcessors'
 import { FileProcessingResult } from '@/types/FileProcessing'
 import { ProcessedData } from '@/types/UpdateResults'
 

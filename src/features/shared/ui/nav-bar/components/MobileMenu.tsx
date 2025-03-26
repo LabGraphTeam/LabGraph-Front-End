@@ -1,7 +1,8 @@
+import Link from 'next/link'
+
 import ViewToggleButton from '@/shared/ui/nav-bar/components/ViewToggleButton'
 import navLinks from '@/shared/ui/nav-bar/constants/navLinks'
 import { MobileMenuProps } from '@/types/NavigationBar'
-import Link from 'next/link'
 
 const MobileMenu = ({ isMenuOpen, onLogout }: MobileMenuProps) => (
   <div

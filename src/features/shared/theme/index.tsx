@@ -1,5 +1,6 @@
-import useTheme from '@/shared/hooks/useTheme'
 import { CloudSun, Moon } from 'lucide-react'
+
+import useTheme from '@/shared/hooks/useTheme'
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme()

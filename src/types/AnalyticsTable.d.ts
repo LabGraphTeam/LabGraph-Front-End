@@ -1,6 +1,7 @@
+import { ReactNode } from 'react'
+
 import { AnalyticData } from '@/types/Chart'
 import { DateSelectorProps } from '@/types/DateSelectorProps'
-import { ReactNode } from 'react'
 
 export interface MobileItemCardProps {
   analyticData: AnalyticData
@@ -11,8 +12,8 @@ export interface AnalyticWithValidatedUser extends AnalyticData {
 }
 
 export interface TableRowProps {
-  analyticData: AnalyticWithValidatedUser,
-  onValidate?: (id: number) => Promise<void>,
+  analyticData: AnalyticWithValidatedUser
+  onValidate?: (id: number) => Promise<void>
   onUpdateDescription?: (id: number, description: string) => Promise<void>
 }
 export interface MainLayoutProps {
@@ -21,12 +22,11 @@ export interface MainLayoutProps {
 }
 
 export interface AnalyticsDataReturn {
-  data: PaginatedAnalyticsResponse | null,
-  error: Error | string | null,
+  data: PaginatedAnalyticsResponse | null
+  error: Error | string | null
   isLoading: boolean
   validateAnalytics: (analyticsId: number) => Promise<void>
   updateDescription: (analyticsId: number, description: string) => Promise<void>
-
 }
 
 export interface AnalyticsFiltersProps {
@@ -57,7 +57,6 @@ export interface PageButtonsProps {
 }
 
 export interface UseFetchAnalyticsTableProps {
-
   endPoint: string
   analyticsType: string
   level: number
@@ -67,7 +66,11 @@ export interface UseFetchAnalyticsTableProps {
   currentPage: number
   setAnalyticData: (data: AnalyticWithValidatedUser[]) => void
   analyticData: AnalyticWithValidatedUser[]
+}
 
+export interface UseValidationAnalyticsProps {
+  analyticsType: string
+  analyticsId: number
 }
 export interface AnalyticsTableProps {
   items: AnalyticWithValidatedUser[]

@@ -1,8 +1,9 @@
+import React from 'react'
+
 import DaySelector from '@/shared/ui/date-selectors/components/DaySelector'
 import MonthSelector from '@/shared/ui/date-selectors/components/MonthSelector'
 import YearSelector from '@/shared/ui/date-selectors/components/YearSelector'
 import { SingleDateSelectorProps } from '@/types/DateSelectorProps'
-import React from 'react'
 
 const sanitize = (str: string) => str.replace(/\s+/g, '-').toLowerCase()
 

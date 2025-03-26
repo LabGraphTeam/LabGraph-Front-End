@@ -1,6 +1,7 @@
+import { useCallback, useEffect, useState } from 'react'
+
 import getStatusMessage from '@/shared/utils/helpers/getStatusMessage'
 import { Theme, ThemeConfig, UseThemeReturn } from '@/types/Theme'
-import { useCallback, useEffect, useState } from 'react'
 
 const useTheme = (config: ThemeConfig = {}): UseThemeReturn => {
   const { storageKey = 'theme', defaultTheme = 'light' } = config

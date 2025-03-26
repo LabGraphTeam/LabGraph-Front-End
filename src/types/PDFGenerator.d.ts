@@ -1,4 +1,3 @@
-
 export interface PdfGeneratorProps {
   analyticsType: string
 
@@ -17,5 +16,4 @@ export interface PdfGeneratorProps {
   reportMonth?: string
   reportYear?: number
   buttonText: string
-
 }

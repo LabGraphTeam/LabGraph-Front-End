@@ -28,10 +28,10 @@ export const useAnalyticsOptions = (analyticsType: string) => {
     }
   }, [analyticsType])
 
-
   const filters = [
     { value: false, label: '-' },
-    { value: true, label: '⚠️ Pending' }]
+    { value: true, label: '⚠️ Pending' }
+  ]
 
   return { analyticsOptions, levelOptions, filters }
 }

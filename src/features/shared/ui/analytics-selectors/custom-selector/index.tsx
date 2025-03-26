@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from 'react'
+
 import useFetchAnalyticsGrouped from '@/features/analytics-charts/hooks/useFetchAnalyticsGrouped'
-import { PRIVATE_ROUTES } from '@/features/shared/utils/constants/privateRoutes'
+import { PRIVATE_ROUTES } from '@/features/shared/routes/routes'
 import useDateSelector from '@/shared/hooks/useDateSelector'
 import TestSelectorActions from '@/shared/ui/analytics-selectors/components/TestSelectorActions'
 import DateSelector from '@/shared/ui/date-selectors'
@@ -7,7 +9,6 @@ import ErrorMessage from '@/shared/utils/components/error-message'
 import buildAnalyticsEndpointByNameAndDate from '@/shared/utils/helpers/buildAnalyticsEndpointByNameAndDate'
 import { BuildAnalyticsEndpointByNameAndDateProps } from '@/types/BuildAnalyticsEndpointByNameAndDateProps'
 import { TestSelectorProps } from '@/types/SelectorProps'
-import React, { useEffect, useState } from 'react'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
   availableTestNames,

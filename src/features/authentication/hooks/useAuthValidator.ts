@@ -1,6 +1,7 @@
+import { useState } from 'react'
+
 import { useHandleAuthForm } from '@/features/authentication/hooks/useHandleAuthForm'
 import { ValidationError } from '@/types/Auth'
-import { useState } from 'react'
 
 export const useAuthValidator = (isLogin: boolean) => {
   const [errors, setErrors] = useState<ValidationError[]>([])

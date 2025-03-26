@@ -1,5 +1,6 @@
-import { CustomErrorProps } from '@/shared/utils/custom-errors/types/CustomErrorProps'
 import Link from 'next/link'
+
+import { CustomErrorProps } from '@/shared/utils/custom-errors/types/CustomErrorProps'
 
 const CustomError = ({ code, title, message }: Readonly<CustomErrorProps>) => {
   return (

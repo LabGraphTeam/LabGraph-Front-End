@@ -1,5 +1,6 @@
-import { GraphContext } from '@/features/analytics-charts/contexts/AnalyticsGraphContext'
 import { useContext } from 'react'
+
+import { GraphContext } from '@/features/analytics-charts/contexts/AnalyticsGraphContext'
 
 export const useAnalyticsGraph = () => {
   const context = useContext(GraphContext)

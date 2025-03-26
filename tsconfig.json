@@ -51,6 +51,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.css",
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "postcss.config*",
