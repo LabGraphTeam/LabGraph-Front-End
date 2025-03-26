@@ -67,6 +67,11 @@ export interface UseFetchAnalyticsTableProps {
   setAnalyticData: (data: AnalyticWithValidatedUser[]) => void
   analyticData: AnalyticWithValidatedUser[]
 }
+
+export interface UseValidationAnalyticsProps {
+  analyticsType: string
+  analyticsId: number
+}
 export interface AnalyticsTableProps {
   items: AnalyticWithValidatedUser[]
   onValidate?: (id: number) => Promise<void>

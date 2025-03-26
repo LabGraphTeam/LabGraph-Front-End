@@ -26,20 +26,6 @@ export default async function getToken(
         message: 'No token found'
       })
     }
-    try {
-      const payload = JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString())
-      if (Date.now() >= payload.exp * 1000) {
-        return res.status(401).json({
-          valid: false,
-          message: 'Token expired'
-        })
-      }
-    } catch {
-      return res.status(401).json({
-        valid: false,
-        message: 'Invalid token payload'
-      })
-    }
 
     return res.status(200).json({ token: token, valid: true })
   } catch (error) {

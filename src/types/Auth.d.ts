@@ -1,5 +1,16 @@
 import { ReactNode } from 'react'
 
+export interface AuthParams {
+  identifier: string
+  password: string
+  remember?: boolean
+}
+
+export interface TokenContextProps {
+  token: string | null
+  isLoading: boolean
+  refreshToken: () => Promise<string | null>
+}
 export interface AuthFormData {
   identifier: string
   email?: string
@@ -36,11 +47,6 @@ export interface AuthLinkProps {
 export interface SubmitButtonProps {
   text?: string
   icon?: boolean
-}
-
-export interface TokenContextProps {
-  token: string | null
-  isLoading: boolean
 }
 
 export interface TokenProviderProps {

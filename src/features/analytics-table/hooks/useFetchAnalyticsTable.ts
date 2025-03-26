@@ -21,55 +21,51 @@ export const useFetchAnalyticsTable = ({
     authenticated: true
   })
 
-  const validateAnalytics = async (analyticsId: number): Promise<void> => {
-    try {
-      const response = await fetchWrapper({
-        route: buildAnalyticsValidationEndpoint({
-          analyticsType,
-          analyticsId
-        }),
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      })
 
-      if (data) {
-        const updatedContent = data.content.map((item) =>
-          item.id === analyticsId ? { ...item, ...response } : item
-        )
-        mutate({ ...data, content: updatedContent }, false)
-      }
-    } catch (error) {
-      console.error('Error validating analytics:', error)
+  const validateAnalytics = async (analyticsId: number): Promise<void> => {
+    const response = await fetchWrapper({
+      route: buildAnalyticsValidationEndpoint({
+        analyticsType,
+        analyticsId
+      }),
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    })
+
+    if (data) {
+      const updatedContent = data.content.map((item) =>
+        item.id === analyticsId ? { ...item, ...response } : item
+      )
+      mutate({ ...data, content: updatedContent }, false)
     }
   }
 
-  const updateDescription = async (analyticsId: number, description: string): Promise<void> => {
-    try {
-      const response = await fetchWrapper({
-        route: buildAnalyticsValidationEndpoint({
-          analyticsType,
-          analyticsId,
-          isUpdateDescription: true
-        }),
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ description })
-      })
 
-      if (data) {
-        const updatedContent = data.content.map((item) =>
-          item.id === analyticsId ? { ...item, ...response } : item
-        )
-        mutate({ ...data, content: updatedContent }, false)
-      }
-    } catch (error) {
-      console.error('Error updating description:', error)
+
+
+  const updateDescription = async (analyticsId: number, description: string): Promise<void> => {
+    const response = await fetchWrapper({
+      route: buildAnalyticsValidationEndpoint({
+        analyticsType,
+        analyticsId,
+        isUpdateDescription: true
+      }),
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ description })
+    })
+
+    if (data) {
+      const updatedContent = data.content.map((item) =>
+        item.id === analyticsId ? { ...item, ...response } : item
+      )
+      mutate({ ...data, content: updatedContent }, false)
     }
   }
 

@@ -1,4 +1,4 @@
-import { ABOUT_US, CHARTS, MISC } from '@/shared/utils/constants/privateRoutes'
+import { CHARTS, MISC, PUBLIC_ROUTES } from '@/features/shared/routes/routes'
 import type { NavLinkProps } from '@/types/NavigationBar'
 
 const navLinks: NavLinkProps[] = [
@@ -29,7 +29,7 @@ const navLinks: NavLinkProps[] = [
   {
     id: 'about',
     text: 'ABOUT',
-    url: ABOUT_US,
+    url: PUBLIC_ROUTES.ABOUT_US,
     title: 'ABOUT'
   }
 ]

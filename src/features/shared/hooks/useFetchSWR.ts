@@ -44,7 +44,7 @@ export function useFetchSWR<T>({
       route: url,
       method,
       headers,
-      body: body ? JSON.stringify(body) : undefined
+      body: body ? JSON.stringify(body) : undefined,
     })
 
     return transform(response)

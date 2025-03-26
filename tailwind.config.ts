@@ -6,7 +6,6 @@ const config: Config = {
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/services/utils/handleResponseError.tsx'
   ],
   theme: {
     extend: {

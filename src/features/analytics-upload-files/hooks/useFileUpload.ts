@@ -35,7 +35,7 @@ export const useFileUpload = (analyticsType: string) => {
         route: endpointUrl,
         method: 'POST',
         headers: { Authorization: `Bearer ${token}` },
-        body: data
+        body: data,
       })
       if (response as Error) {
         setStatus({

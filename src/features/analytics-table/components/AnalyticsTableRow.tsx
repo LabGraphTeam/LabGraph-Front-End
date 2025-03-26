@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 
 import { DESCRIPTION_OPTIONS } from '@/features/analytics-table/constants/descriptionOptions'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
 import { TableRowProps } from '@/types/AnalyticsTable'
 
 const sanitizeDescription = (description: string): string => {
@@ -18,6 +19,8 @@ const TableRow: React.FC<TableRowProps> = ({
   onValidate,
   onUpdateDescription
 }) => {
+  const [validationError, setValidationError] = useState<Error | null>(null)
+
   const [isEditing, setIsEditing] = useState(false)
   const [description, setDescription] = useState(
     item.description ? sanitizeDescription(item.description) : ''
@@ -28,10 +31,20 @@ const TableRow: React.FC<TableRowProps> = ({
     ) && item.description !== ''
   )
 
+  const handleAnalyticsValidate = () => {
+    if (onValidate) {
+      onValidate(item.id).catch((error) => {
+        setValidationError(error)
+      })
+    }
+  }
+
   const handleSaveDescription = () => {
     if (onUpdateDescription) {
       const cleanDescription = sanitizeDescription(description)
-      onUpdateDescription(item.id, cleanDescription)
+      onUpdateDescription(item.id, cleanDescription).catch((error) => {
+        setValidationError(error)
+      })
       setIsEditing(false)
     }
   }
@@ -89,12 +102,15 @@ const TableRow: React.FC<TableRowProps> = ({
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         <div className='flex items-center gap-2'>
           {item.validator_user === 'Not validated' ? (
-            <button
-              className='flex items-center gap-1 rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-red-500 md:text-xs'
-              onClick={() => onValidate?.(item.id)}
-            >
-              <span>✓</span>
-            </button>
+            <>
+              <button
+                className='flex items-center gap-1 rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-red-500 md:text-xs'
+                onClick={handleAnalyticsValidate}
+              >
+                <span>✓</span>
+              </button>
+              {validationError && <ErrorMessage message={validationError.message} />}
+            </>
           ) : null}
           {item.validator_user !== 'Not validated' ? (
             <button

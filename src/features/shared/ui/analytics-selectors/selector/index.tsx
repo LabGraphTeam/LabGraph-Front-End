@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
 import useFetchAnalytics from '@/features/analytics-charts/hooks/useFetchAnalytics'
-import { PRIVATE_ROUTES } from '@/features/shared/utils/constants/privateRoutes'
+import { PRIVATE_ROUTES } from '@/features/shared/routes/routes'
 import { useAnalyticsOptions } from '@/shared/hooks/useAnalyticsOptions'
 import useDateSelector from '@/shared/hooks/useDateSelector'
 import TestSelectorActions from '@/shared/ui/analytics-selectors/components/TestSelectorActions'

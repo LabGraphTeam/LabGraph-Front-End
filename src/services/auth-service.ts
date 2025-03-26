@@ -1,7 +1,6 @@
 import { API_BASE_URL } from '@/services/constants/apiBaseUrl'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
-import { AuthFormData } from '@/types/Auth'
-import { AuthParams } from '@/types/AuthParams'
+import { AuthFormData, AuthParams } from '@/types/Auth'
 
 export const AuthService = {
   signIn: async ({ identifier, password, remember }: AuthParams) => {
