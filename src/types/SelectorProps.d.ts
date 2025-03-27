@@ -23,8 +23,9 @@ export interface AnalyticsLevelSelectorProps {
   setAnalyticsLevel: (level: number) => void
 }
 
-
-export interface CommonTestSelectorProps extends AnalyticsSelectorProps, AnalyticsLevelSelectorProps {
+export interface CommonTestSelectorProps
+  extends AnalyticsSelectorProps,
+    AnalyticsLevelSelectorProps {
   setAnalyticsData: (data: AnalyticWithStatsData) => void
 }
 
@@ -38,7 +39,9 @@ export interface AnalyticsNameSelectorProps {
   setAnalyticsName: (name: string) => void
 }
 
-export interface SelectorActionsProps extends AnalyticsNameSelectorProps, AnalyticsLevelSelectorProps {
+export interface SelectorActionsProps
+  extends AnalyticsNameSelectorProps,
+    AnalyticsLevelSelectorProps {
   analyticsType: string
   validationUrl: string
   isMultiSelect?: boolean
