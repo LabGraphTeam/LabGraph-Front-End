@@ -16,19 +16,21 @@ export const fetchWrapper = async (options: FetchOptions) => {
   }
 
   if (headers.Authorization) {
-    const payload = JSON.parse(Buffer.from(headers.Authorization.split('.')[1], 'base64').toString())
+    const payload = JSON.parse(
+      Buffer.from(headers.Authorization.split('.')[1], 'base64').toString()
+    )
     if (Date.now() >= payload.exp * 1000) {
-      await fetch('/api/logout', { method: 'POST' })
-        .then(() => {
-          throw new Error('Your session has expired. You will be redirected to the login page.')
-        })
+      await fetch('/api/logout', { method: 'POST' }).then(() => {
+        throw new Error('Your session has expired. You will be redirected to the login page.')
+      })
     }
   }
 
   const response = await fetch(`${route}`, fetchOptions)
 
   if (!response.ok && response.status === 403) {
-    const errorMessage = 'Authentication failed. Your session may have expired or you lack sufficient permissions.'
+    const errorMessage =
+      'Authentication failed. Your session may have expired or you lack sufficient permissions.'
     throw new Error(`${response.status}: ${errorMessage}`)
   }
 
