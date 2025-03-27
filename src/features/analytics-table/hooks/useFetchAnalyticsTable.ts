@@ -21,7 +21,6 @@ export const useFetchAnalyticsTable = ({
     authenticated: true
   })
 
-
   const validateAnalytics = async (analyticsId: number): Promise<void> => {
     const response = await fetchWrapper({
       route: buildAnalyticsValidationEndpoint({
@@ -32,7 +31,7 @@ export const useFetchAnalyticsTable = ({
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
-      },
+      }
     })
 
     if (data) {
@@ -42,9 +41,6 @@ export const useFetchAnalyticsTable = ({
       mutate({ ...data, content: updatedContent }, false)
     }
   }
-
-
-
 
   const updateDescription = async (analyticsId: number, description: string): Promise<void> => {
     const response = await fetchWrapper({

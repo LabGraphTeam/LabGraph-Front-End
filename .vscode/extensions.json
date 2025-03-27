@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        "formulahendry.auto-close-tag",
+        "formulahendry.auto-rename-tag",
+        "ms-azuretools.vscode-docker",
+        "jmkrivocapich.drawfolderstructure",
+        "dsznajder.es7-react-js-snippets",
+        "dbaeumer.vscode-eslint",
+        "pmneo.tsimporter",
+        "vincaslt.highlight-matching-tag",
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode",
+        "yoavbls.pretty-ts-errors",
+        "bradlc.vscode-tailwindcss"
+    ]
+}
