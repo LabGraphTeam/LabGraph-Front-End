@@ -40,8 +40,8 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
               <MeanAndDeviationDisplay
                 mean={data.mean}
                 ownMean={data.ownMean}
-                ownSd={data.sd}
-                sd={data.sd}
+                ownSd={data.ownSd}
+                standardDeviation={data.standardDeviation}
                 unitValue={data.unitValue}
               />
             </div>

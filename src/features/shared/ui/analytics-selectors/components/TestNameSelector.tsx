@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react'
 
-import { TestNameSelectorWithLevelProps } from '@/types/SelectorProps'
+import { AnalyticsBaseProps } from '@/types/SelectorProps'
 
-const TestNameSelector: React.FC<TestNameSelectorWithLevelProps> = ({
-  availableTestNames: list,
-  analyticName: testName,
-  setTestName
+const TestNameSelector: React.FC<AnalyticsBaseProps> = ({
+  availableAnalyticsNames,
+  analyticsName,
+  setAnalyticsName
 }) => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setTestName(e.target.value)
+      setAnalyticsName(e.target.value)
     },
-    [setTestName]
+    [setAnalyticsName]
   )
 
   return (
@@ -24,9 +24,9 @@ const TestNameSelector: React.FC<TestNameSelectorWithLevelProps> = ({
         id='testName'
         name='testName'
         onChange={handleChange}
-        value={testName}
+        value={analyticsName}
       >
-        {list.map((optionValue) => (
+        {availableAnalyticsNames.map((optionValue) => (
           <option key={optionValue} value={optionValue}>
             {optionValue}
           </option>

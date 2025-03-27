@@ -4,15 +4,15 @@ import UpdateResults from '@/features/analytics-upload-files'
 import ValidationButtonLink from '@/features/shared/ui/analytics-selectors/components/ValidationButtonLink'
 import TestLevelSelector from '@/shared/ui/analytics-selectors/components/TestLevelSelector'
 import TestNameSelector from '@/shared/ui/analytics-selectors/components/TestNameSelector'
-import { TestSelectorActionsProps } from '@/types/SelectorProps'
+import { SelectorActionsProps } from '@/types/SelectorProps'
 
-const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
-  availableTestNames: list,
-  analyticName: testName,
-  setTestName,
+const TestSelectorActions: React.FC<SelectorActionsProps> = ({
+  availableAnalyticsNames,
+  analyticsName,
+  setAnalyticsName,
   levelOptions,
-  testLevel,
-  setTestLevel,
+  analyticsLevel,
+  setAnalyticsLevel,
   analyticsType,
   validationUrl,
   isMultiSelect
@@ -24,17 +24,17 @@ const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
       </div>
       <span className='text-xs text-textPrimary'>Test:</span>
       <TestNameSelector
-        analyticName={testName}
-        availableTestNames={list}
-        setTestName={setTestName}
+        analyticsName={analyticsName}
+        availableAnalyticsNames={availableAnalyticsNames}
+        setAnalyticsName={setAnalyticsName}
       />
       {!isMultiSelect ? <span className='text-xs text-textPrimary'>Level:</span> : null}
 
-      {levelOptions && levelOptions.length > 0 && !isMultiSelect && setTestLevel ? (
+      {levelOptions && levelOptions.length > 0 && !isMultiSelect && setAnalyticsLevel ? (
         <TestLevelSelector
-          analyticLevel={testLevel}
+          analyticsLevel={analyticsLevel}
           levelOptions={levelOptions}
-          setTestLevel={setTestLevel}
+          setAnalyticsLevel={setAnalyticsLevel}
         />
       ) : null}
       <span className='flex items-center gap-2'>

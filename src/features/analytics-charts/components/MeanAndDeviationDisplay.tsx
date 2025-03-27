@@ -7,7 +7,7 @@ import { MeanAndDeviationDisplayProps } from '@/types/Chart'
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   mean,
-  sd,
+  standardDeviation,
   ownMean,
   ownSd,
   unitValue
@@ -18,7 +18,7 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
       <StatItem
         formatStatValue={formatWithUnit}
         label='Standard Deviation'
-        value={sd}
+        value={standardDeviation}
         unitValue={unitValue}
       />
       {ownMean !== undefined && ownSd !== undefined ? (

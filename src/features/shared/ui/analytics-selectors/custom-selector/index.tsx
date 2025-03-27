@@ -11,13 +11,13 @@ import { BuildAnalyticsEndpointByNameAndDateProps } from '@/types/BuildAnalytics
 import { TestSelectorProps } from '@/types/SelectorProps'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
-  availableTestNames,
+  availableAnalyticsNames,
   analyticsType,
-  analyticName,
-  setAnalyticGroupedData,
+  analyticsName,
+  setGroupedAnalyticData,
   setIsLoading
 }) => {
-  const [testName, setTestName] = useState<string>(analyticName)
+  const [testName, setTestName] = useState<string>(analyticsName)
 
   const { dateValues, combinedDateAndHandlersProps } = useDateSelector()
 
@@ -38,22 +38,22 @@ const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
     if (data && data.length > 0) {
       setIsLoading(false)
     }
-    setAnalyticGroupedData(data || [])
-  }, [endPoint, data, setAnalyticGroupedData, setIsLoading])
+    setGroupedAnalyticData(data || [])
+  }, [endPoint, data, setGroupedAnalyticData, setIsLoading])
 
   return (
     <div className='mt-12 grid content-center items-center text-textSecondary md:mt-8 md:w-full md:justify-around xl:flex'>
       {error ? <ErrorMessage message={error.toString()} /> : null}
       <DateSelector {...combinedDateAndHandlersProps} />
       <TestSelectorActions
-        analyticName={testName}
+        analyticsName={testName}
         analyticsType={analyticsType}
-        availableTestNames={availableTestNames}
+        availableAnalyticsNames={availableAnalyticsNames}
         isMultiSelect={true}
         levelOptions={[]}
-        setTestLevel={() => {}}
-        setTestName={setTestName}
-        testLevel={0}
+        setAnalyticsLevel={() => {}}
+        setAnalyticsName={setTestName}
+        analyticsLevel={0}
         validationUrl={PRIVATE_ROUTES.MISC.ANALYTICS_TABLE}
       />
     </div>

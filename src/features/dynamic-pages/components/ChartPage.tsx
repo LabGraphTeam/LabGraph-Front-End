@@ -4,10 +4,10 @@ import { ChartPageProps } from '@/types/ChartPageProps'
 export const ChartPageComponent = ({ chartType, config }: Readonly<ChartPageProps>) => {
   return (
     <GraphWrapper
-      analyticsType={config.analyticsType}
+      defaultAnalyticsType={config.analyticsType}
       key={chartType}
       size={config.size}
-      testList={config.testList}
+      availableAnalyticsNames={config.testList}
     />
   )
 }
