@@ -1,18 +1,20 @@
 {
   "name": "quality-lab-pro",
-  "version": "0.9.0",
+  "version": "0.9.5",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
+    "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "exec:container": "docker exec -it quality-lab-pro-front-end-dev /bin/sh",
     "e2e": "start-server-and-test dev http://localhost:3000 \"cypress open --e2e\"",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 \"cypress run --e2e\"",
     "component": "cypress open --component",
-    "component:headless": "cypress run --component"
+    "component:headless": "cypress run --component",
+    "prepare": "husky || true",
+    "prettier-format": "prettier --config .prettierrc --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.13",
@@ -23,10 +25,12 @@
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.468.0",
     "next": "^15.2.2",
+    "quality-lab-pro": "file:",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
-    "recharts": "^2.15.0"
+    "recharts": "^2.15.0",
+    "swr": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
@@ -41,6 +45,7 @@
     "eslint-plugin-tailwindcss": "^3.18.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "postcss": "^8.5.3",
     "prettier": "^3.4.2",
     "prettier-plugin-organize-imports": "^4.1.0",

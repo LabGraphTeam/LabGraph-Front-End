@@ -1,16 +1,17 @@
-import { StatItemProps } from '@/types/Chart'
 import React from 'react'
 
-const StatItem: React.FC<StatItemProps> = ({ label, value, formatter }) => {
+import { StatItemProps } from '@/types/Chart'
+
+const StatItem: React.FC<StatItemProps> = ({ label, value, unitValue, formatStatValue }) => {
   const displayValue = React.useMemo(() => {
     if (value === undefined || isNaN(value)) return ''
-    return formatter(value)
-  }, [value, formatter])
+    return formatStatValue(value, unitValue)
+  }, [value, formatStatValue, unitValue])
 
   return (
-    <div className='flex flex-row justify-start md:flex-col'>
+    <div className='flex flex-col text-[12px]'>
       <span>{label}:</span>
-      <span className='text-textPrimary'>{displayValue}</span>
+      <span className='text-[10px] text-textPrimary'>{displayValue}</span>
     </div>
   )
 }

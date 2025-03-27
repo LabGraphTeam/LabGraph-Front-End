@@ -1,6 +1,7 @@
-import CustomError from '@/features/shared/utils/custom-errors'
 import { NextPageContext } from 'next'
 import { ErrorProps } from 'next/error'
+
+import CustomError from '@/shared/utils/components/custom-errors'
 
 const MyError = ({ statusCode }: ErrorProps) => {
   const errorData = {

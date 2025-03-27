@@ -6,7 +6,6 @@ const config: Config = {
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/services/utils/handleResponseError.tsx'
   ],
   theme: {
     extend: {
@@ -40,7 +39,6 @@ const config: Config = {
         bgText: 'var(--color-bg-text)',
         border: 'var(--color-border)',
         white: 'var(--color-white)',
-        green: 'var(--color-green)',
         shadow: 'var(--color-shadow)',
         overlay: 'var(--color-overlay)',
         sd1: 'var(--color-sd1)',
@@ -80,7 +78,6 @@ const config: Config = {
           bgText: 'var(--color-bg-text)',
           border: 'var(--color-border)',
           white: 'var(--color-white)',
-          green: 'var(--color-green)',
           shadow: 'var(--color-shadow)',
           overlay: 'var(--color-overlay)',
           sd1: 'var(--color-sd1)',

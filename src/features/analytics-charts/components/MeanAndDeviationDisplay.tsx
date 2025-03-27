@@ -1,7 +1,9 @@
-import { MeanAndDeviationDisplayProps } from '@/types/Chart'
 import React from 'react'
-import { calculateCV } from '../utils/calculateCv'
-import StatItem from './StatItem'
+
+import StatItem from '@/features/analytics-charts/components/StatItem'
+import { calculateCV } from '@/features/analytics-charts/utils/calculateCv'
+import formatWithUnit from '@/features/analytics-charts/utils/formatWithUnit'
+import { MeanAndDeviationDisplayProps } from '@/types/Chart'
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   mean,
@@ -10,26 +12,25 @@ const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
   ownSd,
   unitValue
 }) => {
-  const formatWithUnit = React.useCallback(
-    (value: number) => value.toFixed(2) + (unitValue ? ' (' + unitValue + ')' : ''),
-    [unitValue]
-  )
-
   return (
-    <div className='grid w-full grid-cols-1 text-[10px] font-light text-textPrimary md:ml-8 md:grid-cols-3'>
-      <StatItem label='Mean (Reference)' value={mean} formatter={formatWithUnit} />
-      <StatItem label='Deviation (Reference)' value={sd} formatter={formatWithUnit} />
-      <StatItem label='Calculated Mean' value={ownMean} formatter={formatWithUnit} />
-      <StatItem label='Calculated Deviation' value={ownSd} formatter={formatWithUnit} />
-      {ownMean !== undefined && ownSd !== undefined && (
+    <div className='flex w-full flex-col text-textPrimary'>
+      <StatItem formatStatValue={formatWithUnit} label='Mean' value={mean} unitValue={unitValue} />
+      <StatItem
+        formatStatValue={formatWithUnit}
+        label='Standard Deviation'
+        value={sd}
+        unitValue={unitValue}
+      />
+      {ownMean !== undefined && ownSd !== undefined ? (
         <StatItem
+          formatStatValue={() => `${calculateCV(ownMean, ownSd)} (%)`}
           label='Calculated CV'
           value={ownMean}
-          formatter={() => `${calculateCV(ownMean, ownSd)} (%)`}
+          unitValue={unitValue}
         />
-      )}
+      ) : null}
     </div>
   )
 }
 
-export default React.memo(MeanAndDeviationDisplay)
+export default MeanAndDeviationDisplay

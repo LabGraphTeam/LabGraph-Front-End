@@ -1,10 +1,11 @@
+import { useCallback, useState } from 'react'
+
+import { API_ENDPOINTS } from '@/features/analytics-upload-files/constants/fileProcessing'
+import { processCsvFile } from '@/features/analytics-upload-files/utils/processCsvFile'
+import { processTextFile } from '@/features/analytics-upload-files/utils/processTxtFile'
 import { useToken } from '@/features/authentication/contexts/TokenContext'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { ProcessedData, ProcessingStatus } from '@/types/UpdateResults'
-import { useCallback, useState } from 'react'
-import { API_ENDPOINTS } from '../constants/fileProcessing'
-import { processCsvFile } from '../utils/processCsvFile'
-import { processTextFile } from '../utils/processTxtFile'
 
 export const useFileUpload = (analyticsType: string) => {
   const [status, setStatus] = useState<ProcessingStatus>({

@@ -1,5 +1,5 @@
-import { OVERVIEW_ITEMS } from '@/features/about/constants/overviewConstants';
-import { OverviewCard } from '@/features/about/components/Cards';
+import { OverviewCard } from '@/features/about/components/Cards'
+import { OVERVIEW_ITEMS } from '@/features/about/constants/overviewConstants'
 
 const Overview: React.FC = () => (
   <div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
@@ -13,6 +13,6 @@ const Overview: React.FC = () => (
       ))}
     </div>
   </div>
-);
+)
 
-export default Overview;
+export default Overview

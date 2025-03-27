@@ -13,10 +13,10 @@ const getStatusMessage = (statusCode: number): string => {
     500: 'Internal server error',
     502: 'Bad gateway',
     503: 'Service unavailable',
-    504: 'Gateway timeout',
-  };
+    504: 'Gateway timeout'
+  }
 
-  return statusMap[statusCode] || 'Unknown HTTP status';
-};
+  return statusMap[statusCode] || 'Unknown HTTP status'
+}
 
-export default getStatusMessage;
+export default getStatusMessage

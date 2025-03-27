@@ -1,11 +1,14 @@
+import { useRouter } from 'next/router'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+
+import { PUBLIC_ROUTES_HOME, PUBLIC_ROUTES_LIST } from '@/features/shared/routes/routes'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { TokenContextProps, TokenProviderProps } from '@/types/Auth'
-import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 const TokenContext = createContext<TokenContextProps>({
   token: null,
-  isLoading: true
+  isLoading: true,
+  refreshToken: async () => null
 })
 
 export const TokenProvider = ({ children }: TokenProviderProps) => {
@@ -13,40 +16,34 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        setIsLoading(true)
+  const refreshToken = useCallback(async () => {
+    const isPublicRoute = PUBLIC_ROUTES_LIST.includes(router.pathname)
+    const isHomeRoute = router.pathname === PUBLIC_ROUTES_HOME
 
-        if (
-          router.pathname === '/auth/login' ||
-          router.pathname === '/auth/signup' ||
-          router.pathname === '/auth/forgot-password' ||
-          router.pathname === '/about-us' ||
-          router.pathname === '/'
-        ) {
-          return
-        }
-
-        const tokenResponse = await fetchWrapper({
-          route: '/api/get-token',
-          method: 'GET'
-        })
-
-        if (tokenResponse.valid) {
-          setToken(tokenResponse.token)
-          setIsLoading(false)
-        }
-      } catch (err) {
-        console.error(`'token provider error - '${err}`)
-        setToken(null)
-      }
+    if (isPublicRoute || isHomeRoute) {
+      setIsLoading(false)
+      return
     }
 
-    fetchToken()
-  }, [router])
+    const tokenResponse = await fetchWrapper({
+      route: '/api/get-token',
+      method: 'GET'
+    })
 
-  const value = useMemo(() => ({ token, isLoading }), [token, isLoading])
+    setToken(tokenResponse.token)
+    setIsLoading(false)
+    return tokenResponse.token
+  }, [router.pathname])
+
+  useEffect(() => {
+    refreshToken()
+  }, [refreshToken, router.pathname])
+
+  const value = useMemo(
+    () => ({ token, isLoading, refreshToken }),
+    [token, isLoading, refreshToken]
+  )
+
   return <TokenContext.Provider value={value}>{children}</TokenContext.Provider>
 }
 

@@ -1,17 +1,36 @@
-import { PdfGeneratorProps } from '@/types/PDFGenerator'
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 import { FileText, Loader2 } from 'lucide-react'
 import React, { useState } from 'react'
-import getStatusMessage from '../../shared/utils/helpers/getStatusMessage'
+
+import useReportsData from '@/features/analytics-reports/hooks/useReportsData'
+import {
+  formatDateWithTime,
+  formatEndDateWithTime
+} from '@/shared/ui/date-selectors/constants/formatDateWithTime'
+import getStatusMessage from '@/shared/utils/helpers/getStatusMessage'
+import { PdfGeneratorProps } from '@/types/PDFGenerator'
 
 const GeneratePdf: React.FC<PdfGeneratorProps> = ({
-  jsonData,
+  analyticsType,
   fileName = 'data.pdf',
   reportMonth,
-  reportYear
+  reportYear,
+  startDate,
+  endDate
 }) => {
   const [isGenerating, setIsGenerating] = useState(false)
+
+  const url: string = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${analyticsType}/${
+    process.env.NEXT_PUBLIC_API_BASE_URL_REPORTS
+  }startDate=${formatDateWithTime(startDate.year, startDate.month, startDate.day)}&endDate=${formatEndDateWithTime(
+    endDate.year,
+    endDate.month,
+    endDate.day
+  )}&pageSize=2500&sort=date,asc`
+
+  const { dataFetched: jsonData } = useReportsData({ url })
 
   // Helper function to format only decimal numbers
   const formatValue = (value: number | string | null | undefined): number | string => {
@@ -68,7 +87,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   }
 
   // Function to check if a rule is a severe violation (+3s or -3s)
-  const isSevereViolation = (rule: any): boolean => {
+  const isSevereViolation = (rule: string | null | undefined): boolean => {
     if (rule === null || rule === undefined) return false
 
     // Convert to string and trim in case it's not a string
@@ -79,7 +98,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   }
 
   // Function to determine rule violation type
-  const getRuleViolationType = (rule: any): 'severe' | 'warning' | 'minor' | 'none' => {
+  const getRuleViolationType = (rule: string): 'severe' | 'warning' | 'minor' | 'none' => {
     if (rule === null || rule === undefined) return 'none'
 
     // Convert to string and trim
@@ -130,6 +149,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   }
 
   // Function to get problematic tests ranked by violation count
+
   const getProblematicTests = (data: any[], maxCount = 5) => {
     if (!data || data.length === 0) return []
 
@@ -306,7 +326,12 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
       let yPosition = 25 // Reduced from 35 to 25
 
       // Add summary section if data exists
-      if (jsonData.content && Array.isArray(jsonData.content) && jsonData.content.length > 0) {
+      if (
+        typeof jsonData === 'object' &&
+        'content' in jsonData &&
+        Array.isArray(jsonData.content) &&
+        jsonData.content.length > 0
+      ) {
         // Calculate statistics
         const stats = calculateStatistics(jsonData.content)
 
@@ -520,7 +545,7 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
                 const cellValue = data.cell.raw
 
                 if (data.column.index === rulesCol) {
-                  const violationType = getRuleViolationType(cellValue)
+                  const violationType = getRuleViolationType(cellValue?.toString() ?? '')
 
                   switch (violationType) {
                     case 'severe':
@@ -583,17 +608,17 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
 
   return (
     <button
-      onClick={generatePdf}
-      disabled={isGenerating}
-      className={`flex items-center justify-evenly rounded-lg p-1 text-textPrimary transition-all duration-300 ease-in-out focus:outline-none focus:ring-0 ${isGenerating ? 'cursor-not-allowed opacity-50' : 'hover:scale-105'} `}
       aria-label='Export PDF'
+      className='flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-sm text-textSecondary shadow-sm shadow-shadow hover:scale-105'
+      disabled={isGenerating}
+      onClick={generatePdf}
     >
       {isGenerating ? (
-        <Loader2 className='mr-2 size-5 animate-spin' />
+        <Loader2 className='mr-1 size-4 animate-spin' />
       ) : (
-        <FileText className='mr-2 size-5' />
+        <FileText className='mr-1 size-4' />
       )}
-      <span>Generate PDF</span>
+      <span>Generate Report</span>
     </button>
   )
 }

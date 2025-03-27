@@ -1,12 +1,12 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const useNavigation = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   return {
     isMenuOpen,
-    setIsMenuOpen,
-  };
-};
+    setIsMenuOpen
+  }
+}
 
-export default useNavigation;
+export default useNavigation

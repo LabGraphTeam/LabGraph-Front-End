@@ -1,7 +1,7 @@
-import AboutUs from '@/features/about';
+import AboutUs from '@/features/about'
 
 const AboutUsPage = () => {
-  return <AboutUs />;
-};
+  return <AboutUs />
+}
 
-export default AboutUsPage;
+export default AboutUsPage

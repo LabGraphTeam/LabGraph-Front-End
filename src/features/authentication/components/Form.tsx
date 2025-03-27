@@ -1,5 +1,5 @@
-import ThemeToggle from '@/features/shared/theme'
-import Logo from '@/features/shared/ui/logo'
+import ThemeToggle from '@/shared/theme'
+import Logo from '@/shared/ui/logo'
 
 export default function Form() {
   return (

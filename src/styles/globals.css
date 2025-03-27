@@ -34,7 +34,7 @@
 
     /* Text Colors */
     --color-text-primary: #2c3e50; /* Main body text - refined dark blue-gray */
-    --color-text-secondary: #5d6d7e; /* Supporting text - balanced gray */
+    --color-text-secondary: #556373; /* Supporting text - balanced gray */
     --color-bg-text: #2c3e50; /* Text on colored backgrounds */
     --color-error-text: #ffffff; /* Error message text - pure white for contrast */
 
@@ -62,7 +62,7 @@
     /* System Colors */
     --color-white: #ffffff; /* Pure white */
     --color-logo-l: #ffffff; /* Logo light variant */
-    --border-color: #d0d8e0; /* Standard borders - darker blue-gray */
+    --border-color: #ced4db; /* Standard borders - darker blue-gray */
     --color-sun: #f1c40f; /* Light theme indicator - vibrant yellow */
     --color-moon: #7f8c8d; /* Dark theme indicator - balanced gray */
   }
@@ -92,7 +92,7 @@
 
     /* Text Colors */
     --color-text-primary: #ecf0f1; /* Crisp off-white text */
-    --color-text-secondary: #bdc3c7; /* Softer secondary text */
+    --color-text-secondary: #c6ced3; /* Softer secondary text */
     --color-bg-text: #f5f5f5; /* Even brighter text on dark backgrounds */
     --color-error-text: #ffffff; /* Pure white for errors */
 
@@ -123,7 +123,7 @@
     --checkbox-color: #ffffff; /* White checkboxes */
     --color-sun: #f1c40f; /* Vibrant yellow sun */
     --color-moon: #7f8c8d; /* Balanced gray moon */
-    --border-color: rgba(236, 240, 241, 0.2); /* Semi-transparent white borders */
+    --border-color: #ecf0f167; /* Semi-transparent white borders */
   }
 
   /********************

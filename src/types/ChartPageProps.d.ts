@@ -3,6 +3,6 @@ export interface ChartPageProps {
   config: {
     testList: string[]
     analyticsType: string
-    levelListSize: number
+    size: number
   }
 }

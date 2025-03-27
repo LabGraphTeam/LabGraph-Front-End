@@ -1,5 +1,7 @@
-import AnalyticsTableIndex from '@/features/analytics-table';
+import AnalyticsTableIndex from '@/features/analytics-table'
 
-export default function AnalyticsTable() {
-  return <AnalyticsTableIndex />;
+const AnalyticsTable = () => {
+  return <AnalyticsTableIndex />
 }
+
+export default AnalyticsTable

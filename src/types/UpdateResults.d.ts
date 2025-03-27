@@ -1,9 +1,8 @@
 export interface UploadButtonProps {
-  isProcessing: boolean;
-  message: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  isProcessing: boolean
+  message: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
-
 
 export interface ProcessedData {
   date: string
@@ -16,7 +15,6 @@ export interface ProcessedData {
   mean: string
   sd: string
 }
-
 
 export interface ProcessingStatus {
   isProcessing: boolean

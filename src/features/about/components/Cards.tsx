@@ -1,3 +1,7 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import { FaGithub, FaLinkedin } from 'react-icons/fa'
+
 import {
   ContactItemProps,
   FAQProps,
@@ -5,17 +9,14 @@ import {
   OverviewProps,
   TeamMemberProps
 } from '@/types/About'
-import Image from 'next/image'
-import Link from 'next/link'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
 
 export const FeatureCard: React.FC<FeatureProps> = ({ title, description, icon }) => (
-  <div className='card-hover group rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
+  <div className='card-hover hover:bg-primaryLight/5 group rounded-2xl border border-borderColor bg-surface p-6 shadow-lg transition-all duration-300 hover:shadow-xl'>
     <div className='mb-4 flex items-center space-x-3'>
       <div className='text-primary transition-colors duration-300 group-hover:text-accent'>
         {icon}
       </div>
-      <h3 className='text-lg font-semibold text-textSecondary'>{title}</h3>
+      <h3 className='text-lg font-semibold text-textPrimary group-hover:text-accent'>{title}</h3>
     </div>
     <p className='text-sm leading-relaxed text-textSecondary'>{description}</p>
   </div>
@@ -74,11 +75,11 @@ export const TeamMemberCard: React.FC<TeamMemberProps> = ({ name, role, image, b
     <div className='mb-4 flex flex-col items-center'>
       <div className='relative h-32 w-32 overflow-hidden rounded-full'>
         <Image
-          src={image ?? '/team/placeholder.jpg'}
           alt={name}
+          className='transition-transform duration-300 group-hover:scale-110'
           layout='fill'
           objectFit='cover'
-          className='transition-transform duration-300 group-hover:scale-110'
+          src={image ?? '/team/placeholder.jpg'}
         />
       </div>
       <h3 className='mt-4 text-lg font-semibold text-textPrimary'>{name}</h3>
@@ -86,26 +87,26 @@ export const TeamMemberCard: React.FC<TeamMemberProps> = ({ name, role, image, b
     </div>
     <p className='mb-4 text-center text-sm leading-relaxed text-textSecondary'>{bio}</p>
     <div className='flex justify-center space-x-4'>
-      {social?.linkedin && (
+      {social?.linkedin ? (
         <Link
+          className='text-textSecondary transition-colors hover:text-textPrimary'
           href={social.linkedin}
-          target='_blank'
           rel='noopener noreferrer'
-          className='text-textSecondary transition-colors hover:text-primary'
+          target='_blank'
         >
           <FaLinkedin size={20} />
         </Link>
-      )}
-      {social?.github && (
+      ) : null}
+      {social?.github ? (
         <Link
+          className='text-textSecondary transition-colors hover:text-textPrimary'
           href={social.github}
-          target='_blank'
           rel='noopener noreferrer'
-          className='text-textSecondary transition-colors hover:text-primary'
+          target='_blank'
         >
           <FaGithub size={20} />
         </Link>
-      )}
+      ) : null}
     </div>
   </div>
 )

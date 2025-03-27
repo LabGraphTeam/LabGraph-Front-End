@@ -1,6 +1,8 @@
-import { TableRowProps } from '@/types/AnalyticsTable'
 import React, { useState } from 'react'
-import { DESCRIPTION_OPTIONS } from '../constants/descriptionOptions'
+
+import { DESCRIPTION_OPTIONS } from '@/features/analytics-table/constants/descriptionOptions'
+import ErrorMessage from '@/features/shared/utils/components/error-message'
+import { TableRowProps } from '@/types/AnalyticsTable'
 
 const sanitizeDescription = (description: string): string => {
   if (!description) return ''
@@ -13,10 +15,12 @@ const sanitizeDescription = (description: string): string => {
 }
 
 const TableRow: React.FC<TableRowProps> = ({
-  analyticItem: item,
+  analyticData: item,
   onValidate,
   onUpdateDescription
 }) => {
+  const [validationError, setValidationError] = useState<Error | null>(null)
+
   const [isEditing, setIsEditing] = useState(false)
   const [description, setDescription] = useState(
     item.description ? sanitizeDescription(item.description) : ''
@@ -27,10 +31,20 @@ const TableRow: React.FC<TableRowProps> = ({
     ) && item.description !== ''
   )
 
+  const handleAnalyticsValidate = () => {
+    if (onValidate) {
+      onValidate(item.id).catch((error) => {
+        setValidationError(error)
+      })
+    }
+  }
+
   const handleSaveDescription = () => {
     if (onUpdateDescription) {
       const cleanDescription = sanitizeDescription(description)
-      onUpdateDescription(item.id, cleanDescription)
+      onUpdateDescription(item.id, cleanDescription).catch((error) => {
+        setValidationError(error)
+      })
       setIsEditing(false)
     }
   }
@@ -55,7 +69,7 @@ const TableRow: React.FC<TableRowProps> = ({
         {item.name}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
-        {item.level}
+        {item.level.toUpperCase()}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {item.level_lot}
@@ -77,39 +91,48 @@ const TableRow: React.FC<TableRowProps> = ({
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {item.validator_user !== 'Not validated' ? (
-          <span className='text-green-500 flex items-center'>
-            <span className='mr-1'>✅</span>
+          <span className='flex items-center'>
+            <span className='mr-1' />
             {item.validator_user}
           </span>
         ) : (
-          <span className='flex items-center text-amber-500'>⚠️Pending</span>
+          <span className='flex items-center'>⚠️Pending</span>
         )}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
-        {item.validator_user === 'Not validated' && (
-          <button
-            onClick={() => onValidate?.(item.id)}
-            className='rounded bg-blue-500 px-2 py-1 text-[6px] text-white hover:bg-blue-600 md:text-xs'
-          >
-            Validate
+        <div className='flex items-center gap-2'>
+          {item.validator_user === 'Not validated' ? (
+            <>
+              <button
+                className='flex items-center gap-1 rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-red-500 md:text-xs'
+                onClick={handleAnalyticsValidate}
+              >
+                <span>✓</span>
+              </button>
+              {validationError && <ErrorMessage message={validationError.message} />}
+            </>
+          ) : null}
+          {item.validator_user !== 'Not validated' ? (
+            <button
+              className='cursor-not-allowed rounded bg-green-500 px-2 py-1 text-[6px] text-white md:text-xs'
+              disabled
+            >
+              ✓
+            </button>
+          ) : null}
+          <button className='px-2 py-1.5 text-[6px] md:text-xs' onClick={() => setIsEditing(true)}>
+            ✏️
           </button>
-        )}
-        {item.validator_user !== 'Not validated' && (
-          <button
-            disabled
-            className='cursor-not-allowed rounded bg-blue-400 px-2 py-1 text-[6px] text-white md:text-xs'
-          >
-            Validated
-          </button>
-        )}
+        </div>
       </td>
+
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {isEditing ? (
           <div className='flex flex-col gap-1'>
             <select
-              value={isCustomDescription ? 'Other' : description}
-              onChange={handleDescriptionChange}
               className='rounded border border-gray-300 px-2 py-1 text-[6px] text-black md:text-xs'
+              onChange={handleDescriptionChange}
+              value={isCustomDescription ? 'Other' : description}
             >
               {DESCRIPTION_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -118,24 +141,25 @@ const TableRow: React.FC<TableRowProps> = ({
               ))}
             </select>
 
-            {isCustomDescription && (
+            {isCustomDescription ? (
               <input
-                type='text'
-                value={description}
+                className='mt-1 w-full rounded border border-gray-300 px-2 py-1 text-[6px] text-black md:text-xs'
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder='Enter custom description'
-                className='mt-1 w-full rounded border border-gray-300 px-2 py-1 text-[6px] text-black md:text-xs'
+                type='text'
+                value={description}
               />
-            )}
+            ) : null}
 
             <div className='mt-1 flex gap-1'>
               <button
+                className='rounded bg-blue-500 px-2 py-1 text-[6px] text-white hover:bg-green-600 md:text-xs'
                 onClick={handleSaveDescription}
-                className='hover:bg-green-600 rounded bg-blue-500 px-2 py-1 text-[6px] text-white md:text-xs'
               >
                 Save
               </button>
               <button
+                className='rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-gray-600 md:text-xs'
                 onClick={() => {
                   setIsEditing(false)
                   setDescription(item.description || '')
@@ -144,7 +168,6 @@ const TableRow: React.FC<TableRowProps> = ({
                       item.description !== ''
                   )
                 }}
-                className='rounded bg-danger px-2 py-1 text-[6px] text-white hover:bg-gray-600 md:text-xs'
               >
                 Cancel
               </button>
@@ -153,12 +176,6 @@ const TableRow: React.FC<TableRowProps> = ({
         ) : (
           <div className='flex items-center justify-between'>
             <span>{description || '-'}</span>
-            <button
-              onClick={() => setIsEditing(true)}
-              className='ml-2 text-[6px] text-blue-500 hover:text-blue-700 md:text-xs'
-            >
-              ✏️
-            </button>
           </div>
         )}
       </td>

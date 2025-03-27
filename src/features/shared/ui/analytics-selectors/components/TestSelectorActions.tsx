@@ -1,46 +1,44 @@
-import UpdateResults from '@/features/analytics-upload-files'
-import { TestSelectorActionsProps } from '@/types/SelectorProps'
-import { CheckCircle } from 'lucide-react'
-import Link from 'next/link'
 import React from 'react'
-import TestLevelSelector from './TestLevelSelector'
-import TestNameSelector from './TestNameSelector'
+
+import UpdateResults from '@/features/analytics-upload-files'
+import ValidationButtonLink from '@/features/shared/ui/analytics-selectors/components/ValidationButtonLink'
+import TestLevelSelector from '@/shared/ui/analytics-selectors/components/TestLevelSelector'
+import TestNameSelector from '@/shared/ui/analytics-selectors/components/TestNameSelector'
+import { TestSelectorActionsProps } from '@/types/SelectorProps'
 
 const TestSelectorActions: React.FC<TestSelectorActionsProps> = ({
-  testNameList: list,
-  testName,
+  availableTestNames: list,
+  analyticName: testName,
   setTestName,
   levelOptions,
   testLevel,
   setTestLevel,
   analyticsType,
-  googleSheetUrl
+  validationUrl,
+  isMultiSelect
 }) => {
   return (
-    <div className='flex flex-row items-center gap-2'>
+    <div className='relative mt-2 flex flex-row items-center gap-2 rounded-md border border-borderColor p-4 md:mt-0'>
+      <div className='absolute -top-1.5 left-8 ml-7 -translate-x-1/2 bg-background px-2 text-[7px] font-extralight text-textPrimary md:-top-2 md:ml-6 md:text-[10px]'>
+        Filters & Actions
+      </div>
       <span className='text-xs text-textPrimary'>Test:</span>
-      <TestNameSelector testNameList={list} testName={testName} setTestName={setTestName} />
-      <span className='text-xs text-textPrimary'>Level:</span>
-      {levelOptions && levelOptions.length > 0 && setTestLevel && (
+      <TestNameSelector
+        analyticName={testName}
+        availableTestNames={list}
+        setTestName={setTestName}
+      />
+      {!isMultiSelect ? <span className='text-xs text-textPrimary'>Level:</span> : null}
+
+      {levelOptions && levelOptions.length > 0 && !isMultiSelect && setTestLevel ? (
         <TestLevelSelector
+          analyticLevel={testLevel}
           levelOptions={levelOptions}
-          testLevel={testLevel}
           setTestLevel={setTestLevel}
         />
-      )}
+      ) : null}
       <span className='flex items-center gap-2'>
-        <Link
-          className='flex items-center justify-center rounded-md border border-borderColor px-2 py-0.5 text-sm font-medium text-textSecondary transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 md:px-2 md:py-1'
-          target='_blank'
-          href={googleSheetUrl || ''}
-        >
-          <span className='md:hidden'>
-            <CheckCircle size={17} />
-          </span>
-          <span className='hidden md:inline'>
-            <CheckCircle size={17} />
-          </span>
-        </Link>
+        <ValidationButtonLink validationUrl={validationUrl} />
         <UpdateResults analyticsType={analyticsType} />
       </span>
     </div>

@@ -1,18 +1,18 @@
-import IntervalDates from './IntervalDates'
+import IntervalDates from '@/types/IntervalDates'
 
 export default interface BuildAnalyticsEndpointProps {
   analyticsType: string
-  name: string
-  level?: number
-  date: IntervalDates
+  analyticsName: string
+  analyticsLevel?: number
+  analyticsMeasurementPeriod: IntervalDates
   isFiltered?: boolean
   itemsPerPage?: number
   currentPage?: number
+  unValidatedFilter?: boolean
 }
 
-
 export interface BuildAnalyticsValidationParamsProps {
-  analyticsType: string,
+  analyticsType: string
   analyticsId: number
   isUpdateDescription?: boolean
 }

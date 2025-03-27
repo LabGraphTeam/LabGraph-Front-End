@@ -1,18 +1,17 @@
-import { useAuthenticatedFetch } from '@/features/shared/hooks/useAuthenticatedFetch'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
 import { AnalyticWithStatsData } from '@/types/Chart'
 
-const useFetchAnalytics = (route: string) => {
-  const {
-    data: analyticsListData,
-    error,
-    isLoading
-  } = useAuthenticatedFetch<AnalyticWithStatsData>({
-    url: route
+const useFetchAnalytics = (url: string) => {
+  const { data, error, isLoading } = useFetchSWR<AnalyticWithStatsData>({
+    url,
+    method: 'GET',
+    immediate: true,
+    authenticated: true
   })
 
   return {
-    analyticsListData,
-    url: route,
+    data,
+    url,
     isLoading,
     error
   }

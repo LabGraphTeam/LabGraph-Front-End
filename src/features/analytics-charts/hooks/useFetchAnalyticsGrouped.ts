@@ -1,29 +1,16 @@
-import { useAuthenticatedFetch } from '@/features/shared/hooks/useAuthenticatedFetch'
-import { AnalyticGroupedData } from '@/types/Chart'
-import { useEffect, useState } from 'react'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
+import { GroupedAnalyticData } from '@/types/Chart'
 
 const useFetchAnalyticsGrouped = (route: string) => {
-  const [unitValues, setUnitValues] = useState<string | null>(null)
-
-  const {
-    data: listing = [],
-    error,
-    isLoading
-  } = useAuthenticatedFetch<AnalyticGroupedData[]>({
+  const { data, error, isLoading } = useFetchSWR<GroupedAnalyticData[]>({
     url: route,
     method: 'GET',
-    immediate: true
+    immediate: true,
+    authenticated: true
   })
 
-  useEffect(() => {
-    if (listing && listing.length > 0 && listing[0].groupedValuesByLevelDTO.values.length > 0) {
-      setUnitValues(listing[0].groupedValuesByLevelDTO.values[0].unit_value)
-    }
-  }, [listing])
-
   return {
-    listing,
-    unitValues,
+    data,
     isLoading,
     error
   }

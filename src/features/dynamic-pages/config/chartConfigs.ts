@@ -1,7 +1,7 @@
 export interface ChartConfig {
   testList: string[]
   analyticsType: string
-  levelListSize: number
+  size: number
 }
 
 export type ChartConfigMap = Record<string, ChartConfig>
@@ -32,7 +32,7 @@ export const chartConfigs: ChartConfigMap = {
       'BAS%'
     ],
     analyticsType: 'hematology-analytics',
-    levelListSize: 3
+    size: 3
   },
   biochemistry: {
     testList: [
@@ -64,12 +64,12 @@ export const chartConfigs: ChartConfigMap = {
       'UREL'
     ],
     analyticsType: 'biochemistry-analytics',
-    levelListSize: 2
+    size: 2
   },
   coagulation: {
     testList: ['TAP-20', 'TTPA'],
     analyticsType: 'coagulation-analytics',
-    levelListSize: 2
+    size: 2
   }
 }
 

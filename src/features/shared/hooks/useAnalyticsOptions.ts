@@ -2,9 +2,9 @@ import { useMemo } from 'react'
 
 export const useAnalyticsOptions = (analyticsType: string) => {
   const analyticsOptions = [
-    { value: 'biochemistry-analytics', label: 'BIOCHEMISTRY' },
-    { value: 'hematology-analytics', label: 'HEMATOLOGY' },
-    { value: 'coagulation-analytics', label: 'COAGULATION' }
+    { value: 'biochemistry-analytics', label: 'Biochemistry' },
+    { value: 'hematology-analytics', label: 'Hematology' },
+    { value: 'coagulation-analytics', label: 'Coagulation' }
   ]
 
   const levelOptions = useMemo(() => {
@@ -28,5 +28,10 @@ export const useAnalyticsOptions = (analyticsType: string) => {
     }
   }, [analyticsType])
 
-  return { analyticsOptions, levelOptions }
+  const filters = [
+    { value: false, label: '-' },
+    { value: true, label: '⚠️ Pending' }
+  ]
+
+  return { analyticsOptions, levelOptions, filters }
 }

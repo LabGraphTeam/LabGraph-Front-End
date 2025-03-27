@@ -1,6 +1,3 @@
-import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
-import useWindowDimensions from '@/features/shared/hooks/useWindowDimensions'
-import { ChartEntry, MeanStdDevValueData, MultipleLineChartProps } from '@/types/Chart'
 import React, { useCallback, useMemo, useState } from 'react'
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
@@ -13,19 +10,22 @@ import {
   Tooltip,
   YAxis
 } from 'recharts'
-import customFormatDate from '../../../shared/ui/date-selectors/constants/customFormatDate'
-import normalizeValue from '../../utils/normalizeValue'
-import LegendMultiple from './LegendMultiple'
-import TooltipMultiple from './TooltipMultiple'
 
-
+import { yAxisValues } from '@/features/analytics-charts/constants/yAxisValues'
+import LegendMultiple from '@/features/analytics-charts/multiple-line/components/LegendMultiple'
+import TooltipMultiple from '@/features/analytics-charts/multiple-line/components/TooltipMultiple'
+import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
+import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
+import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
+import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatDate'
+import { ChartEntry, MeanStdDevValueData, MultipleLineChartProps } from '@/types/Chart'
 
 const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
-  analyticsListData: listings
+  groupedAnalysisData: listings
 }) => {
   const [useOwnValues, setUseOwnValues] = useState(false)
   const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), [])
-  const { width: windowWidth } = useWindowDimensions()
+  const { windowWidth } = useWindowDimensions()
 
   const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)']
 
@@ -72,25 +72,13 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
           entry[`rules${levelNum}`] = values.rules ?? ''
           entry[`mean${levelNum}`] = useOwnValues ? ownMean : mean
           entry[`sd${levelNum}`] = useOwnValues ? ownSd : standardDeviation
+          entry[`unit${levelNum}`] = values.unit_value
         }
       }
 
       return entry
     })
   }, [listings, useOwnValues])
-
-  const yAxisValues = useMemo(
-    () => [
-      { value: -3, label: '-3s', color: 'var(--color-sd3)' },
-      { value: -2, label: '-2s', color: 'var(--color-sd2)' },
-      { value: -1, label: '-1s', color: 'var(--color-sd1)' },
-      { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
-      { value: 1, label: '+1s', color: 'var(--color-sd1)' },
-      { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-      { value: 3, label: '+3s', color: 'var(--color-sd3)' }
-    ],
-    []
-  )
 
   if (!listings || listings.length === 0) return null
 
@@ -103,8 +91,8 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
           </h2>
           <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
-              onClick={toggleUseOwnValues}
               className='group flex flex-col items-center transition-all duration-300'
+              onClick={toggleUseOwnValues}
             >
               <div
                 className={`rounded-full p-2 transition-all duration-300 ${
@@ -131,42 +119,38 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
         <div className='flex h-[225px] place-content-center items-center md:min-h-[300px] xl:min-h-[300px] 2xl:min-h-[350px] 3xl:min-h-[500px]'>
           <ResponsiveContainer
             className='flex place-content-center items-center bg-surface'
-            width='97%'
             height='96%'
+            width='97%'
           >
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <YAxis
-                className='text-[0.5rem] text-textPrimary md:text-xs'
-                domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
-                textAnchor='end'
-                ticks={yAxisValues.map((v) => v.value)}
-                dataKey='sd'
-                height={windowWidth < 768 ? 35 : 60}
-                width={windowWidth < 768 ? 35 : 40}
-                tickMargin={0}
                 axisLine={false}
-                tickLine={false}
+                className='text-[0.5rem] text-textPrimary md:text-xs'
+                dataKey='sd'
+                domain={[0 - 3.5 * 1, 0 + 3.5 * 1]}
+                height={windowWidth < 768 ? 35 : 60}
                 stroke='var(--color-text-primary)'
+                textAnchor='end'
                 tickFormatter={(value) => {
                   const matchingValue = yAxisValues.find((v) => Math.abs(v.value - value) < 0.0001)
                   return matchingValue ? matchingValue.label : ''
                 }}
+                tickLine={false}
+                tickMargin={0}
+                ticks={yAxisValues.map((v) => v.value)}
+                width={windowWidth < 768 ? 35 : 40}
               />
               <Tooltip content={<TooltipMultiple />} />
               {listings.map((_, index) => (
                 <Line
-                  key={listings[index].groupedValuesByLevelDTO.level}
-                  type='linear'
-                  dataKey={`value${index + 1}`}
-                  name={`Nível ${index}`}
-                  stroke={lineColors[index]}
-                  strokeWidth={1.0}
-                  connectNulls={true}
                   activeDot={{
                     color: lineColors[index],
                     r: 3
                   }}
+                  animationDuration={250}
+                  connectNulls={true}
+                  dataKey={`value${index + 1}`}
                   dot={{
                     fill: lineColors[index],
                     stroke: lineColors[index],
@@ -174,21 +158,25 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
                     strokeWidth: 1,
                     className: 'text-textPrimary'
                   }}
-                  animationDuration={250}
+                  key={listings[index].groupedValuesByLevelDTO.level}
+                  name={`Nível ${index}`}
+                  stroke={lineColors[index]}
+                  strokeWidth={1.0}
+                  type='linear'
                 />
               ))}
               {yAxisValues.map((line) => (
                 <ReferenceLine
                   key={line.value}
-                  y={line.value}
                   stroke={line.color}
                   strokeDasharray='5 5'
-                  strokeWidth={1.0}
                   strokeOpacity={1.0}
+                  strokeWidth={1.0}
+                  y={line.value}
                 />
               ))}
               <Legend
-                content={<LegendMultiple levels={levels} />}
+                content={<LegendMultiple multipleLineLevels={levels} />}
                 verticalAlign='bottom'
                 wrapperStyle={{
                   paddingTop: '5px',

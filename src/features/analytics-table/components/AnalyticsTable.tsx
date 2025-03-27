@@ -1,8 +1,9 @@
-import { AnalyticsTableProps } from '@/types/AnalyticsTable'
 import React from 'react'
-import { tableHeaders } from '../constants/tableHeaders'
-import TableRow from './AnalyticsTableRow'
-import MobileItemCard from './MobileItemCard'
+
+import TableRow from '@/features/analytics-table/components/AnalyticsTableRow'
+import MobileItemCard from '@/features/analytics-table/components/MobileItemCard'
+import { tableHeaders } from '@/features/analytics-table/constants/tableHeaders'
+import { AnalyticsTableProps } from '@/types/AnalyticsTable'
 
 const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
   items,
@@ -11,7 +12,7 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
 }) => {
   return (
     <>
-      <table className='hidden rounded-md bg-surface shadow-md shadow-shadow md:table md:w-full'>
+      <table className='hidden rounded-md border border-borderColor bg-surface shadow-md shadow-shadow md:table md:w-full'>
         <caption className='mb-1 text-[10px] text-primary'>
           Table 1.1: Interactive Analytics Results with Filtering Options
         </caption>
@@ -19,8 +20,8 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
           <tr className=''>
             {tableHeaders.map((header) => (
               <th
+                className='border-b border-border px-1.5 py-0.5 text-left text-[8px] font-semibold uppercase tracking-wider text-textSecondary md:text-[9px]'
                 key={header.id}
-                className='border-b border-border px-2 py-1 text-left text-[8px] font-semibold uppercase tracking-wider text-textSecondary md:text-[9px]'
               >
                 {header.name}
               </th>
@@ -30,17 +31,17 @@ const AnalyticsTable: React.FC<AnalyticsTableProps> = ({
         <tbody>
           {items.map((item) => (
             <TableRow
+              analyticData={item}
               key={item.id}
-              analyticItem={item}
-              onValidate={onValidate}
               onUpdateDescription={onUpdateDescription}
+              onValidate={onValidate}
             />
           ))}
         </tbody>
       </table>
-      <div className='grid grid-cols-4 place-content-center gap-2 px-2 text-center md:hidden'>
+      <div className='mt-2 grid grid-cols-3 place-content-center gap-2 px-2 text-center md:hidden'>
         {items.map((item) => (
-          <MobileItemCard key={item.id} analyticItem={item} />
+          <MobileItemCard analyticData={item} key={item.id} />
         ))}
       </div>
     </>

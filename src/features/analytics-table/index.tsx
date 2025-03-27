@@ -1,133 +1,133 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useAnalyticsOptions } from '../shared/hooks/useAnalyticsOptions'
-import useDateSelector from '../shared/hooks/useDateSelector'
-import useWindowDimensions from '../shared/hooks/useWindowDimensions'
-import ErrorMessage from '../shared/utils/components/error-message'
-import Loading from '../shared/utils/components/loading'
-import { buildAnalyticsValidationEndpoint } from '../shared/utils/helpers/buildAnalyticsTableEndpoint'
-import AnalyticsFilters from './components/AnalyticsFilters'
-import AnalyticsPagination from './components/AnalyticsPagination'
-import AnalyticsTable from './components/AnalyticsTable'
-import { useFetchAnalyticsTable } from './hooks/useFetchAnalyticsTable'
-import MainLayout from './layouts/MainLayout'
+import { useEffect, useMemo, useState } from 'react'
+
+import GeneratePdf from '@/features/analytics-reports/generate-pdf'
+import AnalyticsFilters from '@/features/analytics-table/components/AnalyticsFilters'
+import AnalyticsPagination from '@/features/analytics-table/components/AnalyticsPagination'
+import AnalyticsTable from '@/features/analytics-table/components/AnalyticsTable'
+import useFetchAnalyticsTable from '@/features/analytics-table/hooks/useFetchAnalyticsTable'
+import { useAnalyticsOptions } from '@/shared/hooks/useAnalyticsOptions'
+import useDateSelector from '@/shared/hooks/useDateSelector'
+import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
+import MainLayout from '@/shared/ui/layouts/MainLayout'
+import ErrorMessage from '@/shared/utils/components/error-message'
+import { buildAnalyticsValidationWithFiltersEndpoint } from '@/shared/utils/helpers/buildAnalyticsTableEndpoint'
+import { AnalyticWithValidatedUser, UseFetchAnalyticsTableProps } from '@/types/AnalyticsTable'
+import BuildAnalyticsEndpointProps from '@/types/BuildAnalyticsEndpointProps'
 
 const AnalyticsTableIndex = () => {
-  const dateSelector = useDateSelector()
   const [analyticsType, setAnalyticsType] = useState('biochemistry-analytics')
+  const [analyticData, setAnalyticData] = useState<AnalyticWithValidatedUser[]>([])
+  const [totalPages, setTotalPages] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState(0)
-  const [itemsPerPage, setItemsPerPage] = useState(8)
-  const [level, setLevel] = useState(0)
+  const [itemsPerPage, setItemsPerPage] = useState(7)
+  const [analyticsLevel, setAnalyticsLevel] = useState(0)
   const [isFiltered, setIsFiltered] = useState(false)
-  const { analyticsOptions, levelOptions } = useAnalyticsOptions(analyticsType)
+  const { analyticsOptions, levelOptions, filters } = useAnalyticsOptions(analyticsType)
+  const [unValidatedFilter, setUnValidatedFilter] = useState(false)
+  const { windowWidth: width } = useWindowDimensions()
 
-  const { width } = useWindowDimensions()
+  const { combinedDateAndHandlersProps, combinedDateProps, dateValues } = useDateSelector()
 
-  const startDate = {
-    day: dateSelector.startDay,
-    month: dateSelector.startMonth,
-    year: dateSelector.startYear
-  }
-
-  const endDate = {
-    day: dateSelector.endDay,
-    month: dateSelector.endMonth,
-    year: dateSelector.endYear
-  }
-
-  const {
-    analyticData,
-    isLoading,
-    isTokenLoading,
-    fetchData,
-    totalPages,
-    validateAnalytics,
-    updateDescription,
-    error
-  } = useFetchAnalyticsTable({
-    analyticsType,
-    level,
-    startDate,
-    endDate,
-    itemsPerPage,
-    currentPage
-  })
-
-  const handlePageChange = useCallback(
-    async (url: string): Promise<void> => {
-      await fetchData(url)
-    },
-    [isFiltered, analyticsType, level, itemsPerPage, currentPage]
-  )
-
-  const getParams = useCallback(() => {
-    return buildAnalyticsValidationEndpoint({
+  const endPointProps = useMemo(
+    () =>
+      ({
+        analyticsType,
+        analyticsLevel,
+        analyticsMeasurementPeriod: {
+          ...dateValues
+        },
+        isFiltered,
+        itemsPerPage,
+        currentPage,
+        unValidatedFilter
+      }) as BuildAnalyticsEndpointProps,
+    [
       analyticsType,
-      level,
-      date: {
-        startDay: dateSelector.startDay,
-        startMonth: dateSelector.startMonth,
-        startYear: dateSelector.startYear,
-        endDay: dateSelector.endDay,
-        endMonth: dateSelector.endMonth,
-        endYear: dateSelector.endYear
-      },
+      analyticsLevel,
+      dateValues,
       isFiltered,
       itemsPerPage,
       currentPage,
-      name: '-'
-    })
-  }, [
+      unValidatedFilter
+    ]
+  )
+
+  const endPoint: string = buildAnalyticsValidationWithFiltersEndpoint(endPointProps)
+
+  const useFetchAnalyticsTableProps: UseFetchAnalyticsTableProps = {
+    endPoint,
     analyticsType,
-    level,
-    dateSelector.startDay,
-    dateSelector.startMonth,
-    dateSelector.startYear,
-    dateSelector.endDay,
-    dateSelector.endMonth,
-    dateSelector.endYear,
-    isFiltered,
+    level: analyticsLevel,
+    ...combinedDateProps,
     itemsPerPage,
-    currentPage
-  ])
+    currentPage,
+    setAnalyticData,
+    analyticData
+  }
+
+  const { isLoading, validateAnalytics, updateDescription, error, data } = useFetchAnalyticsTable(
+    useFetchAnalyticsTableProps
+  )
+
+  const getItemsPerPage = (screenWidth: number) => {
+    if (screenWidth >= 1800) return 10
+    if (screenWidth < 768) return 6
+    return 7
+  }
 
   useEffect(() => {
-    fetchData(getParams())
-  }, [getParams, isTokenLoading])
+    if (!error && !isLoading && data && data?.content?.length > 0) {
+      setTotalPages(data.page.totalPages)
+      setItemsPerPage(getItemsPerPage(width))
+      setAnalyticData(data.content)
+    }
 
-  useEffect(() => {
-    setItemsPerPage(width >= 1800 ? 14 : 8)
-  }, [width])
+    if (error) {
+      setTotalPages(0)
+      setAnalyticData([])
+    }
+  }, [data, width, error, isLoading])
 
   return (
-    <MainLayout title={`LabGraph - ${analyticsType || 'Quality-Lab-Pro'}`}>
-      {error && <ErrorMessage message={error.toString()} />}
+    <MainLayout title='Analytics-Table 🥼🔬'>
+      {error ? <ErrorMessage message={error.toString()} /> : null}
       <AnalyticsFilters
-        dateSelector={dateSelector}
         analyticsOptions={analyticsOptions}
         analyticsType={analyticsType}
-        setAnalyticsType={setAnalyticsType}
+        dateSelector={combinedDateAndHandlersProps}
+        filters={filters}
+        level={analyticsLevel}
         levelOptions={levelOptions}
-        level={level}
-        setLevel={setLevel}
+        setAnalyticsType={setAnalyticsType}
         setFiltered={setIsFiltered}
+        setLevel={setAnalyticsLevel}
+        setUnValidatedFilter={setUnValidatedFilter}
+        unValidFilter={unValidatedFilter}
       />
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <AnalyticsTable
-          items={analyticData}
-          isLoading={isLoading}
-          onPageChange={handlePageChange}
-          onValidate={validateAnalytics}
-          onUpdateDescription={updateDescription}
+      <span className='hidden justify-end md:flex'>
+        <GeneratePdf
+          analyticsType={analyticsType}
+          buttonText='Generate Report'
+          endDate={combinedDateProps.endDate}
+          fileName={analyticsType}
+          reportMonth={combinedDateProps.startDate.month.toString()}
+          reportYear={combinedDateProps.startDate.year}
+          startDate={combinedDateProps.startDate}
         />
-      )}
+      </span>
+
+      <AnalyticsTable
+        isLoading={isLoading}
+        items={analyticData}
+        onUpdateDescription={updateDescription}
+        onValidate={validateAnalytics}
+      />
 
       <AnalyticsPagination
+        analyticsData={analyticData}
         currentPage={currentPage}
-        totalPages={totalPages}
-        analyticsListData={analyticData}
         setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
       />
     </MainLayout>
   )

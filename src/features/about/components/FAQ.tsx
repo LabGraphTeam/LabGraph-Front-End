@@ -1,8 +1,8 @@
-import { FAQ_ITEMS } from '@/features/about/constants/faqConstants';
-import { FAQCard } from '@/features/about/components/Cards';
+import { FAQCard } from '@/features/about/components/Cards'
+import { FAQ_ITEMS } from '@/features/about/constants/faqConstants'
 
 const FAQ: React.FC = () => (
-  <div id='faq' className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
+  <div className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8' id='faq'>
     <h2 className='mb-4 text-center text-3xl font-semibold text-textPrimary'>
       Frequently Asked Questions
     </h2>
@@ -15,6 +15,6 @@ const FAQ: React.FC = () => (
       ))}
     </div>
   </div>
-);
+)
 
-export default FAQ;
+export default FAQ

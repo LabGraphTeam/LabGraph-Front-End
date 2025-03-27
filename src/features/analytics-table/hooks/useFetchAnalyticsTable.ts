@@ -1,123 +1,76 @@
 import { useToken } from '@/features/authentication/contexts/TokenContext'
-
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
-import { AnalyticsDataReturn, AnalyticWithValidatedUser, UseAnalyticsDataProps } from '@/types/AnalyticsTable'
-import { useState } from 'react'
-import { buildAnalyticsValidationEndpoint } from '../../shared/utils/helpers/buildAnalyticsValidationEndpoint'
+import { useFetchSWR } from '@/shared/hooks/useFetchSWR'
+import { buildAnalyticsValidationEndpoint } from '@/shared/utils/helpers/buildAnalyticsValidationEndpoint'
+import {
+  AnalyticsDataReturn,
+  PaginatedAnalyticsResponse,
+  UseFetchAnalyticsTableProps
+} from '@/types/AnalyticsTable'
 
 export const useFetchAnalyticsTable = ({
   analyticsType,
-}: UseAnalyticsDataProps): AnalyticsDataReturn => {
-  const [analyticData, setAnalyticData] = useState<AnalyticWithValidatedUser[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [totalPages, setTotalPages] = useState<number>(0)
-  const [totalElements, setTotalElements] = useState<number>(0)
-  const { token, isLoading: isTokenLoading } = useToken()
-  const [error, setError] = useState<string | null>(null)
+  endPoint
+}: UseFetchAnalyticsTableProps): AnalyticsDataReturn => {
+  const { token } = useToken()
 
-
-  const fetchData = async (apiEndpoint: string): Promise<void> => {
-    if (isTokenLoading) {
-      return
-    }
-
-    try {
-      const response = await fetchWrapper({
-        route: apiEndpoint,
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${token}`
-        },
-      })
-
-      setAnalyticData(response.content || [])
-      setTotalPages(response.page?.totalPages || 0)
-      setTotalElements(response.page?.totalElements || 0)
-
-    } catch (error) {
-      if (error instanceof Error) {
-        setError(error.message)
-      } else {
-        setError('An unexpected error occurred')
-      }
-    } finally {
-      setIsLoading(false)
-    }
-  }
+  const { data, error, isLoading, mutate } = useFetchSWR<PaginatedAnalyticsResponse>({
+    url: endPoint,
+    method: 'GET',
+    immediate: true,
+    authenticated: true
+  })
 
   const validateAnalytics = async (analyticsId: number): Promise<void> => {
-    if (isTokenLoading) {
-      return
-    }
+    const response = await fetchWrapper({
+      route: buildAnalyticsValidationEndpoint({
+        analyticsType,
+        analyticsId
+      }),
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    })
 
-    try {
-      const response = await fetchWrapper({
-        route: buildAnalyticsValidationEndpoint({
-          analyticsType,
-          analyticsId
-        }),
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-
-
-      setAnalyticData(prevData =>
-        prevData.map(item =>
-          item.id === analyticsId
-            ? { ...item, ...response }
-            : item
-        )
+    if (data) {
+      const updatedContent = data.content.map((item: { id: number }) =>
+        item.id === analyticsId ? { ...item, ...response } : item
       )
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Insufficient permissions to perform this action')
+      mutate({ ...data, content: updatedContent }, false)
     }
   }
 
   const updateDescription = async (analyticsId: number, description: string): Promise<void> => {
-    if (isTokenLoading) {
-      return
-    }
+    const response = await fetchWrapper({
+      route: buildAnalyticsValidationEndpoint({
+        analyticsType,
+        analyticsId,
+        isUpdateDescription: true
+      }),
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ description })
+    })
 
-    try {
-      const response = await fetchWrapper({
-        route: buildAnalyticsValidationEndpoint({
-          analyticsType,
-          analyticsId,
-          isUpdateDescription: true
-        }),
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(description)
-      })
-
-      setAnalyticData(prevData =>
-        prevData.map(item =>
-          item.id === analyticsId
-            ? { ...item, ...response }
-            : item
-        )
+    if (data) {
+      const updatedContent = data.content.map((item: { id: number }) =>
+        item.id === analyticsId ? { ...item, ...response } : item
       )
-    } catch (error) {
-      setError(error instanceof Error ? error.message : 'Insufficient permissions to perform this action')
+      mutate({ ...data, content: updatedContent }, false)
     }
   }
-
 
   return {
-    analyticData,
     isLoading,
-    isTokenLoading,
     validateAnalytics,
     updateDescription,
-    fetchData,
-    totalPages,
-    totalElements,
     error,
-
+    data
   }
 }
+export default useFetchAnalyticsTable

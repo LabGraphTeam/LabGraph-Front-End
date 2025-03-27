@@ -1,13 +1,13 @@
-import CustomError from '@/features/shared/utils/custom-errors'
+import CustomError from '@/shared/utils/components/custom-errors'
 
 export default function Custom404() {
   return (
-    <CustomError 
-      code="404"
-      title="Not Found"
+    <CustomError
+      buttonHref='/'
+      buttonText='Home'
+      code='404'
       message="The page you're looking for doesn't exist"
-      buttonText="Home"
-      buttonHref="/"
+      title='Not Found'
     />
   )
 }

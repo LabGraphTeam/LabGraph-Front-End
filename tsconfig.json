@@ -18,10 +18,29 @@
     "jsx": "preserve",
     "incremental": true,
     "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/features/*": [
+        "features/*"
+      ],
+      "@/styles/*": [
+        "styles/*"
+      ],
+      "@/shared/*": [
+        "features/shared/*"
+      ],
+      "@/types/*": [
+        "types/*"
+      ],
+      "@/services/*": [
+        "services/*"
+      ],
+      "@/pages/*": [
+        "pages/*"
+      ],
+      "@/features/*/constants": [
+        "features/*/constants"
+      ],
     },
     "plugins": [
       {
@@ -32,12 +51,12 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
+    "**/*.css",
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "postcss.config*",
     "tailwind.config*",
     "next.config*",
-    "src/features/shared/utils/components/error-message/ErrorBoundary.jsx"
   ],
   "exclude": [
     "node_modules"
