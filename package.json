@@ -14,7 +14,8 @@
     "component": "cypress open --component",
     "component:headless": "cypress run --component",
     "prepare": "husky || true",
-    "prettier-format": "prettier --config .prettierrc --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "prettier-format": "prettier --config .prettierrc --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "commitlint": "commitlint -e --verbose"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.13",
@@ -33,6 +34,8 @@
     "swr": "^2.3.3"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@eslint/js": "^9.22.0",
     "@types/node": "^20",
     "@types/react": "19.0.1",
