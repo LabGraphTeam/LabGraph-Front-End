@@ -6,6 +6,8 @@ export const PUBLIC_ROUTES = {
   ABOUT_US: '/about-us'
 }
 
+export const PUBLIC_ROUTES_HOME = '/'
+
 export const PRIVATE_ROUTES = {
   CHARTS: {
     BIOCHEMISTRY: '/charts/biochemistry',

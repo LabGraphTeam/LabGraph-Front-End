@@ -24,7 +24,7 @@ const AnalyticsTableIndex = () => {
   const [isFiltered, setIsFiltered] = useState(false)
   const { analyticsOptions, levelOptions, filters } = useAnalyticsOptions(analyticsType)
   const [unValidatedFilter, setUnValidatedFilter] = useState(false)
-  const { width } = useWindowDimensions()
+  const { windowWidth: width } = useWindowDimensions()
 
   const { combinedDateAndHandlersProps, combinedDateProps, dateValues } = useDateSelector()
 

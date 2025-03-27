@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react'
 
-export type WindowDimensions = {
-  width: number
-  height: number
+type WindowDimensions = {
+  windowWidth: number
+  windowHeight: number
 }
 
 const useWindowDimensions = (): WindowDimensions => {
   const [windowDimensions, setWindowDimensions] = useState<WindowDimensions>({
-    width: 0,
-    height: 0
+    windowWidth: 0,
+    windowHeight: 0
   })
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const handleResize = (): void => {
         setWindowDimensions({
-          width: window.innerWidth,
-          height: window.innerHeight
+          windowWidth: window.innerWidth,
+          windowHeight: window.innerHeight
         })
       }
 

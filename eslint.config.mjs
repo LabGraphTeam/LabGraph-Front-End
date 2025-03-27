@@ -14,13 +14,11 @@ export default [
   { languageOptions: { globals: globals.browser } },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  // Base rules for all JavaScript and TypeScript files
   {
     rules: {
       semi: ['error', 'never']
     }
   },
-  // Add Next.js plugin configuration
   {
     plugins: {
       '@next/next': nextPlugin
@@ -69,7 +67,6 @@ export default [
           }
         }
       ],
-      // Add new rule to warn about relative imports
       'no-restricted-imports': [
         'warn',
         {
@@ -95,11 +92,9 @@ export default [
       'react/react-in-jsx-scope': 'off',
       'react-hooks/exhaustive-deps': 'warn',
       'react-hooks/rules-of-hooks': 'error',
-      // Add Tailwind CSS rules explicitly
       'tailwindcss/classnames-order': 'warn',
       'tailwindcss/no-contradicting-classname': 'error',
       'tailwindcss/no-custom-classname': 'warn',
-      // Add the same rule for JSX files
       'no-restricted-imports': [
         'warn',
         {

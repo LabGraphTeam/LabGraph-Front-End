@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
   CartesianGrid,
@@ -12,6 +12,7 @@ import {
   YAxis
 } from 'recharts'
 
+import { yAxisValues } from '@/features/analytics-charts/constants/yAxisValues'
 import LegendCustom from '@/features/analytics-charts/single-line/components/LegendCustom'
 import TooltipCustom from '@/features/analytics-charts/single-line/components/TooltipCustom'
 import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
@@ -27,11 +28,7 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
 }) => {
   const [useOwnValues, setUseOwnValues] = useState(false)
 
-  const toggleUseOwnValues = useCallback(() => {
-    setUseOwnValues((prev) => !prev)
-  }, [])
-
-  const { width: windowWidth } = useWindowDimensions()
+  const { windowWidth } = useWindowDimensions()
 
   const chartData = listingData.map((entry) => ({
     key: entry.id,
@@ -55,19 +52,6 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
     rules: entry.rules
   }))
 
-  const yAxisValues = useMemo(
-    () => [
-      { value: -3, label: '-3s', color: 'var(--color-sd3)' },
-      { value: -2, label: '-2s', color: 'var(--color-sd2)' },
-      { value: -1, label: '-1s', color: 'var(--color-sd1)' },
-      { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
-      { value: 1, label: '+1s', color: 'var(--color-sd1)' },
-      { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-      { value: 3, label: '+3s', color: 'var(--color-sd3)' }
-    ],
-    []
-  )
-
   return (
     <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
@@ -81,7 +65,7 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
           <div className='absolute right-1 top-1/2 -translate-y-1/2'>
             <button
               className='group flex flex-col items-center transition-all duration-300'
-              onClick={toggleUseOwnValues}
+              onClick={() => setUseOwnValues((prev) => !prev)}
             >
               <div
                 className={`rounded-full p-2 transition-all duration-300 ${

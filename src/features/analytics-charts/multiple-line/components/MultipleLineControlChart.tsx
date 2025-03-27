@@ -11,6 +11,7 @@ import {
   YAxis
 } from 'recharts'
 
+import { yAxisValues } from '@/features/analytics-charts/constants/yAxisValues'
 import LegendMultiple from '@/features/analytics-charts/multiple-line/components/LegendMultiple'
 import TooltipMultiple from '@/features/analytics-charts/multiple-line/components/TooltipMultiple'
 import normalizeValue from '@/features/analytics-charts/utils/normalizeValue'
@@ -24,7 +25,7 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
 }) => {
   const [useOwnValues, setUseOwnValues] = useState(false)
   const toggleUseOwnValues = useCallback(() => setUseOwnValues((prev) => !prev), [])
-  const { width: windowWidth } = useWindowDimensions()
+  const { windowWidth } = useWindowDimensions()
 
   const lineColors = ['var(--color-primary)', 'var(--color-accent)', 'var(--color-secondary)']
 
@@ -78,19 +79,6 @@ const MultipleLineControlChart: React.FC<MultipleLineChartProps> = ({
       return entry
     })
   }, [listings, useOwnValues])
-
-  const yAxisValues = useMemo(
-    () => [
-      { value: -3, label: '-3s', color: 'var(--color-sd3)' },
-      { value: -2, label: '-2s', color: 'var(--color-sd2)' },
-      { value: -1, label: '-1s', color: 'var(--color-sd1)' },
-      { value: 0, label: 'Mean', color: 'var(--color-mean-line)' },
-      { value: 1, label: '+1s', color: 'var(--color-sd1)' },
-      { value: 2, label: '+2s', color: 'var(--color-sd2)' },
-      { value: 3, label: '+3s', color: 'var(--color-sd3)' }
-    ],
-    []
-  )
 
   if (!listings || listings.length === 0) return null
 

@@ -36,7 +36,7 @@ export const useFetchAnalyticsTable = ({
     })
 
     if (data) {
-      const updatedContent = data.content.map((item) =>
+      const updatedContent = data.content.map((item: { id: number }) =>
         item.id === analyticsId ? { ...item, ...response } : item
       )
       mutate({ ...data, content: updatedContent }, false)
@@ -62,7 +62,7 @@ export const useFetchAnalyticsTable = ({
     })
 
     if (data) {
-      const updatedContent = data.content.map((item) =>
+      const updatedContent = data.content.map((item: { id: number }) =>
         item.id === analyticsId ? { ...item, ...response } : item
       )
       mutate({ ...data, content: updatedContent }, false)

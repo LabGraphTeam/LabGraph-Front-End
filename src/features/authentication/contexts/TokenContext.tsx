@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
-import { PUBLIC_ROUTES_LIST } from '@/features/shared/routes/routes'
+import { PUBLIC_ROUTES_HOME, PUBLIC_ROUTES_LIST } from '@/features/shared/routes/routes'
 import { fetchWrapper } from '@/services/wrappers/fetch-wrapper'
 import { TokenContextProps, TokenProviderProps } from '@/types/Auth'
 
@@ -18,8 +18,9 @@ export const TokenProvider = ({ children }: TokenProviderProps) => {
 
   const refreshToken = useCallback(async () => {
     const isPublicRoute = PUBLIC_ROUTES_LIST.includes(router.pathname)
+    const isHomeRoute = router.pathname === PUBLIC_ROUTES_HOME
 
-    if (isPublicRoute) {
+    if (isPublicRoute || isHomeRoute) {
       setIsLoading(false)
       return
     }

@@ -3,7 +3,7 @@ import { PaginatedAnalyticsResponse } from '@/types/AnalyticsTable'
 import { UseReportsDataProps } from '@/types/Reports'
 
 const useReportsData = ({ url }: UseReportsDataProps) => {
-  const { data: dataFetched = [] } = useFetchSWR<PaginatedAnalyticsResponse | never[]>({
+  const { data: dataFetched = [] } = useFetchSWR<PaginatedAnalyticsResponse>({
     url,
     method: 'GET',
     contentType: 'application/json',

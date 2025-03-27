@@ -119,5 +119,6 @@ export interface GraphContextType {
 export interface StatItemProps {
   label: string
   value?: number
-  formatStatValue: (value: number) => string
+  unitValue: string
+  formatStatValue: (value: number, unitValue: string) => string
 }

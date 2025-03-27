@@ -1,5 +1,6 @@
 import { TooltipProps } from 'recharts'
 
+import DataItem from '@/features/analytics-charts/components/DataItem'
 import MeanAndDeviationDisplay from '@/features/analytics-charts/components/MeanAndDeviationDisplay'
 import getColorByLevel from '@/features/analytics-charts/utils/getColorByLevel'
 import returnFullNameByTest from '@/features/analytics-charts/utils/returnFullNameByTest'
@@ -50,12 +51,5 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
     </div>
   )
 }
-
-const DataItem = ({ label, value }: { label: string; value: string }) => (
-  <div className='flex flex-col'>
-    <span className='text-[12px] text-textPrimary'>{label}</span>
-    <span className='text-[10px]'>{value}</span>
-  </div>
-)
 
 export default TooltipCustom

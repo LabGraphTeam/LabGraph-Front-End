@@ -2,11 +2,11 @@ import React from 'react'
 
 import { StatItemProps } from '@/types/Chart'
 
-const StatItem: React.FC<StatItemProps> = ({ label, value, formatStatValue: formatter }) => {
+const StatItem: React.FC<StatItemProps> = ({ label, value, unitValue, formatStatValue }) => {
   const displayValue = React.useMemo(() => {
     if (value === undefined || isNaN(value)) return ''
-    return formatter(value)
-  }, [value, formatter])
+    return formatStatValue(value, unitValue)
+  }, [value, formatStatValue, unitValue])
 
   return (
     <div className='flex flex-col text-[12px]'>

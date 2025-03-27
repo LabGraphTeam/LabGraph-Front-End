@@ -1,6 +1,8 @@
 import React from 'react'
 import { TooltipProps } from 'recharts'
 
+import DataItem from '@/features/analytics-charts/components/DataItem'
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) => {
   if (active && payload?.length) {
@@ -43,21 +45,25 @@ const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) 
                     {data[level].toUpperCase()}
                   </span>
                 </div>
-                <p>Date of Analysis: {data[date]}</p>
-                <p>Analyte: {data[nameKey]}</p>
-                <p>Lot: {data[levelLotKey]}</p>
-                <p>Value: {data[rawValueKey] + '-' + data[unitKey]}</p>
-                <p>Mean: {data[meanKey].toFixed(2) + '-' + data[unitKey]}</p>
-                <p>StandardDeviation: {data[sdKey].toFixed(2) + '-' + data[unitKey]}</p>
+                <DataItem label='Date of Analysis' value={data[date]} />
+                <DataItem label='Analyte' value={data[nameKey]} />
+                <DataItem label='Lot' value={data[levelLotKey]} />
+                <DataItem label='Value' value={`${data[rawValueKey]}(${data[unitKey]})`} />
+                <DataItem
+                  label='Mean'
+                  value={`${data[meanKey].toFixed(2)}(${data[unitKey]})`}
+                />{' '}
+                <DataItem
+                  label='StandardDeviation'
+                  value={`${data[sdKey].toFixed(2)}(${data[unitKey]})`}
+                />
               </div>
             )
           }
-          return null
         })}
       </div>
     )
   }
-  return null
 }
 
 export default TooltipMultiple
