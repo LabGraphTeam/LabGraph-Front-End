@@ -17,6 +17,9 @@ const TestSelectorActions: React.FC<SelectorActionsProps> = ({
   validationUrl,
   isMultiSelect
 }) => {
+  const shouldRenderLevelSelector =
+    levelOptions && levelOptions.length > 0 && !isMultiSelect && !!setAnalyticsLevel
+
   return (
     <div className='relative mt-2 flex flex-row items-center gap-2 rounded-md border border-borderColor p-4 md:mt-0'>
       <div className='absolute -top-1.5 left-8 ml-7 -translate-x-1/2 bg-background px-2 text-[7px] font-extralight text-textPrimary md:-top-2 md:ml-6 md:text-[10px]'>
@@ -30,7 +33,7 @@ const TestSelectorActions: React.FC<SelectorActionsProps> = ({
       />
       {!isMultiSelect ? <span className='text-xs text-textPrimary'>Level:</span> : null}
 
-      {levelOptions && levelOptions.length > 0 && !isMultiSelect && setAnalyticsLevel ? (
+      {shouldRenderLevelSelector ? (
         <TestLevelSelector
           analyticsLevel={analyticsLevel}
           levelOptions={levelOptions}
