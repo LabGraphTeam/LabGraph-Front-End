@@ -8,8 +8,6 @@ WORKDIR /app
 FROM base AS deps
 WORKDIR /app
 
-ENV HUSKY=0
-
 RUN apk add --no-cache libc6-compat
 RUN apk add --update npm
 RUN npm install -g npm@latest
@@ -21,8 +19,6 @@ RUN npm ci --omit=dev
 
 FROM base AS builder
 WORKDIR /app
-
-ENV HUSKY=0
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
