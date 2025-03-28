@@ -2,11 +2,13 @@ import React from 'react'
 
 import { StatItemProps } from '@/types/Chart'
 
-const StatItem: React.FC<StatItemProps> = ({ label, value, unitValue, formatStatValue }) => {
-  const displayValue = React.useMemo(() => {
-    if (value === undefined || isNaN(value)) return ''
-    return formatStatValue(value, unitValue)
-  }, [value, formatStatValue, unitValue])
+const StatItem: React.FC<StatItemProps> = ({
+  label = '',
+  value = 0,
+  unitValue = '',
+  formatStatValue
+}) => {
+  const displayValue = formatStatValue(value, unitValue)
 
   return (
     <div className='flex flex-col text-[12px]'>
@@ -16,4 +18,4 @@ const StatItem: React.FC<StatItemProps> = ({ label, value, unitValue, formatStat
   )
 }
 
-export default React.memo(StatItem)
+export default StatItem

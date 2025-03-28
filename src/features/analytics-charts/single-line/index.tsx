@@ -36,7 +36,7 @@ const LabGraph: React.FC<SingleLineGraphProps> = ({
           levelOptions={levelOptions}
         />
       </div>
-      <div className='flex min-h-full w-full items-center justify-center'>
+      <div className='flex min-h-full w-full items-center justify-center '>
         {isLoading ? (
           <Loading />
         ) : (

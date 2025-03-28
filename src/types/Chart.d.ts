@@ -16,8 +16,8 @@ export interface AnalyticData {
   rules: string
 }
 
-/** Define valores de média e desvio padrão */
 export interface MeanStdDevValueData {
+  sd: number
   mean: number
   standardDeviation: number
 }
@@ -38,7 +38,10 @@ export interface GroupedAnalyticData {
 }
 
 export interface AnalyticWithStatsData {
-  calcMeanAndStdDTO: MeanStdDevValueData
+  calcMeanAndStdDTO: {
+    mean: number
+    standardDeviation: number
+  }
   analyticsDTO: AnalyticData[]
 }
 
@@ -57,7 +60,9 @@ export interface ChartEntry {
   [key: `unit${number}`]: string
 }
 
-export interface MeanAndDeviationDisplayProps extends MeanStdDevValueData {
+export interface MeanAndDeviationDisplayProps {
+  mean: number
+  sd: number
   ownMean: number
   ownSd: number
   unitValue: string
@@ -77,13 +82,21 @@ export interface SingleLineGraphProps extends BaseGraphProps {
 
 export type MultipleLineGraphProps = BaseGraphProps
 
-export interface PayloadData extends MeanAndDeviationDisplayProps {
+export interface PayloadData {
   date: string
   level: string
   levelLot: string
   name: string
   rawValue: number
   unitValue: string
+
+  rawValue: number
+  sd: number
+  mean: number
+  ownSd: number
+  ownMean: number
+  description: string
+  rules: string
 }
 
 export interface LegendCustomSingleLineProps extends LegendProps {
@@ -111,7 +124,7 @@ export interface GraphContextType {
 
 export interface StatItemProps {
   label: string
-  value: number
-  unitValue: string
+  value?: number
+  unitValue?: string
   formatStatValue: (value: number, unitValue: string) => string
 }
