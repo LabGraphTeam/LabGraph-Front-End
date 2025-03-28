@@ -7,14 +7,20 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+| Type           | Current Status | Time Estimated
+|----------------|----------------|----------------
+| Feature        | in progress    |       > 5 hours  
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## Description
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+description here...
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## Proposed
+
+describe propose here...
+
+## Acceptance Criteria
+
+- [x] criteria
+- [x] criteria
+- [x] criteria
