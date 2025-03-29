@@ -25,7 +25,7 @@ export interface AnalyticsLevelSelectorProps {
 
 export interface CommonTestSelectorProps
   extends AnalyticsSelectorProps,
-  AnalyticsLevelSelectorProps {
+    AnalyticsLevelSelectorProps {
   setAnalyticsData: (data: AnalyticWithStatsData) => void
 }
 
@@ -41,7 +41,7 @@ export interface AnalyticsNameSelectorProps {
 
 export interface SelectorActionsProps
   extends AnalyticsNameSelectorProps,
-  AnalyticsLevelSelectorProps {
+    AnalyticsLevelSelectorProps {
   analyticsType: string
   validationUrl: string
   isMultiSelect?: boolean
