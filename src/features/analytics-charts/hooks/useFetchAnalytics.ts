@@ -11,7 +11,6 @@ const useFetchAnalytics = (url: string) => {
 
   return {
     data,
-    url,
     isLoading,
     error
   }

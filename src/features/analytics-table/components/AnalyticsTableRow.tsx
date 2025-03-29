@@ -3,6 +3,7 @@ import { CiCircleAlert, CiEdit } from 'react-icons/ci'
 
 import { DESCRIPTION_OPTIONS } from '@/features/analytics-table/constants/descriptionOptions'
 import sanitizeDescription from '@/features/analytics-table/utils/sanitizeDescription'
+import customFormatDateWithYear from '@/features/shared/ui/date-selectors/constants/customFormatDateWithYear'
 import ValidateButton from '@/features/shared/ui/layouts/ValidateButton'
 import ErrorMessage from '@/features/shared/utils/components/error-message'
 import { TableRowProps } from '@/types/AnalyticsTable'
@@ -56,7 +57,7 @@ const TableRow: React.FC<TableRowProps> = ({
   return (
     <tr className='rounded-md transition-colors duration-200 hover:bg-muted'>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
-        {item.date}
+        {customFormatDateWithYear(item.date)}
       </td>
       <td className='border-b border-border px-3 py-2 text-[6px] text-textPrimary md:text-xs'>
         {item.name}
