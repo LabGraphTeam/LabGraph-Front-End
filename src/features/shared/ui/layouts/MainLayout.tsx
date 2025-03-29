@@ -1,4 +1,4 @@
-import Footer from '@/shared/ui/footer'
+import Footer from '@/features/shared/ui/layouts/Footer'
 import NavBar from '@/shared/ui/nav-bar'
 import { MainLayoutProps } from '@/types/AnalyticsTable'
 

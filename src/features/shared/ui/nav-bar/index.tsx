@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import ThemeToggle from '@/shared/theme'
+import ThemeToggle from '@/features/shared/ui/layouts/ThemeToggle'
 import MobileMenu from '@/shared/ui/nav-bar/components/MobileMenu'
 import NavLinksComponent from '@/shared/ui/nav-bar/components/NavLinksComponent'
 import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'

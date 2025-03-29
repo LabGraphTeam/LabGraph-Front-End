@@ -4,7 +4,7 @@ interface CheckIconProps {
   onChange: (checked: boolean) => void
 }
 
-const CheckIcon = ({ text, checked, onChange }: CheckIconProps) => {
+const ToggleCheckbox = ({ text, checked, onChange }: CheckIconProps) => {
   return (
     <label className='flex cursor-pointer items-center space-x-1'>
       <div className='relative'>
@@ -36,4 +36,4 @@ const CheckIcon = ({ text, checked, onChange }: CheckIconProps) => {
   )
 }
 
-export default CheckIcon
+export default ToggleCheckbox

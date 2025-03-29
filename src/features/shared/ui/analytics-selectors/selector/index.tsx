@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect } from 'react'
 
 import useFetchAnalytics from '@/features/analytics-charts/hooks/useFetchAnalytics'
 import { PRIVATE_ROUTES } from '@/features/shared/routes/routes'
@@ -7,6 +7,7 @@ import TestSelectorActions from '@/shared/ui/analytics-selectors/components/Test
 import DateSelector from '@/shared/ui/date-selectors'
 import ErrorMessage from '@/shared/utils/components/error-message'
 import buildAnalyticsEndpoint from '@/shared/utils/helpers/buildAnalyticsEndpoint'
+import BuildAnalyticsEndpointProps from '@/types/BuildAnalyticsEndpointProps'
 import { CommonTestSelectorProps } from '@/types/SelectorProps'
 
 const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
@@ -22,19 +23,18 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
 }) => {
   const { dateValues, combinedDateAndHandlersProps } = useDateSelector()
 
-  const analyticsApiUrl = useMemo(() => {
-    const analyticsEndPointProps = {
-      analyticsType,
-      analyticsName,
-      analyticsLevel,
-      analyticsMeasurementPeriod: {
-        ...dateValues
-      }
+  const analyticsEndPointProps: BuildAnalyticsEndpointProps = {
+    analyticsType,
+    analyticsName,
+    analyticsLevel,
+    analyticsMeasurementPeriod: {
+      ...dateValues
     }
-    return buildAnalyticsEndpoint(analyticsEndPointProps)
-  }, [analyticsType, analyticsName, analyticsLevel, dateValues])
+  }
 
-  const { data, isLoading, error } = useFetchAnalytics(analyticsApiUrl)
+  const { data, isLoading, error } = useFetchAnalytics(
+    buildAnalyticsEndpoint(analyticsEndPointProps)
+  )
 
   useEffect(() => {
     if (!error && !isLoading && data && data?.analyticsDTO?.length > 0) {
@@ -45,7 +45,7 @@ const TestSelectorWithLevel: React.FC<CommonTestSelectorProps> = ({
 
   return (
     <div className='mt-12 grid place-content-center items-start text-textSecondary md:mt-2 md:flex md:w-full md:justify-around'>
-      {error ? <ErrorMessage message={error.toString()} /> : null}
+      {error ?? <ErrorMessage message={error} />}
       <DateSelector {...combinedDateAndHandlersProps} />
       <TestSelectorActions
         analyticsName={analyticsName}

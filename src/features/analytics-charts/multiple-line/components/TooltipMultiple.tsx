@@ -45,8 +45,8 @@ const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) 
                     {data[level].toUpperCase()}
                   </span>
                 </div>
-                <DataItem label='Date of Analysis' value={data[date]} />
                 <DataItem label='Analyte' value={data[nameKey]} />
+                <DataItem label='Date of Analysis' value={data[date]} />
                 <DataItem label='Lot' value={data[levelLotKey]} />
                 <DataItem label='Value' value={`${data[rawValueKey]}(${data[unitKey]})`} />
                 <DataItem

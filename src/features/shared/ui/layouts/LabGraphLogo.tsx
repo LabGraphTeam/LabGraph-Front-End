@@ -1,16 +1,16 @@
-export interface LogoProps {
+interface LabGraphLogoProps {
   className?: string
   h1Style?: string
   h2Style?: string
   title?: string
 }
 
-const Logo = ({
+const LabGraphLogo = ({
   className,
   h1Style = 'text-2xl font-bold italic text-textPrimary opacity-90 sm:text-3xl md:text-3xl',
   h2Style = 'text-xs text-textPrimary opacity-70 md:text-xs',
   title = 'LabGraph'
-}: LogoProps) => {
+}: LabGraphLogoProps) => {
   return (
     <div className='flex flex-col items-center'>
       <svg className={`${className}`} viewBox='0 0 300 200' xmlns='http://www.w3.org/2000/svg'>
@@ -95,4 +95,4 @@ const Logo = ({
   )
 }
 
-export default Logo
+export default LabGraphLogo

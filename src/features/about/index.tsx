@@ -6,7 +6,7 @@ import FAQSection from '@/features/about/components/FAQ'
 import Overview from '@/features/about/components/Overview'
 import Team from '@/features/about/components/Team'
 import { CAROULSEL_IMAGES } from '@/features/about/constants/carouselImages'
-import Footer from '@/shared/ui/footer'
+import Footer from '@/features/shared/ui/layouts/Footer'
 
 const AboutUs = () => {
   return (

@@ -3,7 +3,7 @@ import { CiCircleAlert, CiEdit } from 'react-icons/ci'
 
 import { DESCRIPTION_OPTIONS } from '@/features/analytics-table/constants/descriptionOptions'
 import sanitizeDescription from '@/features/analytics-table/utils/sanitizeDescription'
-import ValidateButton from '@/features/shared/ui/icons/ValidateButton'
+import ValidateButton from '@/features/shared/ui/layouts/ValidateButton'
 import ErrorMessage from '@/features/shared/utils/components/error-message'
 import { TableRowProps } from '@/types/AnalyticsTable'
 

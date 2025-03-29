@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
 
 import { NAVIGATION_ITEMS } from '@/features/about/constants/navigationConstants'
 import { PUBLIC_ROUTES } from '@/features/shared/routes/routes'
-import ThemeToggle from '@/shared/theme'
+import ThemeToggle from '@/features/shared/ui/layouts/ThemeToggle'
 import NavLogo from '@/shared/ui/nav-bar/components/NavLogo'
 
 // eslint-disable-next-line no-restricted-imports
