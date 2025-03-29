@@ -1,5 +1,5 @@
-import ThemeToggle from '@/shared/theme'
-import Logo from '@/shared/ui/logo'
+import LabGraphLogo from '@/features/shared/ui/layouts/LabGraphLogo'
+import ThemeToggle from '@/features/shared/ui/layouts/ThemeToggle'
 
 interface AuthFormContainerProps {
   children: React.ReactNode
@@ -15,7 +15,7 @@ const AuthFormContainer = ({ children }: AuthFormContainerProps) => {
         </div>
         <div className='mb-6 text-center'>
           <div className='flex justify-center text-secondary opacity-95 transition-transform duration-300 ease-in-out'>
-            <Logo className='w-32 opacity-90 sm:w-40 md:w-48 lg:w-56' />
+            <LabGraphLogo className='w-32 opacity-90 sm:w-40 md:w-48 lg:w-56' />
           </div>
         </div>
         {children}

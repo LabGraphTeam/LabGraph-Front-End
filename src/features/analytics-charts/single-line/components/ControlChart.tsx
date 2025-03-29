@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { TbFileDescription, TbMathFunction } from 'react-icons/tb'
 import {
   CartesianGrid,
   Legend,
@@ -12,6 +11,7 @@ import {
   YAxis
 } from 'recharts'
 
+import OwnStatisticsButton from '@/features/analytics-charts/components/OwnStatisticValuesButton'
 import { yAxisValues } from '@/features/analytics-charts/constants/yAxisValues'
 import LegendCustom from '@/features/analytics-charts/single-line/components/LegendCustom'
 import TooltipCustom from '@/features/analytics-charts/single-line/components/TooltipCustom'
@@ -23,14 +23,17 @@ import customFormatDate from '@/shared/ui/date-selectors/constants/customFormatD
 import { AnalyticWithStatsData } from '@/types/Chart'
 
 const ControlChart: React.FC<AnalyticWithStatsData> = ({
-  analyticsDTO: listingData,
-  calcMeanAndStdDTO
+  analyticsDTO: analyticsData = [],
+  calcMeanAndStdDTO: statisticsData = {
+    mean: 0,
+    standardDeviation: 0
+  }
 }) => {
-  const [useOwnValues, setUseOwnValues] = useState(false)
+  const [isOwnStatisticsValues, setIsOwnStatisticsValues] = useState(false)
 
   const { windowWidth } = useWindowDimensions()
 
-  const chartData = listingData.map((entry) => ({
+  const chartData = analyticsData.map((entry) => ({
     key: entry.id,
     date: customFormatDate(entry.date),
     levelLot: entry.level_lot,
@@ -38,62 +41,38 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
     name: entry.name,
     value: normalizeValue(
       entry.value,
-      useOwnValues ? calcMeanAndStdDTO.mean : entry.mean,
-      useOwnValues ? calcMeanAndStdDTO.standardDeviation : entry.sd
+      isOwnStatisticsValues ? statisticsData.mean : entry.mean,
+      isOwnStatisticsValues ? statisticsData.standardDeviation : entry.sd
     ),
-
     unitValue: entry.unit_value,
     rawValue: entry.value,
-    sd: useOwnValues ? calcMeanAndStdDTO.standardDeviation : entry.sd,
-    mean: useOwnValues ? calcMeanAndStdDTO.mean : entry.mean,
-    ownSd: calcMeanAndStdDTO.standardDeviation,
-    ownMean: calcMeanAndStdDTO.mean,
+    sd: isOwnStatisticsValues ? statisticsData.standardDeviation : entry.sd,
+    mean: isOwnStatisticsValues ? statisticsData.mean : entry.mean,
+    ownSd: statisticsData.standardDeviation,
+    ownMean: statisticsData.mean,
     description: entry.description,
     rules: entry.rules
   }))
 
   return (
-    <div className='mb-2 min-h-min w-[98%] md:w-[90%]'>
+    <div className='mb-2 w-[98%] grow md:w-[98%]'>
       <div className='rounded-2xl border border-borderColor bg-surface shadow-md shadow-shadow'>
         <div className='relative flex flex-col items-center'>
-          <h2 className='mt-4 flex place-content-center items-center text-[9px] italic text-textSecondary md:text-2xl'>
-            {returnFullNameByTest(listingData[0].name) +
+          <h3 className='mt-4 flex place-content-center items-center text-[9px] italic text-textSecondary md:text-2xl'>
+            {returnFullNameByTest(analyticsData[0].name) +
               ' (Level - ' +
-              listingData[0].level.toUpperCase() +
+              analyticsData[0].level.toUpperCase() +
               ')'}
-          </h2>
-          <div className='absolute right-1 top-1/2 -translate-y-1/2'>
-            <button
-              className='group flex flex-col items-center transition-all duration-300'
-              onClick={() => setUseOwnValues((prev) => !prev)}
-            >
-              <div
-                className={`rounded-full p-2 transition-all duration-300 ${
-                  useOwnValues
-                    ? 'hover:bg-textPrimary/20 text-textPrimary'
-                    : 'hover:bg-textSecondary/20 text-textSecondary'
-                }`}
-              >
-                {useOwnValues ? (
-                  <TbMathFunction className='size-3 md:size-5' />
-                ) : (
-                  <TbFileDescription className='size-3 md:size-5' />
-                )}
-              </div>
-              <span
-                className={`text-[6px] font-medium md:text-xs ${useOwnValues ? 'text-textPrimary' : 'text-textSecondary'}`}
-              >
-                {useOwnValues ? 'Calculated' : 'Reference Value'}
-              </span>
-            </button>
-          </div>
+          </h3>
+          <span className='absolute right-2 top-1/2 -translate-y-1/2'>
+            <OwnStatisticsButton
+              isOwnStatisticValues={isOwnStatisticsValues}
+              setIsOwnStatisticValues={setIsOwnStatisticsValues}
+            />
+          </span>
         </div>
-        <div className='flex h-[225px] place-content-center items-center md:min-h-[250px] xl:min-h-[250px] 2xl:min-h-[325px] 3xl:min-h-[500px]'>
-          <ResponsiveContainer
-            className='flex place-content-center items-center bg-surface'
-            height='96%'
-            width='97%'
-          >
+        <div className='flex h-[250px] place-content-center items-center md:min-h-[250px] xl:min-h-[250px] 2xl:min-h-[325px] 3xl:min-h-[525px] 4xl:min-h-[625px]'>
+          <ResponsiveContainer className='flex items-center bg-surface' height='97%' width='97%'>
             <LineChart data={chartData} margin={{}}>
               <CartesianGrid stroke='false' />
               <XAxis
@@ -129,22 +108,22 @@ const ControlChart: React.FC<AnalyticWithStatsData> = ({
               <Tooltip content={TooltipCustom} />
               <Line
                 activeDot={{
-                  color: getColorByLevel(listingData[0].level.toString()),
+                  color: getColorByLevel(analyticsData[0].level.toString()),
                   r: 3
                 }}
                 animationDuration={250}
                 connectNulls={true}
                 dataKey='value'
                 dot={{
-                  fill: getColorByLevel(listingData[0].level.toString()),
-                  stroke: getColorByLevel(listingData[0].level.toString()),
+                  fill: getColorByLevel(analyticsData[0].level.toString()),
+                  stroke: getColorByLevel(analyticsData[0].level.toString()),
                   r: 2,
                   strokeWidth: 1,
                   className: 'text-textPrimary'
                 }}
                 id='id'
                 name='level'
-                stroke={getColorByLevel(listingData[0].level.toString())}
+                stroke={getColorByLevel(analyticsData[0].level.toString())}
                 strokeWidth={1.0}
                 type='linear'
               />

@@ -38,9 +38,9 @@ const TooltipCustom = ({ active, payload }: TooltipProps<number, string>) => {
               <DataItem label='Lot of control:' value={data.levelLot} />
 
               <MeanAndDeviationDisplay
-                mean={data.mean}
                 ownMean={data.ownMean}
-                ownSd={data.sd}
+                ownSd={data.ownSd}
+                mean={data.mean}
                 sd={data.sd}
                 unitValue={data.unitValue}
               />

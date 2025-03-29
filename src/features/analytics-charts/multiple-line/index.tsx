@@ -6,8 +6,13 @@ import MainLayout from '@/shared/ui/layouts/MainLayout'
 import Loading from '@/shared/utils/components/loading'
 import { GroupedAnalyticData, MultipleLineGraphProps } from '@/types/Chart'
 
-const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, analyticsType }) => {
+const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({
+  availableAnalyticsNames,
+  defaultAnalyticsType
+}) => {
   const [analyticsGroupData, setAnalyticsGroupData] = useState<GroupedAnalyticData[]>([])
+  const [analyticsType, setAnalyticsType] = useState<string>(defaultAnalyticsType)
+  const [analyticsName, setAnalyticsName] = useState<string>(availableAnalyticsNames[0])
   const [isLoading, setIsLoading] = useState(true)
 
   return (
@@ -15,10 +20,12 @@ const MultipleLineLabGraph: React.FC<MultipleLineGraphProps> = ({ testList, anal
       <div className='flex flex-col'>
         <div className='mb-8 mt-14 md:mt-28 xl:mt-36'>
           <TestSelectorWithoutLevel
-            analyticName={testList[0]}
+            analyticsName={analyticsName}
             analyticsType={analyticsType}
-            availableTestNames={testList}
-            setAnalyticGroupedData={setAnalyticsGroupData}
+            availableAnalyticsNames={availableAnalyticsNames}
+            setAnalyticsName={setAnalyticsName}
+            setAnalyticsType={setAnalyticsType}
+            setGroupedAnalyticData={setAnalyticsGroupData}
             setIsLoading={setIsLoading}
           />
         </div>

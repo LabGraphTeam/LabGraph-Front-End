@@ -1,34 +1,25 @@
 import React from 'react'
 
 import StatItem from '@/features/analytics-charts/components/StatItem'
-import { calculateCV } from '@/features/analytics-charts/utils/calculateCv'
+import calculateCV from '@/features/analytics-charts/utils/calculateCv'
 import formatWithUnit from '@/features/analytics-charts/utils/formatWithUnit'
 import { MeanAndDeviationDisplayProps } from '@/types/Chart'
 
 const MeanAndDeviationDisplay: React.FC<MeanAndDeviationDisplayProps> = ({
-  mean,
-  sd,
   ownMean,
   ownSd,
+  mean,
+  sd,
   unitValue
 }) => {
   return (
     <div className='flex w-full flex-col text-textPrimary'>
       <StatItem formatStatValue={formatWithUnit} label='Mean' value={mean} unitValue={unitValue} />
+      <StatItem formatStatValue={() => formatWithUnit(sd, unitValue)} label='Standard Deviation' />
       <StatItem
-        formatStatValue={formatWithUnit}
-        label='Standard Deviation'
-        value={sd}
-        unitValue={unitValue}
+        formatStatValue={() => formatWithUnit(calculateCV(ownMean, ownSd), '%')}
+        label='Calculated CV'
       />
-      {ownMean !== undefined && ownSd !== undefined ? (
-        <StatItem
-          formatStatValue={() => `${calculateCV(ownMean, ownSd)} (%)`}
-          label='Calculated CV'
-          value={ownMean}
-          unitValue={unitValue}
-        />
-      ) : null}
     </div>
   )
 }

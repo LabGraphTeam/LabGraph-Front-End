@@ -5,12 +5,16 @@ import MultipleLineLabGraph from '@/features/analytics-charts/multiple-line'
 import LabGraph from '@/features/analytics-charts/single-line'
 import { SingleLineGraphProps } from '@/types/Chart'
 
-const GraphWrapper: React.FC<SingleLineGraphProps> = ({ testList, analyticsType, size }) => {
+const GraphWrapper: React.FC<SingleLineGraphProps> = ({
+  availableAnalyticsNames,
+  defaultAnalyticsType,
+  size
+}) => {
   const { viewMode } = useAnalyticsGraph()
 
   const graphProps = useMemo(
-    () => ({ size, testList, analyticsType }),
-    [size, testList, analyticsType]
+    () => ({ size, availableAnalyticsNames, defaultAnalyticsType }),
+    [size, availableAnalyticsNames, defaultAnalyticsType]
   )
 
   const SingleGraph = useMemo(() => <LabGraph {...graphProps} />, [graphProps])

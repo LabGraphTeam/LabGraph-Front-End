@@ -1,17 +1,17 @@
 import React, { useCallback } from 'react'
 
-import { TestLevelSelectorProps } from '@/types/SelectorProps'
+import { AnalyticsLevelSelectorProps } from '@/types/SelectorProps'
 
-const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
+const TestLevelSelector: React.FC<AnalyticsLevelSelectorProps> = ({
   levelOptions,
-  analyticLevel: testLevel,
-  setTestLevel
+  analyticsLevel,
+  setAnalyticsLevel
 }) => {
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setTestLevel(Number(e.target.value))
+      setAnalyticsLevel(Number(e.target.value))
     },
-    [setTestLevel]
+    [setAnalyticsLevel]
   )
 
   return (
@@ -23,7 +23,7 @@ const TestLevelSelector: React.FC<TestLevelSelectorProps> = ({
         className='hover:border-borderColor/80 focus:ring-borderColor/30 rounded-md border border-borderColor bg-background text-xs text-textSecondary shadow-sm shadow-shadow transition-all duration-200 focus:outline-none focus:ring-2 md:px-2 md:py-1'
         id='testLevel'
         onChange={handleChange}
-        value={testLevel}
+        value={analyticsLevel}
       >
         {levelOptions
           .filter((option) => option.value !== 0)

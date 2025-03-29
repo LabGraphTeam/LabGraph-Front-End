@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import ThemeToggle from '@/shared/theme'
+import ThemeToggle from '@/features/shared/ui/layouts/ThemeToggle'
 import ViewToggleButton from '@/shared/ui/nav-bar/components/ViewToggleButton'
 import navLinks from '@/shared/ui/nav-bar/constants/navLinks'
 import { NavLinksComponentProps } from '@/types/NavigationBar'

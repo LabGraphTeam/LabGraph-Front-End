@@ -1,7 +1,7 @@
 const DataItem = ({ label, value }: { label: string; value: string }) => (
   <div className='flex flex-col'>
-    <span className='text-[12px] text-textPrimary'>{label}</span>
-    <span className='text-[10px]'>{value}</span>
+    <span className='text-textPrimary md:text-[12px]'>{label}</span>
+    <span className='md:text-[10px]'>{value}</span>
   </div>
 )
 

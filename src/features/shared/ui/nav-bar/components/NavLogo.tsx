@@ -1,4 +1,4 @@
-import Logo from '@/shared/ui/logo'
+import LabGraphLogo from '@/features/shared/ui/layouts/LabGraphLogo'
 
 interface NavLogoProps {
   className?: string
@@ -12,7 +12,7 @@ const NavLogo = ({
   h2Style = 'text-[10px] text-textPrimary opacity-70 md:text-xs'
 }: NavLogoProps) => (
   <div>
-    <Logo className={className} h1Style={h1Style} h2Style={h2Style} title='LabGraph' />
+    <LabGraphLogo className={className} h1Style={h1Style} h2Style={h2Style} title='LabGraph' />
   </div>
 )
 

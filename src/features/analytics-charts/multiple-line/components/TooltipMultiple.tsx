@@ -21,7 +21,7 @@ const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) 
     )
 
     return (
-      <div className='rounded border border-border bg-background p-1 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:text-[0.65rem]'>
+      <div className='flex flex-row  gap-2 rounded border border-border bg-background p-1 text-[0.5rem] text-textPrimary shadow-md shadow-shadow md:gap-4 md:p-4 md:text-[0.65rem]'>
         {uniqueEntries.map((entry) => {
           const dataKeyIndex = entry.dataKey?.toString().slice(-1) ?? ''
           const id = entry.dataKey
@@ -38,15 +38,15 @@ const TooltipMultiple: React.FC<TooltipProps<any, any>> = ({ active, payload }) 
 
           if (data[valueKey]) {
             return (
-              <div className='border-border' key={`tooltip-${id}-${level}`}>
+              <div key={`tooltip-${id}-${level}`}>
                 <div className='flex items-center gap-2'>
                   <div className='size-2 rounded-full' style={{ backgroundColor: entry.stroke }} />
                   <span className='text-[10px] font-extralight text-textPrimary'>
                     {data[level].toUpperCase()}
                   </span>
                 </div>
-                <DataItem label='Date of Analysis' value={data[date]} />
                 <DataItem label='Analyte' value={data[nameKey]} />
+                <DataItem label='Date of Analysis' value={data[date]} />
                 <DataItem label='Lot' value={data[levelLotKey]} />
                 <DataItem label='Value' value={`${data[rawValueKey]}(${data[unitKey]})`} />
                 <DataItem

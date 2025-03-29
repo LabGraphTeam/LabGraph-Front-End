@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import GeneratePdf from '@/features/analytics-reports/generate-pdf'
 import AnalyticsFilters from '@/features/analytics-table/components/AnalyticsFilters'
 import AnalyticsPagination from '@/features/analytics-table/components/AnalyticsPagination'
 import AnalyticsTable from '@/features/analytics-table/components/AnalyticsTable'
 import useFetchAnalyticsTable from '@/features/analytics-table/hooks/useFetchAnalyticsTable'
+import getItemsPerPageByScreenSize from '@/features/analytics-table/utils/getItemsPerPageByScreenSize'
 import { useAnalyticsOptions } from '@/shared/hooks/useAnalyticsOptions'
 import useDateSelector from '@/shared/hooks/useDateSelector'
 import useWindowDimensions from '@/shared/hooks/useWindowDimensions'
@@ -19,38 +20,26 @@ const AnalyticsTableIndex = () => {
   const [analyticData, setAnalyticData] = useState<AnalyticWithValidatedUser[]>([])
   const [totalPages, setTotalPages] = useState<number>(0)
   const [currentPage, setCurrentPage] = useState(0)
-  const [itemsPerPage, setItemsPerPage] = useState(7)
+  const [itemsPerPage, setItemsPerPage] = useState(6)
   const [analyticsLevel, setAnalyticsLevel] = useState(0)
   const [isFiltered, setIsFiltered] = useState(false)
   const { analyticsOptions, levelOptions, filters } = useAnalyticsOptions(analyticsType)
   const [unValidatedFilter, setUnValidatedFilter] = useState(false)
-  const { windowWidth: width } = useWindowDimensions()
+  const { windowWidth, windowHeight } = useWindowDimensions()
 
   const { combinedDateAndHandlersProps, combinedDateProps, dateValues } = useDateSelector()
 
-  const endPointProps = useMemo(
-    () =>
-      ({
-        analyticsType,
-        analyticsLevel,
-        analyticsMeasurementPeriod: {
-          ...dateValues
-        },
-        isFiltered,
-        itemsPerPage,
-        currentPage,
-        unValidatedFilter
-      }) as BuildAnalyticsEndpointProps,
-    [
-      analyticsType,
-      analyticsLevel,
-      dateValues,
-      isFiltered,
-      itemsPerPage,
-      currentPage,
-      unValidatedFilter
-    ]
-  )
+  const endPointProps = {
+    analyticsType,
+    analyticsLevel,
+    analyticsMeasurementPeriod: {
+      ...dateValues
+    },
+    isFiltered,
+    itemsPerPage,
+    currentPage,
+    unValidatedFilter
+  } as BuildAnalyticsEndpointProps
 
   const endPoint: string = buildAnalyticsValidationWithFiltersEndpoint(endPointProps)
 
@@ -69,16 +58,10 @@ const AnalyticsTableIndex = () => {
     useFetchAnalyticsTableProps
   )
 
-  const getItemsPerPage = (screenWidth: number) => {
-    if (screenWidth >= 1800) return 10
-    if (screenWidth < 768) return 6
-    return 7
-  }
-
   useEffect(() => {
     if (!error && !isLoading && data && data?.content?.length > 0) {
       setTotalPages(data.page.totalPages)
-      setItemsPerPage(getItemsPerPage(width))
+      setItemsPerPage(getItemsPerPageByScreenSize(windowHeight, windowWidth))
       setAnalyticData(data.content)
     }
 
@@ -86,7 +69,7 @@ const AnalyticsTableIndex = () => {
       setTotalPages(0)
       setAnalyticData([])
     }
-  }, [data, width, error, isLoading])
+  }, [data, windowHeight, windowWidth, error, isLoading])
 
   return (
     <MainLayout title='Analytics-Table 🥼🔬'>

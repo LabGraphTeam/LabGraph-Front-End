@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import useFetchAnalyticsGrouped from '@/features/analytics-charts/hooks/useFetchAnalyticsGrouped'
 import { PRIVATE_ROUTES } from '@/features/shared/routes/routes'
@@ -11,53 +11,51 @@ import { BuildAnalyticsEndpointByNameAndDateProps } from '@/types/BuildAnalytics
 import { TestSelectorProps } from '@/types/SelectorProps'
 
 const TestSelectorWithoutLevel: React.FC<TestSelectorProps> = ({
-  availableTestNames,
+  availableAnalyticsNames,
   analyticsType,
-  analyticName,
-  setAnalyticGroupedData,
+  analyticsName,
+  setAnalyticsName,
+  setGroupedAnalyticData,
   setIsLoading
 }) => {
-  const [testName, setTestName] = useState<string>(analyticName)
-
   const { dateValues, combinedDateAndHandlersProps } = useDateSelector()
 
-  const propsEndpoint: BuildAnalyticsEndpointByNameAndDateProps = {
-    analyticName: testName,
+  const endPointProps: BuildAnalyticsEndpointByNameAndDateProps = {
+    analyticsName,
     analyticsMeasurementPeriod: {
       ...dateValues
     },
     analyticsType
   }
 
-  const endPoint = buildAnalyticsEndpointByNameAndDate(propsEndpoint)
-
-  const { data, error } = useFetchAnalyticsGrouped(endPoint)
+  const { data, error, isLoading } = useFetchAnalyticsGrouped(
+    buildAnalyticsEndpointByNameAndDate(endPointProps)
+  )
 
   useEffect(() => {
-    setIsLoading(true)
-    if (data && data.length > 0) {
+    if (!error && data && data.length > 0 && !isLoading) {
+      setGroupedAnalyticData(data)
       setIsLoading(false)
     }
-    setAnalyticGroupedData(data || [])
-  }, [endPoint, data, setAnalyticGroupedData, setIsLoading])
+  }, [data, setGroupedAnalyticData, setIsLoading, isLoading, error])
 
   return (
     <div className='mt-12 grid content-center items-center text-textSecondary md:mt-8 md:w-full md:justify-around xl:flex'>
-      {error ? <ErrorMessage message={error.toString()} /> : null}
+      {error ?? <ErrorMessage message={error} />}
       <DateSelector {...combinedDateAndHandlersProps} />
       <TestSelectorActions
-        analyticName={testName}
+        analyticsName={analyticsName}
         analyticsType={analyticsType}
-        availableTestNames={availableTestNames}
+        availableAnalyticsNames={availableAnalyticsNames}
         isMultiSelect={true}
         levelOptions={[]}
-        setTestLevel={() => {}}
-        setTestName={setTestName}
-        testLevel={0}
+        setAnalyticsLevel={() => {}}
+        setAnalyticsName={setAnalyticsName}
+        analyticsLevel={0}
         validationUrl={PRIVATE_ROUTES.MISC.ANALYTICS_TABLE}
       />
     </div>
   )
 }
 
-export default React.memo(TestSelectorWithoutLevel)
+export default TestSelectorWithoutLevel

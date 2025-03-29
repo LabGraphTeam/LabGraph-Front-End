@@ -1,5 +1,6 @@
 import { LegendProps } from 'recharts'
 
+/** Representa um conjunto de dados analíticos */
 export interface AnalyticData {
   id: number
   name: string
@@ -13,6 +14,35 @@ export interface AnalyticData {
   unit_value: string
   description: string
   rules: string
+}
+
+export interface MeanStdDevValueData {
+  sd: number
+  mean: number
+  standardDeviation: number
+}
+
+export interface GroupedValuesByLevel {
+  level: string
+  values: AnalyticData[]
+}
+
+export interface GroupedMeanStdByLevel {
+  level: string
+  values: MeanStdDevValueData[]
+}
+
+export interface GroupedAnalyticData {
+  groupedValuesByLevelDTO: GroupedValuesByLevel
+  groupedMeanAndStdByLevelDTO: GroupedMeanStdByLevel
+}
+
+export interface AnalyticWithStatsData {
+  calcMeanAndStdDTO: {
+    mean: number
+    standardDeviation: number
+  }
+  analyticsDTO: AnalyticData[]
 }
 
 export interface ChartEntry {
@@ -30,22 +60,6 @@ export interface ChartEntry {
   [key: `unit${number}`]: string
 }
 
-export interface MeanStdDevValueData {
-  mean: number
-  standardDeviation: number
-}
-
-export interface GroupedAnalyticData {
-  groupedValuesByLevelDTO: {
-    level: string
-    values: AnalyticData[]
-  }
-  groupedMeanAndStdByLevelDTO: {
-    level: string
-    values: MeanStdDevValueData[]
-  }
-}
-
 export interface MeanAndDeviationDisplayProps {
   mean: number
   sd: number
@@ -58,24 +72,15 @@ export interface MultipleLineChartProps {
   groupedAnalysisData: GroupedAnalyticData[]
 }
 
-export interface SingleLineGraphProps {
-  testList: string[]
-  analyticsType: string
+export interface BaseGraphProps {
+  availableAnalyticsNames: string[]
+  defaultAnalyticsType: string
+}
+export interface SingleLineGraphProps extends BaseGraphProps {
   size: number
 }
 
-export interface MultipleLineGraphProps {
-  testList: string[]
-  analyticsType: string
-}
-
-export interface AnalyticWithStatsData {
-  calcMeanAndStdDTO: {
-    mean: number
-    standardDeviation: number
-  }
-  analyticsDTO: AnalyticData[]
-}
+export type MultipleLineGraphProps = BaseGraphProps
 
 export interface PayloadData {
   date: string
@@ -84,10 +89,14 @@ export interface PayloadData {
   name: string
   rawValue: number
   unitValue: string
-  mean: number
+
+  rawValue: number
   sd: number
-  ownMean: number
+  mean: number
   ownSd: number
+  ownMean: number
+  description: string
+  rules: string
 }
 
 export interface LegendCustomSingleLineProps extends LegendProps {
@@ -98,16 +107,13 @@ export interface LegendCustomSingleLineProps extends LegendProps {
       strokeDasharray: string | number
     }
   }>
-  levelData?: Array<{
-    dataLevel: string
-  }>
+  levelData?: Array<{ dataLevel: string }>
 }
 
 export interface LegendMultipleLinesProps {
   payload?: { color: string }[]
   multipleLineLevels: string[]
 }
-
 export type ViewMode = 'single' | 'dual'
 
 export interface GraphContextType {
@@ -119,6 +125,6 @@ export interface GraphContextType {
 export interface StatItemProps {
   label: string
   value?: number
-  unitValue: string
+  unitValue?: string
   formatStatValue: (value: number, unitValue: string) => string
 }

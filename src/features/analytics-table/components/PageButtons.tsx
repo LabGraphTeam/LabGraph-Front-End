@@ -11,14 +11,14 @@ const PageButtons: React.FC<PageButtonsProps> = ({ totalPages, currentPage, setC
   if (showAllPages || totalPages <= 4) {
     for (let i = 0; i < totalPages; i++) {
       pages.push(i)
+      return
     }
-  } else {
-    for (let i = 0; i < 3; i++) {
-      pages.push(i)
-    }
-    pages.push('ellipsis')
-    pages.push(totalPages - 1)
   }
+  for (let i = 0; i < 3; i++) {
+    pages.push(i)
+  }
+  pages.push('ellipsis')
+  pages.push(totalPages - 1)
 
   return pages.map((page) =>
     page === 'ellipsis' ? (

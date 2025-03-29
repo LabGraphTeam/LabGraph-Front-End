@@ -5,7 +5,7 @@ import InputField from '@/features/authentication/components/InputField'
 import SubmitButton from '@/features/authentication/components/SubmitButton'
 import { useAuthValidator } from '@/features/authentication/hooks/useAuthValidator'
 import AuthFormContainer from '@/features/authentication/layout/AuthFormContainer'
-import CheckIcon from '@/shared/ui/icons/CheckBox'
+import ToggleCheckbox from '@/features/shared/ui/layouts/ToggleCheckbox'
 import ErrorMessage from '@/shared/utils/components/error-message'
 
 const LoginForm = () => {
@@ -40,7 +40,7 @@ const LoginForm = () => {
         />
 
         <div className='flex items-center justify-between text-xs sm:text-sm'>
-          <CheckIcon
+          <ToggleCheckbox
             checked={rememberMe}
             onChange={handleRememberMeChange}
             text='Keep me logged in'

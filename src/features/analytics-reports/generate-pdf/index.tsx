@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
-import { FileText, Loader2 } from 'lucide-react'
+import { ClipboardMinus, Loader2 } from 'lucide-react'
 import React, { useState } from 'react'
 
 import useReportsData from '@/features/analytics-reports/hooks/useReportsData'
@@ -609,16 +609,16 @@ const GeneratePdf: React.FC<PdfGeneratorProps> = ({
   return (
     <button
       aria-label='Export PDF'
-      className='flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-sm text-textSecondary shadow-sm shadow-shadow hover:scale-105'
+      className='flex items-center justify-center rounded-md border border-borderColor p-1 text-center text-xs text-textSecondary shadow-sm shadow-shadow hover:scale-105'
       disabled={isGenerating}
       onClick={generatePdf}
     >
       {isGenerating ? (
         <Loader2 className='mr-1 size-4 animate-spin' />
       ) : (
-        <FileText className='mr-1 size-4' />
+        <ClipboardMinus strokeWidth={1} className='mr-1 size-4' />
       )}
-      <span>Generate Report</span>
+      <span>Download Report</span>
     </button>
   )
 }
