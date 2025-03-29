@@ -1,1 +1,1 @@
-npm run prettier-format
+npm run prettier-format || exit 1
